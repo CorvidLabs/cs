@@ -1,0 +1,40 @@
+{
+    "id": "01-theme-with-variables",
+    "title": "Create a Theme with CSS Variables",
+    "description": "Build a simple theming system using CSS custom properties.\n\n## Requirements\n\n1. Define these variables on `:root`:\n   - `--primary-color`: #3498db\n   - `--secondary-color`: #2ecc71\n   - `--text-color`: #333333\n   - `--background-color`: #ffffff\n   - `--border-radius`: 8px\n\n2. Style the `.card` using the variables:\n   - Background: var(--background-color)\n   - Border: 1px solid using var(--primary-color)\n   - Border radius: var(--border-radius)\n   - Padding: 20px\n\n3. Style the `.card-title`:\n   - Color: var(--primary-color)\n\n4. Style the `.button`:\n   - Background: var(--secondary-color)\n   - Color: white\n   - Border radius: var(--border-radius)\n\n## Expected Result\n\nA card and button styled using CSS variables.",
+    "order": 1,
+    "language": "css",
+    "starterCode": "/* Define your CSS variables here */\n:root {\n    /* Add your variables */\n}\n\n/* Card styles */\n.card {\n    /* Use variables here */\n}\n\n/* Card title */\n.card-title {\n    /* Use variables here */\n}\n\n/* Button */\n.button {\n    padding: 10px 20px;\n    border: none;\n    cursor: pointer;\n    /* Use variables here */\n}",
+    "testCases": [
+        {
+            "description": "Primary color variable should be defined",
+            "assertion": "getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() === '#3498db'"
+        },
+        {
+            "description": "Secondary color variable should be defined",
+            "assertion": "getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim() === '#2ecc71'"
+        },
+        {
+            "description": "Card should have white background",
+            "assertion": "getComputedStyle(document.querySelector('.card')).backgroundColor === 'rgb(255, 255, 255)'"
+        },
+        {
+            "description": "Card should have 8px border radius",
+            "assertion": "getComputedStyle(document.querySelector('.card')).borderRadius === '8px'"
+        },
+        {
+            "description": "Card title should use primary color",
+            "assertion": "getComputedStyle(document.querySelector('.card-title')).color === 'rgb(52, 152, 219)'"
+        },
+        {
+            "description": "Button should use secondary color as background",
+            "assertion": "getComputedStyle(document.querySelector('.button')).backgroundColor === 'rgb(46, 204, 113)'"
+        }
+    ],
+    "hints": [
+        "Define variables with double-dash prefix: --primary-color: #3498db",
+        "Use var() to access variables: background: var(--background-color)",
+        "All variables should be defined on :root",
+        "Make sure hex colors are lowercase"
+    ]
+}

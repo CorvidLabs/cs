@@ -1,0 +1,45 @@
+{
+    "id": "01-type-annotations",
+    "title": "Type Annotations",
+    "description": "Practice adding type annotations to variables and functions.\n\n## Requirements\n\n1. Add type annotations to all variables\n2. Add parameter types and return types to all functions\n3. Use appropriate types: string, number, boolean, arrays, objects\n\n## Tasks\n\n1. Annotate the person object with proper types\n2. Add types to the `formatPerson` function\n3. Add types to the `calculateTotal` function\n4. Create a properly typed `Product` interface\n5. Add types to the `findProduct` function\n\n## Expected Behavior\n\nAll code should compile without errors and the IDE should provide proper autocomplete.",
+    "order": 1,
+    "language": "typescript",
+    "starterCode": "// 1. Add type annotations to this object\n// person should have: name (string), age (number), isActive (boolean), hobbies (string array)\nconst person = {\n    name: \"Alice\",\n    age: 30,\n    isActive: true,\n    hobbies: [\"reading\", \"coding\", \"gaming\"]\n};\n\n// 2. Add types to this function\n// Takes a person object and returns a formatted string\nfunction formatPerson(person) {\n    return `${person.name} (${person.age}) - ${person.hobbies.join(\", \")}`;\n}\n\n// 3. Add types to this function\n// Takes an array of numbers and returns their sum\nfunction calculateTotal(numbers) {\n    return numbers.reduce((sum, n) => sum + n, 0);\n}\n\n// 4. Create a Product interface with:\n// - id: number\n// - name: string\n// - price: number\n// - inStock: boolean\n// - tags: string[] (optional)\n\n// Your interface here:\n\n\n// 5. Add types to this function\n// Takes an array of products and an id, returns the product or undefined\nfunction findProduct(products, id) {\n    return products.find(p => p.id === id);\n}\n\n// Test code (should work after adding types)\nconst formatted = formatPerson(person);\nconsole.log(formatted);\n\nconst total = calculateTotal([10, 20, 30]);\nconsole.log(\"Total:\", total);\n\nconst products: Product[] = [\n    { id: 1, name: \"Laptop\", price: 999.99, inStock: true, tags: [\"electronics\", \"computers\"] },\n    { id: 2, name: \"Mouse\", price: 29.99, inStock: false }\n];\n\nconst laptop = findProduct(products, 1);\nconsole.log(\"Found:\", laptop?.name);\n",
+    "testCases": [
+        {
+            "description": "person has correct types",
+            "assertion": "typeof person.name === 'string' && typeof person.age === 'number' && typeof person.isActive === 'boolean' && Array.isArray(person.hobbies)"
+        },
+        {
+            "description": "formatPerson returns a string",
+            "assertion": "typeof formatPerson({ name: 'Test', age: 25, isActive: true, hobbies: ['a'] }) === 'string'"
+        },
+        {
+            "description": "calculateTotal returns correct sum",
+            "assertion": "calculateTotal([1, 2, 3, 4, 5]) === 15"
+        },
+        {
+            "description": "calculateTotal returns 0 for empty array",
+            "assertion": "calculateTotal([]) === 0"
+        },
+        {
+            "description": "findProduct finds existing product",
+            "assertion": "findProduct([{id:1,name:'A',price:10,inStock:true}], 1)?.name === 'A'"
+        },
+        {
+            "description": "findProduct returns undefined for missing product",
+            "assertion": "findProduct([{id:1,name:'A',price:10,inStock:true}], 99) === undefined"
+        },
+        {
+            "description": "Product interface allows optional tags",
+            "assertion": "(function() { const p: Product = {id:1,name:'A',price:1,inStock:true}; return p.tags === undefined; })()"
+        }
+    ],
+    "hints": [
+        "For person: const person: { name: string; age: number; isActive: boolean; hobbies: string[] } = ...",
+        "Or create an interface: interface Person { name: string; age: number; ... }",
+        "Function syntax: function name(param: Type): ReturnType { }",
+        "Optional properties use ?: like tags?: string[]",
+        "For findProduct return type: Product | undefined"
+    ]
+}

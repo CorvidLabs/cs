@@ -1,0 +1,57 @@
+{
+    "id": "03-inventory-system",
+    "title": "Inventory Management System",
+    "description": "Create an inventory management system using multiple classes.\n\n## Requirements\n\n1. Create a `Product` class:\n   - `__init__(self, name, price, quantity)` - Initialize product details\n   - `get_value(self)` - Return price * quantity\n   - `__str__(self)` - Return \"{name}: ${price} x {quantity}\"\n\n2. Create an `Inventory` class:\n   - `__init__(self)` - Initialize empty product dictionary\n   - `add_product(self, product)` - Add a Product to inventory (use name as key)\n   - `remove_product(self, name)` - Remove product by name\n   - `get_product(self, name)` - Return product or None if not found\n   - `total_value(self)` - Return sum of all product values\n   - `__len__(self)` - Return number of products\n\n## Example Usage\n\n```python\napple = Product(\"Apple\", 1.50, 100)\nbanana = Product(\"Banana\", 0.75, 50)\n\ninv = Inventory()\ninv.add_product(apple)\ninv.add_product(banana)\n\nprint(len(inv))           # 2\nprint(inv.total_value())  # 187.50\nprint(inv.get_product(\"Apple\"))  # Apple: $1.5 x 100\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "class Product:\n    def __init__(self, name, price, quantity):\n        pass\n\n    def get_value(self):\n        # Return total value (price * quantity)\n        pass\n\n    def __str__(self):\n        pass\n\n\nclass Inventory:\n    def __init__(self):\n        # Initialize empty dictionary for products\n        pass\n\n    def add_product(self, product):\n        # Add product using its name as key\n        pass\n\n    def remove_product(self, name):\n        # Remove product by name\n        pass\n\n    def get_product(self, name):\n        # Return product or None if not found\n        pass\n\n    def total_value(self):\n        # Return sum of all product values\n        pass\n\n    def __len__(self):\n        # Return number of products\n        pass\n\n\n# Test your classes\napple = Product(\"Apple\", 1.50, 100)\nbanana = Product(\"Banana\", 0.75, 50)\norange = Product(\"Orange\", 2.00, 30)\n\nprint(apple)\nprint(f\"Apple value: ${apple.get_value()}\")\n\ninv = Inventory()\ninv.add_product(apple)\ninv.add_product(banana)\ninv.add_product(orange)\n\nprint(f\"\\nInventory size: {len(inv)}\")\nprint(f\"Total value: ${inv.total_value()}\")\nprint(f\"\\nGet Apple: {inv.get_product('Apple')}\")\nprint(f\"Get Grape: {inv.get_product('Grape')}\")\n\ninv.remove_product(\"Banana\")\nprint(f\"\\nAfter removing Banana: {len(inv)} products\")\n",
+    "testCases": [
+        {
+            "description": "Product class exists",
+            "assertion": "'Product' in dir()"
+        },
+        {
+            "description": "Product.get_value calculates correctly",
+            "assertion": "Product('Test', 10, 5).get_value() == 50"
+        },
+        {
+            "description": "Product.__str__ formats correctly",
+            "assertion": "'Test' in str(Product('Test', 10, 5)) and '10' in str(Product('Test', 10, 5))"
+        },
+        {
+            "description": "Inventory class exists",
+            "assertion": "'Inventory' in dir()"
+        },
+        {
+            "description": "Inventory starts empty",
+            "assertion": "len(Inventory()) == 0"
+        },
+        {
+            "description": "add_product adds products",
+            "assertion": "inv := Inventory(); inv.add_product(Product('A', 1, 1)); len(inv) == 1"
+        },
+        {
+            "description": "get_product returns product",
+            "assertion": "inv := Inventory(); inv.add_product(Product('A', 1, 1)); inv.get_product('A') is not None"
+        },
+        {
+            "description": "get_product returns None for missing",
+            "assertion": "Inventory().get_product('Missing') is None"
+        },
+        {
+            "description": "total_value sums correctly",
+            "assertion": "inv := Inventory(); inv.add_product(Product('A', 10, 2)); inv.add_product(Product('B', 5, 4)); inv.total_value() == 40"
+        },
+        {
+            "description": "remove_product removes products",
+            "assertion": "inv := Inventory(); inv.add_product(Product('A', 1, 1)); inv.remove_product('A'); len(inv) == 0"
+        }
+    ],
+    "hints": [
+        "Store products in a dictionary: self.products = {}",
+        "Use product.name as the key when adding: self.products[product.name] = product",
+        "For total_value, loop through products.values() and sum get_value()",
+        "Use dict.get(name) which returns None if key not found",
+        "Use del self.products[name] or products.pop(name) to remove"
+    ]
+}

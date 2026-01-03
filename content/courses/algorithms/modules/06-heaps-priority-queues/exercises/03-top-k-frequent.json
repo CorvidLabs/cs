@@ -1,0 +1,55 @@
+{
+  "id": "03-top-k-frequent",
+  "title": "Top K Frequent Elements",
+  "description": "Find the k most frequent elements in an array using a heap.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def top_k_frequent(nums: list[int], k: int) -> list[int]:\n    \"\"\"\n    Return the k most frequent elements in the array.\n    \n    You may return the answer in any order.\n    \n    Args:\n        nums: List of integers\n        k: Number of most frequent elements to return\n        \n    Returns:\n        List of k most frequent elements\n        \n    Example:\n        Input: nums = [1, 1, 1, 2, 2, 3], k = 2\n        Output: [1, 2]\n        Explanation: 1 appears 3 times, 2 appears 2 times\n        \n        Input: nums = [1], k = 1\n        Output: [1]\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "import heapq\nfrom collections import Counter\n\ndef top_k_frequent(nums: list[int], k: int) -> list[int]:\n    # Count frequency of each element\n    count = Counter(nums)\n    \n    # Use min-heap of size k to find k most frequent\n    # Heap contains (frequency, element) tuples\n    heap = []\n    \n    for num, freq in count.items():\n        heapq.heappush(heap, (freq, num))\n        if len(heap) > k:\n            heapq.heappop(heap)  # Remove least frequent\n    \n    return [num for freq, num in heap]",
+  "testCases": [
+    {
+      "input": {"nums": [1, 1, 1, 2, 2, 3], "k": 2},
+      "expected": [1, 2],
+      "description": "Standard case",
+      "unordered": true
+    },
+    {
+      "input": {"nums": [1], "k": 1},
+      "expected": [1],
+      "description": "Single element"
+    },
+    {
+      "input": {"nums": [4, 1, -1, 2, -1, 2, 3], "k": 2},
+      "expected": [-1, 2],
+      "description": "With negative numbers",
+      "unordered": true
+    },
+    {
+      "input": {"nums": [1, 2, 3, 4, 5], "k": 5},
+      "expected": [1, 2, 3, 4, 5],
+      "description": "All unique, return all",
+      "unordered": true
+    },
+    {
+      "input": {"nums": [5, 5, 5, 5, 1, 1, 1, 2, 2, 3], "k": 3},
+      "expected": [5, 1, 2],
+      "description": "Three most frequent",
+      "unordered": true
+    },
+    {
+      "input": {"nums": [1, 1, 2, 2, 3, 3], "k": 2},
+      "expected": [1, 2],
+      "description": "Tied frequencies",
+      "unordered": true
+    }
+  ],
+  "hints": [
+    "First count the frequency of each element using a hash map or Counter",
+    "Use a min-heap of size k to track the k most frequent elements",
+    "The heap should store (frequency, element) tuples",
+    "When heap size exceeds k, remove the element with lowest frequency",
+    "Alternative: use bucket sort for O(n) time complexity"
+  ],
+  "explanation": "First, we count the frequency of each element using Counter. Then, we use a min-heap of size k: for each (element, frequency) pair, we push to the heap and pop if size exceeds k. This ensures we keep only the k most frequent elements. The min-heap naturally removes the least frequent elements when it overflows. Time complexity is O(n log k) for the heap operations after O(n) counting. Space complexity is O(n) for the frequency map."
+}

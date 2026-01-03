@@ -1,0 +1,17 @@
+{
+    "id": "08-swiftui",
+    "title": "Introduction to SwiftUI",
+    "description": "Build beautiful, native user interfaces with SwiftUI. Learn the declarative approach to UI development, manage state with property wrappers, compose views, and create responsive layouts for Apple platforms.",
+    "order": 8,
+    "lessons": [
+        "01-swiftui-basics",
+        "02-state-management",
+        "03-view-composition",
+        "04-lists-navigation"
+    ],
+    "exercises": [
+        "01-counter-app",
+        "02-profile-card",
+        "03-todo-list"
+    ]
+}

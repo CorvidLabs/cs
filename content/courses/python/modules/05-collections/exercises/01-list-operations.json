@@ -1,0 +1,52 @@
+{
+    "id": "01-list-operations",
+    "title": "List Operations",
+    "description": "Create functions to perform common list operations.\n\n## Requirements\n\n1. Define `find_max(numbers)` that returns the largest number in a list (without using max())\n2. Define `remove_duplicates(items)` that returns a new list with duplicates removed, preserving order\n3. Define `rotate_left(items, n)` that returns a new list rotated left by n positions\n\n## Example Usage\n\n```python\nfind_max([3, 1, 4, 1, 5, 9])     # Returns 9\nremove_duplicates([1, 2, 2, 3, 1])  # Returns [1, 2, 3]\nrotate_left([1, 2, 3, 4, 5], 2)     # Returns [3, 4, 5, 1, 2]\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "# Find the maximum value in a list (without using max())\ndef find_max(numbers):\n    pass  # Replace with your code\n\n\n# Remove duplicates while preserving order\ndef remove_duplicates(items):\n    pass  # Replace with your code\n\n\n# Rotate list left by n positions\ndef rotate_left(items, n):\n    pass  # Replace with your code\n\n\n# Test your functions\nprint(f\"Max of [3, 1, 4, 1, 5, 9]: {find_max([3, 1, 4, 1, 5, 9])}\")\nprint(f\"Remove duplicates from [1, 2, 2, 3, 1]: {remove_duplicates([1, 2, 2, 3, 1])}\")\nprint(f\"Rotate [1, 2, 3, 4, 5] left by 2: {rotate_left([1, 2, 3, 4, 5], 2)}\")\n",
+    "testCases": [
+        {
+            "description": "find_max function exists",
+            "assertion": "callable(find_max)"
+        },
+        {
+            "description": "find_max([3, 1, 4, 1, 5, 9]) returns 9",
+            "assertion": "find_max([3, 1, 4, 1, 5, 9]) == 9"
+        },
+        {
+            "description": "find_max([-5, -2, -10]) returns -2",
+            "assertion": "find_max([-5, -2, -10]) == -2"
+        },
+        {
+            "description": "remove_duplicates function exists",
+            "assertion": "callable(remove_duplicates)"
+        },
+        {
+            "description": "remove_duplicates([1, 2, 2, 3, 1]) returns [1, 2, 3]",
+            "assertion": "remove_duplicates([1, 2, 2, 3, 1]) == [1, 2, 3]"
+        },
+        {
+            "description": "remove_duplicates preserves order",
+            "assertion": "remove_duplicates(['b', 'a', 'b', 'c', 'a']) == ['b', 'a', 'c']"
+        },
+        {
+            "description": "rotate_left function exists",
+            "assertion": "callable(rotate_left)"
+        },
+        {
+            "description": "rotate_left([1, 2, 3, 4, 5], 2) returns [3, 4, 5, 1, 2]",
+            "assertion": "rotate_left([1, 2, 3, 4, 5], 2) == [3, 4, 5, 1, 2]"
+        },
+        {
+            "description": "rotate_left handles rotation larger than length",
+            "assertion": "rotate_left([1, 2, 3], 4) == [2, 3, 1]"
+        }
+    ],
+    "hints": [
+        "For find_max: initialize max_val with the first element, then loop through comparing",
+        "For remove_duplicates: use a seen set to track what you've already added",
+        "For rotate_left: use list slicing - items[n:] + items[:n]",
+        "For rotate_left with n > length: use modulo operator n % len(items)"
+    ]
+}

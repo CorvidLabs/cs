@@ -1,0 +1,42 @@
+{
+    "id": "03-stackable-protocol",
+    "title": "Generic Stack Protocol",
+    "description": "Create a generic protocol for stack operations and implement it with a concrete type.\n\n## Requirements\n\n1. Define a `Stackable` protocol with an associated type `Element`:\n   - `mutating func push(_ element: Element)`\n   - `mutating func pop() -> Element?`\n   - `func peek() -> Element?`\n   - `var isEmpty: Bool { get }`\n   - `var count: Int { get }`\n\n2. Create a `Stack<T>` struct that conforms to `Stackable`:\n   - Use an array internally to store elements\n   - Implement all protocol requirements\n\n3. Add a protocol extension that provides a default `isEmpty` implementation\n\n## Expected Output\n\n```\nPushed: 1, 2, 3\nPeek: 3\nPopped: 3\nPopped: 2\nCount: 1\nisEmpty: false\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "// Define the Stackable protocol with associated type Element\n\n\n// Add a protocol extension for default isEmpty implementation\n\n\n// Create a generic Stack<T> struct conforming to Stackable\n\n\n// Test your implementation\nvar stack = Stack<Int>()\nstack.push(1)\nstack.push(2)\nstack.push(3)\nprint(\"Pushed: 1, 2, 3\")\n\nif let top = stack.peek() {\n    print(\"Peek: \\(top)\")\n}\n\nif let popped = stack.pop() {\n    print(\"Popped: \\(popped)\")\n}\n\nif let popped = stack.pop() {\n    print(\"Popped: \\(popped)\")\n}\n\nprint(\"Count: \\(stack.count)\")\nprint(\"isEmpty: \\(stack.isEmpty)\")\n",
+    "testCases": [
+        {
+            "description": "Stack should be empty initially",
+            "assertion": "Stack<Int>().isEmpty == true"
+        },
+        {
+            "description": "push should add elements to stack",
+            "assertion": "stack.count == 1"
+        },
+        {
+            "description": "peek should return top element without removing",
+            "assertion": "stack.peek() == 1 && stack.count == 1"
+        },
+        {
+            "description": "pop should remove and return top element",
+            "assertion": "stack.pop() == 1 && stack.isEmpty"
+        },
+        {
+            "description": "pop on empty stack should return nil",
+            "assertion": "Stack<Int>().pop() == nil"
+        },
+        {
+            "description": "Output should show correct operations",
+            "assertion": "output.contains(\"Peek: 3\") && output.contains(\"Popped: 3\") && output.contains(\"Count: 1\")"
+        }
+    ],
+    "hints": [
+        "Define the protocol with: protocol Stackable { associatedtype Element; ... }",
+        "Use an array property: private var elements: [T] = []",
+        "push appends to the array: elements.append(element)",
+        "pop removes last: elements.popLast()",
+        "peek returns last without removing: elements.last",
+        "Default isEmpty can be: var isEmpty: Bool { count == 0 }"
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "id": "02-dictionary-phonebook",
+    "title": "Dictionary Phonebook",
+    "description": "Create a simple phonebook using a dictionary with helper functions.\n\n## Requirements\n\n1. Create a dictionary called `phonebook` with at least 3 contacts (name -> phone number)\n2. Define `add_contact(name, number)` that adds a contact to the phonebook\n3. Define `lookup(name)` that returns the phone number or 'Not found' if the name doesn't exist\n4. Define `list_contacts()` that returns a sorted list of all contact names\n\n## Example Usage\n\n```python\nadd_contact(\"Alice\", \"555-1234\")\nlookup(\"Alice\")      # Returns \"555-1234\"\nlookup(\"Unknown\")    # Returns \"Not found\"\nlist_contacts()      # Returns sorted list of names\n```",
+    "order": 2,
+    "language": "python",
+    "starterCode": "# Create a phonebook dictionary with at least 3 contacts\nphonebook = {\n    # Add your initial contacts here\n}\n\n\n# Add a new contact to the phonebook\ndef add_contact(name, number):\n    pass  # Replace with your code\n\n\n# Look up a contact's phone number\n# Return \"Not found\" if the contact doesn't exist\ndef lookup(name):\n    pass  # Replace with your code\n\n\n# Return a sorted list of all contact names\ndef list_contacts():\n    pass  # Replace with your code\n\n\n# Test your functions\nprint(f\"Initial phonebook: {phonebook}\")\nadd_contact(\"Diana\", \"555-9999\")\nprint(f\"After adding Diana: {phonebook}\")\nprint(f\"Looking up Diana: {lookup('Diana')}\")\nprint(f\"Looking up Unknown: {lookup('Unknown')}\")\nprint(f\"All contacts: {list_contacts()}\")\n",
+    "testCases": [
+        {
+            "description": "phonebook is a dictionary",
+            "assertion": "isinstance(phonebook, dict)"
+        },
+        {
+            "description": "phonebook has at least 3 contacts",
+            "assertion": "len(phonebook) >= 3"
+        },
+        {
+            "description": "add_contact function exists",
+            "assertion": "callable(add_contact)"
+        },
+        {
+            "description": "add_contact adds new contacts",
+            "assertion": "add_contact('TestUser', '555-0000') or True; 'TestUser' in phonebook"
+        },
+        {
+            "description": "lookup function exists",
+            "assertion": "callable(lookup)"
+        },
+        {
+            "description": "lookup returns correct number for existing contact",
+            "assertion": "lookup('TestUser') == '555-0000'"
+        },
+        {
+            "description": "lookup returns 'Not found' for missing contact",
+            "assertion": "lookup('NonexistentPerson') == 'Not found'"
+        },
+        {
+            "description": "list_contacts function exists",
+            "assertion": "callable(list_contacts)"
+        },
+        {
+            "description": "list_contacts returns a sorted list",
+            "assertion": "list_contacts() == sorted(list_contacts())"
+        }
+    ],
+    "hints": [
+        "Initialize phonebook with at least 3 key-value pairs",
+        "To add a contact: phonebook[name] = number",
+        "Use phonebook.get(name, 'Not found') for safe lookup",
+        "Use sorted(phonebook.keys()) to get sorted names"
+    ]
+}

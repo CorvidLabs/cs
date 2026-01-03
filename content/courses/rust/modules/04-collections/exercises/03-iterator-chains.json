@@ -1,0 +1,41 @@
+{
+    "id": "03-iterator-chains",
+    "title": "Iterator Chains",
+    "description": "Practice using iterator adaptors to process data.\n\n## Requirements\n\n1. Implement `sum_of_squares(numbers: &[i32]) -> i32`\n   - Square each number and sum them\n\n2. Implement `even_indices(items: &[&str]) -> Vec<String>`\n   - Return items at even indices (0, 2, 4, ...)\n   - Convert to owned Strings\n\n3. Implement `parse_numbers(strings: &[&str]) -> Vec<i32>`\n   - Parse each string to i32\n   - Skip any that fail to parse\n\n4. Implement `group_by_first_char(words: &[&str]) -> HashMap<char, Vec<String>>`\n   - Group words by their first character (lowercase)",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "use std::collections::HashMap;\n\n// Square each number and sum the results\nfn sum_of_squares(numbers: &[i32]) -> i32 {\n    todo!()\n}\n\n// Return items at even indices (0, 2, 4, ...)\nfn even_indices(items: &[&str]) -> Vec<String> {\n    todo!()\n}\n\n// Parse strings to i32, skipping failures\nfn parse_numbers(strings: &[&str]) -> Vec<i32> {\n    todo!()\n}\n\n// Group words by their first character (lowercase)\nfn group_by_first_char(words: &[&str]) -> HashMap<char, Vec<String>> {\n    todo!()\n}\n\nfn main() {\n    // Test sum_of_squares\n    println!(\"Sum of squares: {}\", sum_of_squares(&[1, 2, 3]));  // 14\n\n    // Test even_indices\n    let items = vec![\"a\", \"b\", \"c\", \"d\", \"e\"];\n    println!(\"Even indices: {:?}\", even_indices(&items));  // [\"a\", \"c\", \"e\"]\n\n    // Test parse_numbers\n    let strings = vec![\"1\", \"two\", \"3\", \"four\", \"5\"];\n    println!(\"Parsed: {:?}\", parse_numbers(&strings));  // [1, 3, 5]\n\n    // Test group_by_first_char\n    let words = vec![\"apple\", \"Banana\", \"apricot\", \"blueberry\"];\n    println!(\"Grouped: {:?}\", group_by_first_char(&words));\n}\n",
+    "testCases": [
+        {
+            "description": "sum_of_squares calculates correctly",
+            "assertion": "sum_of_squares(&[1, 2, 3]) == 14"
+        },
+        {
+            "description": "sum_of_squares handles empty",
+            "assertion": "sum_of_squares(&[]) == 0"
+        },
+        {
+            "description": "even_indices selects correct items",
+            "assertion": "even_indices(&[\"a\", \"b\", \"c\", \"d\", \"e\"]) == vec![\"a\", \"c\", \"e\"]"
+        },
+        {
+            "description": "parse_numbers skips invalid",
+            "assertion": "parse_numbers(&[\"1\", \"two\", \"3\"]) == vec![1, 3]"
+        },
+        {
+            "description": "group_by_first_char groups correctly",
+            "assertion": "group_by_first_char(&[\"apple\", \"ant\"]).get(&'a').map(|v| v.len()) == Some(2)"
+        },
+        {
+            "description": "group_by_first_char is case-insensitive",
+            "assertion": "group_by_first_char(&[\"Apple\", \"ant\"]).get(&'a').map(|v| v.len()) == Some(2)"
+        }
+    ],
+    "hints": [
+        "sum_of_squares: use .iter().map(|x| x * x).sum()",
+        "even_indices: use .iter().enumerate().filter(|(i, _)| i % 2 == 0).map(...)",
+        "parse_numbers: use .iter().filter_map(|s| s.parse().ok())",
+        "group_by_first_char: use entry().or_default().push() to build the groups",
+        "Use .chars().next().map(|c| c.to_ascii_lowercase()) to get first char lowercase"
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "id": "02-navigation-layout",
+    "title": "Create a Navigation Layout",
+    "description": "Build a horizontal navigation bar using Flexbox.\n\n## Requirements\n\n1. Style the `.navbar`:\n   - Use flexbox layout\n   - Space items with space-between\n   - Vertically center items\n   - 16px padding\n   - #333 background color\n\n2. Style the `.nav-links` (ul):\n   - Use flexbox layout\n   - 24px gap between items\n   - Remove list bullets\n   - Remove default margin and padding\n\n3. Style the `.nav-link` (a):\n   - White text color\n   - No text decoration\n   - 8px vertical padding, 16px horizontal\n\n## Expected Result\n\nA responsive navigation bar with logo on the left and links on the right.",
+    "order": 2,
+    "language": "css",
+    "starterCode": "/* Navigation container */\n.navbar {\n    /* Add your styles here */\n}\n\n/* Navigation links list */\n.nav-links {\n    /* Add your styles here */\n}\n\n/* Individual nav link */\n.nav-link {\n    /* Add your styles here */\n}",
+    "testCases": [
+        {
+            "description": "Navbar should use flexbox",
+            "assertion": "getComputedStyle(document.querySelector('.navbar')).display === 'flex'"
+        },
+        {
+            "description": "Navbar should use space-between",
+            "assertion": "getComputedStyle(document.querySelector('.navbar')).justifyContent === 'space-between'"
+        },
+        {
+            "description": "Navbar should center items vertically",
+            "assertion": "getComputedStyle(document.querySelector('.navbar')).alignItems === 'center'"
+        },
+        {
+            "description": "Navbar should have #333 background",
+            "assertion": "getComputedStyle(document.querySelector('.navbar')).backgroundColor === 'rgb(51, 51, 51)'"
+        },
+        {
+            "description": "Nav links should use flexbox",
+            "assertion": "getComputedStyle(document.querySelector('.nav-links')).display === 'flex'"
+        },
+        {
+            "description": "Nav links should have 24px gap",
+            "assertion": "getComputedStyle(document.querySelector('.nav-links')).gap === '24px'"
+        },
+        {
+            "description": "Nav links should have no list style",
+            "assertion": "getComputedStyle(document.querySelector('.nav-links')).listStyleType === 'none'"
+        },
+        {
+            "description": "Nav link should be white",
+            "assertion": "getComputedStyle(document.querySelector('.nav-link')).color === 'rgb(255, 255, 255)'"
+        },
+        {
+            "description": "Nav link should have no text decoration",
+            "assertion": "getComputedStyle(document.querySelector('.nav-link')).textDecorationLine === 'none'"
+        }
+    ],
+    "hints": [
+        "Use display: flex on the navbar container",
+        "Use justify-content: space-between and align-items: center",
+        "For nav-links: display: flex, gap: 24px, list-style: none, margin: 0, padding: 0",
+        "For nav-link: color: white, text-decoration: none, padding: 8px 16px"
+    ]
+}

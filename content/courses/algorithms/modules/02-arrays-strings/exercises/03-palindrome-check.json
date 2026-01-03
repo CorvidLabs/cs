@@ -1,0 +1,44 @@
+{
+  "id": "03-palindrome-check",
+  "title": "Valid Palindrome",
+  "description": "Check if a string is a palindrome, considering only alphanumeric characters and ignoring case.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "beginner",
+  "starterCode": "def is_palindrome(s: str) -> bool:\n    \"\"\"\n    Check if a string is a valid palindrome.\n    \n    A palindrome reads the same forward and backward.\n    Consider only alphanumeric characters and ignore case.\n    \n    Args:\n        s: The input string\n        \n    Returns:\n        True if it's a valid palindrome, False otherwise\n        \n    Example:\n        Input: s = \"A man, a plan, a canal: Panama\"\n        Output: True  # \"amanaplanacanalpanama\" is a palindrome\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def is_palindrome(s: str) -> bool:\n    left = 0\n    right = len(s) - 1\n    \n    while left < right:\n        # Skip non-alphanumeric characters\n        while left < right and not s[left].isalnum():\n            left += 1\n        while left < right and not s[right].isalnum():\n            right -= 1\n        \n        # Compare characters (case-insensitive)\n        if s[left].lower() != s[right].lower():\n            return False\n        \n        left += 1\n        right -= 1\n    \n    return True",
+  "testCases": [
+    {
+      "input": {"s": "A man, a plan, a canal: Panama"},
+      "expected": true,
+      "description": "Classic palindrome with punctuation"
+    },
+    {
+      "input": {"s": "race a car"},
+      "expected": false,
+      "description": "Not a palindrome"
+    },
+    {
+      "input": {"s": " "},
+      "expected": true,
+      "description": "Empty after filtering is palindrome"
+    },
+    {
+      "input": {"s": "Was it a car or a cat I saw?"},
+      "expected": true,
+      "description": "Another valid palindrome"
+    },
+    {
+      "input": {"s": "No 'x' in Nixon"},
+      "expected": true,
+      "description": "Palindrome with apostrophe"
+    }
+  ],
+  "hints": [
+    "Use two pointers: one at the start, one at the end",
+    "Skip non-alphanumeric characters using isalnum()",
+    "Compare characters in lowercase using lower()",
+    "Move pointers inward after each comparison"
+  ],
+  "explanation": "We use the two-pointer technique, starting from both ends of the string. We skip any non-alphanumeric characters (spaces, punctuation) and compare the remaining characters case-insensitively. If all pairs match as we move inward, it's a palindrome. Time complexity is O(n) where n is the string length, and space complexity is O(1) since we only use two pointers."
+}

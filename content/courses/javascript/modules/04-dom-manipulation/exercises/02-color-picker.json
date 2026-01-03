@@ -1,0 +1,49 @@
+{
+    "id": "02-color-picker",
+    "title": "Color Picker",
+    "description": "Build an interactive color picker that updates in real-time.\n\n## Requirements\n\n1. Create a function `createColorPicker(containerSelector)` that builds a color picker UI\n\n2. The picker should include:\n   - Three range inputs for Red, Green, Blue (0-255)\n   - A color preview box showing the current color\n   - Text displaying the hex code and RGB values\n   - A \"Copy Hex\" button that copies the hex code\n\n3. Return an object with:\n   - `setColor(r, g, b)` - sets the color programmatically\n   - `getColor()` - returns `{ r, g, b, hex }`\n   - `onChange(callback)` - registers a callback for color changes\n\n4. Update the preview and values in real-time as sliders move\n\n## HTML Structure\n\n```html\n<div class=\"color-preview\"></div>\n<div class=\"color-values\">\n    <span class=\"hex\">#000000</span>\n    <span class=\"rgb\">rgb(0, 0, 0)</span>\n</div>\n<div class=\"sliders\">\n    <label>R: <input type=\"range\" class=\"red\" min=\"0\" max=\"255\" value=\"0\"></label>\n    <label>G: <input type=\"range\" class=\"green\" min=\"0\" max=\"255\" value=\"0\"></label>\n    <label>B: <input type=\"range\" class=\"blue\" min=\"0\" max=\"255\" value=\"0\"></label>\n</div>\n<button class=\"copy-btn\">Copy Hex</button>\n```",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "function createColorPicker(containerSelector) {\n    const container = document.querySelector(containerSelector);\n    if (!container) throw new Error('Container not found');\n\n    let changeCallbacks = [];\n\n    // Create HTML structure\n    container.innerHTML = `\n        <div class=\"color-preview\" style=\"width: 100px; height: 100px; border: 1px solid #ccc;\"></div>\n        <div class=\"color-values\">\n            <span class=\"hex\">#000000</span>\n            <span class=\"rgb\">rgb(0, 0, 0)</span>\n        </div>\n        <div class=\"sliders\">\n            <label>R: <input type=\"range\" class=\"red\" min=\"0\" max=\"255\" value=\"0\"></label>\n            <label>G: <input type=\"range\" class=\"green\" min=\"0\" max=\"255\" value=\"0\"></label>\n            <label>B: <input type=\"range\" class=\"blue\" min=\"0\" max=\"255\" value=\"0\"></label>\n        </div>\n        <button class=\"copy-btn\">Copy Hex</button>\n    `;\n\n    const preview = container.querySelector('.color-preview');\n    const hexDisplay = container.querySelector('.hex');\n    const rgbDisplay = container.querySelector('.rgb');\n    const redSlider = container.querySelector('.red');\n    const greenSlider = container.querySelector('.green');\n    const blueSlider = container.querySelector('.blue');\n    const copyBtn = container.querySelector('.copy-btn');\n\n    // Convert RGB to hex\n    function rgbToHex(r, g, b) {\n        // Convert each value to 2-digit hex and combine\n        // Hint: Use .toString(16) and .padStart(2, '0')\n        \n    }\n\n    // Update the display\n    function updateDisplay() {\n        const r = Number(redSlider.value);\n        const g = Number(greenSlider.value);\n        const b = Number(blueSlider.value);\n        const hex = rgbToHex(r, g, b);\n\n        // Update preview background\n        // Update hex and rgb text displays\n        // Call all registered callbacks\n        \n    }\n\n    // Set color programmatically\n    function setColor(r, g, b) {\n        // Update slider values\n        // Update display\n        \n    }\n\n    // Get current color\n    function getColor() {\n        const r = Number(redSlider.value);\n        const g = Number(greenSlider.value);\n        const b = Number(blueSlider.value);\n        return {\n            r,\n            g,\n            b,\n            hex: rgbToHex(r, g, b)\n        };\n    }\n\n    // Register change callback\n    function onChange(callback) {\n        changeCallbacks.push(callback);\n    }\n\n    // Set up event listeners\n    // Listen for input events on sliders\n    \n    // Copy button functionality\n    copyBtn.addEventListener('click', () => {\n        const { hex } = getColor();\n        navigator.clipboard.writeText(hex).then(() => {\n            copyBtn.textContent = 'Copied!';\n            setTimeout(() => {\n                copyBtn.textContent = 'Copy Hex';\n            }, 1500);\n        });\n    });\n\n    // Initialize display\n    updateDisplay();\n\n    return {\n        setColor,\n        getColor,\n        onChange\n    };\n}\n\n// Test your implementation\nconst picker = createColorPicker('#app');\npicker.onChange((color) => {\n    console.log('Color changed:', color);\n});\npicker.setColor(255, 128, 0);\nconsole.log('Current color:', picker.getColor());\n",
+    "testCases": [
+        {
+            "description": "createColorPicker returns object with getColor",
+            "assertion": "typeof createColorPicker('#app').getColor === 'function'"
+        },
+        {
+            "description": "createColorPicker returns object with setColor",
+            "assertion": "typeof createColorPicker('#app').setColor === 'function'"
+        },
+        {
+            "description": "getColor returns object with r, g, b, hex",
+            "assertion": "(function() { const c = createColorPicker('#app').getColor(); return 'r' in c && 'g' in c && 'b' in c && 'hex' in c; })()"
+        },
+        {
+            "description": "Initial color is black (0, 0, 0)",
+            "assertion": "(function() { const c = createColorPicker('#app').getColor(); return c.r === 0 && c.g === 0 && c.b === 0; })()"
+        },
+        {
+            "description": "setColor updates the color values",
+            "assertion": "(function() { const p = createColorPicker('#app'); p.setColor(100, 150, 200); const c = p.getColor(); return c.r === 100 && c.g === 150 && c.b === 200; })()"
+        },
+        {
+            "description": "getColor returns correct hex for black",
+            "assertion": "createColorPicker('#app').getColor().hex === '#000000'"
+        },
+        {
+            "description": "getColor returns correct hex after setColor",
+            "assertion": "(function() { const p = createColorPicker('#app'); p.setColor(255, 128, 0); return p.getColor().hex === '#ff8000'; })()"
+        },
+        {
+            "description": "onChange callback is called on setColor",
+            "assertion": "(function() { const p = createColorPicker('#app'); let called = false; p.onChange(() => called = true); p.setColor(50, 50, 50); return called; })()"
+        }
+    ],
+    "hints": [
+        "To convert to hex: num.toString(16).padStart(2, '0')",
+        "Combine hex parts: '#' + rHex + gHex + bHex",
+        "Use input event on sliders: slider.addEventListener('input', updateDisplay)",
+        "Update preview with: preview.style.backgroundColor = hex",
+        "For callbacks: changeCallbacks.forEach(cb => cb(getColor()))"
+    ]
+}

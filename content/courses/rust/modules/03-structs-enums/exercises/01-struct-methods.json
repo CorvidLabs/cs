@@ -1,0 +1,42 @@
+{
+    "id": "01-struct-methods",
+    "title": "Struct Methods",
+    "description": "Practice defining structs and implementing methods.\n\n## Requirements\n\n1. Define a `Rectangle` struct with `width` and `height` fields (both f64)\n2. Implement `new(width, height)` associated function\n3. Implement `area(&self)` method returning the area\n4. Implement `perimeter(&self)` method returning the perimeter\n5. Implement `scale(&mut self, factor: f64)` to multiply both dimensions\n6. Implement `is_square(&self)` returning bool",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "// Define the Rectangle struct here\n// It should have width and height fields of type f64\nstruct Rectangle {\n    // Your fields here\n    todo!()\n}\n\nimpl Rectangle {\n    // Create a new Rectangle\n    fn new(width: f64, height: f64) -> Rectangle {\n        todo!()\n    }\n\n    // Calculate the area\n    fn area(&self) -> f64 {\n        todo!()\n    }\n\n    // Calculate the perimeter\n    fn perimeter(&self) -> f64 {\n        todo!()\n    }\n\n    // Scale both dimensions by a factor\n    fn scale(&mut self, factor: f64) {\n        todo!()\n    }\n\n    // Check if this is a square\n    fn is_square(&self) -> bool {\n        todo!()\n    }\n}\n\nfn main() {\n    let mut rect = Rectangle::new(10.0, 5.0);\n\n    println!(\"Rectangle: {}x{}\", rect.width, rect.height);\n    println!(\"Area: {}\", rect.area());\n    println!(\"Perimeter: {}\", rect.perimeter());\n    println!(\"Is square: {}\", rect.is_square());\n\n    rect.scale(2.0);\n    println!(\"After scaling: {}x{}\", rect.width, rect.height);\n\n    let square = Rectangle::new(5.0, 5.0);\n    println!(\"Square check: {}\", square.is_square());\n}\n",
+    "testCases": [
+        {
+            "description": "Rectangle::new creates correct dimensions",
+            "assertion": "{ let r = Rectangle::new(10.0, 5.0); r.width == 10.0 && r.height == 5.0 }"
+        },
+        {
+            "description": "area() calculates correctly",
+            "assertion": "(Rectangle::new(10.0, 5.0).area() - 50.0).abs() < 0.001"
+        },
+        {
+            "description": "perimeter() calculates correctly",
+            "assertion": "(Rectangle::new(10.0, 5.0).perimeter() - 30.0).abs() < 0.001"
+        },
+        {
+            "description": "scale() modifies dimensions",
+            "assertion": "{ let mut r = Rectangle::new(10.0, 5.0); r.scale(2.0); r.width == 20.0 && r.height == 10.0 }"
+        },
+        {
+            "description": "is_square() returns false for non-square",
+            "assertion": "!Rectangle::new(10.0, 5.0).is_square()"
+        },
+        {
+            "description": "is_square() returns true for square",
+            "assertion": "Rectangle::new(5.0, 5.0).is_square()"
+        }
+    ],
+    "hints": [
+        "The struct needs pub or no modifier for fields: width: f64, height: f64",
+        "new() should return Rectangle { width, height } using field init shorthand",
+        "area = width * height",
+        "perimeter = 2 * (width + height)",
+        "For scale, multiply self.width and self.height by factor",
+        "For is_square, compare width and height (consider using approximate equality for floats)"
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "id": "01-api-client",
+    "title": "API Client",
+    "description": "Build a reusable API client class for making HTTP requests.\n\n## Requirements\n\n1. Create an `ApiClient` class with:\n   - Constructor that takes `baseUrl` string\n   - Method `get(endpoint)` - makes GET request, returns JSON\n   - Method `post(endpoint, data)` - makes POST request with JSON body, returns JSON\n   - Method `put(endpoint, data)` - makes PUT request with JSON body, returns JSON\n   - Method `delete(endpoint)` - makes DELETE request, returns boolean\n\n2. All methods should:\n   - Prepend baseUrl to endpoint\n   - Include `Content-Type: application/json` header for POST/PUT\n   - Throw Error with status code if response is not ok\n\n## Expected Usage\n\n```javascript\nconst api = new ApiClient('https://api.example.com');\n\nconst users = await api.get('/users');\nconst newUser = await api.post('/users', { name: 'Alice' });\nawait api.delete('/users/1');\n```",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "class ApiClient {\n    constructor(baseUrl) {\n        // Store the base URL\n        this.baseUrl = baseUrl;\n    }\n\n    // Helper method to handle response\n    async handleResponse(response) {\n        // If response not ok, throw error with status\n        // Otherwise return JSON\n        return {};\n    }\n\n    // GET request\n    async get(endpoint) {\n        // Fetch from baseUrl + endpoint\n        // Return JSON response\n        return {};\n    }\n\n    // POST request with JSON body\n    async post(endpoint, data) {\n        // POST to baseUrl + endpoint\n        // Include Content-Type header\n        // Stringify data as body\n        // Return JSON response\n        return {};\n    }\n\n    // PUT request with JSON body\n    async put(endpoint, data) {\n        // PUT to baseUrl + endpoint\n        // Include Content-Type header\n        // Stringify data as body\n        // Return JSON response\n        return {};\n    }\n\n    // DELETE request\n    async delete(endpoint) {\n        // DELETE to baseUrl + endpoint\n        // Return true if successful\n        return false;\n    }\n}\n\n// Test your implementation\nconst api = new ApiClient('https://jsonplaceholder.typicode.com');\n\nasync function testApi() {\n    try {\n        // Test GET\n        console.log('Testing GET...');\n        const posts = await api.get('/posts?_limit=2');\n        console.log('Got posts:', posts.length);\n\n        // Test POST\n        console.log('\\nTesting POST...');\n        const newPost = await api.post('/posts', {\n            title: 'Test Post',\n            body: 'This is a test',\n            userId: 1\n        });\n        console.log('Created post:', newPost.id);\n\n        // Test PUT\n        console.log('\\nTesting PUT...');\n        const updatedPost = await api.put('/posts/1', {\n            id: 1,\n            title: 'Updated Title',\n            body: 'Updated body',\n            userId: 1\n        });\n        console.log('Updated post:', updatedPost.title);\n\n        // Test DELETE\n        console.log('\\nTesting DELETE...');\n        const deleted = await api.delete('/posts/1');\n        console.log('Deleted:', deleted);\n\n    } catch (error) {\n        console.error('Error:', error.message);\n    }\n}\n\ntestApi();\n",
+    "testCases": [
+        {
+            "description": "ApiClient stores baseUrl",
+            "assertion": "new ApiClient('https://api.test.com').baseUrl === 'https://api.test.com'"
+        },
+        {
+            "description": "get method exists",
+            "assertion": "typeof new ApiClient('').get === 'function'"
+        },
+        {
+            "description": "post method exists",
+            "assertion": "typeof new ApiClient('').post === 'function'"
+        },
+        {
+            "description": "put method exists",
+            "assertion": "typeof new ApiClient('').put === 'function'"
+        },
+        {
+            "description": "delete method exists",
+            "assertion": "typeof new ApiClient('').delete === 'function'"
+        }
+    ],
+    "hints": [
+        "handleResponse: if (!response.ok) throw new Error(`HTTP ${response.status}`)",
+        "handleResponse: return response.json()",
+        "get: return this.handleResponse(await fetch(this.baseUrl + endpoint))",
+        "post/put: include headers: { 'Content-Type': 'application/json' }",
+        "post/put: include body: JSON.stringify(data)",
+        "delete: return response.ok or check status === 200 || status === 204"
+    ]
+}

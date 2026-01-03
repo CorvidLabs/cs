@@ -1,0 +1,45 @@
+{
+    "id": "03-trait-objects",
+    "title": "Trait Objects for Polymorphism",
+    "description": "Use trait objects to work with different types at runtime.\n\n## Requirements\n\n1. Define a `Shape` trait with:\n   - `fn area(&self) -> f64`\n   - `fn name(&self) -> &str`\n\n2. Implement `Shape` for `Circle` and `Rectangle` structs\n\n3. Implement `total_area(shapes: &[Box<dyn Shape>]) -> f64`\n   - Sum the areas of all shapes\n\n4. Implement `largest_shape(shapes: &[Box<dyn Shape>]) -> Option<&dyn Shape>`\n   - Return the shape with the largest area\n\n## Examples\n\n- Circle with radius 2.0 has area ~12.57\n- Rectangle 3x4 has area 12.0\n- total_area of both is ~24.57",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "use std::f64::consts::PI;\n\n// Define the Shape trait\ntrait Shape {\n    fn area(&self) -> f64;\n    fn name(&self) -> &str;\n}\n\nstruct Circle {\n    radius: f64,\n}\n\nstruct Rectangle {\n    width: f64,\n    height: f64,\n}\n\n// Implement Shape for Circle\nimpl Shape for Circle {\n    fn area(&self) -> f64 {\n        todo!()\n    }\n\n    fn name(&self) -> &str {\n        todo!()\n    }\n}\n\n// Implement Shape for Rectangle\nimpl Shape for Rectangle {\n    fn area(&self) -> f64 {\n        todo!()\n    }\n\n    fn name(&self) -> &str {\n        todo!()\n    }\n}\n\n// Sum the areas of all shapes\nfn total_area(shapes: &[Box<dyn Shape>]) -> f64 {\n    todo!()\n}\n\n// Return the shape with the largest area\nfn largest_shape(shapes: &[Box<dyn Shape>]) -> Option<&dyn Shape> {\n    todo!()\n}\n\nfn main() {\n    let shapes: Vec<Box<dyn Shape>> = vec![\n        Box::new(Circle { radius: 2.0 }),\n        Box::new(Rectangle { width: 3.0, height: 4.0 }),\n        Box::new(Circle { radius: 1.5 }),\n    ];\n\n    println!(\"Shapes:\");\n    for shape in &shapes {\n        println!(\"  {} - area: {:.2}\", shape.name(), shape.area());\n    }\n\n    println!(\"\\nTotal area: {:.2}\", total_area(&shapes));\n\n    if let Some(largest) = largest_shape(&shapes) {\n        println!(\"Largest: {} with area {:.2}\", largest.name(), largest.area());\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "Circle area is calculated correctly",
+            "assertion": "{ let c = Circle { radius: 2.0 }; (c.area() - 4.0 * PI).abs() < 0.001 }"
+        },
+        {
+            "description": "Rectangle area is calculated correctly",
+            "assertion": "{ let r = Rectangle { width: 3.0, height: 4.0 }; (r.area() - 12.0).abs() < 0.001 }"
+        },
+        {
+            "description": "Circle name is correct",
+            "assertion": "Circle { radius: 1.0 }.name() == \"Circle\""
+        },
+        {
+            "description": "Rectangle name is correct",
+            "assertion": "Rectangle { width: 1.0, height: 1.0 }.name() == \"Rectangle\""
+        },
+        {
+            "description": "total_area sums correctly",
+            "assertion": "{ let shapes: Vec<Box<dyn Shape>> = vec![Box::new(Rectangle { width: 2.0, height: 3.0 }), Box::new(Rectangle { width: 4.0, height: 5.0 })]; (total_area(&shapes) - 26.0).abs() < 0.001 }"
+        },
+        {
+            "description": "largest_shape finds largest",
+            "assertion": "{ let shapes: Vec<Box<dyn Shape>> = vec![Box::new(Rectangle { width: 2.0, height: 2.0 }), Box::new(Rectangle { width: 5.0, height: 5.0 })]; largest_shape(&shapes).unwrap().area() > 20.0 }"
+        },
+        {
+            "description": "largest_shape returns None for empty",
+            "assertion": "{ let shapes: Vec<Box<dyn Shape>> = vec![]; largest_shape(&shapes).is_none() }"
+        }
+    ],
+    "hints": [
+        "Circle area formula: PI * radius * radius",
+        "Rectangle area formula: width * height",
+        "For total_area: shapes.iter().map(|s| s.area()).sum()",
+        "For largest_shape: use max_by with f64::total_cmp for comparison",
+        "When returning &dyn Shape from Box<dyn Shape>, use shape.as_ref()"
+    ]
+}

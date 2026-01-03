@@ -1,0 +1,44 @@
+{
+  "id": "01-sort-colors",
+  "title": "Sort Colors (Dutch National Flag)",
+  "description": "Sort an array with three distinct values in-place using the Dutch National Flag algorithm.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def sort_colors(nums: list[int]) -> None:\n    \"\"\"\n    Sort array containing only 0s, 1s, and 2s in-place.\n    \n    This is known as the Dutch National Flag problem.\n    Must be done in-place with O(1) extra space.\n    \n    Args:\n        nums: List containing only 0, 1, and 2\n        \n    Returns:\n        None (modifies nums in-place)\n        \n    Example:\n        Input: nums = [2, 0, 2, 1, 1, 0]\n        After: nums = [0, 0, 1, 1, 2, 2]\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def sort_colors(nums: list[int]) -> None:\n    # Dutch National Flag algorithm\n    # Three pointers: low, mid, high\n    low = 0      # boundary for 0s\n    mid = 0      # current element\n    high = len(nums) - 1  # boundary for 2s\n    \n    while mid <= high:\n        if nums[mid] == 0:\n            # Swap with low boundary, advance both\n            nums[low], nums[mid] = nums[mid], nums[low]\n            low += 1\n            mid += 1\n        elif nums[mid] == 1:\n            # 1 is in correct position, just advance\n            mid += 1\n        else:  # nums[mid] == 2\n            # Swap with high boundary, only decrement high\n            nums[mid], nums[high] = nums[high], nums[mid]\n            high -= 1\n            # Don't increment mid - need to check swapped value",
+  "testCases": [
+    {
+      "input": {"nums": [2, 0, 2, 1, 1, 0]},
+      "expected": [0, 0, 1, 1, 2, 2],
+      "description": "Mixed colors"
+    },
+    {
+      "input": {"nums": [2, 0, 1]},
+      "expected": [0, 1, 2],
+      "description": "One of each"
+    },
+    {
+      "input": {"nums": [0]},
+      "expected": [0],
+      "description": "Single element"
+    },
+    {
+      "input": {"nums": [1, 1, 1]},
+      "expected": [1, 1, 1],
+      "description": "All same value"
+    },
+    {
+      "input": {"nums": [2, 2, 1, 1, 0, 0]},
+      "expected": [0, 0, 1, 1, 2, 2],
+      "description": "Reverse sorted"
+    }
+  ],
+  "hints": [
+    "Use three pointers: low (0s boundary), mid (current), high (2s boundary)",
+    "Elements before low are all 0s, elements after high are all 2s",
+    "When you see 0, swap with low and advance both pointers",
+    "When you see 2, swap with high but only decrement high (need to check swapped value)"
+  ],
+  "explanation": "The Dutch National Flag algorithm uses three pointers. 'low' marks where the next 0 should go, 'high' marks where the next 2 should go, and 'mid' is the current element. When we see 0, swap it to the low section. When we see 2, swap it to the high section. When we see 1, leave it in place. Key insight: after swapping with high, don't advance mid because the swapped element hasn't been examined yet. Time: O(n), Space: O(1)."
+}

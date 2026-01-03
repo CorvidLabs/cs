@@ -1,0 +1,45 @@
+{
+    "id": "01-bank-account",
+    "title": "Bank Account Class",
+    "description": "Create a BankAccount class that simulates a simple bank account.\n\n## Requirements\n\n1. Create a `BankAccount` class with:\n   - `__init__(self, owner, balance=0)` - Initialize with owner name and optional starting balance\n   - `deposit(self, amount)` - Add money to the account (only positive amounts)\n   - `withdraw(self, amount)` - Remove money (only if sufficient funds)\n   - `get_balance(self)` - Return the current balance\n   - `__str__(self)` - Return a string like \"Account owner: Alice, Balance: $100.00\"\n\n2. The account should:\n   - Not allow negative deposits or withdrawals\n   - Not allow withdrawals greater than the balance\n   - Keep track of the balance accurately\n\n## Example Usage\n\n```python\naccount = BankAccount(\"Alice\", 100)\naccount.deposit(50)      # Balance: 150\naccount.withdraw(30)     # Balance: 120\naccount.withdraw(200)    # Should fail (insufficient funds)\nprint(account)           # Account owner: Alice, Balance: $120.00\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "class BankAccount:\n    def __init__(self, owner, balance=0):\n        # Initialize the account with owner and balance\n        pass\n\n    def deposit(self, amount):\n        # Add money to the account (only positive amounts)\n        pass\n\n    def withdraw(self, amount):\n        # Remove money (only if sufficient funds)\n        # Return True if successful, False otherwise\n        pass\n\n    def get_balance(self):\n        # Return the current balance\n        pass\n\n    def __str__(self):\n        # Return formatted string representation\n        pass\n\n\n# Test your class\naccount = BankAccount(\"Alice\", 100)\nprint(account)\naccount.deposit(50)\nprint(f\"After deposit: ${account.get_balance()}\")\naccount.withdraw(30)\nprint(f\"After withdrawal: ${account.get_balance()}\")\nresult = account.withdraw(200)\nprint(f\"Withdrawal of $200 successful: {result}\")\nprint(account)\n",
+    "testCases": [
+        {
+            "description": "BankAccount class exists",
+            "assertion": "'BankAccount' in dir()"
+        },
+        {
+            "description": "Can create account with owner and balance",
+            "assertion": "BankAccount('Test', 100).get_balance() == 100"
+        },
+        {
+            "description": "Default balance is 0",
+            "assertion": "BankAccount('Test').get_balance() == 0"
+        },
+        {
+            "description": "Deposit increases balance",
+            "assertion": "a := BankAccount('Test', 100); a.deposit(50); a.get_balance() == 150"
+        },
+        {
+            "description": "Withdraw decreases balance",
+            "assertion": "a := BankAccount('Test', 100); a.withdraw(30); a.get_balance() == 70"
+        },
+        {
+            "description": "Cannot withdraw more than balance",
+            "assertion": "a := BankAccount('Test', 100); not a.withdraw(200)"
+        },
+        {
+            "description": "__str__ returns formatted string",
+            "assertion": "'Alice' in str(BankAccount('Alice', 100)) and '100' in str(BankAccount('Alice', 100))"
+        }
+    ],
+    "hints": [
+        "Store owner and balance as instance attributes (self.owner, self.balance)",
+        "In deposit, check if amount > 0 before adding",
+        "In withdraw, check if amount <= self.balance before subtracting",
+        "Return True/False from withdraw to indicate success/failure",
+        "Use f-string formatting in __str__: f'${self.balance:.2f}'"
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "id": "01-module-system",
+    "title": "Module Export System",
+    "description": "Create a utility module with named and default exports.\n\n## Requirements\n\nCreate the following exports in the code:\n\n1. Named export `PI` - a constant with value 3.14159\n2. Named export `add(a, b)` - returns sum of two numbers\n3. Named export `multiply(a, b)` - returns product of two numbers\n4. Default export `Calculator` class with:\n   - `result` property initialized to 0\n   - `add(n)` method that adds n to result and returns `this`\n   - `multiply(n)` method that multiplies result by n and returns `this`\n   - `reset()` method that sets result to 0 and returns `this`\n\n## Expected Usage\n\n```javascript\nimport Calculator, { PI, add, multiply } from './math.js';\n\nconsole.log(PI);           // 3.14159\nconsole.log(add(2, 3));    // 5\nconsole.log(multiply(4, 5)); // 20\n\nconst calc = new Calculator();\ncalc.add(10).multiply(2).add(5);\nconsole.log(calc.result);  // 25\n```",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "// Named exports\n// TODO: Export a constant PI with value 3.14159\nconst PI = 0;\n\n// TODO: Export a function add(a, b) that returns sum\nfunction add(a, b) {\n    return 0;\n}\n\n// TODO: Export a function multiply(a, b) that returns product\nfunction multiply(a, b) {\n    return 0;\n}\n\n// Default export\n// TODO: Create and export default Calculator class\nclass Calculator {\n    constructor() {\n        // Initialize result to 0\n        this.result = 0;\n    }\n\n    add(n) {\n        // Add n to result, return this for chaining\n        return this;\n    }\n\n    multiply(n) {\n        // Multiply result by n, return this for chaining\n        return this;\n    }\n\n    reset() {\n        // Reset result to 0, return this for chaining\n        return this;\n    }\n}\n\n// Test your implementation\nconsole.log('PI:', PI);\nconsole.log('add(2, 3):', add(2, 3));\nconsole.log('multiply(4, 5):', multiply(4, 5));\n\nconst calc = new Calculator();\ncalc.add(10).multiply(2).add(5);\nconsole.log('Calculator result:', calc.result);\n\ncalc.reset();\nconsole.log('After reset:', calc.result);\n",
+    "testCases": [
+        {
+            "description": "PI should be 3.14159",
+            "assertion": "PI === 3.14159"
+        },
+        {
+            "description": "add(2, 3) should return 5",
+            "assertion": "add(2, 3) === 5"
+        },
+        {
+            "description": "multiply(4, 5) should return 20",
+            "assertion": "multiply(4, 5) === 20"
+        },
+        {
+            "description": "Calculator add and multiply should chain correctly",
+            "assertion": "(() => { const c = new Calculator(); c.add(10).multiply(2).add(5); return c.result === 25; })()"
+        },
+        {
+            "description": "Calculator reset should set result to 0",
+            "assertion": "(() => { const c = new Calculator(); c.add(10).reset(); return c.result === 0; })()"
+        }
+    ],
+    "hints": [
+        "For named exports, add 'export' before const/function declarations",
+        "For default export, use 'export default class Calculator'",
+        "In add(n), use: this.result += n; return this;",
+        "In multiply(n), use: this.result *= n; return this;",
+        "Returning 'this' enables method chaining"
+    ]
+}

@@ -1,0 +1,48 @@
+{
+    "id": "01-calculator-functions",
+    "title": "Calculator Functions",
+    "description": "Create a set of calculator functions that demonstrate function parameters, return values, and higher-order functions.\n\n## Requirements\n\n1. Create a function `add` that takes two `Double` parameters and returns their sum\n2. Create a function `subtract` that takes two `Double` parameters and returns the difference\n3. Create a function `multiply` that takes two `Double` parameters and returns the product\n4. Create a function `divide` that takes two `Double` parameters and returns an optional `Double` (nil if dividing by zero)\n5. Create a function `calculate` that takes two `Double` values and an operation function, then returns the result\n\n## Example Usage\n\n```swift\nlet sum = add(5.0, 3.0)           // 8.0\nlet diff = subtract(10.0, 4.0)     // 6.0\nlet prod = multiply(3.0, 7.0)      // 21.0\nlet quot = divide(15.0, 3.0)       // Optional(5.0)\nlet zero = divide(10.0, 0.0)       // nil\n\nlet result = calculate(10.0, 5.0, operation: add)  // 15.0\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "// Create basic arithmetic functions\n\npublic func add(_ a: Double, _ b: Double) -> Double {\n    // Your code here\n}\n\npublic func subtract(_ a: Double, _ b: Double) -> Double {\n    // Your code here\n}\n\npublic func multiply(_ a: Double, _ b: Double) -> Double {\n    // Your code here\n}\n\npublic func divide(_ a: Double, _ b: Double) -> Double? {\n    // Your code here - return nil if b is zero\n}\n\n// Create a higher-order function that takes an operation\npublic func calculate(\n    _ a: Double,\n    _ b: Double,\n    operation: (Double, Double) -> Double\n) -> Double {\n    // Your code here\n}\n\n// Test your functions\nprint(add(5.0, 3.0))           // Should print: 8.0\nprint(subtract(10.0, 4.0))     // Should print: 6.0\nprint(multiply(3.0, 7.0))      // Should print: 21.0\nprint(divide(15.0, 3.0) ?? 0)  // Should print: 5.0\nprint(divide(10.0, 0.0) ?? \"nil\")  // Should print: nil\n\nprint(calculate(10.0, 5.0, operation: add))       // Should print: 15.0\nprint(calculate(10.0, 5.0, operation: subtract))  // Should print: 5.0\n",
+    "testCases": [
+        {
+            "description": "add(5.0, 3.0) should return 8.0",
+            "assertion": "add(5.0, 3.0) == 8.0"
+        },
+        {
+            "description": "subtract(10.0, 4.0) should return 6.0",
+            "assertion": "subtract(10.0, 4.0) == 6.0"
+        },
+        {
+            "description": "multiply(3.0, 7.0) should return 21.0",
+            "assertion": "multiply(3.0, 7.0) == 21.0"
+        },
+        {
+            "description": "divide(15.0, 3.0) should return 5.0",
+            "assertion": "divide(15.0, 3.0) == 5.0"
+        },
+        {
+            "description": "divide(10.0, 0.0) should return nil",
+            "assertion": "divide(10.0, 0.0) == nil"
+        },
+        {
+            "description": "calculate with add operation should work",
+            "assertion": "calculate(10.0, 5.0, operation: add) == 15.0"
+        },
+        {
+            "description": "calculate with subtract operation should work",
+            "assertion": "calculate(10.0, 5.0, operation: subtract) == 5.0"
+        },
+        {
+            "description": "calculate with multiply operation should work",
+            "assertion": "calculate(10.0, 5.0, operation: multiply) == 50.0"
+        }
+    ],
+    "hints": [
+        "For add, subtract, and multiply, simply use the arithmetic operators",
+        "For divide, use a guard statement to check if b is zero and return nil",
+        "The calculate function should simply call the operation with a and b",
+        "Function types: (Double, Double) -> Double is the type of functions that take two Doubles and return a Double"
+    ]
+}

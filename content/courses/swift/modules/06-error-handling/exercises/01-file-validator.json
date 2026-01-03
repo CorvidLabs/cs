@@ -1,0 +1,36 @@
+{
+    "id": "01-file-validator",
+    "title": "File Validator",
+    "description": "Create a file validation system using throwing functions and custom error types.\n\n## Requirements\n\n1. Create a `FileValidationError` enum conforming to `Error` with cases:\n   - `emptyFilename`\n   - `invalidExtension(expected: String)`\n   - `fileTooLarge(maxSize: Int)`\n\n2. Create a `FileInfo` struct with:\n   - `name: String`\n   - `extension: String`\n   - `sizeInBytes: Int`\n\n3. Create a throwing function `validateFile(_ file: FileInfo, allowedExtension: String, maxSize: Int) throws`\n\n4. Create a function `validateMultipleFiles(_ files: [FileInfo], allowedExtension: String, maxSize: Int) -> [Result<FileInfo, FileValidationError>]`\n\n## Example Usage\n\n```swift\nlet file = FileInfo(name: \"document\", extension: \"pdf\", sizeInBytes: 1024)\n\ndo {\n    try validateFile(file, allowedExtension: \"pdf\", maxSize: 5000)\n    print(\"File is valid\")\n} catch FileValidationError.invalidExtension(let expected) {\n    print(\"Expected: \\(expected)\")\n} catch {\n    print(\"Error: \\(error)\")\n}\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "// Define the error type\npublic enum FileValidationError: Error {\n    case emptyFilename\n    case invalidExtension(expected: String)\n    case fileTooLarge(maxSize: Int)\n}\n\n// Define the FileInfo struct\npublic struct FileInfo {\n    public let name: String\n    public let `extension`: String\n    public let sizeInBytes: Int\n\n    public init(name: String, extension: String, sizeInBytes: Int) {\n        self.name = name\n        self.`extension` = `extension`\n        self.sizeInBytes = sizeInBytes\n    }\n}\n\n// Create the validation function\npublic func validateFile(\n    _ file: FileInfo,\n    allowedExtension: String,\n    maxSize: Int\n) throws {\n    // Check for empty filename\n\n    // Check for valid extension\n\n    // Check file size\n}\n\n// Create the multiple files validation function\npublic func validateMultipleFiles(\n    _ files: [FileInfo],\n    allowedExtension: String,\n    maxSize: Int\n) -> [Result<FileInfo, FileValidationError>] {\n    // Return array of Results\n}\n\n// Test your implementation\nlet files = [\n    FileInfo(name: \"doc1\", extension: \"pdf\", sizeInBytes: 1000),\n    FileInfo(name: \"\", extension: \"pdf\", sizeInBytes: 500),\n    FileInfo(name: \"image\", extension: \"jpg\", sizeInBytes: 2000),\n    FileInfo(name: \"big\", extension: \"pdf\", sizeInBytes: 10000)\n]\n\nlet results = validateMultipleFiles(files, allowedExtension: \"pdf\", maxSize: 5000)\nfor (index, result) in results.enumerated() {\n    switch result {\n    case .success(let file):\n        print(\"File \\(index): \\(file.name).\\(file.extension) is valid\")\n    case .failure(let error):\n        print(\"File \\(index): Error - \\(error)\")\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "validateFile should succeed for valid file",
+            "assertion": "{ let f = FileInfo(name: \"doc\", extension: \"pdf\", sizeInBytes: 1000); do { try validateFile(f, allowedExtension: \"pdf\", maxSize: 2000); return true } catch { return false } }()"
+        },
+        {
+            "description": "validateFile should throw emptyFilename for empty name",
+            "assertion": "{ let f = FileInfo(name: \"\", extension: \"pdf\", sizeInBytes: 100); do { try validateFile(f, allowedExtension: \"pdf\", maxSize: 200); return false } catch FileValidationError.emptyFilename { return true } catch { return false } }()"
+        },
+        {
+            "description": "validateFile should throw invalidExtension for wrong extension",
+            "assertion": "{ let f = FileInfo(name: \"doc\", extension: \"txt\", sizeInBytes: 100); do { try validateFile(f, allowedExtension: \"pdf\", maxSize: 200); return false } catch FileValidationError.invalidExtension { return true } catch { return false } }()"
+        },
+        {
+            "description": "validateFile should throw fileTooLarge for oversized file",
+            "assertion": "{ let f = FileInfo(name: \"doc\", extension: \"pdf\", sizeInBytes: 1000); do { try validateFile(f, allowedExtension: \"pdf\", maxSize: 500); return false } catch FileValidationError.fileTooLarge { return true } catch { return false } }()"
+        },
+        {
+            "description": "validateMultipleFiles returns correct number of results",
+            "assertion": "{ let files = [FileInfo(name: \"a\", extension: \"pdf\", sizeInBytes: 100), FileInfo(name: \"b\", extension: \"pdf\", sizeInBytes: 100)]; return validateMultipleFiles(files, allowedExtension: \"pdf\", maxSize: 200).count == 2 }()"
+        }
+    ],
+    "hints": [
+        "Use guard statements to check each validation condition",
+        "throw FileValidationError.emptyFilename if name is empty",
+        "throw FileValidationError.invalidExtension(expected: allowedExtension) if extension doesn't match",
+        "For validateMultipleFiles, use map with Result { try validateFile(...) }"
+    ]
+}

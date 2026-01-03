@@ -1,0 +1,52 @@
+{
+    "id": "01-style-text",
+    "title": "Style Text Elements",
+    "description": "Apply CSS styling to text elements using various selectors.\n\n## Requirements\n\n1. Style `h1` elements:\n   - Font size: 2.5rem\n   - Color: #1a1a2e\n   - Margin bottom: 1rem\n\n2. Style `p` elements:\n   - Font size: 1rem\n   - Color: #4a4a4a\n   - Line height: 1.6\n\n3. Style elements with class `.highlight`:\n   - Background color: #fff3cd\n   - Padding: 0.25rem 0.5rem\n\n4. Style elements with class `.lead`:\n   - Font size: 1.25rem\n   - Font weight: 300\n   - Color: #6c757d\n\n5. Style `a` (links):\n   - Color: #0066cc\n   - Text decoration: none\n   - On hover (a:hover): text decoration underline",
+    "order": 1,
+    "language": "css",
+    "starterCode": "/* Heading styles */\nh1 {\n    \n}\n\n/* Paragraph styles */\np {\n    \n}\n\n/* Highlight class */\n.highlight {\n    \n}\n\n/* Lead paragraph class */\n.lead {\n    \n}\n\n/* Link styles */\na {\n    \n}\n\n/* Link hover state */\na:hover {\n    \n}",
+    "testCases": [
+        {
+            "description": "h1 font-size should be 2.5rem",
+            "assertion": "getComputedStyle(document.querySelector('h1')).fontSize === '40px'"
+        },
+        {
+            "description": "h1 color should be #1a1a2e",
+            "assertion": "getComputedStyle(document.querySelector('h1')).color === 'rgb(26, 26, 46)'"
+        },
+        {
+            "description": "p line-height should be 1.6",
+            "assertion": "parseFloat(getComputedStyle(document.querySelector('p')).lineHeight) / parseFloat(getComputedStyle(document.querySelector('p')).fontSize) > 1.5"
+        },
+        {
+            "description": "p color should be #4a4a4a",
+            "assertion": "getComputedStyle(document.querySelector('p')).color === 'rgb(74, 74, 74)'"
+        },
+        {
+            "description": ".highlight should have yellow background",
+            "assertion": "getComputedStyle(document.querySelector('.highlight')).backgroundColor === 'rgb(255, 243, 205)'"
+        },
+        {
+            "description": ".lead font-size should be 1.25rem",
+            "assertion": "getComputedStyle(document.querySelector('.lead')).fontSize === '20px'"
+        },
+        {
+            "description": ".lead font-weight should be 300",
+            "assertion": "getComputedStyle(document.querySelector('.lead')).fontWeight === '300'"
+        },
+        {
+            "description": "links should have color #0066cc",
+            "assertion": "getComputedStyle(document.querySelector('a')).color === 'rgb(0, 102, 204)'"
+        },
+        {
+            "description": "links should have no text decoration",
+            "assertion": "getComputedStyle(document.querySelector('a')).textDecorationLine === 'none'"
+        }
+    ],
+    "hints": [
+        "Use font-size: 2.5rem for h1",
+        "Use line-height: 1.6 for paragraphs (no unit needed)",
+        "Use background-color: #fff3cd for highlight",
+        "Use text-decoration: none for links, text-decoration: underline for hover"
+    ]
+}

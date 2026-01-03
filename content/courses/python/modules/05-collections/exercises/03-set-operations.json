@@ -1,0 +1,52 @@
+{
+    "id": "03-set-operations",
+    "title": "Set Operations",
+    "description": "Practice using sets for common data analysis tasks.\n\n## Requirements\n\n1. Define `find_common(list1, list2)` that returns a set of elements common to both lists\n2. Define `find_unique_to_first(list1, list2)` that returns a set of elements in list1 but not in list2\n3. Define `count_unique(items)` that returns the count of unique elements in a list\n\n## Example Usage\n\n```python\nfind_common([1, 2, 3], [2, 3, 4])         # Returns {2, 3}\nfind_unique_to_first([1, 2, 3], [2, 3, 4]) # Returns {1}\ncount_unique([1, 2, 2, 3, 1, 4])           # Returns 4\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "# Find elements common to both lists\ndef find_common(list1, list2):\n    pass  # Replace with your code\n\n\n# Find elements in list1 that are not in list2\ndef find_unique_to_first(list1, list2):\n    pass  # Replace with your code\n\n\n# Count the number of unique elements in a list\ndef count_unique(items):\n    pass  # Replace with your code\n\n\n# Test your functions\nlist_a = [1, 2, 3, 4, 5]\nlist_b = [4, 5, 6, 7, 8]\n\nprint(f\"Common elements: {find_common(list_a, list_b)}\")\nprint(f\"Unique to first: {find_unique_to_first(list_a, list_b)}\")\nprint(f\"Unique count in [1, 2, 2, 3, 1, 4]: {count_unique([1, 2, 2, 3, 1, 4])}\")\n",
+    "testCases": [
+        {
+            "description": "find_common function exists",
+            "assertion": "callable(find_common)"
+        },
+        {
+            "description": "find_common([1, 2, 3], [2, 3, 4]) returns {2, 3}",
+            "assertion": "find_common([1, 2, 3], [2, 3, 4]) == {2, 3}"
+        },
+        {
+            "description": "find_common returns a set",
+            "assertion": "isinstance(find_common([1, 2], [2, 3]), set)"
+        },
+        {
+            "description": "find_unique_to_first function exists",
+            "assertion": "callable(find_unique_to_first)"
+        },
+        {
+            "description": "find_unique_to_first([1, 2, 3], [2, 3, 4]) returns {1}",
+            "assertion": "find_unique_to_first([1, 2, 3], [2, 3, 4]) == {1}"
+        },
+        {
+            "description": "find_unique_to_first returns a set",
+            "assertion": "isinstance(find_unique_to_first([1], [2]), set)"
+        },
+        {
+            "description": "count_unique function exists",
+            "assertion": "callable(count_unique)"
+        },
+        {
+            "description": "count_unique([1, 2, 2, 3, 1, 4]) returns 4",
+            "assertion": "count_unique([1, 2, 2, 3, 1, 4]) == 4"
+        },
+        {
+            "description": "count_unique([]) returns 0",
+            "assertion": "count_unique([]) == 0"
+        }
+    ],
+    "hints": [
+        "Convert lists to sets to use set operations",
+        "Use set intersection (&) or .intersection() for common elements",
+        "Use set difference (-) or .difference() for unique to first",
+        "Use len(set(items)) to count unique elements"
+    ]
+}

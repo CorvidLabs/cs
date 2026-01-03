@@ -1,0 +1,37 @@
+{
+    "id": "01-component-class",
+    "title": "Base Component Class",
+    "description": "Create a base Component class that other components can extend.\n\n## Requirements\n\nImplement a `Component` class with:\n\n1. `constructor(props)` - stores props and initializes empty state object\n2. `setState(newState)` - merges newState with existing state and calls `update()`\n3. `render()` - returns HTML string (default: `'<div></div>'`)\n4. `update()` - calls render() and logs 'Component updated'\n5. `mount(container)` - sets element innerHTML to render() result and logs 'Component mounted'\n\n## Expected Usage\n\n```javascript\nclass Counter extends Component {\n    constructor(props) {\n        super(props);\n        this.state = { count: props.initialCount || 0 };\n    }\n\n    render() {\n        return `<div>Count: ${this.state.count}</div>`;\n    }\n}\n\nconst counter = new Counter({ initialCount: 5 });\ncounter.mount(document.body);\ncounter.setState({ count: 10 }); // Triggers update\n```",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "class Component {\n    constructor(props = {}) {\n        // TODO: Store props and initialize state\n        this.props = null;\n        this.state = null;\n        this.element = null;\n    }\n\n    setState(newState) {\n        // TODO: Merge newState with existing state\n        // Then call this.update()\n    }\n\n    render() {\n        // TODO: Return default HTML string\n        return '';\n    }\n\n    update() {\n        // TODO: Call render() and log 'Component updated'\n    }\n\n    mount(container) {\n        // TODO: Set container innerHTML to render() result\n        // Store container as this.element\n        // Log 'Component mounted'\n    }\n}\n\n// Test the base Component class\nclass Greeting extends Component {\n    constructor(props) {\n        super(props);\n        this.state = { message: 'Hello' };\n    }\n\n    render() {\n        return `<h1>${this.state.message}, ${this.props.name}!</h1>`;\n    }\n}\n\n// Test\nconst testContainer = document.createElement('div');\nconst greeting = new Greeting({ name: 'World' });\n\nconsole.log('Initial render:', greeting.render());\ngreeting.mount(testContainer);\nconsole.log('After mount:', testContainer.innerHTML);\n\ngreeting.setState({ message: 'Goodbye' });\nconsole.log('After setState:', greeting.render());\n",
+    "testCases": [
+        {
+            "description": "Component stores props",
+            "assertion": "new Component({ foo: 'bar' }).props.foo === 'bar'"
+        },
+        {
+            "description": "Component initializes state as object",
+            "assertion": "typeof new Component().state === 'object'"
+        },
+        {
+            "description": "render returns default div",
+            "assertion": "new Component().render() === '<div></div>'"
+        },
+        {
+            "description": "setState merges state",
+            "assertion": "(() => { const c = new Component(); c.state = { a: 1 }; c.setState({ b: 2 }); return c.state.a === 1 && c.state.b === 2; })()"
+        },
+        {
+            "description": "Greeting component renders with props and state",
+            "assertion": "new Greeting({ name: 'Test' }).render().includes('Hello') && new Greeting({ name: 'Test' }).render().includes('Test')"
+        }
+    ],
+    "hints": [
+        "In constructor: this.props = props; this.state = {};",
+        "In setState: this.state = { ...this.state, ...newState };",
+        "In render: return '<div></div>';",
+        "In update: const html = this.render(); console.log('Component updated');",
+        "In mount: container.innerHTML = this.render(); this.element = container; console.log('Component mounted');"
+    ]
+}

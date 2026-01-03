@@ -1,0 +1,48 @@
+{
+    "id": "01-grade-calculator",
+    "title": "Grade Calculator",
+    "description": "Create a function that converts a numeric score to a letter grade using control flow.\n\n## Requirements\n\n1. Create a function `calculateGrade` that takes an `Int` score parameter\n2. Return the letter grade as a `String`\n3. Use the following scale:\n   - 90-100: \"A\"\n   - 80-89: \"B\"\n   - 70-79: \"C\"\n   - 60-69: \"D\"\n   - Below 60: \"F\"\n4. Handle invalid scores (< 0 or > 100) by returning \"Invalid\"\n\n## Example Usage\n\n```swift\nlet grade1 = calculateGrade(score: 95)   // \"A\"\nlet grade2 = calculateGrade(score: 82)   // \"B\"\nlet grade3 = calculateGrade(score: 45)   // \"F\"\nlet grade4 = calculateGrade(score: -5)   // \"Invalid\"\nlet grade5 = calculateGrade(score: 105)  // \"Invalid\"\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "// Create a function that calculates letter grades from numeric scores\n// Use guard statements for validation and switch for the grade ranges\n\npublic func calculateGrade(score: Int) -> String {\n    // Your code here\n}\n\n// Test your function\nprint(calculateGrade(score: 95))   // Should print: A\nprint(calculateGrade(score: 82))   // Should print: B\nprint(calculateGrade(score: 73))   // Should print: C\nprint(calculateGrade(score: 65))   // Should print: D\nprint(calculateGrade(score: 45))   // Should print: F\nprint(calculateGrade(score: -5))   // Should print: Invalid\n",
+    "testCases": [
+        {
+            "description": "Score of 100 should return 'A'",
+            "assertion": "calculateGrade(score: 100) == \"A\""
+        },
+        {
+            "description": "Score of 90 should return 'A'",
+            "assertion": "calculateGrade(score: 90) == \"A\""
+        },
+        {
+            "description": "Score of 85 should return 'B'",
+            "assertion": "calculateGrade(score: 85) == \"B\""
+        },
+        {
+            "description": "Score of 75 should return 'C'",
+            "assertion": "calculateGrade(score: 75) == \"C\""
+        },
+        {
+            "description": "Score of 65 should return 'D'",
+            "assertion": "calculateGrade(score: 65) == \"D\""
+        },
+        {
+            "description": "Score of 50 should return 'F'",
+            "assertion": "calculateGrade(score: 50) == \"F\""
+        },
+        {
+            "description": "Score of -1 should return 'Invalid'",
+            "assertion": "calculateGrade(score: -1) == \"Invalid\""
+        },
+        {
+            "description": "Score of 101 should return 'Invalid'",
+            "assertion": "calculateGrade(score: 101) == \"Invalid\""
+        }
+    ],
+    "hints": [
+        "Use guard statements to handle invalid scores first (< 0 or > 100)",
+        "Use a switch statement with range patterns for the grade calculation",
+        "Remember: ranges use '..<' for exclusive upper bound and '...' for inclusive",
+        "The switch should be exhaustive - you might need a default case"
+    ]
+}

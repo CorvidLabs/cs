@@ -1,0 +1,17 @@
+{
+  "id": "11-searching",
+  "title": "Searching Algorithms",
+  "description": "Master binary search and its variations. Learn to apply binary search to sorted arrays, rotated arrays, and search spaces. Understand how to identify when binary search can be applied to optimize solutions.",
+  "order": 11,
+  "lessons": [
+    "01-binary-search-fundamentals",
+    "02-binary-search-variations",
+    "03-search-rotated-array",
+    "04-binary-search-applications"
+  ],
+  "exercises": [
+    "01-search-insert-position",
+    "02-find-minimum-rotated",
+    "03-search-2d-matrix"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "id": "02-clone-graph",
+  "title": "Clone Graph",
+  "description": "Create a deep copy of a connected undirected graph given a reference to any node.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "class Node:\n    def __init__(self, val=0, neighbors=None):\n        self.val = val\n        self.neighbors = neighbors if neighbors is not None else []\n\n\ndef clone_graph(node: Node) -> Node:\n    \"\"\"\n    Return a deep copy of the graph.\n    \n    Each node has a val and a list of neighbors.\n    The graph is connected and undirected.\n    \n    Args:\n        node: A reference to any node in the graph\n        \n    Returns:\n        A reference to the cloned graph (same structure, new objects)\n        \n    Example:\n        Input: node with val=1, neighbors=[Node(2), Node(4)]\n               Node(2) has neighbors [Node(1), Node(3)]\n               Node(3) has neighbors [Node(2), Node(4)]\n               Node(4) has neighbors [Node(1), Node(3)]\n        Output: Deep copy with same structure\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "class Node:\n    def __init__(self, val=0, neighbors=None):\n        self.val = val\n        self.neighbors = neighbors if neighbors is not None else []\n\n\ndef clone_graph(node: Node) -> Node:\n    if not node:\n        return None\n    \n    cloned = {}  # Map original node -> cloned node\n    \n    def dfs(original):\n        if original in cloned:\n            return cloned[original]\n        \n        # Create clone\n        copy = Node(original.val)\n        cloned[original] = copy\n        \n        # Clone all neighbors\n        for neighbor in original.neighbors:\n            copy.neighbors.append(dfs(neighbor))\n        \n        return copy\n    \n    return dfs(node)",
+  "testCases": [
+    {
+      "input": {"adjList": [[2,4],[1,3],[2,4],[1,3]]},
+      "expected": [[2,4],[1,3],[2,4],[1,3]],
+      "description": "4-node cycle graph"
+    },
+    {
+      "input": {"adjList": [[]]},
+      "expected": [[]],
+      "description": "Single node, no neighbors"
+    },
+    {
+      "input": {"adjList": []},
+      "expected": [],
+      "description": "Empty graph"
+    },
+    {
+      "input": {"adjList": [[2],[1]]},
+      "expected": [[2],[1]],
+      "description": "Two connected nodes"
+    }
+  ],
+  "hints": [
+    "Use a dictionary to map original nodes to their clones",
+    "Use DFS to traverse and clone each node",
+    "When visiting a node, first check if it's already cloned",
+    "Clone neighbors recursively after creating the current node's clone"
+  ],
+  "explanation": "We use DFS with a hash map to track cloned nodes. For each node, we first check if it's already cloned (to handle cycles). If not, we create a clone and add it to the map. Then we recursively clone all neighbors. The map ensures each node is cloned exactly once, even in cyclic graphs. Time: O(V + E), Space: O(V)."
+}

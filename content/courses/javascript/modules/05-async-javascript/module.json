@@ -1,0 +1,17 @@
+{
+    "id": "05-async-javascript",
+    "title": "Async JavaScript",
+    "description": "Master asynchronous programming in JavaScript. Learn callbacks, promises, async/await, and how to work with APIs using the Fetch API.",
+    "order": 5,
+    "lessons": [
+        "01-callbacks",
+        "02-promises",
+        "03-async-await",
+        "04-fetch-api"
+    ],
+    "exercises": [
+        "01-promise-chain",
+        "02-async-data-loader",
+        "03-rate-limited-fetcher"
+    ]
+}

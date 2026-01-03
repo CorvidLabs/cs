@@ -1,0 +1,44 @@
+{
+  "id": "03-course-schedule",
+  "title": "Course Schedule",
+  "description": "Determine if it's possible to finish all courses given their prerequisites (detect cycle in directed graph).",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def can_finish(num_courses: int, prerequisites: list[list[int]]) -> bool:\n    \"\"\"\n    Determine if all courses can be finished.\n    \n    A course [a, b] means you must take course b before course a.\n    Return True if all courses can be finished, False if there's a cycle.\n    \n    Args:\n        num_courses: Total number of courses (0 to num_courses-1)\n        prerequisites: List of [course, prerequisite] pairs\n        \n    Returns:\n        True if all courses can be completed\n        \n    Example:\n        Input: num_courses = 2, prerequisites = [[1,0]]\n        Output: True  # Take course 0, then course 1\n        \n        Input: num_courses = 2, prerequisites = [[1,0],[0,1]]\n        Output: False  # Circular dependency\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def can_finish(num_courses: int, prerequisites: list[list[int]]) -> bool:\n    # Build adjacency list\n    graph = [[] for _ in range(num_courses)]\n    for course, prereq in prerequisites:\n        graph[prereq].append(course)\n    \n    # 0: unvisited, 1: visiting (in current path), 2: visited\n    state = [0] * num_courses\n    \n    def has_cycle(node):\n        if state[node] == 1:  # Found cycle\n            return True\n        if state[node] == 2:  # Already processed\n            return False\n        \n        state[node] = 1  # Mark as visiting\n        \n        for neighbor in graph[node]:\n            if has_cycle(neighbor):\n                return True\n        \n        state[node] = 2  # Mark as visited\n        return False\n    \n    for course in range(num_courses):\n        if has_cycle(course):\n            return False\n    \n    return True",
+  "testCases": [
+    {
+      "input": {"num_courses": 2, "prerequisites": [[1, 0]]},
+      "expected": true,
+      "description": "Simple prerequisite chain"
+    },
+    {
+      "input": {"num_courses": 2, "prerequisites": [[1, 0], [0, 1]]},
+      "expected": false,
+      "description": "Circular dependency"
+    },
+    {
+      "input": {"num_courses": 3, "prerequisites": [[1, 0], [2, 1]]},
+      "expected": true,
+      "description": "Linear chain: 0 -> 1 -> 2"
+    },
+    {
+      "input": {"num_courses": 4, "prerequisites": [[1, 0], [2, 0], [3, 1], [3, 2]]},
+      "expected": true,
+      "description": "Diamond dependency"
+    },
+    {
+      "input": {"num_courses": 1, "prerequisites": []},
+      "expected": true,
+      "description": "Single course, no prerequisites"
+    }
+  ],
+  "hints": [
+    "This is a cycle detection problem in a directed graph",
+    "Build a graph where prerequisites point to dependent courses",
+    "Use DFS with 3 states: unvisited, visiting (in current path), visited",
+    "If we encounter a 'visiting' node, we found a cycle"
+  ],
+  "explanation": "We model this as a directed graph where an edge from A to B means 'A is a prerequisite for B'. We need to detect if there's a cycle. We use DFS with three states: unvisited (0), visiting/in-progress (1), and visited (2). If during DFS we encounter a node in 'visiting' state, we found a back edge indicating a cycle. Time: O(V + E), Space: O(V)."
+}

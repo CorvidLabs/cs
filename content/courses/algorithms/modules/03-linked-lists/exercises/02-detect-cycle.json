@@ -1,0 +1,44 @@
+{
+  "id": "02-detect-cycle",
+  "title": "Linked List Cycle Detection",
+  "description": "Detect if a linked list has a cycle using Floyd's Tortoise and Hare algorithm.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\n\ndef has_cycle(head: ListNode) -> bool:\n    \"\"\"\n    Detect if a linked list has a cycle.\n    \n    Use Floyd's cycle detection (slow and fast pointers).\n    \n    Args:\n        head: The head of the linked list\n        \n    Returns:\n        True if there's a cycle, False otherwise\n        \n    Example:\n        Input: 1 -> 2 -> 3 -> 4 -> 2 (cycle back to node 2)\n        Output: True\n        \n        Input: 1 -> 2 -> 3 -> None\n        Output: False\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\n\ndef has_cycle(head: ListNode) -> bool:\n    if head is None or head.next is None:\n        return False\n    \n    slow = head\n    fast = head\n    \n    while fast is not None and fast.next is not None:\n        slow = slow.next\n        fast = fast.next.next\n        \n        if slow == fast:\n            return True\n    \n    return False",
+  "testCases": [
+    {
+      "input": {"list": [3, 2, 0, -4], "pos": 1},
+      "expected": true,
+      "description": "Cycle at position 1"
+    },
+    {
+      "input": {"list": [1, 2], "pos": 0},
+      "expected": true,
+      "description": "Cycle at position 0"
+    },
+    {
+      "input": {"list": [1], "pos": -1},
+      "expected": false,
+      "description": "Single node, no cycle"
+    },
+    {
+      "input": {"list": [1, 2, 3, 4, 5], "pos": -1},
+      "expected": false,
+      "description": "No cycle"
+    },
+    {
+      "input": {"list": [], "pos": -1},
+      "expected": false,
+      "description": "Empty list"
+    }
+  ],
+  "hints": [
+    "Use two pointers: slow moves 1 step, fast moves 2 steps",
+    "If there's a cycle, fast will eventually catch up to slow",
+    "If fast reaches null, there's no cycle",
+    "Check fast and fast.next before moving fast"
+  ],
+  "explanation": "Floyd's Tortoise and Hare algorithm uses two pointers moving at different speeds. The slow pointer moves one step at a time, while the fast pointer moves two steps. If there's a cycle, they will eventually meet (fast catches up to slow). If fast reaches the end (null), there's no cycle. Time is O(n) and space is O(1), making this optimal for cycle detection."
+}

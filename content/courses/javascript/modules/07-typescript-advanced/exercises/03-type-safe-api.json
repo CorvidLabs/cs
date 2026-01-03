@@ -1,0 +1,59 @@
+{
+    "id": "03-type-safe-api",
+    "title": "Type-Safe API",
+    "description": "Build a type-safe API response handler using discriminated unions and type guards.\n\n## Requirements\n\n1. Define response types:\n   - `SuccessResponse<T>`: `{ success: true; data: T; statusCode: number }`\n   - `ErrorResponse`: `{ success: false; error: string; statusCode: number }`\n   - `ApiResponse<T>`: Union of Success and Error\n\n2. Create type guard:\n   - `isSuccess<T>(response: ApiResponse<T>): response is SuccessResponse<T>`\n\n3. Create helper functions:\n   - `ok<T>(data: T, statusCode?: number): SuccessResponse<T>` (default status 200)\n   - `fail(error: string, statusCode?: number): ErrorResponse` (default status 400)\n\n4. Create `handleResponse<T>` function:\n   - Takes `ApiResponse<T>` and two callbacks\n   - `onSuccess: (data: T) => void`\n   - `onError: (error: string) => void`\n   - Calls appropriate callback based on response\n\n## Expected Behavior\n\n```typescript\nconst success = ok({ name: 'Alice' });\nconst error = fail('Not found', 404);\n\nif (isSuccess(success)) {\n    console.log(success.data.name);  // TypeScript knows data exists\n}\n```",
+    "order": 3,
+    "language": "typescript",
+    "starterCode": "// Define the response types\n\ninterface SuccessResponse<T> {\n    // success: true, data: T, statusCode: number\n}\n\ninterface ErrorResponse {\n    // success: false, error: string, statusCode: number\n}\n\ntype ApiResponse<T> = unknown;  // Union of Success and Error\n\n// Type guard to check if response is successful\nfunction isSuccess<T>(response: ApiResponse<T>): response is SuccessResponse<T> {\n    // Check if response.success is true\n    return false;\n}\n\n// Helper to create success response\nfunction ok<T>(data: T, statusCode: number = 200): SuccessResponse<T> {\n    // Return success response object\n    return {} as SuccessResponse<T>;\n}\n\n// Helper to create error response\nfunction fail(error: string, statusCode: number = 400): ErrorResponse {\n    // Return error response object\n    return {} as ErrorResponse;\n}\n\n// Handle response with callbacks\nfunction handleResponse<T>(\n    response: ApiResponse<T>,\n    onSuccess: (data: T) => void,\n    onError: (error: string) => void\n): void {\n    // Call onSuccess with data if success\n    // Call onError with error message if failed\n}\n\n// Test your implementation\ninterface User {\n    id: number;\n    name: string;\n}\n\nconst successResponse = ok<User>({ id: 1, name: 'Alice' });\nconst errorResponse = fail('User not found', 404);\n\nconsole.log('Success response:', successResponse);\nconsole.log('Error response:', errorResponse);\n\nconsole.log('\\nType guard test:');\nif (isSuccess(successResponse)) {\n    console.log('Success! User:', successResponse.data.name);\n}\n\nconsole.log('\\nHandle response tests:');\nhandleResponse(\n    successResponse,\n    (data) => console.log('Got user:', data.name),\n    (error) => console.log('Error:', error)\n);\n\nhandleResponse(\n    errorResponse,\n    (data) => console.log('Got user:', data),\n    (error) => console.log('Error:', error)\n);\n",
+    "testCases": [
+        {
+            "description": "ok creates success response with data",
+            "assertion": "(function() { const r = ok({ x: 1 }); return r.success === true && r.data.x === 1; })()"
+        },
+        {
+            "description": "ok uses default status code 200",
+            "assertion": "ok({ x: 1 }).statusCode === 200"
+        },
+        {
+            "description": "ok uses custom status code",
+            "assertion": "ok({ x: 1 }, 201).statusCode === 201"
+        },
+        {
+            "description": "fail creates error response",
+            "assertion": "(function() { const r = fail('Error'); return r.success === false && r.error === 'Error'; })()"
+        },
+        {
+            "description": "fail uses default status code 400",
+            "assertion": "fail('Error').statusCode === 400"
+        },
+        {
+            "description": "fail uses custom status code",
+            "assertion": "fail('Not found', 404).statusCode === 404"
+        },
+        {
+            "description": "isSuccess returns true for success response",
+            "assertion": "isSuccess(ok({ x: 1 })) === true"
+        },
+        {
+            "description": "isSuccess returns false for error response",
+            "assertion": "isSuccess(fail('Error')) === false"
+        },
+        {
+            "description": "handleResponse calls onSuccess for success response",
+            "assertion": "(function() { let called = false; handleResponse(ok({ x: 1 }), () => { called = true; }, () => {}); return called; })()"
+        },
+        {
+            "description": "handleResponse calls onError for error response",
+            "assertion": "(function() { let called = false; handleResponse(fail('Error'), () => {}, () => { called = true; }); return called; })()"
+        }
+    ],
+    "hints": [
+        "SuccessResponse<T>: { success: true; data: T; statusCode: number }",
+        "ErrorResponse: { success: false; error: string; statusCode: number }",
+        "ApiResponse<T> = SuccessResponse<T> | ErrorResponse",
+        "isSuccess: return response.success === true",
+        "ok: return { success: true, data, statusCode }",
+        "fail: return { success: false, error, statusCode }",
+        "handleResponse: use isSuccess to determine which callback to call"
+    ]
+}

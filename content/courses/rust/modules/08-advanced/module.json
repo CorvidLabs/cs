@@ -1,0 +1,17 @@
+{
+    "id": "08-advanced",
+    "title": "Advanced Rust",
+    "description": "Explore advanced Rust concepts. Dive deeper into lifetimes, understand smart pointers, learn when and how to use unsafe Rust, and create powerful macros.",
+    "order": 8,
+    "lessons": [
+        "01-lifetimes-deep-dive",
+        "02-smart-pointers",
+        "03-unsafe-rust",
+        "04-macros"
+    ],
+    "exercises": [
+        "01-lifetime-challenges",
+        "02-smart-pointer-usage",
+        "03-declarative-macro"
+    ]
+}

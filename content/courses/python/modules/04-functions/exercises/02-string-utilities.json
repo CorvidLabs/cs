@@ -1,0 +1,56 @@
+{
+    "id": "02-string-utilities",
+    "title": "String Utility Functions",
+    "description": "Create utility functions for common string operations.\n\n## Requirements\n\n1. Define `is_palindrome(text)` that returns True if text reads the same forwards and backwards (ignoring case)\n2. Define `count_vowels(text)` that returns the count of vowels (a, e, i, o, u) in the text\n3. Define `reverse_words(text)` that returns the text with word order reversed\n\n## Example Usage\n\n```python\nis_palindrome(\"Radar\")      # Returns True\nis_palindrome(\"Hello\")      # Returns False\ncount_vowels(\"Hello World\") # Returns 3\nreverse_words(\"Hello World\") # Returns \"World Hello\"\n```",
+    "order": 2,
+    "language": "python",
+    "starterCode": "# Check if text is a palindrome (reads same forwards and backwards)\ndef is_palindrome(text):\n    pass  # Replace with your code\n\n\n# Count the number of vowels in text\ndef count_vowels(text):\n    pass  # Replace with your code\n\n\n# Reverse the order of words in text\ndef reverse_words(text):\n    pass  # Replace with your code\n\n\n# Test your functions\nprint(f\"Is 'Radar' a palindrome? {is_palindrome('Radar')}\")\nprint(f\"Is 'Hello' a palindrome? {is_palindrome('Hello')}\")\nprint(f\"Vowels in 'Hello World': {count_vowels('Hello World')}\")\nprint(f\"Reverse words of 'Hello World': {reverse_words('Hello World')}\")\n",
+    "testCases": [
+        {
+            "description": "is_palindrome function exists",
+            "assertion": "callable(is_palindrome)"
+        },
+        {
+            "description": "is_palindrome('Radar') returns True",
+            "assertion": "is_palindrome('Radar') == True"
+        },
+        {
+            "description": "is_palindrome('Hello') returns False",
+            "assertion": "is_palindrome('Hello') == False"
+        },
+        {
+            "description": "is_palindrome('A') returns True",
+            "assertion": "is_palindrome('A') == True"
+        },
+        {
+            "description": "count_vowels function exists",
+            "assertion": "callable(count_vowels)"
+        },
+        {
+            "description": "count_vowels('Hello World') returns 3",
+            "assertion": "count_vowels('Hello World') == 3"
+        },
+        {
+            "description": "count_vowels('xyz') returns 0",
+            "assertion": "count_vowels('xyz') == 0"
+        },
+        {
+            "description": "reverse_words function exists",
+            "assertion": "callable(reverse_words)"
+        },
+        {
+            "description": "reverse_words('Hello World') returns 'World Hello'",
+            "assertion": "reverse_words('Hello World') == 'World Hello'"
+        },
+        {
+            "description": "reverse_words('a b c') returns 'c b a'",
+            "assertion": "reverse_words('a b c') == 'c b a'"
+        }
+    ],
+    "hints": [
+        "For is_palindrome: convert to lowercase with .lower(), then compare to its reverse",
+        "Reverse a string with slicing: text[::-1]",
+        "For count_vowels: loop through each character and check if it's in 'aeiouAEIOU'",
+        "For reverse_words: use .split() to get a list of words, reverse it, then .join() back together"
+    ]
+}

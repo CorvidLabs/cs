@@ -1,0 +1,37 @@
+{
+    "id": "03-functional-pipeline",
+    "title": "Functional Data Pipeline",
+    "description": "Build a data processing pipeline using map, filter, and reduce.\n\n## Requirements\n\nGiven an array of product orders, create:\n\n1. `completedOrders` - filter to only orders with status 'completed'\n2. `orderTotals` - map completed orders to include a `total` property (qty * price)\n3. `totalRevenue` - reduce to sum all totals from completed orders\n4. `averageOrderValue` - calculate average total of completed orders (rounded to 2 decimals)\n5. `topProduct` - find the product name with highest total revenue\n\n## Input Data\n\n```javascript\nconst orders = [\n    { id: 1, product: 'Widget', qty: 2, price: 25, status: 'completed' },\n    { id: 2, product: 'Gadget', qty: 1, price: 50, status: 'pending' },\n    { id: 3, product: 'Widget', qty: 3, price: 25, status: 'completed' },\n    { id: 4, product: 'Gizmo', qty: 2, price: 30, status: 'completed' },\n    { id: 5, product: 'Gadget', qty: 2, price: 50, status: 'completed' }\n];\n```\n\n## Expected Results\n\n- `completedOrders`: 4 orders\n- `orderTotals`: array with `total` added to each\n- `totalRevenue`: 285\n- `averageOrderValue`: 71.25\n- `topProduct`: 'Widget' (total: 125)",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "const orders = [\n    { id: 1, product: 'Widget', qty: 2, price: 25, status: 'completed' },\n    { id: 2, product: 'Gadget', qty: 1, price: 50, status: 'pending' },\n    { id: 3, product: 'Widget', qty: 3, price: 25, status: 'completed' },\n    { id: 4, product: 'Gizmo', qty: 2, price: 30, status: 'completed' },\n    { id: 5, product: 'Gadget', qty: 2, price: 50, status: 'completed' }\n];\n\n// TODO: Filter to only completed orders\nconst completedOrders = [];\n\n// TODO: Map to add total property (qty * price) to each order\nconst orderTotals = [];\n\n// TODO: Reduce to calculate total revenue\nconst totalRevenue = 0;\n\n// TODO: Calculate average order value (rounded to 2 decimal places)\nconst averageOrderValue = 0;\n\n// TODO: Find product with highest total revenue\n// Hint: First reduce to get totals by product, then find the max\nconst topProduct = '';\n\n// Your code here:\n\n\n// Test output\nconsole.log('Completed orders:', completedOrders.length);\nconsole.log('Order totals:', orderTotals.map(o => o.total));\nconsole.log('Total revenue:', totalRevenue);\nconsole.log('Average order value:', averageOrderValue);\nconsole.log('Top product:', topProduct);\n",
+    "testCases": [
+        {
+            "description": "completedOrders should have 4 items",
+            "assertion": "completedOrders.length === 4"
+        },
+        {
+            "description": "orderTotals should have total property on each item",
+            "assertion": "orderTotals.every(o => typeof o.total === 'number')"
+        },
+        {
+            "description": "totalRevenue should be 285",
+            "assertion": "totalRevenue === 285"
+        },
+        {
+            "description": "averageOrderValue should be 71.25",
+            "assertion": "averageOrderValue === 71.25"
+        },
+        {
+            "description": "topProduct should be 'Widget'",
+            "assertion": "topProduct === 'Widget'"
+        }
+    ],
+    "hints": [
+        "Filter: orders.filter(o => o.status === 'completed')",
+        "Map with total: completedOrders.map(o => ({ ...o, total: o.qty * o.price }))",
+        "Reduce for sum: orderTotals.reduce((sum, o) => sum + o.total, 0)",
+        "Average: Math.round((totalRevenue / completedOrders.length) * 100) / 100",
+        "For topProduct, use reduce to build { Widget: 125, ... }, then Object.entries to find max"
+    ]
+}

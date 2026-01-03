@@ -1,0 +1,36 @@
+{
+    "id": "02-profile-card",
+    "title": "Profile Card Component",
+    "description": "Create a reusable profile card component using view composition.\n\n## Requirements\n\n1. Create a `ProfileCard` view that accepts:\n   - `name: String`\n   - `title: String`\n   - `imageName: String` (SF Symbol name)\n\n2. The card should display:\n   - A circular image at the top\n   - The name in headline font\n   - The title in subheadline font with secondary color\n   - All content centered in a VStack\n\n3. Apply card styling:\n   - White background\n   - Rounded corners (12pt)\n   - Subtle shadow\n   - Padding inside the card\n\n4. Create a preview showing multiple ProfileCards\n\n## Expected Output\n\nA polished card component that can be reused with different data.",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "import SwiftUI\n\nstruct ProfileCard: View {\n    // Add properties\n    \n    var body: some View {\n        // Build the card layout\n        VStack {\n            // Image\n            \n            // Name\n            \n            // Title\n        }\n        // Apply card styling\n    }\n}\n\n#Preview {\n    VStack(spacing: 20) {\n        ProfileCard(\n            name: \"Alice Smith\",\n            title: \"iOS Developer\",\n            imageName: \"person.circle.fill\"\n        )\n        \n        ProfileCard(\n            name: \"Bob Johnson\",\n            title: \"UX Designer\",\n            imageName: \"paintbrush.fill\"\n        )\n    }\n    .padding()\n    .background(Color.gray.opacity(0.2))\n}\n",
+    "testCases": [
+        {
+            "description": "ProfileCard should accept name, title, and imageName",
+            "assertion": "ProfileCard(name: \"Test\", title: \"Title\", imageName: \"star\") compiles"
+        },
+        {
+            "description": "Card should display the image",
+            "assertion": "Image(systemName: imageName) is in the view"
+        },
+        {
+            "description": "Card should display name with headline font",
+            "assertion": "Text(name).font(.headline) is in the view"
+        },
+        {
+            "description": "Card should have rounded corners",
+            "assertion": ".clipShape or RoundedRectangle is applied"
+        },
+        {
+            "description": "Card should have shadow",
+            "assertion": ".shadow modifier is applied"
+        }
+    ],
+    "hints": [
+        "Use let properties: let name: String, let title: String, let imageName: String",
+        "Create circular image: Image(systemName: imageName).font(.system(size: 60)).clipShape(Circle())",
+        "Apply card style with: .padding().background(.white).clipShape(RoundedRectangle(cornerRadius: 12)).shadow(radius: 4)",
+        "For secondary text: .foregroundStyle(.secondary)"
+    ]
+}

@@ -1,0 +1,41 @@
+{
+    "id": "03-generic-storage",
+    "title": "Generic Storage Protocol",
+    "description": "Create a protocol with associated types for a type-safe storage system.\n\n## Requirements\n\n1. Create a `Storage` protocol with:\n   - Associated type `Key: Hashable`\n   - Associated type `Value`\n   - Method `get(_ key: Key) -> Value?`\n   - Method `set(_ key: Key, value: Value)`\n   - Method `remove(_ key: Key)`\n   - Property `count: Int`\n\n2. Create a `MemoryStorage<StorageKey: Hashable, StorageValue>` struct conforming to `Storage`\n\n3. Create a `CachedStorage<StorageKey: Hashable, StorageValue>` struct that:\n   - Wraps a primary and cache storage\n   - On get: check cache first, then primary\n   - On set: write to both\n\n## Example Usage\n\n```swift\nvar storage = MemoryStorage<String, Int>()\nstorage.set(\"score\", value: 100)\nprint(storage.get(\"score\"))  // Optional(100)\nprint(storage.count)         // 1\n\nstorage.remove(\"score\")\nprint(storage.get(\"score\"))  // nil\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "// Define the Storage protocol with associated types\npublic protocol Storage {\n    associatedtype Key: Hashable\n    associatedtype Value\n\n    func get(_ key: Key) -> Value?\n    mutating func set(_ key: Key, value: Value)\n    mutating func remove(_ key: Key)\n    var count: Int { get }\n}\n\n// Create MemoryStorage struct\npublic struct MemoryStorage<StorageKey: Hashable, StorageValue>: Storage {\n    public typealias Key = StorageKey\n    public typealias Value = StorageValue\n\n    private var data: [StorageKey: StorageValue] = [:]\n\n    public init() {}\n\n    public func get(_ key: StorageKey) -> StorageValue? {\n        // Your code here\n    }\n\n    public mutating func set(_ key: StorageKey, value: StorageValue) {\n        // Your code here\n    }\n\n    public mutating func remove(_ key: StorageKey) {\n        // Your code here\n    }\n\n    public var count: Int {\n        // Your code here\n    }\n}\n\n// Test your implementation\nvar storage = MemoryStorage<String, Int>()\nprint(\"Initial count: \\(storage.count)\")  // 0\n\nstorage.set(\"score\", value: 100)\nstorage.set(\"level\", value: 5)\nprint(\"After setting: \\(storage.count)\")  // 2\nprint(\"Score: \\(storage.get(\"score\") ?? -1)\")  // 100\n\nstorage.remove(\"score\")\nprint(\"After removal: \\(storage.count)\")  // 1\nprint(\"Score: \\(storage.get(\"score\") ?? -1)\")  // -1\n",
+    "testCases": [
+        {
+            "description": "get returns nil for missing key",
+            "assertion": "{ var s = MemoryStorage<String, Int>(); return s.get(\"missing\") == nil }()"
+        },
+        {
+            "description": "set and get work correctly",
+            "assertion": "{ var s = MemoryStorage<String, Int>(); s.set(\"key\", value: 42); return s.get(\"key\") == 42 }()"
+        },
+        {
+            "description": "remove deletes the key",
+            "assertion": "{ var s = MemoryStorage<String, Int>(); s.set(\"key\", value: 42); s.remove(\"key\"); return s.get(\"key\") == nil }()"
+        },
+        {
+            "description": "count is 0 for empty storage",
+            "assertion": "MemoryStorage<String, Int>().count == 0"
+        },
+        {
+            "description": "count increments on set",
+            "assertion": "{ var s = MemoryStorage<String, Int>(); s.set(\"a\", value: 1); s.set(\"b\", value: 2); return s.count == 2 }()"
+        },
+        {
+            "description": "count decrements on remove",
+            "assertion": "{ var s = MemoryStorage<String, Int>(); s.set(\"a\", value: 1); s.remove(\"a\"); return s.count == 0 }()"
+        }
+    ],
+    "hints": [
+        "Use a dictionary [StorageKey: StorageValue] for internal storage",
+        "get: return data[key]",
+        "set: data[key] = value",
+        "remove: data.removeValue(forKey: key) or data[key] = nil",
+        "count: return data.count"
+    ]
+}

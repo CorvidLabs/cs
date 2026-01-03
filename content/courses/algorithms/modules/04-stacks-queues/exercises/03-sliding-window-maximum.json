@@ -1,0 +1,44 @@
+{
+  "id": "03-sliding-window-maximum",
+  "title": "Sliding Window Maximum",
+  "description": "Find the maximum value in each sliding window of size k using a deque.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "advanced",
+  "starterCode": "from collections import deque\n\ndef max_sliding_window(nums: list[int], k: int) -> list[int]:\n    \"\"\"\n    Find the maximum in each sliding window of size k.\n    \n    Use a deque to efficiently track potential maximum values.\n    \n    Args:\n        nums: List of integers\n        k: Window size\n        \n    Returns:\n        List of maximum values for each window position\n        \n    Example:\n        Input: nums = [1, 3, -1, -3, 5, 3, 6, 7], k = 3\n        Output: [3, 3, 5, 5, 6, 7]\n        \n        Window positions:\n        [1  3  -1] -3  5  3  6  7  -> max = 3\n         1 [3  -1  -3] 5  3  6  7  -> max = 3\n         1  3 [-1  -3  5] 3  6  7  -> max = 5\n         1  3  -1 [-3  5  3] 6  7  -> max = 5\n         1  3  -1  -3 [5  3  6] 7  -> max = 6\n         1  3  -1  -3  5 [3  6  7] -> max = 7\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "from collections import deque\n\ndef max_sliding_window(nums: list[int], k: int) -> list[int]:\n    if not nums or k == 0:\n        return []\n    \n    result = []\n    dq = deque()  # Store indices, not values\n    \n    for i in range(len(nums)):\n        # Remove indices outside the current window\n        while dq and dq[0] < i - k + 1:\n            dq.popleft()\n        \n        # Remove indices of smaller elements (they can't be max)\n        while dq and nums[dq[-1]] < nums[i]:\n            dq.pop()\n        \n        dq.append(i)\n        \n        # Start adding results once we have a full window\n        if i >= k - 1:\n            result.append(nums[dq[0]])\n    \n    return result",
+  "testCases": [
+    {
+      "input": {"nums": [1, 3, -1, -3, 5, 3, 6, 7], "k": 3},
+      "expected": [3, 3, 5, 5, 6, 7],
+      "description": "Standard sliding window"
+    },
+    {
+      "input": {"nums": [1], "k": 1},
+      "expected": [1],
+      "description": "Single element"
+    },
+    {
+      "input": {"nums": [1, -1], "k": 1},
+      "expected": [1, -1],
+      "description": "Window size 1"
+    },
+    {
+      "input": {"nums": [9, 10, 9, -7, -4, -8, 2, -6], "k": 5},
+      "expected": [10, 10, 9, 2],
+      "description": "Larger window"
+    },
+    {
+      "input": {"nums": [7, 2, 4], "k": 2},
+      "expected": [7, 4],
+      "description": "Window size 2"
+    }
+  ],
+  "hints": [
+    "Use a deque to store indices, not values",
+    "Keep the deque in decreasing order of values",
+    "Remove indices that are outside the current window from the front",
+    "Remove smaller elements from the back before adding a new element"
+  ],
+  "explanation": "We use a monotonic deque (decreasing) to track potential maximum values. The deque stores indices, and we maintain the invariant that values at these indices are in decreasing order. When adding a new element, we remove smaller elements from the back (they can never be the max). We also remove elements from the front if they're outside the window. The front of the deque is always the maximum for the current window. Time is O(n) because each element is added and removed at most once."
+}

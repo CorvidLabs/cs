@@ -1,0 +1,49 @@
+{
+    "id": "02-enum-state-machine",
+    "title": "Enum State Machine",
+    "description": "Build a traffic light state machine using enums.\n\n## Requirements\n\n1. Define a `TrafficLight` enum with variants: Red, Yellow, Green\n2. Implement `duration(&self) -> u32` returning seconds for each light:\n   - Red: 60 seconds\n   - Yellow: 5 seconds  \n   - Green: 45 seconds\n3. Implement `next(&self) -> TrafficLight` returning the next state:\n   - Red -> Green\n   - Green -> Yellow\n   - Yellow -> Red\n4. Implement `is_stop(&self) -> bool` (true for Red and Yellow)",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "// Define the TrafficLight enum with Red, Yellow, Green variants\n#[derive(Debug, Clone, Copy, PartialEq)]\nenum TrafficLight {\n    // Your variants here\n    todo!()\n}\n\nimpl TrafficLight {\n    // Return how long this light stays on (in seconds)\n    fn duration(&self) -> u32 {\n        todo!()\n    }\n\n    // Return the next light in the sequence\n    fn next(&self) -> TrafficLight {\n        todo!()\n    }\n\n    // Return true if traffic should stop\n    fn is_stop(&self) -> bool {\n        todo!()\n    }\n}\n\nfn main() {\n    let mut light = TrafficLight::Red;\n\n    // Simulate a few cycles\n    for _ in 0..6 {\n        println!(\n            \"{:?}: {} seconds, stop={}\",\n            light,\n            light.duration(),\n            light.is_stop()\n        );\n        light = light.next();\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "Red light duration is 60 seconds",
+            "assertion": "TrafficLight::Red.duration() == 60"
+        },
+        {
+            "description": "Yellow light duration is 5 seconds",
+            "assertion": "TrafficLight::Yellow.duration() == 5"
+        },
+        {
+            "description": "Green light duration is 45 seconds",
+            "assertion": "TrafficLight::Green.duration() == 45"
+        },
+        {
+            "description": "Red transitions to Green",
+            "assertion": "TrafficLight::Red.next() == TrafficLight::Green"
+        },
+        {
+            "description": "Green transitions to Yellow",
+            "assertion": "TrafficLight::Green.next() == TrafficLight::Yellow"
+        },
+        {
+            "description": "Yellow transitions to Red",
+            "assertion": "TrafficLight::Yellow.next() == TrafficLight::Red"
+        },
+        {
+            "description": "Red and Yellow are stop lights",
+            "assertion": "TrafficLight::Red.is_stop() && TrafficLight::Yellow.is_stop()"
+        },
+        {
+            "description": "Green is not a stop light",
+            "assertion": "!TrafficLight::Green.is_stop()"
+        }
+    ],
+    "hints": [
+        "Define variants as: Red, Yellow, Green (no data needed)",
+        "Use match self { ... } in each method",
+        "For next(), use: TrafficLight::Red => TrafficLight::Green, etc.",
+        "For is_stop(), match on Red | Yellow => true, Green => false",
+        "The #[derive] attributes are already there for Debug, Clone, Copy, PartialEq"
+    ]
+}

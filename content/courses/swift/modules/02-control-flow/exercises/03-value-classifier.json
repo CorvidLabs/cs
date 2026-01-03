@@ -1,0 +1,52 @@
+{
+    "id": "03-value-classifier",
+    "title": "Value Classifier",
+    "description": "Create a function that classifies coordinate points using pattern matching and where clauses.\n\n## Requirements\n\n1. Create a function `classifyPoint` that takes `x: Int` and `y: Int` parameters\n2. Return a classification `String` based on the point's location:\n   - (0, 0): \"Origin\"\n   - (x, 0) where x != 0: \"On X-axis\"\n   - (0, y) where y != 0: \"On Y-axis\"\n   - (x, y) where x > 0 && y > 0: \"Quadrant I\"\n   - (x, y) where x < 0 && y > 0: \"Quadrant II\"\n   - (x, y) where x < 0 && y < 0: \"Quadrant III\"\n   - (x, y) where x > 0 && y < 0: \"Quadrant IV\"\n\n## Example Usage\n\n```swift\nlet loc1 = classifyPoint(x: 0, y: 0)    // \"Origin\"\nlet loc2 = classifyPoint(x: 5, y: 0)    // \"On X-axis\"\nlet loc3 = classifyPoint(x: 0, y: -3)   // \"On Y-axis\"\nlet loc4 = classifyPoint(x: 3, y: 4)    // \"Quadrant I\"\nlet loc5 = classifyPoint(x: -2, y: 5)   // \"Quadrant II\"\nlet loc6 = classifyPoint(x: -1, y: -1)  // \"Quadrant III\"\nlet loc7 = classifyPoint(x: 7, y: -2)   // \"Quadrant IV\"\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "// Create a function that classifies points using pattern matching\n// Use tuple patterns and where clauses in your switch statement\n\npublic func classifyPoint(x: Int, y: Int) -> String {\n    // Your code here\n}\n\n// Test your function\nprint(classifyPoint(x: 0, y: 0))     // Should print: Origin\nprint(classifyPoint(x: 5, y: 0))     // Should print: On X-axis\nprint(classifyPoint(x: 0, y: -3))    // Should print: On Y-axis\nprint(classifyPoint(x: 3, y: 4))     // Should print: Quadrant I\nprint(classifyPoint(x: -2, y: 5))    // Should print: Quadrant II\nprint(classifyPoint(x: -1, y: -1))   // Should print: Quadrant III\nprint(classifyPoint(x: 7, y: -2))    // Should print: Quadrant IV\n",
+    "testCases": [
+        {
+            "description": "(0, 0) should return 'Origin'",
+            "assertion": "classifyPoint(x: 0, y: 0) == \"Origin\""
+        },
+        {
+            "description": "(5, 0) should return 'On X-axis'",
+            "assertion": "classifyPoint(x: 5, y: 0) == \"On X-axis\""
+        },
+        {
+            "description": "(-10, 0) should return 'On X-axis'",
+            "assertion": "classifyPoint(x: -10, y: 0) == \"On X-axis\""
+        },
+        {
+            "description": "(0, 7) should return 'On Y-axis'",
+            "assertion": "classifyPoint(x: 0, y: 7) == \"On Y-axis\""
+        },
+        {
+            "description": "(0, -5) should return 'On Y-axis'",
+            "assertion": "classifyPoint(x: 0, y: -5) == \"On Y-axis\""
+        },
+        {
+            "description": "(3, 4) should return 'Quadrant I'",
+            "assertion": "classifyPoint(x: 3, y: 4) == \"Quadrant I\""
+        },
+        {
+            "description": "(-2, 5) should return 'Quadrant II'",
+            "assertion": "classifyPoint(x: -2, y: 5) == \"Quadrant II\""
+        },
+        {
+            "description": "(-1, -1) should return 'Quadrant III'",
+            "assertion": "classifyPoint(x: -1, y: -1) == \"Quadrant III\""
+        },
+        {
+            "description": "(7, -2) should return 'Quadrant IV'",
+            "assertion": "classifyPoint(x: 7, y: -2) == \"Quadrant IV\""
+        }
+    ],
+    "hints": [
+        "Create a tuple from x and y: let point = (x, y)",
+        "Use tuple pattern matching: case (0, 0):",
+        "Use where clauses for quadrant conditions: case let (x, y) where x > 0 && y > 0:",
+        "Order matters - check for origin and axes before quadrants"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "12-dynamic-programming",
+  "title": "Dynamic Programming",
+  "description": "Learn dynamic programming, a powerful technique for solving optimization problems. Master memoization (top-down) and tabulation (bottom-up) approaches, and recognize common DP patterns like knapsack, LCS, and grid problems.",
+  "order": 12,
+  "lessons": [
+    "01-dp-introduction",
+    "02-memoization",
+    "03-tabulation",
+    "04-common-dp-patterns"
+  ],
+  "exercises": [
+    "01-climbing-stairs",
+    "02-coin-change",
+    "03-longest-common-subsequence"
+  ]
+}

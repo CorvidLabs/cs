@@ -1,0 +1,17 @@
+{
+    "id": "09-data-processing",
+    "title": "Data Processing",
+    "description": "Learn to work with structured data in Python. Read and write CSV and JSON files, transform data with list comprehensions, and perform basic data analysis.",
+    "order": 9,
+    "lessons": [
+        "01-working-with-csv",
+        "02-json-data",
+        "03-list-comprehensions",
+        "04-data-analysis-basics"
+    ],
+    "exercises": [
+        "01-csv-reader",
+        "02-json-converter",
+        "03-data-transformer"
+    ]
+}

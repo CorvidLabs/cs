@@ -1,0 +1,17 @@
+{
+    "id": "07-css-advanced",
+    "title": "Advanced CSS",
+    "description": "Take your CSS skills to the next level with CSS variables, transitions, transforms, and animations. Create dynamic and visually engaging web experiences.",
+    "order": 7,
+    "lessons": [
+        "01-css-variables",
+        "02-transitions",
+        "03-transforms",
+        "04-animations"
+    ],
+    "exercises": [
+        "01-theme-with-variables",
+        "02-hover-effects",
+        "03-loading-animation"
+    ]
+}

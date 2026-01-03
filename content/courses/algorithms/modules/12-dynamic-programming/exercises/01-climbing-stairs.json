@@ -1,0 +1,44 @@
+{
+  "id": "01-climbing-stairs",
+  "title": "Climbing Stairs",
+  "description": "Count the number of distinct ways to climb to the top of a staircase.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "beginner",
+  "starterCode": "def climb_stairs(n: int) -> int:\n    \"\"\"\n    Count distinct ways to climb n stairs.\n    \n    You can climb 1 or 2 steps at a time.\n    \n    Args:\n        n: Number of stairs to climb\n        \n    Returns:\n        Number of distinct ways to reach the top\n        \n    Example:\n        Input: n = 2\n        Output: 2  # (1+1) or (2)\n        \n        Input: n = 3\n        Output: 3  # (1+1+1), (1+2), (2+1)\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def climb_stairs(n: int) -> int:\n    if n <= 2:\n        return n\n    \n    # Only need last two values\n    prev2, prev1 = 1, 2\n    \n    for _ in range(3, n + 1):\n        curr = prev1 + prev2\n        prev2 = prev1\n        prev1 = curr\n    \n    return prev1",
+  "testCases": [
+    {
+      "input": {"n": 2},
+      "expected": 2,
+      "description": "Two stairs"
+    },
+    {
+      "input": {"n": 3},
+      "expected": 3,
+      "description": "Three stairs"
+    },
+    {
+      "input": {"n": 4},
+      "expected": 5,
+      "description": "Four stairs"
+    },
+    {
+      "input": {"n": 5},
+      "expected": 8,
+      "description": "Five stairs"
+    },
+    {
+      "input": {"n": 1},
+      "expected": 1,
+      "description": "One stair"
+    }
+  ],
+  "hints": [
+    "To reach step n, you can come from step n-1 (one step) or n-2 (two steps)",
+    "The recurrence is: ways(n) = ways(n-1) + ways(n-2)",
+    "This is the Fibonacci sequence!",
+    "You only need to track the last two values for O(1) space"
+  ],
+  "explanation": "This is a classic DP problem. To reach step n, you either came from step n-1 (took 1 step) or step n-2 (took 2 steps). So ways(n) = ways(n-1) + ways(n-2). This is the Fibonacci sequence! Base cases: ways(1) = 1, ways(2) = 2. Use space optimization to only keep the last two values. Time: O(n), Space: O(1)."
+}

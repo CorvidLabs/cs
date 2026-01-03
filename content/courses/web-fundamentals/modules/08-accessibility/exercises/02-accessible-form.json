@@ -1,0 +1,41 @@
+{
+    "id": "02-accessible-form",
+    "title": "Create an Accessible Form",
+    "description": "Build a contact form with proper accessibility features.\n\n## Requirements\n\n1. Create a form with:\n   - A `<fieldset>` with `<legend>` \"Contact Information\"\n   - Name input with associated `<label>`\n   - Email input with associated `<label>`\n   - Both inputs should have `required` and `aria-required=\"true\"`\n\n2. Add a message textarea:\n   - With associated `<label>`\n   - With `aria-describedby` pointing to helper text\n   - Add a `<p>` with id for the description\n\n3. Add a submit button:\n   - With clear button text\n\n## Expected Result\n\nA form that screen reader users can easily understand and complete.",
+    "order": 2,
+    "language": "html",
+    "starterCode": "<form>\n    <!-- Add your accessible form elements here -->\n    \n</form>",
+    "testCases": [
+        {
+            "description": "Form should have a fieldset",
+            "assertion": "document.querySelector('fieldset') !== null"
+        },
+        {
+            "description": "Fieldset should have a legend",
+            "assertion": "document.querySelector('fieldset legend') !== null"
+        },
+        {
+            "description": "Name input should have associated label",
+            "assertion": "document.querySelector('label[for]') !== null && document.getElementById(document.querySelector('label[for]').getAttribute('for')) !== null"
+        },
+        {
+            "description": "Inputs should have aria-required attribute",
+            "assertion": "document.querySelector('input[aria-required=\"true\"]') !== null"
+        },
+        {
+            "description": "Textarea should have aria-describedby",
+            "assertion": "document.querySelector('textarea[aria-describedby]') !== null"
+        },
+        {
+            "description": "Form should have a submit button",
+            "assertion": "document.querySelector('button[type=\"submit\"]') !== null || document.querySelector('input[type=\"submit\"]') !== null"
+        }
+    ],
+    "hints": [
+        "Use <fieldset><legend>Contact Information</legend>...</fieldset>",
+        "Connect labels: <label for=\"name\">Name</label><input id=\"name\">",
+        "Add required and aria-required=\"true\" to required fields",
+        "For textarea: aria-describedby=\"message-desc\" with <p id=\"message-desc\">Helper text</p>",
+        "Use <button type=\"submit\">Send Message</button>"
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "id": "02-user-profile",
+    "title": "User Profile Manager",
+    "description": "Practice working with objects using destructuring and spread operators.\n\n## Requirements\n\n1. Create a function `createUser(name, email)` that returns a user object with:\n   - `id`: a random number (use `Math.floor(Math.random() * 10000)`)\n   - `name`: the provided name\n   - `email`: the provided email\n   - `createdAt`: current date as ISO string (`new Date().toISOString()`)\n   - `role`: default value \"user\"\n\n2. Create a function `updateUser(user, updates)` that:\n   - Returns a NEW object with the updates applied\n   - Does NOT modify the original user object\n   - Cannot update the `id` or `createdAt` fields (ignore them in updates)\n\n3. Create a function `formatUserInfo(user)` that:\n   - Uses destructuring to extract `name`, `email`, and `role`\n   - Returns: \"Name (role): email\"\n   - Example: \"Alice (admin): alice@example.com\"\n\n## Expected Output\n\n```javascript\nconst user = createUser(\"Alice\", \"alice@example.com\");\n// { id: 1234, name: \"Alice\", email: \"alice@example.com\", createdAt: \"...\", role: \"user\" }\n\nconst updated = updateUser(user, { role: \"admin\", email: \"admin@example.com\" });\n// { id: 1234, name: \"Alice\", email: \"admin@example.com\", createdAt: \"...\", role: \"admin\" }\n\nformatUserInfo(updated);\n// \"Alice (admin): admin@example.com\"\n```",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "function createUser(name, email) {\n    // Create and return a new user object\n    // Include: id, name, email, createdAt, role\n    \n}\n\nfunction updateUser(user, updates) {\n    // Return a new object with updates applied\n    // Don't allow updating id or createdAt\n    // Hint: Use destructuring to remove unwanted fields from updates\n    // Hint: Use spread to merge objects\n    \n}\n\nfunction formatUserInfo(user) {\n    // Use destructuring to extract name, email, role\n    // Return formatted string\n    \n}\n\n// Test your functions\nconst user = createUser(\"Alice\", \"alice@example.com\");\nconsole.log(\"Created user:\", user);\n\nconst updated = updateUser(user, { role: \"admin\", name: \"Alice Smith\" });\nconsole.log(\"Updated user:\", updated);\nconsole.log(\"Original unchanged:\", user.role === \"user\");\n\nconsole.log(\"Formatted:\", formatUserInfo(updated));\n// Expected: \"Alice Smith (admin): alice@example.com\"\n\n// Test that id cannot be changed\nconst hackedAttempt = updateUser(user, { id: 9999, role: \"hacker\" });\nconsole.log(\"ID unchanged:\", hackedAttempt.id === user.id);\n",
+    "testCases": [
+        {
+            "description": "createUser should return object with name",
+            "assertion": "createUser('Alice', 'a@b.com').name === 'Alice'"
+        },
+        {
+            "description": "createUser should return object with email",
+            "assertion": "createUser('Alice', 'a@b.com').email === 'a@b.com'"
+        },
+        {
+            "description": "createUser should have default role 'user'",
+            "assertion": "createUser('Alice', 'a@b.com').role === 'user'"
+        },
+        {
+            "description": "createUser should include id",
+            "assertion": "typeof createUser('Alice', 'a@b.com').id === 'number'"
+        },
+        {
+            "description": "createUser should include createdAt",
+            "assertion": "typeof createUser('Alice', 'a@b.com').createdAt === 'string'"
+        },
+        {
+            "description": "updateUser should return new object",
+            "assertion": "(function() { const u = createUser('A', 'a@b.com'); return updateUser(u, {role:'admin'}) !== u; })()"
+        },
+        {
+            "description": "updateUser should apply updates",
+            "assertion": "(function() { const u = createUser('A', 'a@b.com'); return updateUser(u, {role:'admin'}).role === 'admin'; })()"
+        },
+        {
+            "description": "updateUser should not modify original",
+            "assertion": "(function() { const u = createUser('A', 'a@b.com'); updateUser(u, {role:'admin'}); return u.role === 'user'; })()"
+        },
+        {
+            "description": "updateUser should not allow id change",
+            "assertion": "(function() { const u = createUser('A', 'a@b.com'); const id = u.id; return updateUser(u, {id: 9999}).id === id; })()"
+        },
+        {
+            "description": "formatUserInfo should return correct format",
+            "assertion": "formatUserInfo({name:'Alice',role:'admin',email:'a@b.com'}) === 'Alice (admin): a@b.com'"
+        }
+    ],
+    "hints": [
+        "Use object literal shorthand: { name, email } instead of { name: name, email: email }",
+        "Use spread to copy: { ...user, ...updates }",
+        "To remove fields from updates: const { id, createdAt, ...safeUpdates } = updates",
+        "Use destructuring in function: const { name, email, role } = user"
+    ]
+}

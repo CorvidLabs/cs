@@ -1,0 +1,17 @@
+{
+    "id": "04-css-basics",
+    "title": "CSS Basics",
+    "description": "Learn the fundamentals of CSS styling. Master selectors, the cascade, specificity, colors, typography, and CSS units.",
+    "order": 4,
+    "lessons": [
+        "01-selectors",
+        "02-cascade-specificity",
+        "03-colors-backgrounds",
+        "04-typography"
+    ],
+    "exercises": [
+        "01-style-text",
+        "02-color-scheme",
+        "03-typography-system"
+    ]
+}

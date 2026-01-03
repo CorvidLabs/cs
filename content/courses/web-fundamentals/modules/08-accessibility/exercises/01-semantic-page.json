@@ -1,0 +1,49 @@
+{
+    "id": "01-semantic-page",
+    "title": "Build a Semantic Page Structure",
+    "description": "Create a properly structured page using semantic HTML elements.\n\n## Requirements\n\n1. Create a `<header>` containing:\n   - A `<nav>` element with navigation links\n   - The nav should have an `aria-label=\"Main navigation\"`\n\n2. Create a `<main>` element containing:\n   - An `<h1>` with the page title \"Welcome to Our Site\"\n   - An `<article>` element with an `<h2>` heading\n\n3. Create an `<aside>` element:\n   - With an `<h2>` heading \"Related Links\"\n\n4. Create a `<footer>` element:\n   - With copyright text\n\n## Expected Result\n\nA semantically correct page structure that screen readers can navigate easily.",
+    "order": 1,
+    "language": "html",
+    "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Semantic Page</title>\n</head>\n<body>\n    <!-- Add your semantic structure here -->\n    \n</body>\n</html>",
+    "testCases": [
+        {
+            "description": "Page should have a header element",
+            "assertion": "document.querySelector('header') !== null"
+        },
+        {
+            "description": "Header should contain a nav element",
+            "assertion": "document.querySelector('header nav') !== null"
+        },
+        {
+            "description": "Nav should have aria-label",
+            "assertion": "document.querySelector('nav').hasAttribute('aria-label')"
+        },
+        {
+            "description": "Page should have a main element",
+            "assertion": "document.querySelector('main') !== null"
+        },
+        {
+            "description": "Main should have an h1",
+            "assertion": "document.querySelector('main h1') !== null"
+        },
+        {
+            "description": "Page should have an article element",
+            "assertion": "document.querySelector('article') !== null"
+        },
+        {
+            "description": "Page should have an aside element",
+            "assertion": "document.querySelector('aside') !== null"
+        },
+        {
+            "description": "Page should have a footer element",
+            "assertion": "document.querySelector('footer') !== null"
+        }
+    ],
+    "hints": [
+        "Wrap the site navigation in <header><nav aria-label=\"Main navigation\">...</nav></header>",
+        "Use <main> for the primary content area",
+        "There should be only one <h1> per page, inside <main>",
+        "Use <article> for self-contained content like blog posts",
+        "Use <aside> for secondary content like sidebars"
+    ]
+}

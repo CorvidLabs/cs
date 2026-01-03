@@ -1,0 +1,44 @@
+{
+  "id": "03-largest-number",
+  "title": "Largest Number",
+  "description": "Arrange numbers to form the largest possible number using custom sorting.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def largest_number(nums: list[int]) -> str:\n    \"\"\"\n    Arrange numbers to form the largest possible number.\n    \n    Args:\n        nums: List of non-negative integers\n        \n    Returns:\n        The largest number as a string\n        \n    Example:\n        Input: [10, 2]\n        Output: \"210\"  # 210 > 102\n        \n        Input: [3, 30, 34, 5, 9]\n        Output: \"9534330\"  # 9 > 5 > 34 > 3 > 30\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "from functools import cmp_to_key\n\ndef largest_number(nums: list[int]) -> str:\n    # Convert to strings for comparison\n    str_nums = [str(num) for num in nums]\n    \n    # Custom comparator: compare a+b vs b+a\n    def compare(a, b):\n        if a + b > b + a:\n            return -1  # a should come first\n        elif a + b < b + a:\n            return 1   # b should come first\n        else:\n            return 0\n    \n    # Sort with custom comparator\n    str_nums.sort(key=cmp_to_key(compare))\n    \n    # Handle edge case of all zeros\n    if str_nums[0] == '0':\n        return '0'\n    \n    return ''.join(str_nums)",
+  "testCases": [
+    {
+      "input": {"nums": [10, 2]},
+      "expected": "210",
+      "description": "Two numbers"
+    },
+    {
+      "input": {"nums": [3, 30, 34, 5, 9]},
+      "expected": "9534330",
+      "description": "Multiple numbers"
+    },
+    {
+      "input": {"nums": [1]},
+      "expected": "1",
+      "description": "Single number"
+    },
+    {
+      "input": {"nums": [0, 0]},
+      "expected": "0",
+      "description": "All zeros"
+    },
+    {
+      "input": {"nums": [12, 121]},
+      "expected": "12121",
+      "description": "Similar prefixes"
+    }
+  ],
+  "hints": [
+    "Convert numbers to strings for comparison",
+    "Compare by concatenation: is a+b > b+a or b+a > a+b?",
+    "Use a custom comparator with functools.cmp_to_key",
+    "Handle edge case: if largest is '0', result is '0'"
+  ],
+  "explanation": "The key insight is that we can't just sort by value (9 > 34 but '9' should come before '34' because '934' > '349'). Instead, compare two numbers a and b by checking if a+b > b+a (as strings). If '910' > '109', then 9 should come before 10. Use Python's cmp_to_key to create a key function from the comparator. Edge case: if all numbers are 0, return '0' not '000'. Time: O(n log n), Space: O(n) for string conversion."
+}

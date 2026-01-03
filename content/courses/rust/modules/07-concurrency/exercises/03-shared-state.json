@@ -1,0 +1,33 @@
+{
+    "id": "03-shared-state",
+    "title": "Shared State",
+    "description": "Practice using Arc and Mutex for shared state.\n\n## Requirements\n\n1. Implement `Counter` struct with thread-safe increment:\n   - `new() -> Counter`\n   - `increment(&self)` - thread-safe increment\n   - `get(&self) -> i32` - get current value\n\n2. Implement `parallel_increment(counter: Counter, num_threads: usize, increments_per_thread: usize)`\n   - Each thread increments the counter increments_per_thread times",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "use std::sync::{Arc, Mutex};\nuse std::thread;\n\n// Thread-safe counter\nstruct Counter {\n    // Use Arc<Mutex<i32>> internally\n    todo!()\n}\n\nimpl Counter {\n    fn new() -> Counter {\n        todo!()\n    }\n\n    fn increment(&self) {\n        todo!()\n    }\n\n    fn get(&self) -> i32 {\n        todo!()\n    }\n}\n\nimpl Clone for Counter {\n    fn clone(&self) -> Self {\n        todo!()\n    }\n}\n\n// Increment counter from multiple threads\nfn parallel_increment(counter: Counter, num_threads: usize, increments_per_thread: usize) {\n    todo!()\n}\n\nfn main() {\n    let counter = Counter::new();\n\n    parallel_increment(counter.clone(), 10, 1000);\n\n    println!(\"Final count: {}\", counter.get());\n    // Should be 10000\n}\n",
+    "testCases": [
+        {
+            "description": "Counter starts at zero",
+            "assertion": "Counter::new().get() == 0"
+        },
+        {
+            "description": "Counter increments correctly",
+            "assertion": "{ let c = Counter::new(); c.increment(); c.increment(); c.get() == 2 }"
+        },
+        {
+            "description": "Counter is thread-safe",
+            "assertion": "{ let c = Counter::new(); parallel_increment(c.clone(), 4, 100); c.get() == 400 }"
+        },
+        {
+            "description": "Clone shares state",
+            "assertion": "{ let c1 = Counter::new(); let c2 = c1.clone(); c1.increment(); c2.get() == 1 }"
+        }
+    ],
+    "hints": [
+        "Counter should contain: value: Arc<Mutex<i32>>",
+        "new(): Counter { value: Arc::new(Mutex::new(0)) }",
+        "increment(): lock the mutex, increment the value",
+        "Clone: just clone the Arc, not the Mutex",
+        "parallel_increment: spawn threads, each clones counter and increments in a loop"
+    ]
+}

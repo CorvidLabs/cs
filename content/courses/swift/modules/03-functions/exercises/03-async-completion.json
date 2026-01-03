@@ -1,0 +1,32 @@
+{
+    "id": "03-async-completion",
+    "title": "Completion Handler Pattern",
+    "description": "Implement a simple data fetcher class that demonstrates escaping closures and the completion handler pattern.\n\n## Requirements\n\n1. Create a `DataFetcher` class with a `result` property of type `String?`\n2. Add a method `fetchData` that takes an escaping completion handler `(String) -> Void`\n3. The fetchData method should:\n   - Set result to \"Loading...\"\n   - Call the completion handler with \"Data loaded successfully\"\n   - Update result to the completion value\n4. Use `[weak self]` in the closure to avoid retain cycles\n\n## Example Usage\n\n```swift\nlet fetcher = DataFetcher()\nprint(fetcher.result ?? \"nil\")  // nil\n\nfetcher.fetchData { data in\n    print(\"Received: \\(data)\")\n}\n// Prints: Received: Data loaded successfully\n\nprint(fetcher.result ?? \"nil\")  // Data loaded successfully\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "// Create a class that demonstrates escaping closures\n\npublic class DataFetcher {\n    public var result: String?\n\n    public init() {}\n\n    // Create a method that takes an escaping completion handler\n    public func fetchData(completion: @escaping (String) -> Void) {\n        // 1. Set result to \"Loading...\"\n\n        // 2. Simulate the fetched data\n        let fetchedData = \"Data loaded successfully\"\n\n        // 3. Call the completion handler\n\n        // 4. Update result to the fetched data\n    }\n}\n\n// Test your implementation\nlet fetcher = DataFetcher()\nprint(\"Initial: \\(fetcher.result ?? \"nil\")\")\n\nfetcher.fetchData { data in\n    print(\"Callback received: \\(data)\")\n}\n\nprint(\"Final: \\(fetcher.result ?? \"nil\")\")\n",
+    "testCases": [
+        {
+            "description": "Initial result should be nil",
+            "assertion": "DataFetcher().result == nil"
+        },
+        {
+            "description": "fetchData should call completion with correct data",
+            "assertion": "{ var received = \"\"; let f = DataFetcher(); f.fetchData { received = $0 }; return received == \"Data loaded successfully\" }()"
+        },
+        {
+            "description": "result should be updated after fetchData",
+            "assertion": "{ let f = DataFetcher(); f.fetchData { _ in }; return f.result == \"Data loaded successfully\" }()"
+        },
+        {
+            "description": "fetchData method should be marked with @escaping",
+            "assertion": "true"
+        }
+    ],
+    "hints": [
+        "Mark the completion parameter with @escaping since it could be stored or called later",
+        "Set self.result = \"Loading...\" at the start of fetchData",
+        "After setting up, call completion(fetchedData)",
+        "Finally, update self.result = fetchedData"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "03-structs-enums",
+    "title": "Structs and Enums",
+    "description": "Define custom data types with structs and enums. Master pattern matching, Option, and Result types to write expressive and safe Rust code.",
+    "order": 3,
+    "lessons": [
+        "01-structs",
+        "02-enums",
+        "03-option-result",
+        "04-pattern-matching"
+    ],
+    "exercises": [
+        "01-struct-methods",
+        "02-enum-state-machine",
+        "03-option-result-handling"
+    ]
+}

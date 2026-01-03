@@ -1,0 +1,63 @@
+{
+    "id": "03-crud-operations",
+    "title": "CRUD Operations",
+    "description": "Implement a complete CRUD (Create, Read, Update, Delete) data manager.\n\n## Requirements\n\n1. Create a `DataManager` class that manages items in memory:\n   - `items` property: array of items, each with `id`, `createdAt`, `updatedAt`\n   - `nextId` property: tracks next ID to assign\n\n2. Implement methods:\n   - `create(data)`: Add item with auto-generated id and timestamps, return item\n   - `getAll()`: Return all items\n   - `getById(id)`: Return item or null if not found\n   - `update(id, updates)`: Update item, set updatedAt, return updated item or null\n   - `delete(id)`: Remove item, return true if deleted, false if not found\n   - `find(predicate)`: Return items matching predicate function\n\n3. Validate that items have at least a `name` property in create/update\n\n## Expected Usage\n\n```javascript\nconst manager = new DataManager();\nconst user = manager.create({ name: 'Alice' });\nmanager.update(user.id, { name: 'Alice Smith' });\nmanager.delete(user.id);\n```",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "class DataManager {\n    constructor() {\n        this.items = [];\n        this.nextId = 1;\n    }\n\n    // Create a new item\n    create(data) {\n        // Validate data has name property\n        // Create item with id, createdAt, updatedAt\n        // Add to items array\n        // Return the created item\n        return null;\n    }\n\n    // Get all items\n    getAll() {\n        // Return copy of items array\n        return [];\n    }\n\n    // Get item by ID\n    getById(id) {\n        // Find and return item, or null if not found\n        return null;\n    }\n\n    // Update an item\n    update(id, updates) {\n        // Find item by id\n        // If not found, return null\n        // Validate updates (if has name, must be non-empty)\n        // Update fields and set updatedAt\n        // Return updated item\n        return null;\n    }\n\n    // Delete an item\n    delete(id) {\n        // Find index of item\n        // If not found, return false\n        // Remove from array, return true\n        return false;\n    }\n\n    // Find items matching predicate\n    find(predicate) {\n        // Return items where predicate returns true\n        return [];\n    }\n}\n\n// Test your implementation\nconst manager = new DataManager();\n\nconsole.log('Testing create...');\nconst alice = manager.create({ name: 'Alice', role: 'admin' });\nconst bob = manager.create({ name: 'Bob', role: 'user' });\nconsole.log('Created:', alice);\nconsole.log('Created:', bob);\n\nconsole.log('\\nTesting getAll...');\nconsole.log('All items:', manager.getAll());\n\nconsole.log('\\nTesting getById...');\nconsole.log('Get id 1:', manager.getById(1));\nconsole.log('Get id 999:', manager.getById(999));\n\nconsole.log('\\nTesting update...');\nconst updated = manager.update(1, { name: 'Alice Smith', role: 'superadmin' });\nconsole.log('Updated:', updated);\n\nconsole.log('\\nTesting find...');\nconst admins = manager.find(item => item.role?.includes('admin'));\nconsole.log('Admins:', admins);\n\nconsole.log('\\nTesting delete...');\nconsole.log('Delete id 1:', manager.delete(1));\nconsole.log('Delete id 999:', manager.delete(999));\nconsole.log('Remaining:', manager.getAll());\n",
+    "testCases": [
+        {
+            "description": "create returns item with id",
+            "assertion": "(function() { const m = new DataManager(); const item = m.create({ name: 'Test' }); return item.id === 1; })()"
+        },
+        {
+            "description": "create sets createdAt",
+            "assertion": "(function() { const m = new DataManager(); const item = m.create({ name: 'Test' }); return item.createdAt instanceof Date; })()"
+        },
+        {
+            "description": "create increments id",
+            "assertion": "(function() { const m = new DataManager(); m.create({ name: 'A' }); const b = m.create({ name: 'B' }); return b.id === 2; })()"
+        },
+        {
+            "description": "getAll returns all items",
+            "assertion": "(function() { const m = new DataManager(); m.create({ name: 'A' }); m.create({ name: 'B' }); return m.getAll().length === 2; })()"
+        },
+        {
+            "description": "getById returns correct item",
+            "assertion": "(function() { const m = new DataManager(); m.create({ name: 'Alice' }); return m.getById(1).name === 'Alice'; })()"
+        },
+        {
+            "description": "getById returns null for missing",
+            "assertion": "(function() { const m = new DataManager(); return m.getById(999) === null; })()"
+        },
+        {
+            "description": "update changes item properties",
+            "assertion": "(function() { const m = new DataManager(); m.create({ name: 'A' }); m.update(1, { name: 'B' }); return m.getById(1).name === 'B'; })()"
+        },
+        {
+            "description": "update sets updatedAt",
+            "assertion": "(function() { const m = new DataManager(); m.create({ name: 'A' }); const before = m.getById(1).updatedAt; m.update(1, { name: 'B' }); return m.getById(1).updatedAt >= before; })()"
+        },
+        {
+            "description": "delete removes item",
+            "assertion": "(function() { const m = new DataManager(); m.create({ name: 'A' }); m.delete(1); return m.getAll().length === 0; })()"
+        },
+        {
+            "description": "delete returns false for missing",
+            "assertion": "(function() { const m = new DataManager(); return m.delete(999) === false; })()"
+        },
+        {
+            "description": "find returns matching items",
+            "assertion": "(function() { const m = new DataManager(); m.create({ name: 'Alice', role: 'admin' }); m.create({ name: 'Bob', role: 'user' }); return m.find(i => i.role === 'admin').length === 1; })()"
+        }
+    ],
+    "hints": [
+        "create: spread data and add id, createdAt: new Date(), updatedAt: new Date()",
+        "create: this.items.push(item); this.nextId++;",
+        "getAll: return [...this.items] to return a copy",
+        "getById: return this.items.find(item => item.id === id) || null",
+        "update: use findIndex, then Object.assign or spread",
+        "delete: use findIndex, then splice if found",
+        "find: return this.items.filter(predicate)"
+    ]
+}

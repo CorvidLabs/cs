@@ -1,0 +1,17 @@
+{
+    "id": "02-ownership",
+    "title": "Ownership and Borrowing",
+    "description": "Master Rust's unique ownership system - the key to memory safety without garbage collection. Learn ownership rules, borrowing, references, and lifetimes to write safe and efficient code.",
+    "order": 2,
+    "lessons": [
+        "01-ownership-rules",
+        "02-borrowing",
+        "03-references",
+        "04-lifetimes-basics"
+    ],
+    "exercises": [
+        "01-ownership-transfer",
+        "02-borrowing-practice",
+        "03-lifetime-annotations"
+    ]
+}

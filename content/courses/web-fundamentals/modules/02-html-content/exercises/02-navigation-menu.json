@@ -1,0 +1,52 @@
+{
+    "id": "02-navigation-menu",
+    "title": "Navigation Menu",
+    "description": "Create an accessible navigation menu with links.\n\n## Requirements\n\n1. Use a `<nav>` element with aria-label=\"Main navigation\"\n2. Inside nav, create a `<ul>` for the menu items\n3. Add 5 navigation links as `<li>` items:\n   - Home (href=\"/\")\n   - About (href=\"/about\")\n   - Services (href=\"/services\")\n   - Blog (href=\"/blog\")\n   - Contact (href=\"/contact\")\n\n4. Mark the current page:\n   - Add class=\"active\" to the Home link\n   - Add aria-current=\"page\" to the Home link\n\n5. Each link should have proper descriptive text\n\n## Expected Structure\n\n```html\n<nav aria-label=\"Main navigation\">\n    <ul>\n        <li><a href=\"/\" class=\"active\" aria-current=\"page\">Home</a></li>\n        <li><a href=\"/about\">About</a></li>\n        ...\n    </ul>\n</nav>\n```",
+    "order": 2,
+    "language": "html",
+    "starterCode": "<!-- Create an accessible navigation menu -->\n<nav>\n    <ul>\n        <!-- Add 5 navigation links -->\n        <!-- Remember to mark Home as the current page -->\n        \n    </ul>\n</nav>",
+    "testCases": [
+        {
+            "description": "Page should have a nav element",
+            "assertion": "document.querySelector('nav') !== null"
+        },
+        {
+            "description": "Nav should have aria-label attribute",
+            "assertion": "document.querySelector('nav').getAttribute('aria-label') === 'Main navigation'"
+        },
+        {
+            "description": "Nav should contain a ul element",
+            "assertion": "document.querySelector('nav > ul') !== null"
+        },
+        {
+            "description": "Navigation should have 5 list items",
+            "assertion": "document.querySelectorAll('nav > ul > li').length === 5"
+        },
+        {
+            "description": "Each list item should have a link",
+            "assertion": "document.querySelectorAll('nav > ul > li > a').length === 5"
+        },
+        {
+            "description": "Home link should have href=\"/\"",
+            "assertion": "document.querySelector('nav a[href=\"/\"]') !== null"
+        },
+        {
+            "description": "Home link should have class active",
+            "assertion": "document.querySelector('nav a[href=\"/\"]').classList.contains('active')"
+        },
+        {
+            "description": "Home link should have aria-current=\"page\"",
+            "assertion": "document.querySelector('nav a[href=\"/\"]').getAttribute('aria-current') === 'page'"
+        },
+        {
+            "description": "Contact link should have href=\"/contact\"",
+            "assertion": "document.querySelector('nav a[href=\"/contact\"]') !== null"
+        }
+    ],
+    "hints": [
+        "Add aria-label=\"Main navigation\" to the nav element",
+        "Use <a href=\"/\">Home</a> for links",
+        "Add class=\"active\" aria-current=\"page\" to the Home link",
+        "Each li should contain exactly one anchor tag"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "04-stacks-queues",
+  "title": "Stacks and Queues",
+  "description": "Learn about stack and queue data structures, their operations, and practical applications. Understand LIFO and FIFO principles, and see how these structures solve real-world problems from expression evaluation to task scheduling.",
+  "order": 4,
+  "lessons": [
+    "01-stack-fundamentals",
+    "02-queue-fundamentals",
+    "03-stack-applications",
+    "04-queue-applications"
+  ],
+  "exercises": [
+    "01-valid-parentheses",
+    "02-implement-queue-with-stacks",
+    "03-sliding-window-maximum"
+  ]
+}

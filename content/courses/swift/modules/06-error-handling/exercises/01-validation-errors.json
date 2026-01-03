@@ -1,0 +1,36 @@
+{
+    "id": "01-validation-errors",
+    "title": "Input Validation Errors",
+    "description": "Create a validation system using custom error types.\n\n## Requirements\n\n1. Define a `ValidationError` enum with cases:\n   - `empty` - input is empty\n   - `tooShort(minimum: Int)` - input too short\n   - `tooLong(maximum: Int)` - input too long\n   - `invalidCharacter(Character)` - contains invalid character\n\n2. Create a `validatePassword(_ password: String) throws` function that:\n   - Throws `empty` if password is empty\n   - Throws `tooShort(minimum: 8)` if less than 8 characters\n   - Throws `tooLong(maximum: 32)` if more than 32 characters\n   - Throws `invalidCharacter` if it contains a space\n   - Returns Void if valid\n\n3. Test with valid and invalid passwords\n\n## Expected Output\n\n```\n\"SecurePass123\" is valid\n\"short\" error: Password must be at least 8 characters\n\"\" error: Password cannot be empty\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "// Define ValidationError enum conforming to Error and LocalizedError\n\n\n// Implement validatePassword function\n\n\n// Test your implementation\nlet passwords = [\"SecurePass123\", \"short\", \"\", \"has space here\", String(repeating: \"a\", count: 40)]\n\nfor password in passwords {\n    do {\n        try validatePassword(password)\n        print(\"\\\"\\(password)\\\" is valid\")\n    } catch {\n        print(\"\\\"\\(password)\\\" error: \\(error.localizedDescription)\")\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "ValidationError should have empty case",
+            "assertion": "ValidationError.empty != nil"
+        },
+        {
+            "description": "ValidationError should have tooShort case with minimum",
+            "assertion": "ValidationError.tooShort(minimum: 8) != nil"
+        },
+        {
+            "description": "Valid password should not throw",
+            "assertion": "(try? validatePassword(\"SecurePass123\")) != nil"
+        },
+        {
+            "description": "Empty password should throw empty error",
+            "assertion": "do { try validatePassword(\"\"); false } catch ValidationError.empty { true } catch { false }"
+        },
+        {
+            "description": "Short password should throw tooShort error",
+            "assertion": "do { try validatePassword(\"short\"); false } catch ValidationError.tooShort { true } catch { false }"
+        }
+    ],
+    "hints": [
+        "Use enum with associated values: case tooShort(minimum: Int)",
+        "Conform to LocalizedError and implement errorDescription",
+        "Check conditions in order: empty first, then length, then characters",
+        "Use password.first(where: { $0 == \" \" }) to find spaces"
+    ]
+}

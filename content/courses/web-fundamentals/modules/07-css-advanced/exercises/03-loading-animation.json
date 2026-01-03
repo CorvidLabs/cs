@@ -1,0 +1,41 @@
+{
+    "id": "03-loading-animation",
+    "title": "Create a Loading Animation",
+    "description": "Build a spinning loader animation using CSS keyframes.\n\n## Requirements\n\n1. Create a `@keyframes spin` animation:\n   - Start at 0deg rotation (from/0%)\n   - End at 360deg rotation (to/100%)\n\n2. Style the `.loader`:\n   - Width and height: 48px\n   - Border: 4px solid #f3f3f3 (light gray)\n   - Border-top: 4px solid #3498db (blue)\n   - Border-radius: 50% (circle)\n   - Apply the spin animation:\n     - Duration: 1s\n     - Timing: linear\n     - Iteration: infinite\n\n## Expected Result\n\nA circular spinner that rotates continuously.",
+    "order": 3,
+    "language": "css",
+    "starterCode": "/* Define the spin animation */\n@keyframes spin {\n    /* Add your keyframes */\n}\n\n/* Loader styles */\n.loader {\n    /* Add your styles and animation */\n}",
+    "testCases": [
+        {
+            "description": "Loader should be 48px wide",
+            "assertion": "document.querySelector('.loader').offsetWidth === 48"
+        },
+        {
+            "description": "Loader should be 48px tall",
+            "assertion": "document.querySelector('.loader').offsetHeight === 48"
+        },
+        {
+            "description": "Loader should be circular (50% border-radius)",
+            "assertion": "getComputedStyle(document.querySelector('.loader')).borderRadius === '50%'"
+        },
+        {
+            "description": "Loader should have animation applied",
+            "assertion": "getComputedStyle(document.querySelector('.loader')).animationName === 'spin'"
+        },
+        {
+            "description": "Animation should be infinite",
+            "assertion": "getComputedStyle(document.querySelector('.loader')).animationIterationCount === 'infinite'"
+        },
+        {
+            "description": "Loader should have blue top border",
+            "assertion": "getComputedStyle(document.querySelector('.loader')).borderTopColor === 'rgb(52, 152, 219)'"
+        }
+    ],
+    "hints": [
+        "Use @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }",
+        "Use width: 48px and height: 48px",
+        "Use border: 4px solid #f3f3f3 for the base circle",
+        "Use border-top-color: #3498db to color just the top",
+        "Apply animation: spin 1s linear infinite"
+    ]
+}

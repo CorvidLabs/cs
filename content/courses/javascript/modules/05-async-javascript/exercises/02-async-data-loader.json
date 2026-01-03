@@ -1,0 +1,53 @@
+{
+    "id": "02-async-data-loader",
+    "title": "Async Data Loader",
+    "description": "Build a data loader using async/await with error handling and loading states.\n\n## Requirements\n\n1. Create a function `createDataLoader(fetchFn)` that takes a fetch function and returns a loader object\n\n2. The loader should have:\n   - `load()` - triggers the fetch, returns a promise\n   - `getState()` - returns `{ loading, data, error }`\n   - `reset()` - resets state to initial values\n\n3. State management:\n   - Initial: `{ loading: false, data: null, error: null }`\n   - Loading: `{ loading: true, data: null, error: null }`\n   - Success: `{ loading: false, data: <result>, error: null }`\n   - Error: `{ loading: false, data: null, error: <error message> }`\n\n4. `load()` should:\n   - Set loading state\n   - Call the fetchFn\n   - Update state with result or error\n   - Return the data on success, or throw on error\n\n## Expected Output\n\n```javascript\nconst loader = createDataLoader(async () => {\n    await delay(100);\n    return { message: 'Hello' };\n});\n\nloader.getState(); // { loading: false, data: null, error: null }\n\nconst promise = loader.load();\nloader.getState(); // { loading: true, data: null, error: null }\n\nawait promise;\nloader.getState(); // { loading: false, data: { message: 'Hello' }, error: null }\n```",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "function createDataLoader(fetchFn) {\n    // State\n    let state = {\n        loading: false,\n        data: null,\n        error: null\n    };\n\n    // Get current state (return a copy)\n    function getState() {\n        return { ...state };\n    }\n\n    // Reset to initial state\n    function reset() {\n        state = {\n            loading: false,\n            data: null,\n            error: null\n        };\n    }\n\n    // Load data\n    async function load() {\n        // Set loading state\n        // Call fetchFn with try/catch\n        // Update state based on result\n        // Return data or throw error\n        \n    }\n\n    return {\n        load,\n        getState,\n        reset\n    };\n}\n\n// Helper for testing\nfunction delay(ms) {\n    return new Promise(resolve => setTimeout(resolve, ms));\n}\n\n// Test your implementation\nasync function test() {\n    // Test successful load\n    const successLoader = createDataLoader(async () => {\n        await delay(50);\n        return { id: 1, name: 'Test' };\n    });\n\n    console.log('Initial state:', successLoader.getState());\n\n    const loadPromise = successLoader.load();\n    console.log('Loading state:', successLoader.getState());\n\n    const data = await loadPromise;\n    console.log('Success state:', successLoader.getState());\n    console.log('Returned data:', data);\n\n    // Test reset\n    successLoader.reset();\n    console.log('After reset:', successLoader.getState());\n\n    // Test error handling\n    const errorLoader = createDataLoader(async () => {\n        await delay(50);\n        throw new Error('Network error');\n    });\n\n    try {\n        await errorLoader.load();\n    } catch (e) {\n        console.log('Error state:', errorLoader.getState());\n    }\n}\n\ntest();\n",
+    "testCases": [
+        {
+            "description": "createDataLoader returns object with load, getState, reset",
+            "assertion": "(function() { const l = createDataLoader(() => {}); return typeof l.load === 'function' && typeof l.getState === 'function' && typeof l.reset === 'function'; })()"
+        },
+        {
+            "description": "Initial state has loading false, data null, error null",
+            "assertion": "(function() { const s = createDataLoader(() => {}).getState(); return s.loading === false && s.data === null && s.error === null; })()"
+        },
+        {
+            "description": "load() sets loading to true immediately",
+            "assertion": "(function() { const l = createDataLoader(() => new Promise(() => {})); l.load(); return l.getState().loading === true; })()"
+        },
+        {
+            "description": "load() returns a Promise",
+            "assertion": "createDataLoader(() => Promise.resolve(1)).load() instanceof Promise"
+        },
+        {
+            "description": "Successful load sets data correctly",
+            "assertion": "(async () => { const l = createDataLoader(() => Promise.resolve({x: 1})); await l.load(); return l.getState().data.x === 1; })()"
+        },
+        {
+            "description": "Successful load sets loading to false",
+            "assertion": "(async () => { const l = createDataLoader(() => Promise.resolve(1)); await l.load(); return l.getState().loading === false; })()"
+        },
+        {
+            "description": "load() returns the data",
+            "assertion": "(async () => { const l = createDataLoader(() => Promise.resolve('test')); const result = await l.load(); return result === 'test'; })()"
+        },
+        {
+            "description": "Failed load sets error message",
+            "assertion": "(async () => { const l = createDataLoader(() => Promise.reject(new Error('fail'))); try { await l.load(); } catch {} return l.getState().error === 'fail'; })()"
+        },
+        {
+            "description": "reset() restores initial state",
+            "assertion": "(async () => { const l = createDataLoader(() => Promise.resolve(1)); await l.load(); l.reset(); const s = l.getState(); return s.loading === false && s.data === null && s.error === null; })()"
+        }
+    ],
+    "hints": [
+        "In load(): First set state.loading = true",
+        "Use try/catch around await fetchFn()",
+        "On success: state = { loading: false, data: result, error: null }",
+        "On error: state = { loading: false, data: null, error: error.message }",
+        "Don't forget to throw the error after setting state so caller can catch it"
+    ]
+}

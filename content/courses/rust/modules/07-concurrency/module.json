@@ -1,0 +1,17 @@
+{
+    "id": "07-concurrency",
+    "title": "Concurrency",
+    "description": "Write safe concurrent code with Rust's fearless concurrency. Learn threads, channels, mutexes, and the Send/Sync traits that make data races impossible.",
+    "order": 7,
+    "lessons": [
+        "01-threads",
+        "02-channels",
+        "03-mutex-arc",
+        "04-send-sync"
+    ],
+    "exercises": [
+        "01-thread-basics",
+        "02-channel-communication",
+        "03-shared-state"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "02-control-flow",
+    "title": "Control Flow",
+    "description": "Master Swift's control flow statements: conditionals with if and guard, powerful switch expressions with pattern matching, and the where clause for additional constraints.",
+    "order": 2,
+    "lessons": [
+        "01-if-guard",
+        "02-switch",
+        "03-pattern-matching",
+        "04-where-clauses"
+    ],
+    "exercises": [
+        "01-grade-calculator",
+        "02-season-detector",
+        "03-value-classifier"
+    ]
+}

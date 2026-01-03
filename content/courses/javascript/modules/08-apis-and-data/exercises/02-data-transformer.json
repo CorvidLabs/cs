@@ -1,0 +1,50 @@
+{
+    "id": "02-data-transformer",
+    "title": "Data Transformer",
+    "description": "Build utilities to transform data between API format and application format.\n\n## Requirements\n\n1. Create `snakeToCamel(str)` function:\n   - Converts snake_case to camelCase\n   - Example: 'user_name' -> 'userName'\n\n2. Create `camelToSnake(str)` function:\n   - Converts camelCase to snake_case\n   - Example: 'userName' -> 'user_name'\n\n3. Create `transformKeys(obj, transformer)` function:\n   - Recursively transforms all keys in object using transformer function\n   - Works with nested objects and arrays\n\n4. Create `pick(obj, keys)` function:\n   - Returns new object with only specified keys\n\n5. Create `omit(obj, keys)` function:\n   - Returns new object without specified keys\n\n## Expected Usage\n\n```javascript\nconst apiData = { user_name: 'Alice', email_address: 'a@b.com' };\nconst appData = transformKeys(apiData, snakeToCamel);\n// { userName: 'Alice', emailAddress: 'a@b.com' }\n```",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "// Convert snake_case to camelCase\nfunction snakeToCamel(str) {\n    // user_name -> userName\n    // Hint: use replace with regex\n    return str;\n}\n\n// Convert camelCase to snake_case\nfunction camelToSnake(str) {\n    // userName -> user_name\n    // Hint: replace uppercase letters with _lowercase\n    return str;\n}\n\n// Recursively transform all keys in an object\nfunction transformKeys(obj, transformer) {\n    // Handle arrays: map each item\n    // Handle objects: transform each key, recurse on values\n    // Handle primitives: return as-is\n    return obj;\n}\n\n// Return object with only specified keys\nfunction pick(obj, keys) {\n    // Return new object with only keys from the keys array\n    return {};\n}\n\n// Return object without specified keys\nfunction omit(obj, keys) {\n    // Return new object without keys from the keys array\n    return {};\n}\n\n// Test your implementation\nconsole.log('snakeToCamel tests:');\nconsole.log(snakeToCamel('user_name'));           // userName\nconsole.log(snakeToCamel('email_address'));       // emailAddress\nconsole.log(snakeToCamel('created_at_date'));     // createdAtDate\n\nconsole.log('\\ncamelToSnake tests:');\nconsole.log(camelToSnake('userName'));            // user_name\nconsole.log(camelToSnake('emailAddress'));        // email_address\nconsole.log(camelToSnake('createdAtDate'));       // created_at_date\n\nconsole.log('\\ntransformKeys tests:');\nconst apiResponse = {\n    user_name: 'Alice',\n    email_address: 'alice@example.com',\n    home_address: {\n        street_name: 'Main St',\n        zip_code: '12345'\n    },\n    phone_numbers: ['555-1234', '555-5678']\n};\n\nconst transformed = transformKeys(apiResponse, snakeToCamel);\nconsole.log(JSON.stringify(transformed, null, 2));\n\nconsole.log('\\npick tests:');\nconst user = { id: 1, name: 'Alice', password: 'secret', role: 'admin' };\nconsole.log(pick(user, ['id', 'name']));  // { id: 1, name: 'Alice' }\n\nconsole.log('\\nomit tests:');\nconsole.log(omit(user, ['password']));   // { id: 1, name: 'Alice', role: 'admin' }\n",
+    "testCases": [
+        {
+            "description": "snakeToCamel converts single underscore",
+            "assertion": "snakeToCamel('user_name') === 'userName'"
+        },
+        {
+            "description": "snakeToCamel converts multiple underscores",
+            "assertion": "snakeToCamel('created_at_date') === 'createdAtDate'"
+        },
+        {
+            "description": "camelToSnake converts single hump",
+            "assertion": "camelToSnake('userName') === 'user_name'"
+        },
+        {
+            "description": "camelToSnake converts multiple humps",
+            "assertion": "camelToSnake('createdAtDate') === 'created_at_date'"
+        },
+        {
+            "description": "transformKeys transforms simple object",
+            "assertion": "(function() { const r = transformKeys({ user_name: 'A' }, snakeToCamel); return r.userName === 'A'; })()"
+        },
+        {
+            "description": "transformKeys transforms nested objects",
+            "assertion": "(function() { const r = transformKeys({ home: { street_name: 'X' } }, snakeToCamel); return r.home.streetName === 'X'; })()"
+        },
+        {
+            "description": "pick returns only specified keys",
+            "assertion": "(function() { const r = pick({ a: 1, b: 2, c: 3 }, ['a', 'c']); return r.a === 1 && r.c === 3 && !('b' in r); })()"
+        },
+        {
+            "description": "omit removes specified keys",
+            "assertion": "(function() { const r = omit({ a: 1, b: 2, c: 3 }, ['b']); return r.a === 1 && r.c === 3 && !('b' in r); })()"
+        }
+    ],
+    "hints": [
+        "snakeToCamel: str.replace(/_([a-z])/g, (_, c) => c.toUpperCase())",
+        "camelToSnake: str.replace(/[A-Z]/g, c => '_' + c.toLowerCase())",
+        "transformKeys: check Array.isArray first, then typeof === 'object'",
+        "transformKeys: use Object.fromEntries with Object.entries.map",
+        "pick: filter Object.entries by keys.includes(key)",
+        "omit: filter Object.entries by !keys.includes(key)"
+    ]
+}

@@ -1,0 +1,64 @@
+{
+    "id": "03-math-functions",
+    "title": "Math Functions",
+    "description": "Create mathematical functions that work with numbers and lists.\n\n## Requirements\n\n1. Define `factorial(n)` that returns n! (n factorial). Return 1 for n=0.\n2. Define `is_prime(n)` that returns True if n is a prime number (greater than 1 and only divisible by 1 and itself)\n3. Define `average(numbers)` that takes a list of numbers and returns their average, or None if the list is empty\n\n## Example Usage\n\n```python\nfactorial(5)        # Returns 120 (5*4*3*2*1)\nfactorial(0)        # Returns 1\nis_prime(7)         # Returns True\nis_prime(4)         # Returns False\naverage([1, 2, 3])  # Returns 2.0\naverage([])         # Returns None\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "# Calculate factorial of n (n!)\n# factorial(5) = 5 * 4 * 3 * 2 * 1 = 120\n# factorial(0) = 1 (by definition)\ndef factorial(n):\n    pass  # Replace with your code\n\n\n# Check if n is a prime number\n# A prime number is greater than 1 and only divisible by 1 and itself\ndef is_prime(n):\n    pass  # Replace with your code\n\n\n# Calculate the average of a list of numbers\n# Return None if the list is empty\ndef average(numbers):\n    pass  # Replace with your code\n\n\n# Test your functions\nprint(f\"factorial(5) = {factorial(5)}\")\nprint(f\"factorial(0) = {factorial(0)}\")\nprint(f\"is_prime(7) = {is_prime(7)}\")\nprint(f\"is_prime(4) = {is_prime(4)}\")\nprint(f\"average([1, 2, 3, 4, 5]) = {average([1, 2, 3, 4, 5])}\")\nprint(f\"average([]) = {average([])}\")\n",
+    "testCases": [
+        {
+            "description": "factorial function exists",
+            "assertion": "callable(factorial)"
+        },
+        {
+            "description": "factorial(5) returns 120",
+            "assertion": "factorial(5) == 120"
+        },
+        {
+            "description": "factorial(0) returns 1",
+            "assertion": "factorial(0) == 1"
+        },
+        {
+            "description": "factorial(1) returns 1",
+            "assertion": "factorial(1) == 1"
+        },
+        {
+            "description": "is_prime function exists",
+            "assertion": "callable(is_prime)"
+        },
+        {
+            "description": "is_prime(7) returns True",
+            "assertion": "is_prime(7) == True"
+        },
+        {
+            "description": "is_prime(4) returns False",
+            "assertion": "is_prime(4) == False"
+        },
+        {
+            "description": "is_prime(2) returns True",
+            "assertion": "is_prime(2) == True"
+        },
+        {
+            "description": "is_prime(1) returns False",
+            "assertion": "is_prime(1) == False"
+        },
+        {
+            "description": "average function exists",
+            "assertion": "callable(average)"
+        },
+        {
+            "description": "average([1, 2, 3, 4, 5]) returns 3.0",
+            "assertion": "average([1, 2, 3, 4, 5]) == 3.0"
+        },
+        {
+            "description": "average([]) returns None",
+            "assertion": "average([]) is None"
+        }
+    ],
+    "hints": [
+        "For factorial: use a loop that multiplies result by each number from 1 to n",
+        "For is_prime: check if any number from 2 to n-1 divides n evenly",
+        "Numbers less than 2 are not prime",
+        "For average: check if the list is empty first, then use sum(numbers) / len(numbers)"
+    ]
+}

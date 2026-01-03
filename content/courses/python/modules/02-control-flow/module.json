@@ -1,0 +1,17 @@
+{
+    "id": "02-control-flow",
+    "title": "Control Flow",
+    "description": "Learn to make decisions in your code with conditional statements. Master if/elif/else structures, comparison operators, and boolean logic to create programs that respond intelligently to different situations.",
+    "order": 2,
+    "lessons": [
+        "01-boolean-logic",
+        "02-if-statements",
+        "03-elif-else",
+        "04-logical-operators"
+    ],
+    "exercises": [
+        "01-grade-calculator",
+        "02-number-classifier",
+        "03-leap-year"
+    ]
+}

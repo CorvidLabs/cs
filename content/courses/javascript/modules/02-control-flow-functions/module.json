@@ -1,0 +1,17 @@
+{
+    "id": "02-control-flow-functions",
+    "title": "Control Flow & Functions",
+    "description": "Master decision-making with conditionals and switches, then learn to organize code with functions and understand the power of closures.",
+    "order": 2,
+    "lessons": [
+        "01-conditionals",
+        "02-switch-statements",
+        "03-functions",
+        "04-closures"
+    ],
+    "exercises": [
+        "01-grade-calculator",
+        "02-fizz-buzz",
+        "03-counter-factory"
+    ]
+}

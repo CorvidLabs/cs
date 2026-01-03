@@ -1,0 +1,17 @@
+{
+  "id": "08-graphs-basics",
+  "title": "Graphs: Fundamentals",
+  "description": "Introduction to graph data structures and basic traversal algorithms. Learn about graph representations (adjacency list and matrix), and master breadth-first search (BFS) and depth-first search (DFS) traversals.",
+  "order": 8,
+  "lessons": [
+    "01-graph-representation",
+    "02-breadth-first-search",
+    "03-depth-first-search",
+    "04-graph-traversal-applications"
+  ],
+  "exercises": [
+    "01-number-of-islands",
+    "02-clone-graph",
+    "03-course-schedule"
+  ]
+}

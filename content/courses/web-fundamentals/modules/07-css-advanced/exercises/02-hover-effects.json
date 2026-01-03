@@ -1,0 +1,32 @@
+{
+    "id": "02-hover-effects",
+    "title": "Create Smooth Hover Effects",
+    "description": "Build interactive hover effects using transitions and transforms.\n\n## Requirements\n\n1. Style the `.card`:\n   - Add a subtle shadow: 0 2px 8px rgba(0,0,0,0.1)\n   - Add transition for transform and box-shadow (0.3s ease)\n\n2. On `.card:hover`:\n   - Lift the card up: translateY(-8px)\n   - Increase shadow: 0 8px 24px rgba(0,0,0,0.15)\n\n3. Style the `.button`:\n   - Background: #3498db\n   - Add transition for background-color and transform (0.2s ease)\n\n4. On `.button:hover`:\n   - Darken background: #2980b9\n   - Scale up slightly: scale(1.05)\n\n5. On `.button:active`:\n   - Scale down: scale(0.98)\n\n## Expected Result\n\nSmooth hover effects on both card and button.",
+    "order": 2,
+    "language": "css",
+    "starterCode": "/* Card base styles */\n.card {\n    background: white;\n    padding: 20px;\n    border-radius: 8px;\n    /* Add shadow and transition */\n}\n\n/* Card hover state */\n.card:hover {\n    /* Add hover effects */\n}\n\n/* Button base styles */\n.button {\n    color: white;\n    padding: 12px 24px;\n    border: none;\n    border-radius: 4px;\n    cursor: pointer;\n    /* Add background and transition */\n}\n\n/* Button hover state */\n.button:hover {\n    /* Add hover effects */\n}\n\n/* Button active state */\n.button:active {\n    /* Add active effects */\n}",
+    "testCases": [
+        {
+            "description": "Card should have box-shadow",
+            "assertion": "getComputedStyle(document.querySelector('.card')).boxShadow !== 'none'"
+        },
+        {
+            "description": "Card should have transition",
+            "assertion": "getComputedStyle(document.querySelector('.card')).transition !== 'none' && getComputedStyle(document.querySelector('.card')).transition !== 'all 0s ease 0s'"
+        },
+        {
+            "description": "Button should have blue background",
+            "assertion": "getComputedStyle(document.querySelector('.button')).backgroundColor === 'rgb(52, 152, 219)'"
+        },
+        {
+            "description": "Button should have transition",
+            "assertion": "getComputedStyle(document.querySelector('.button')).transition !== 'none' && getComputedStyle(document.querySelector('.button')).transition !== 'all 0s ease 0s'"
+        }
+    ],
+    "hints": [
+        "Use transition: transform 0.3s ease, box-shadow 0.3s ease",
+        "Use transform: translateY(-8px) to lift the card",
+        "For button, add background-color to the transition",
+        "Use transform: scale(1.05) for subtle growth on hover"
+    ]
+}

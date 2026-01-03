@@ -1,0 +1,37 @@
+{
+    "id": "01-implement-trait",
+    "title": "Implement a Trait",
+    "description": "Practice defining and implementing traits.\n\n## Requirements\n\n1. Define a trait `Describable` with:\n   - `fn describe(&self) -> String`\n   - A default implementation of `fn describe_short(&self) -> String` that returns first 20 chars of describe()\n\n2. Implement `Describable` for `Book` struct with fields: title, author, pages\n\n3. Implement `Describable` for `Movie` struct with fields: title, director, minutes",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "// Define the Describable trait here\n// It should have:\n// - describe(&self) -> String (required)\n// - describe_short(&self) -> String (default: first 20 chars of describe)\ntrait Describable {\n    todo!()\n}\n\n// Book struct: title, author, pages (u32)\nstruct Book {\n    todo!()\n}\n\n// Implement Describable for Book\n// describe() should return: \"'<title>' by <author> (<pages> pages)\"\n\n// Movie struct: title, director, minutes (u32)\nstruct Movie {\n    todo!()\n}\n\n// Implement Describable for Movie\n// describe() should return: \"'<title>' directed by <director> (<minutes> min)\"\n\nfn main() {\n    let book = Book {\n        title: String::from(\"The Rust Programming Language\"),\n        author: String::from(\"Steve Klabnik\"),\n        pages: 560,\n    };\n\n    let movie = Movie {\n        title: String::from(\"Inception\"),\n        director: String::from(\"Christopher Nolan\"),\n        minutes: 148,\n    };\n\n    println!(\"Book: {}\", book.describe());\n    println!(\"Book short: {}\", book.describe_short());\n    println!(\"Movie: {}\", movie.describe());\n    println!(\"Movie short: {}\", movie.describe_short());\n}\n",
+    "testCases": [
+        {
+            "description": "Book describe includes title",
+            "assertion": "{ let b = Book { title: \"Test\".into(), author: \"Auth\".into(), pages: 100 }; b.describe().contains(\"Test\") }"
+        },
+        {
+            "description": "Book describe includes author",
+            "assertion": "{ let b = Book { title: \"Test\".into(), author: \"Auth\".into(), pages: 100 }; b.describe().contains(\"Auth\") }"
+        },
+        {
+            "description": "Book describe includes pages",
+            "assertion": "{ let b = Book { title: \"Test\".into(), author: \"Auth\".into(), pages: 100 }; b.describe().contains(\"100\") }"
+        },
+        {
+            "description": "Movie describe includes director",
+            "assertion": "{ let m = Movie { title: \"Film\".into(), director: \"Dir\".into(), minutes: 90 }; m.describe().contains(\"Dir\") }"
+        },
+        {
+            "description": "describe_short returns max 20 chars",
+            "assertion": "{ let b = Book { title: \"Very Long Title Here\".into(), author: \"Author\".into(), pages: 100 }; b.describe_short().len() <= 20 }"
+        }
+    ],
+    "hints": [
+        "The trait definition needs: fn describe(&self) -> String;",
+        "Default implementation: fn describe_short(&self) -> String { self.describe().chars().take(20).collect() }",
+        "Book struct: title: String, author: String, pages: u32",
+        "Use format!() to create the description strings",
+        "impl Describable for Book { fn describe(&self) -> String { ... } }"
+    ]
+}

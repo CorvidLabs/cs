@@ -1,0 +1,17 @@
+{
+    "id": "03-html-forms-tables",
+    "title": "HTML Forms and Tables",
+    "description": "Master HTML forms for user input and tables for structured data. Learn form validation, accessibility, and proper table markup.",
+    "order": 3,
+    "lessons": [
+        "01-form-basics",
+        "02-input-types",
+        "03-form-validation",
+        "04-tables"
+    ],
+    "exercises": [
+        "01-contact-form",
+        "02-registration-form",
+        "03-data-table"
+    ]
+}

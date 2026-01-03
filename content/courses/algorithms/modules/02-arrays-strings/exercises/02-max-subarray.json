@@ -1,0 +1,44 @@
+{
+  "id": "02-max-subarray",
+  "title": "Maximum Sum Subarray",
+  "description": "Find the contiguous subarray with the largest sum using the sliding window / Kadane's algorithm approach.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def max_subarray_sum(nums: list[int]) -> int:\n    \"\"\"\n    Find the maximum sum of any contiguous subarray.\n    \n    Use Kadane's algorithm: maintain a running sum, resetting when\n    it becomes negative.\n    \n    Args:\n        nums: A list of integers (can include negatives)\n        \n    Returns:\n        The maximum sum of any contiguous subarray\n        \n    Example:\n        Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]\n        Output: 6  # Subarray [4, -1, 2, 1] has the largest sum\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def max_subarray_sum(nums: list[int]) -> int:\n    if not nums:\n        return 0\n    \n    max_sum = nums[0]\n    current_sum = nums[0]\n    \n    for i in range(1, len(nums)):\n        # Either extend the current subarray or start fresh\n        current_sum = max(nums[i], current_sum + nums[i])\n        max_sum = max(max_sum, current_sum)\n    \n    return max_sum",
+  "testCases": [
+    {
+      "input": {"nums": [-2, 1, -3, 4, -1, 2, 1, -5, 4]},
+      "expected": 6,
+      "description": "Classic case: [4, -1, 2, 1] = 6"
+    },
+    {
+      "input": {"nums": [1]},
+      "expected": 1,
+      "description": "Single element"
+    },
+    {
+      "input": {"nums": [5, 4, -1, 7, 8]},
+      "expected": 23,
+      "description": "All elements sum to max"
+    },
+    {
+      "input": {"nums": [-1, -2, -3]},
+      "expected": -1,
+      "description": "All negative: pick least negative"
+    },
+    {
+      "input": {"nums": [1, 2, 3, -2, 5]},
+      "expected": 9,
+      "description": "Sum of all: 1+2+3-2+5 = 9"
+    }
+  ],
+  "hints": [
+    "Track two values: the current subarray sum and the maximum sum seen so far",
+    "At each position, decide: extend the current subarray or start a new one",
+    "Start fresh when current_sum + nums[i] < nums[i] (i.e., current_sum < 0)",
+    "Initialize both values with the first element to handle all-negative arrays"
+  ],
+  "explanation": "Kadane's algorithm solves this in O(n) time. The key insight is that at each position, we decide whether to extend our current subarray or start a new one. We extend if current_sum + nums[i] >= nums[i], which simplifies to current_sum >= 0. We track the maximum sum seen at any point. The algorithm handles all-negative arrays by initializing with the first element rather than 0."
+}

@@ -1,0 +1,49 @@
+{
+  "id": "01-kth-largest",
+  "title": "Kth Largest Element in an Array",
+  "description": "Find the kth largest element in an unsorted array using a heap.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def find_kth_largest(nums: list[int], k: int) -> int:\n    \"\"\"\n    Find the kth largest element in an unsorted array.\n    \n    Note: It is the kth largest in sorted order, not the kth distinct element.\n    \n    Args:\n        nums: List of integers\n        k: The k value (1 <= k <= len(nums))\n        \n    Returns:\n        The kth largest element\n        \n    Example:\n        Input: nums = [3, 2, 1, 5, 6, 4], k = 2\n        Output: 5\n        Explanation: Sorted: [1, 2, 3, 4, 5, 6], 2nd largest is 5\n        \n        Input: nums = [3, 2, 3, 1, 2, 4, 5, 5, 6], k = 4\n        Output: 4\n        Explanation: Sorted: [1, 2, 2, 3, 3, 4, 5, 5, 6], 4th largest is 4\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "import heapq\n\ndef find_kth_largest(nums: list[int], k: int) -> int:\n    # Use a min-heap of size k\n    # The root will be the kth largest\n    heap = []\n    \n    for num in nums:\n        heapq.heappush(heap, num)\n        if len(heap) > k:\n            heapq.heappop(heap)\n    \n    return heap[0]",
+  "testCases": [
+    {
+      "input": {"nums": [3, 2, 1, 5, 6, 4], "k": 2},
+      "expected": 5,
+      "description": "Standard case"
+    },
+    {
+      "input": {"nums": [3, 2, 3, 1, 2, 4, 5, 5, 6], "k": 4},
+      "expected": 4,
+      "description": "Array with duplicates"
+    },
+    {
+      "input": {"nums": [1], "k": 1},
+      "expected": 1,
+      "description": "Single element"
+    },
+    {
+      "input": {"nums": [7, 6, 5, 4, 3, 2, 1], "k": 5},
+      "expected": 3,
+      "description": "Descending array"
+    },
+    {
+      "input": {"nums": [1, 2, 3, 4, 5, 6, 7], "k": 3},
+      "expected": 5,
+      "description": "Ascending array"
+    },
+    {
+      "input": {"nums": [5, 5, 5, 5, 5], "k": 3},
+      "expected": 5,
+      "description": "All same elements"
+    }
+  ],
+  "hints": [
+    "Consider using a min-heap of size k",
+    "If you maintain only the k largest elements in a min-heap, what is at the root?",
+    "Python's heapq module provides heap operations",
+    "An alternative approach uses quickselect for O(n) average time"
+  ],
+  "explanation": "We maintain a min-heap of size k. As we process each number, we add it to the heap. If the heap size exceeds k, we remove the smallest element (heap root). After processing all numbers, the heap contains the k largest elements, with the smallest of these (the kth largest) at the root. Time complexity is O(n log k) and space complexity is O(k)."
+}

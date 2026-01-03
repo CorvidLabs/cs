@@ -1,0 +1,17 @@
+{
+    "id": "04-functions",
+    "title": "Functions",
+    "description": "Master the art of writing reusable code with functions. Learn to define functions, work with parameters and return values, and understand scope to write clean, modular programs.",
+    "order": 4,
+    "lessons": [
+        "01-defining-functions",
+        "02-parameters-arguments",
+        "03-return-values",
+        "04-scope-and-variables"
+    ],
+    "exercises": [
+        "01-calculator-functions",
+        "02-string-utilities",
+        "03-math-functions"
+    ]
+}

@@ -1,0 +1,57 @@
+{
+    "id": "03-shopping-cart",
+    "title": "Shopping Cart",
+    "description": "Build a shopping cart using arrays and objects with immutable operations.\n\n## Requirements\n\n1. Create a function `addItem(cart, item)` that:\n   - Returns a new cart array with the item added\n   - If item already exists (same id), increase its quantity instead\n   - Item structure: `{ id, name, price, quantity }`\n\n2. Create a function `removeItem(cart, itemId)` that:\n   - Returns a new cart array without the item\n   - Returns original cart if item not found\n\n3. Create a function `updateQuantity(cart, itemId, quantity)` that:\n   - Returns a new cart with updated quantity\n   - If quantity is 0 or less, remove the item\n\n4. Create a function `getCartTotal(cart)` that:\n   - Returns the total price of all items (price * quantity for each)\n\n5. Create a function `getCartSummary(cart)` that returns an object:\n   - `itemCount`: total number of unique items\n   - `totalQuantity`: sum of all quantities\n   - `total`: total price\n\n## Expected Output\n\n```javascript\nlet cart = [];\ncart = addItem(cart, { id: 1, name: \"Apple\", price: 1.50, quantity: 3 });\ncart = addItem(cart, { id: 2, name: \"Banana\", price: 0.75, quantity: 2 });\n// cart has 2 items\n\ncart = addItem(cart, { id: 1, name: \"Apple\", price: 1.50, quantity: 2 });\n// Apple quantity is now 5\n\ngetCartTotal(cart);  // 9.00 (5*1.50 + 2*0.75)\n\ngetCartSummary(cart);\n// { itemCount: 2, totalQuantity: 7, total: 9.00 }\n```",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "function addItem(cart, item) {\n    // Check if item exists (same id)\n    // If exists, return new cart with increased quantity\n    // If not, return new cart with item added\n    \n}\n\nfunction removeItem(cart, itemId) {\n    // Return new cart without the item\n    // Hint: Use filter\n    \n}\n\nfunction updateQuantity(cart, itemId, quantity) {\n    // If quantity <= 0, remove item\n    // Otherwise, return new cart with updated quantity\n    // Hint: Use map to transform the matching item\n    \n}\n\nfunction getCartTotal(cart) {\n    // Sum of (price * quantity) for each item\n    // Hint: Use reduce\n    \n}\n\nfunction getCartSummary(cart) {\n    // Return object with itemCount, totalQuantity, total\n    \n}\n\n// Test your functions\nlet cart = [];\n\ncart = addItem(cart, { id: 1, name: \"Apple\", price: 1.50, quantity: 3 });\nconsole.log(\"After adding apples:\", cart);\n\ncart = addItem(cart, { id: 2, name: \"Banana\", price: 0.75, quantity: 2 });\nconsole.log(\"After adding bananas:\", cart);\n\ncart = addItem(cart, { id: 1, name: \"Apple\", price: 1.50, quantity: 2 });\nconsole.log(\"After adding more apples:\", cart);\n// Apple quantity should be 5\n\nconsole.log(\"Cart total:\", getCartTotal(cart));\n// Expected: 9.00\n\nconsole.log(\"Cart summary:\", getCartSummary(cart));\n// Expected: { itemCount: 2, totalQuantity: 7, total: 9 }\n\ncart = updateQuantity(cart, 1, 2);\nconsole.log(\"After updating apple quantity to 2:\", cart);\n\ncart = removeItem(cart, 2);\nconsole.log(\"After removing bananas:\", cart);\n",
+    "testCases": [
+        {
+            "description": "addItem should add new item to empty cart",
+            "assertion": "addItem([], {id:1,name:'A',price:1,quantity:1}).length === 1"
+        },
+        {
+            "description": "addItem should increase quantity for existing item",
+            "assertion": "(function() { const c = addItem([{id:1,name:'A',price:1,quantity:2}], {id:1,name:'A',price:1,quantity:3}); return c.length === 1 && c[0].quantity === 5; })()"
+        },
+        {
+            "description": "addItem should not modify original cart",
+            "assertion": "(function() { const orig = [{id:1,name:'A',price:1,quantity:1}]; addItem(orig, {id:2,name:'B',price:2,quantity:1}); return orig.length === 1; })()"
+        },
+        {
+            "description": "removeItem should remove item by id",
+            "assertion": "removeItem([{id:1,name:'A',price:1,quantity:1},{id:2,name:'B',price:2,quantity:1}], 1).length === 1"
+        },
+        {
+            "description": "updateQuantity should update quantity",
+            "assertion": "updateQuantity([{id:1,name:'A',price:1,quantity:5}], 1, 3)[0].quantity === 3"
+        },
+        {
+            "description": "updateQuantity should remove item if quantity <= 0",
+            "assertion": "updateQuantity([{id:1,name:'A',price:1,quantity:5}], 1, 0).length === 0"
+        },
+        {
+            "description": "getCartTotal should calculate correct total",
+            "assertion": "getCartTotal([{id:1,name:'A',price:1.5,quantity:3},{id:2,name:'B',price:0.75,quantity:2}]) === 6"
+        },
+        {
+            "description": "getCartSummary should return correct itemCount",
+            "assertion": "getCartSummary([{id:1,name:'A',price:1,quantity:3},{id:2,name:'B',price:2,quantity:2}]).itemCount === 2"
+        },
+        {
+            "description": "getCartSummary should return correct totalQuantity",
+            "assertion": "getCartSummary([{id:1,name:'A',price:1,quantity:3},{id:2,name:'B',price:2,quantity:2}]).totalQuantity === 5"
+        },
+        {
+            "description": "getCartSummary should return correct total",
+            "assertion": "getCartSummary([{id:1,name:'A',price:2,quantity:3},{id:2,name:'B',price:1,quantity:2}]).total === 8"
+        }
+    ],
+    "hints": [
+        "Use find() to check if item exists: cart.find(i => i.id === item.id)",
+        "Use map() to update specific item: cart.map(i => i.id === id ? {...i, quantity} : i)",
+        "Use filter() to remove: cart.filter(i => i.id !== itemId)",
+        "Use reduce() for totals: cart.reduce((sum, i) => sum + i.price * i.quantity, 0)",
+        "Always return new arrays/objects - never mutate the original"
+    ]
+}

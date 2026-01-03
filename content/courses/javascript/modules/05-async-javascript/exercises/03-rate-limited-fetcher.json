@@ -1,0 +1,52 @@
+{
+    "id": "03-rate-limited-fetcher",
+    "title": "Rate-Limited Fetcher",
+    "description": "Build a rate-limited fetcher that processes requests with controlled concurrency.\n\n## Requirements\n\n1. Create a function `createRateLimiter(maxConcurrent)` that:\n   - Limits how many promises can run at once\n   - Queues additional requests until slots are available\n\n2. The limiter should have:\n   - `add(asyncFn)` - adds a function to the queue, returns a promise for its result\n   - `getPending()` - returns number of pending (queued) tasks\n   - `getActive()` - returns number of currently running tasks\n\n3. Behavior:\n   - If under the limit, execute immediately\n   - If at the limit, queue and wait\n   - When a task completes, start the next queued task\n\n## Expected Output\n\n```javascript\nconst limiter = createRateLimiter(2);\n\n// These start immediately (under limit)\nconst p1 = limiter.add(() => delay(100).then(() => 'A'));\nconst p2 = limiter.add(() => delay(100).then(() => 'B'));\n\nlimiter.getActive(); // 2\nlimiter.getPending(); // 0\n\n// This gets queued\nconst p3 = limiter.add(() => delay(100).then(() => 'C'));\n\nlimiter.getActive(); // 2\nlimiter.getPending(); // 1\n\n// When p1 or p2 completes, p3 starts\nawait Promise.all([p1, p2, p3]); // ['A', 'B', 'C']\n```",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "function createRateLimiter(maxConcurrent) {\n    let active = 0;\n    const queue = [];\n\n    // Process next item in queue if possible\n    function processQueue() {\n        // If queue is empty or at limit, do nothing\n        // Otherwise, take next item from queue and run it\n        \n    }\n\n    // Run a task\n    async function runTask(asyncFn, resolve, reject) {\n        active++;\n        try {\n            const result = await asyncFn();\n            resolve(result);\n        } catch (error) {\n            reject(error);\n        } finally {\n            active--;\n            processQueue();  // Try to start next queued task\n        }\n    }\n\n    // Add a task to the limiter\n    function add(asyncFn) {\n        return new Promise((resolve, reject) => {\n            // If under limit, run immediately\n            // Otherwise, add to queue\n            \n        });\n    }\n\n    // Get number of pending (queued) tasks\n    function getPending() {\n        return queue.length;\n    }\n\n    // Get number of active (running) tasks\n    function getActive() {\n        return active;\n    }\n\n    return {\n        add,\n        getPending,\n        getActive\n    };\n}\n\n// Helper\nfunction delay(ms) {\n    return new Promise(resolve => setTimeout(resolve, ms));\n}\n\n// Test your implementation\nasync function test() {\n    const limiter = createRateLimiter(2);\n    const results = [];\n    const log = (msg) => results.push({ time: Date.now(), msg });\n\n    const start = Date.now();\n\n    const p1 = limiter.add(async () => {\n        log('A start');\n        await delay(100);\n        log('A end');\n        return 'A';\n    });\n\n    const p2 = limiter.add(async () => {\n        log('B start');\n        await delay(100);\n        log('B end');\n        return 'B';\n    });\n\n    console.log('Active after 2:', limiter.getActive());  // 2\n    console.log('Pending after 2:', limiter.getPending()); // 0\n\n    const p3 = limiter.add(async () => {\n        log('C start');\n        await delay(100);\n        log('C end');\n        return 'C';\n    });\n\n    console.log('Active after 3:', limiter.getActive());  // 2\n    console.log('Pending after 3:', limiter.getPending()); // 1\n\n    const values = await Promise.all([p1, p2, p3]);\n    console.log('Results:', values);  // ['A', 'B', 'C']\n    console.log('Final active:', limiter.getActive());  // 0\n    console.log('Final pending:', limiter.getPending()); // 0\n}\n\ntest();\n",
+    "testCases": [
+        {
+            "description": "createRateLimiter returns object with add, getPending, getActive",
+            "assertion": "(function() { const l = createRateLimiter(1); return typeof l.add === 'function' && typeof l.getPending === 'function' && typeof l.getActive === 'function'; })()"
+        },
+        {
+            "description": "Initial active count is 0",
+            "assertion": "createRateLimiter(2).getActive() === 0"
+        },
+        {
+            "description": "Initial pending count is 0",
+            "assertion": "createRateLimiter(2).getPending() === 0"
+        },
+        {
+            "description": "add() returns a Promise",
+            "assertion": "createRateLimiter(1).add(() => Promise.resolve(1)) instanceof Promise"
+        },
+        {
+            "description": "add() starts task immediately when under limit",
+            "assertion": "(function() { const l = createRateLimiter(2); l.add(() => new Promise(() => {})); return l.getActive() === 1; })()"
+        },
+        {
+            "description": "add() queues task when at limit",
+            "assertion": "(function() { const l = createRateLimiter(1); l.add(() => new Promise(() => {})); l.add(() => new Promise(() => {})); return l.getActive() === 1 && l.getPending() === 1; })()"
+        },
+        {
+            "description": "add() resolves with the task result",
+            "assertion": "(async () => { const l = createRateLimiter(1); const result = await l.add(() => Promise.resolve('test')); return result === 'test'; })()"
+        },
+        {
+            "description": "Queued tasks run after earlier tasks complete",
+            "assertion": "(async () => { const l = createRateLimiter(1); const order = []; await Promise.all([l.add(async () => { order.push('A'); }), l.add(async () => { order.push('B'); })]); return order[0] === 'A' && order[1] === 'B'; })()"
+        },
+        {
+            "description": "Active count returns to 0 after all tasks complete",
+            "assertion": "(async () => { const l = createRateLimiter(2); await Promise.all([l.add(() => Promise.resolve(1)), l.add(() => Promise.resolve(2))]); return l.getActive() === 0; })()"
+        }
+    ],
+    "hints": [
+        "Queue stores objects like { asyncFn, resolve, reject }",
+        "In add(): if (active < maxConcurrent) runTask(...) else queue.push(...)",
+        "In processQueue(): if (queue.length > 0 && active < maxConcurrent) { const { asyncFn, resolve, reject } = queue.shift(); runTask(...) }",
+        "Use finally in runTask to always decrement active and processQueue"
+    ]
+}

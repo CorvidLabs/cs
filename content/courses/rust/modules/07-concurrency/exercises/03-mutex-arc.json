@@ -1,0 +1,41 @@
+{
+    "id": "03-mutex-arc",
+    "title": "Shared State with Mutex and Arc",
+    "description": "Practice sharing mutable state between threads safely.\n\n## Requirements\n\n1. Implement `parallel_counter(increments: usize, num_threads: usize) -> usize`\n   - Create a shared counter starting at 0\n   - Each thread increments the counter (increments/num_threads) times\n   - Return the final counter value\n\n2. Implement `parallel_collect(items: Vec<i32>, num_threads: usize) -> Vec<i32>`\n   - Process items across multiple threads\n   - Each thread doubles its items and adds to shared result\n   - Return the collected (unordered) results\n\n## Examples\n\n- `parallel_counter(1000, 4)` returns `1000`\n- `parallel_collect(vec![1,2,3,4], 2)` returns `[2,4,6,8]` (order may vary)",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "use std::sync::{Arc, Mutex};\nuse std::thread;\n\n// Increment a shared counter from multiple threads\nfn parallel_counter(increments: usize, num_threads: usize) -> usize {\n    todo!()\n}\n\n// Process items in parallel, collect results into shared vec\n// Results may be in any order\nfn parallel_collect(items: Vec<i32>, num_threads: usize) -> Vec<i32> {\n    todo!()\n}\n\nfn main() {\n    // Test parallel_counter\n    let count = parallel_counter(10000, 4);\n    println!(\"Counter result: {}\", count);\n\n    // Test parallel_collect\n    let items = vec![1, 2, 3, 4, 5, 6, 7, 8];\n    let mut results = parallel_collect(items, 4);\n    results.sort();  // Sort for consistent display\n    println!(\"Collected results: {:?}\", results);\n}\n",
+    "testCases": [
+        {
+            "description": "parallel_counter counts correctly",
+            "assertion": "parallel_counter(1000, 4) == 1000"
+        },
+        {
+            "description": "parallel_counter works with single thread",
+            "assertion": "parallel_counter(100, 1) == 100"
+        },
+        {
+            "description": "parallel_counter handles zero increments",
+            "assertion": "parallel_counter(0, 4) == 0"
+        },
+        {
+            "description": "parallel_collect processes all items",
+            "assertion": "{ let mut r = parallel_collect(vec![1, 2, 3, 4], 2); r.sort(); r == vec![2, 4, 6, 8] }"
+        },
+        {
+            "description": "parallel_collect handles single thread",
+            "assertion": "{ let mut r = parallel_collect(vec![1, 2, 3], 1); r.sort(); r == vec![2, 4, 6] }"
+        },
+        {
+            "description": "parallel_collect handles empty input",
+            "assertion": "parallel_collect(vec![], 4).is_empty()"
+        }
+    ],
+    "hints": [
+        "Create shared state with Arc::new(Mutex::new(value))",
+        "Clone the Arc for each thread before spawning",
+        "Lock the mutex with .lock().unwrap() to access data",
+        "Keep lock scope as small as possible to avoid contention",
+        "Use chunks() to divide items among threads"
+    ]
+}

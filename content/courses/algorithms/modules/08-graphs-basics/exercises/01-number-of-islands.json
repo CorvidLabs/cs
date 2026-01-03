@@ -1,0 +1,39 @@
+{
+  "id": "01-number-of-islands",
+  "title": "Number of Islands",
+  "description": "Count the number of islands in a 2D grid. An island is surrounded by water and formed by connecting adjacent lands horizontally or vertically.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def num_islands(grid: list[list[str]]) -> int:\n    \"\"\"\n    Count the number of islands in a grid.\n    \n    '1' represents land, '0' represents water.\n    An island is a group of connected '1's (horizontally or vertically).\n    \n    Args:\n        grid: 2D grid of '1's and '0's\n        \n    Returns:\n        Number of distinct islands\n        \n    Example:\n        Input:\n        [[\"1\",\"1\",\"0\",\"0\",\"0\"],\n         [\"1\",\"1\",\"0\",\"0\",\"0\"],\n         [\"0\",\"0\",\"1\",\"0\",\"0\"],\n         [\"0\",\"0\",\"0\",\"1\",\"1\"]]\n        Output: 3\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def num_islands(grid: list[list[str]]) -> int:\n    if not grid:\n        return 0\n    \n    rows, cols = len(grid), len(grid[0])\n    count = 0\n    \n    def dfs(r, c):\n        if r < 0 or r >= rows or c < 0 or c >= cols:\n            return\n        if grid[r][c] != '1':\n            return\n        \n        grid[r][c] = '0'  # Mark as visited\n        dfs(r + 1, c)\n        dfs(r - 1, c)\n        dfs(r, c + 1)\n        dfs(r, c - 1)\n    \n    for r in range(rows):\n        for c in range(cols):\n            if grid[r][c] == '1':\n                dfs(r, c)\n                count += 1\n    \n    return count",
+  "testCases": [
+    {
+      "input": {"grid": [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]},
+      "expected": 1,
+      "description": "One large island"
+    },
+    {
+      "input": {"grid": [["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]},
+      "expected": 3,
+      "description": "Three separate islands"
+    },
+    {
+      "input": {"grid": [["0","0"],["0","0"]]},
+      "expected": 0,
+      "description": "No islands"
+    },
+    {
+      "input": {"grid": [["1"]]},
+      "expected": 1,
+      "description": "Single cell island"
+    }
+  ],
+  "hints": [
+    "Use DFS to explore and mark all connected land cells",
+    "When you find a '1', do DFS to mark all connected '1's as visited",
+    "Increment count each time you start a new DFS",
+    "Mark visited cells by changing '1' to '0' or use a visited set"
+  ],
+  "explanation": "We iterate through the grid. When we find a '1' (land), we start a DFS to explore and mark all connected land cells. Each DFS call marks one complete island. We count how many times we initiate a DFS from unvisited land cells. Time: O(rows * cols), Space: O(rows * cols) for recursion stack in worst case."
+}

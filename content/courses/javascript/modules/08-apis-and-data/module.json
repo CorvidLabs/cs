@@ -1,0 +1,17 @@
+{
+    "id": "08-apis-and-data",
+    "title": "APIs and Data",
+    "description": "Learn to work with web APIs and data in JavaScript. Master the Fetch API, understand REST conventions, handle JSON data, and implement data validation.",
+    "order": 8,
+    "lessons": [
+        "01-fetch-api",
+        "02-rest-apis",
+        "03-json-handling",
+        "04-data-validation"
+    ],
+    "exercises": [
+        "01-api-client",
+        "02-data-transformer",
+        "03-crud-operations"
+    ]
+}

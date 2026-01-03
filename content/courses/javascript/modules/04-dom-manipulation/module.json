@@ -1,0 +1,17 @@
+{
+    "id": "04-dom-manipulation",
+    "title": "DOM Manipulation",
+    "description": "Learn to interact with web pages using the Document Object Model. Select elements, handle events, modify content, and build dynamic user interfaces.",
+    "order": 4,
+    "lessons": [
+        "01-dom-selection",
+        "02-events",
+        "03-dom-modification",
+        "04-event-delegation"
+    ],
+    "exercises": [
+        "01-todo-list",
+        "02-color-picker",
+        "03-accordion"
+    ]
+}

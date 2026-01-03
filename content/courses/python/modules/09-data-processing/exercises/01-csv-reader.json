@@ -1,0 +1,32 @@
+{
+    "id": "01-csv-reader",
+    "title": "Student Grade Calculator",
+    "description": "Parse CSV data and calculate student grade averages.\n\n## Requirements\n\n1. The variable `csv_data` contains CSV-formatted student grades\n2. Parse the CSV data using the `csv` module with `csv.DictReader`\n3. Calculate the average grade for each student\n4. Store the results in a list called `results` containing dictionaries with 'name' and 'average' keys\n5. Round averages to 1 decimal place\n\n## Input Data\n\nThe `csv_data` variable contains:\n```\nname,math,science,english\nAlice,85,90,88\nBob,78,82,85\nCarol,92,95,90\n```\n\n## Expected Output\n\n`results` should be:\n```python\n[\n    {'name': 'Alice', 'average': 87.7},\n    {'name': 'Bob', 'average': 81.7},\n    {'name': 'Carol', 'average': 92.3}\n]\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "import csv\nfrom io import StringIO\n\n# CSV data as a string (simulating a file)\ncsv_data = \"\"\"name,math,science,english\nAlice,85,90,88\nBob,78,82,85\nCarol,92,95,90\"\"\"\n\n# Create a file-like object from the string\ncsv_file = StringIO(csv_data)\n\n# TODO: Use csv.DictReader to read the data\nreader = None  # Replace with csv.DictReader(csv_file)\n\n# TODO: Calculate average for each student\nresults = []  # Should contain {'name': ..., 'average': ...} for each student\n\n# Your code here:\n\n\n# Print results to verify\nfor student in results:\n    print(f\"{student['name']}: {student['average']}\")\n",
+    "testCases": [
+        {
+            "description": "results should be a list with 3 items",
+            "assertion": "isinstance(results, list) and len(results) == 3"
+        },
+        {
+            "description": "Alice's average should be 87.7",
+            "assertion": "results[0]['name'] == 'Alice' and results[0]['average'] == 87.7"
+        },
+        {
+            "description": "Bob's average should be 81.7",
+            "assertion": "results[1]['name'] == 'Bob' and results[1]['average'] == 81.7"
+        },
+        {
+            "description": "Carol's average should be 92.3",
+            "assertion": "results[2]['name'] == 'Carol' and results[2]['average'] == 92.3"
+        }
+    ],
+    "hints": [
+        "Use csv.DictReader(csv_file) to create the reader",
+        "Each row is a dictionary with keys: 'name', 'math', 'science', 'english'",
+        "Convert grade strings to integers: int(row['math'])",
+        "Use round(value, 1) to round to 1 decimal place"
+    ]
+}

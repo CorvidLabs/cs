@@ -1,0 +1,56 @@
+{
+    "id": "02-registration-form",
+    "title": "Registration Form",
+    "description": "Create a registration form with various input types and fieldsets.\n\n## Requirements\n\n1. Create a `<form>` with id=\"registration-form\"\n\n2. First `<fieldset>` with `<legend>` \"Account Information\":\n   - Username: text input, id=\"username\", required, minlength=\"3\"\n   - Password: password input, id=\"password\", required, minlength=\"8\"\n   - Email: email input, id=\"email\", required\n\n3. Second `<fieldset>` with `<legend>` \"Personal Details\":\n   - Date of Birth: date input, id=\"dob\"\n   - Country: select dropdown, id=\"country\", with options:\n     - \"Select country\" (value=\"\", disabled, selected)\n     - \"United States\" (value=\"us\")\n     - \"Canada\" (value=\"ca\")\n     - \"United Kingdom\" (value=\"uk\")\n\n4. Terms checkbox: id=\"terms\", required, with label \"I agree to the terms\"\n\n5. Submit button: \"Create Account\"",
+    "order": 2,
+    "language": "html",
+    "starterCode": "<!-- Create a registration form -->\n<form id=\"registration-form\">\n    <!-- Account Information fieldset -->\n    <fieldset>\n        <legend>Account Information</legend>\n        \n    </fieldset>\n\n    <!-- Personal Details fieldset -->\n    <fieldset>\n        <legend>Personal Details</legend>\n        \n    </fieldset>\n\n    <!-- Terms checkbox -->\n    <div class=\"form-group\">\n        \n    </div>\n\n    <!-- Submit button -->\n    \n</form>",
+    "testCases": [
+        {
+            "description": "Form should have id=\"registration-form\"",
+            "assertion": "document.querySelector('form#registration-form') !== null"
+        },
+        {
+            "description": "Form should have two fieldsets",
+            "assertion": "document.querySelectorAll('form fieldset').length === 2"
+        },
+        {
+            "description": "First fieldset should have legend \"Account Information\"",
+            "assertion": "document.querySelector('form fieldset:first-of-type legend')?.textContent?.includes('Account Information')"
+        },
+        {
+            "description": "Username input should have minlength=\"3\"",
+            "assertion": "document.querySelector('input#username')?.getAttribute('minlength') === '3'"
+        },
+        {
+            "description": "Password input should have type=\"password\" and minlength=\"8\"",
+            "assertion": "document.querySelector('input#password[type=\"password\"]')?.getAttribute('minlength') === '8'"
+        },
+        {
+            "description": "Form should have a date input for DOB",
+            "assertion": "document.querySelector('input#dob[type=\"date\"]') !== null"
+        },
+        {
+            "description": "Form should have a country select with 4 options",
+            "assertion": "document.querySelectorAll('select#country option').length === 4"
+        },
+        {
+            "description": "First select option should be disabled",
+            "assertion": "document.querySelector('select#country option:first-child')?.hasAttribute('disabled')"
+        },
+        {
+            "description": "Terms checkbox should be required",
+            "assertion": "document.querySelector('input#terms[type=\"checkbox\"]')?.hasAttribute('required')"
+        },
+        {
+            "description": "Form should have a submit button",
+            "assertion": "document.querySelector('form button[type=\"submit\"]') !== null"
+        }
+    ],
+    "hints": [
+        "Use <fieldset> and <legend> to group related fields",
+        "Use minlength attribute for minimum length validation",
+        "For select: first option can be disabled with value=\"\"",
+        "Checkbox: <input type=\"checkbox\" id=\"terms\" required>"
+    ]
+}

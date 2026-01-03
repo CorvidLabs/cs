@@ -1,0 +1,17 @@
+{
+    "id": "07-oop",
+    "title": "Object-Oriented Programming",
+    "description": "Learn the principles of object-oriented programming in Python. Create classes, work with objects, understand inheritance, and design modular, reusable code.",
+    "order": 7,
+    "lessons": [
+        "01-classes-objects",
+        "02-methods-attributes",
+        "03-inheritance",
+        "04-special-methods"
+    ],
+    "exercises": [
+        "01-bank-account",
+        "02-shapes-hierarchy",
+        "03-inventory-system"
+    ]
+}

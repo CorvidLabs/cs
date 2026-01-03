@@ -1,0 +1,36 @@
+{
+    "id": "01-counter-app",
+    "title": "Counter App",
+    "description": "Build a simple counter app to practice @State and button actions.\n\n## Requirements\n\n1. Create a `CounterView` with:\n   - A `@State` variable `count` starting at 0\n   - A `Text` view displaying the current count with a large title font\n   - An \"Increment\" button that adds 1 to count\n   - A \"Decrement\" button that subtracts 1 from count\n   - A \"Reset\" button that sets count back to 0\n\n2. Layout:\n   - Center everything vertically in a VStack\n   - Use proper spacing between elements\n   - Style the buttons appropriately\n\n3. Bonus: Disable the decrement button when count is 0\n\n## Expected Behavior\n\n- Tapping Increment increases the count\n- Tapping Decrement decreases the count\n- Tapping Reset sets count to 0\n- The display updates immediately on each tap",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "import SwiftUI\n\nstruct CounterView: View {\n    // Add @State property for count\n    \n    var body: some View {\n        VStack(spacing: 20) {\n            // Display the count\n            \n            // Increment button\n            \n            // Decrement button\n            \n            // Reset button\n        }\n        .padding()\n    }\n}\n\n#Preview {\n    CounterView()\n}\n",
+    "testCases": [
+        {
+            "description": "CounterView should have @State count property",
+            "assertion": "CounterView has @State private var count"
+        },
+        {
+            "description": "Initial count should be 0",
+            "assertion": "count == 0 on initial render"
+        },
+        {
+            "description": "Increment should increase count",
+            "assertion": "after increment button tap, count increases by 1"
+        },
+        {
+            "description": "Decrement should decrease count",
+            "assertion": "after decrement button tap, count decreases by 1"
+        },
+        {
+            "description": "Reset should set count to 0",
+            "assertion": "after reset button tap, count becomes 0"
+        }
+    ],
+    "hints": [
+        "Declare state with: @State private var count = 0",
+        "Display with: Text(\"\\(count)\").font(.largeTitle)",
+        "Button action: Button(\"Increment\") { count += 1 }",
+        "Disable button with: .disabled(count == 0)"
+    ]
+}

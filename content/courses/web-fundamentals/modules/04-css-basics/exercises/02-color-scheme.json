@@ -1,0 +1,52 @@
+{
+    "id": "02-color-scheme",
+    "title": "Color Scheme",
+    "description": "Create a consistent color scheme using CSS custom properties.\n\n## Requirements\n\n1. Define CSS custom properties on `:root`:\n   - --color-primary: #2563eb\n   - --color-secondary: #64748b\n   - --color-background: #f8fafc\n   - --color-text: #1e293b\n   - --color-accent: #f59e0b\n\n2. Style the `.page` container:\n   - Background color: use var(--color-background)\n   - Color (text): use var(--color-text)\n   - Padding: 2rem\n\n3. Style `.btn-primary`:\n   - Background color: use var(--color-primary)\n   - Color: white\n   - Padding: 0.75rem 1.5rem\n   - Border: none\n   - Border radius: 0.375rem\n\n4. Style `.btn-secondary`:\n   - Background color: use var(--color-secondary)\n   - Color: white\n   - Same padding, border, and border-radius as primary\n\n5. Style `.accent-text`:\n   - Color: use var(--color-accent)",
+    "order": 2,
+    "language": "css",
+    "starterCode": "/* Define custom properties */\n:root {\n    \n}\n\n/* Page container */\n.page {\n    \n}\n\n/* Primary button */\n.btn-primary {\n    \n}\n\n/* Secondary button */\n.btn-secondary {\n    \n}\n\n/* Accent text */\n.accent-text {\n    \n}",
+    "testCases": [
+        {
+            "description": ":root should define --color-primary",
+            "assertion": "getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim() === '#2563eb'"
+        },
+        {
+            "description": ":root should define --color-background",
+            "assertion": "getComputedStyle(document.documentElement).getPropertyValue('--color-background').trim() === '#f8fafc'"
+        },
+        {
+            "description": ".page should use background from custom property",
+            "assertion": "getComputedStyle(document.querySelector('.page')).backgroundColor === 'rgb(248, 250, 252)'"
+        },
+        {
+            "description": ".page should have 2rem padding",
+            "assertion": "getComputedStyle(document.querySelector('.page')).paddingTop === '32px'"
+        },
+        {
+            "description": ".btn-primary should use primary color background",
+            "assertion": "getComputedStyle(document.querySelector('.btn-primary')).backgroundColor === 'rgb(37, 99, 235)'"
+        },
+        {
+            "description": ".btn-primary should have white text",
+            "assertion": "getComputedStyle(document.querySelector('.btn-primary')).color === 'rgb(255, 255, 255)'"
+        },
+        {
+            "description": ".btn-secondary should use secondary color background",
+            "assertion": "getComputedStyle(document.querySelector('.btn-secondary')).backgroundColor === 'rgb(100, 116, 139)'"
+        },
+        {
+            "description": "Buttons should have border-radius of 0.375rem",
+            "assertion": "getComputedStyle(document.querySelector('.btn-primary')).borderRadius === '6px'"
+        },
+        {
+            "description": ".accent-text should use accent color",
+            "assertion": "getComputedStyle(document.querySelector('.accent-text')).color === 'rgb(245, 158, 11)'"
+        }
+    ],
+    "hints": [
+        "Define properties with: --color-primary: #2563eb;",
+        "Use properties with: background-color: var(--color-primary);",
+        "Don't forget border: none on buttons",
+        "0.375rem equals 6px, 0.75rem equals 12px, 1.5rem equals 24px"
+    ]
+}

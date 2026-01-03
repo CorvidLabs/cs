@@ -1,0 +1,41 @@
+{
+    "id": "01-implement-display",
+    "title": "Implement Display Trait",
+    "description": "Practice implementing the Display trait for custom formatting.\n\n## Requirements\n\n1. Implement `Display` for `Temperature` struct\n   - Format as \"X.X C\" or \"X.X F\" based on the unit field\n   - Round to 1 decimal place\n\n2. Implement `Display` for `Color` enum\n   - RGB variant: \"rgb(R, G, B)\"\n   - Hex variant: \"#RRGGBB\" (uppercase hex)\n\n## Examples\n\n- `Temperature { value: 23.5, unit: Unit::Celsius }` displays as \"23.5 C\"\n- `Color::RGB(255, 128, 0)` displays as \"rgb(255, 128, 0)\"\n- `Color::Hex(0xFF8800)` displays as \"#FF8800\"",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "use std::fmt;\n\n#[derive(Debug)]\nenum Unit {\n    Celsius,\n    Fahrenheit,\n}\n\n#[derive(Debug)]\nstruct Temperature {\n    value: f64,\n    unit: Unit,\n}\n\n// Implement Display for Temperature\n// Format: \"X.X C\" or \"X.X F\"\nimpl fmt::Display for Temperature {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {\n        todo!()\n    }\n}\n\n#[derive(Debug)]\nenum Color {\n    RGB(u8, u8, u8),\n    Hex(u32),\n}\n\n// Implement Display for Color\n// RGB: \"rgb(R, G, B)\"\n// Hex: \"#RRGGBB\"\nimpl fmt::Display for Color {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {\n        todo!()\n    }\n}\n\nfn main() {\n    let temp_c = Temperature { value: 23.5, unit: Unit::Celsius };\n    let temp_f = Temperature { value: 98.6, unit: Unit::Fahrenheit };\n\n    println!(\"Temperature: {}\", temp_c);\n    println!(\"Temperature: {}\", temp_f);\n\n    let rgb = Color::RGB(255, 128, 0);\n    let hex = Color::Hex(0xFF8800);\n\n    println!(\"Color: {}\", rgb);\n    println!(\"Color: {}\", hex);\n}\n",
+    "testCases": [
+        {
+            "description": "Temperature Celsius displays correctly",
+            "assertion": "format!(\"{}\", Temperature { value: 23.5, unit: Unit::Celsius }) == \"23.5 C\""
+        },
+        {
+            "description": "Temperature Fahrenheit displays correctly",
+            "assertion": "format!(\"{}\", Temperature { value: 98.6, unit: Unit::Fahrenheit }) == \"98.6 F\""
+        },
+        {
+            "description": "Temperature rounds to one decimal",
+            "assertion": "format!(\"{}\", Temperature { value: 23.567, unit: Unit::Celsius }) == \"23.6 C\""
+        },
+        {
+            "description": "Color RGB displays correctly",
+            "assertion": "format!(\"{}\", Color::RGB(255, 128, 0)) == \"rgb(255, 128, 0)\""
+        },
+        {
+            "description": "Color Hex displays correctly",
+            "assertion": "format!(\"{}\", Color::Hex(0xFF8800)) == \"#FF8800\""
+        },
+        {
+            "description": "Color Hex pads with zeros",
+            "assertion": "format!(\"{}\", Color::Hex(0x0000FF)) == \"#0000FF\""
+        }
+    ],
+    "hints": [
+        "Use write!(f, ...) to write to the formatter",
+        "For Temperature, match on self.unit to get the suffix letter",
+        "Use {:.1} format specifier for one decimal place",
+        "For Hex color, use {:06X} to get uppercase hex with leading zeros",
+        "Match on the Color enum variants to extract values"
+    ]
+}

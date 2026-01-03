@@ -1,0 +1,52 @@
+{
+    "id": "01-grade-calculator",
+    "title": "Grade Calculator",
+    "description": "Create a function that converts a numeric score to a letter grade.\n\n## Requirements\n\n1. Create a function called `getGrade` that takes a numeric score (0-100)\n2. Return the letter grade based on:\n   - 90-100: \"A\"\n   - 80-89: \"B\"\n   - 70-79: \"C\"\n   - 60-69: \"D\"\n   - Below 60: \"F\"\n3. Handle edge cases:\n   - Return \"Invalid\" for scores below 0 or above 100\n\n## Expected Output\n\n- getGrade(95) returns \"A\"\n- getGrade(82) returns \"B\"\n- getGrade(71) returns \"C\"\n- getGrade(65) returns \"D\"\n- getGrade(42) returns \"F\"\n- getGrade(105) returns \"Invalid\"",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "// Create a function that returns the letter grade for a score\nfunction getGrade(score) {\n    // Your code here\n    \n}\n\n// Test your function\nconsole.log(getGrade(95));   // Should print: A\nconsole.log(getGrade(82));   // Should print: B\nconsole.log(getGrade(71));   // Should print: C\nconsole.log(getGrade(65));   // Should print: D\nconsole.log(getGrade(42));   // Should print: F\nconsole.log(getGrade(105));  // Should print: Invalid\nconsole.log(getGrade(-5));   // Should print: Invalid\n",
+    "testCases": [
+        {
+            "description": "getGrade(95) should return 'A'",
+            "assertion": "getGrade(95) === 'A'"
+        },
+        {
+            "description": "getGrade(90) should return 'A' (boundary)",
+            "assertion": "getGrade(90) === 'A'"
+        },
+        {
+            "description": "getGrade(82) should return 'B'",
+            "assertion": "getGrade(82) === 'B'"
+        },
+        {
+            "description": "getGrade(71) should return 'C'",
+            "assertion": "getGrade(71) === 'C'"
+        },
+        {
+            "description": "getGrade(65) should return 'D'",
+            "assertion": "getGrade(65) === 'D'"
+        },
+        {
+            "description": "getGrade(42) should return 'F'",
+            "assertion": "getGrade(42) === 'F'"
+        },
+        {
+            "description": "getGrade(0) should return 'F' (boundary)",
+            "assertion": "getGrade(0) === 'F'"
+        },
+        {
+            "description": "getGrade(105) should return 'Invalid'",
+            "assertion": "getGrade(105) === 'Invalid'"
+        },
+        {
+            "description": "getGrade(-5) should return 'Invalid'",
+            "assertion": "getGrade(-5) === 'Invalid'"
+        }
+    ],
+    "hints": [
+        "Use if...else if...else to check score ranges",
+        "Check for invalid scores first (< 0 or > 100)",
+        "Start with the highest grade and work down",
+        "Remember: 90 should get an 'A', so use >= for boundaries"
+    ]
+}

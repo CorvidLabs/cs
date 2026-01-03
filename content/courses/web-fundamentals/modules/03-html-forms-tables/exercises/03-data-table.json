@@ -1,0 +1,52 @@
+{
+    "id": "03-data-table",
+    "title": "Data Table",
+    "description": "Create a properly structured and accessible data table.\n\n## Requirements\n\n1. Create a `<table>` with:\n   - A `<caption>` with text \"Quarterly Sales Report\"\n   - A `<thead>` with header row\n   - A `<tbody>` with data rows\n   - A `<tfoot>` with totals row\n\n2. Table headers (4 columns):\n   - \"Product\" with scope=\"col\"\n   - \"Q1\" with scope=\"col\"\n   - \"Q2\" with scope=\"col\"\n   - \"Total\" with scope=\"col\"\n\n3. Table body (3 data rows):\n   - Widget: 150, 175, 325\n   - Gadget: 200, 225, 425\n   - Gizmo: 100, 150, 250\n\n4. Table footer:\n   - First cell: \"Totals\" with scope=\"row\"\n   - Sum cells: 450, 550, 1000\n\n## Expected Structure\n\n```html\n<table>\n    <caption>Quarterly Sales Report</caption>\n    <thead>...</thead>\n    <tbody>...</tbody>\n    <tfoot>...</tfoot>\n</table>\n```",
+    "order": 3,
+    "language": "html",
+    "starterCode": "<!-- Create a data table -->\n<table>\n    <!-- Add caption -->\n    \n    <!-- Add table header -->\n    <thead>\n        <tr>\n            \n        </tr>\n    </thead>\n\n    <!-- Add table body with 3 rows -->\n    <tbody>\n        \n    </tbody>\n\n    <!-- Add table footer with totals -->\n    <tfoot>\n        <tr>\n            \n        </tr>\n    </tfoot>\n</table>",
+    "testCases": [
+        {
+            "description": "Table should have a caption",
+            "assertion": "document.querySelector('table caption')?.textContent?.includes('Quarterly Sales Report')"
+        },
+        {
+            "description": "Table should have thead, tbody, and tfoot",
+            "assertion": "document.querySelector('table thead') !== null && document.querySelector('table tbody') !== null && document.querySelector('table tfoot') !== null"
+        },
+        {
+            "description": "Table header should have 4 th elements",
+            "assertion": "document.querySelectorAll('table thead th').length === 4"
+        },
+        {
+            "description": "Header cells should have scope=\"col\"",
+            "assertion": "[...document.querySelectorAll('table thead th')].every(th => th.getAttribute('scope') === 'col')"
+        },
+        {
+            "description": "Table body should have 3 rows",
+            "assertion": "document.querySelectorAll('table tbody tr').length === 3"
+        },
+        {
+            "description": "First body row should start with \"Widget\"",
+            "assertion": "document.querySelector('table tbody tr:first-child td:first-child')?.textContent?.includes('Widget') || document.querySelector('table tbody tr:first-child th')?.textContent?.includes('Widget')"
+        },
+        {
+            "description": "Table footer should have a row",
+            "assertion": "document.querySelector('table tfoot tr') !== null"
+        },
+        {
+            "description": "Footer first cell should have scope=\"row\" or contain Totals",
+            "assertion": "document.querySelector('table tfoot th[scope=\"row\"]') !== null || document.querySelector('table tfoot')?.textContent?.includes('Totals')"
+        },
+        {
+            "description": "Each body row should have 4 cells",
+            "assertion": "[...document.querySelectorAll('table tbody tr')].every(tr => tr.querySelectorAll('td, th').length === 4)"
+        }
+    ],
+    "hints": [
+        "Use <th scope=\"col\">Header</th> for column headers",
+        "Use <th scope=\"row\">Row Label</th> for row headers",
+        "Product names can be th with scope=\"row\" or td",
+        "Caption describes the table for accessibility"
+    ]
+}

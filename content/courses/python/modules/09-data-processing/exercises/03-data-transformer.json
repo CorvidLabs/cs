@@ -1,0 +1,36 @@
+{
+    "id": "03-data-transformer",
+    "title": "Sales Data Pipeline",
+    "description": "Process sales data using list comprehensions and aggregation.\n\n## Requirements\n\nGiven a list of sales transactions:\n\n1. Create `high_value_sales` - a list of sales where amount > 100 (use list comprehension)\n2. Create `product_totals` - a dictionary with total sales per product\n3. Create `top_product` - the name of the product with highest total sales\n4. Create `average_sale` - the average sale amount across all transactions (rounded to 2 decimal places)\n\n## Input Data\n\n```python\nsales = [\n    {'product': 'Widget', 'amount': 150},\n    {'product': 'Gadget', 'amount': 75},\n    {'product': 'Widget', 'amount': 200},\n    {'product': 'Gizmo', 'amount': 50},\n    {'product': 'Gadget', 'amount': 125},\n    {'product': 'Widget', 'amount': 80}\n]\n```\n\n## Expected Output\n\n- `high_value_sales`: 3 items (Widget 150, Widget 200, Gadget 125)\n- `product_totals`: {'Widget': 430, 'Gadget': 200, 'Gizmo': 50}\n- `top_product`: 'Widget'\n- `average_sale`: 113.33",
+    "order": 3,
+    "language": "python",
+    "starterCode": "# Sales data\nsales = [\n    {'product': 'Widget', 'amount': 150},\n    {'product': 'Gadget', 'amount': 75},\n    {'product': 'Widget', 'amount': 200},\n    {'product': 'Gizmo', 'amount': 50},\n    {'product': 'Gadget', 'amount': 125},\n    {'product': 'Widget', 'amount': 80}\n]\n\n# TODO: Filter sales > 100 using list comprehension\nhigh_value_sales = []  # List of sales dictionaries where amount > 100\n\n# TODO: Calculate total sales per product\nproduct_totals = {}  # {'Widget': total, 'Gadget': total, 'Gizmo': total}\n\n# TODO: Find the product with highest total sales\ntop_product = None  # Name of the top-selling product\n\n# TODO: Calculate average sale amount\naverage_sale = 0  # Average of all amounts, rounded to 2 decimal places\n\n# Your code here:\n\n\n# Print results to verify\nprint(f\"High value sales: {len(high_value_sales)}\")\nprint(f\"Product totals: {product_totals}\")\nprint(f\"Top product: {top_product}\")\nprint(f\"Average sale: ${average_sale}\")\n",
+    "testCases": [
+        {
+            "description": "high_value_sales should have 3 items",
+            "assertion": "len(high_value_sales) == 3"
+        },
+        {
+            "description": "All high_value_sales should have amount > 100",
+            "assertion": "all(s['amount'] > 100 for s in high_value_sales)"
+        },
+        {
+            "description": "product_totals should have Widget: 430, Gadget: 200, Gizmo: 50",
+            "assertion": "product_totals.get('Widget') == 430 and product_totals.get('Gadget') == 200 and product_totals.get('Gizmo') == 50"
+        },
+        {
+            "description": "top_product should be 'Widget'",
+            "assertion": "top_product == 'Widget'"
+        },
+        {
+            "description": "average_sale should be 113.33",
+            "assertion": "abs(average_sale - 113.33) < 0.01"
+        }
+    ],
+    "hints": [
+        "Use [s for s in sales if s['amount'] > 100] for filtering",
+        "Loop through sales and accumulate totals: product_totals[product] = product_totals.get(product, 0) + amount",
+        "Use max() with key parameter to find top product: max(product_totals, key=product_totals.get)",
+        "Average = sum of amounts / number of sales, use round(value, 2)"
+    ]
+}

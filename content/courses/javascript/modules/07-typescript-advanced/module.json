@@ -1,0 +1,17 @@
+{
+    "id": "07-typescript-advanced",
+    "title": "Advanced TypeScript",
+    "description": "Master advanced TypeScript features. Learn generics, utility types, type guards, and advanced patterns for building robust type-safe applications.",
+    "order": 7,
+    "lessons": [
+        "01-generics",
+        "02-utility-types",
+        "03-type-guards",
+        "04-advanced-patterns"
+    ],
+    "exercises": [
+        "01-generic-functions",
+        "02-utility-types-practice",
+        "03-type-safe-api"
+    ]
+}

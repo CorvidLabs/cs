@@ -1,0 +1,34 @@
+{
+    "id": "03-declarative-macro",
+    "title": "Declarative Macros",
+    "description": "Create useful declarative macros with macro_rules!\n\n## Requirements\n\n1. Create a `hashmap!` macro:\n   - Syntax: `hashmap!{ key1 => value1, key2 => value2 }`\n   - Returns a HashMap with the given key-value pairs\n   - Should handle zero or more pairs\n\n2. Create a `debug_print!` macro:\n   - Syntax: `debug_print!(expr1, expr2, ...)`\n   - Prints each expression with its name and value\n   - Example: `debug_print!(x, y)` prints \"x = 5, y = 10\"\n\n## Examples\n\n- `hashmap!{ \"a\" => 1, \"b\" => 2 }` creates HashMap\n- `debug_print!(1 + 1)` prints \"1 + 1 = 2\"",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "use std::collections::HashMap;\n\n// Create a HashMap from key => value pairs\nmacro_rules! hashmap {\n    // Your implementation here\n    () => {\n        todo!()\n    };\n}\n\n// Print expressions with their names and values\nmacro_rules! debug_print {\n    // Your implementation here\n    () => {\n        todo!()\n    };\n}\n\nfn main() {\n    // Test hashmap!\n    let map = hashmap! {\n        \"one\" => 1,\n        \"two\" => 2,\n        \"three\" => 3\n    };\n    println!(\"Map: {:?}\", map);\n\n    let empty: HashMap<&str, i32> = hashmap!{};\n    println!(\"Empty map: {:?}\", empty);\n\n    // Test debug_print!\n    let x = 5;\n    let y = 10;\n    debug_print!(x);\n    debug_print!(x, y);\n    debug_print!(x + y, x * y);\n}\n",
+    "testCases": [
+        {
+            "description": "hashmap! creates correct map",
+            "assertion": "{ let m = hashmap!{ \"a\" => 1 }; *m.get(\"a\").unwrap() == 1 }"
+        },
+        {
+            "description": "hashmap! handles multiple pairs",
+            "assertion": "{ let m = hashmap!{ \"a\" => 1, \"b\" => 2 }; m.len() == 2 }"
+        },
+        {
+            "description": "hashmap! handles empty",
+            "assertion": "{ let m: HashMap<&str, i32> = hashmap!{}; m.is_empty() }"
+        },
+        {
+            "description": "hashmap! works with different types",
+            "assertion": "{ let m = hashmap!{ 1 => \"one\", 2 => \"two\" }; m.get(&1) == Some(&\"one\") }"
+        }
+    ],
+    "hints": [
+        "For hashmap!, use pattern: $( $key:expr => $val:expr ),* $(,)?",
+        "The $(,)? allows optional trailing comma",
+        "Create HashMap::new(), then insert each pair in $( )* block",
+        "For debug_print!, use stringify!($expr) to get expression as string",
+        "Pattern for debug_print: $( $expr:expr ),+ for one or more expressions",
+        "Use $( println!(...) );+ to print each expression"
+    ]
+}

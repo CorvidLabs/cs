@@ -1,0 +1,56 @@
+{
+    "id": "01-calculator-functions",
+    "title": "Calculator Functions",
+    "description": "Create a set of calculator functions for basic arithmetic operations.\n\n## Requirements\n\n1. Define a function `add(a, b)` that returns the sum of a and b\n2. Define a function `subtract(a, b)` that returns a minus b\n3. Define a function `multiply(a, b)` that returns the product of a and b\n4. Define a function `divide(a, b)` that returns a divided by b, or None if b is 0\n\n## Example Usage\n\n```python\nadd(5, 3)       # Returns 8\nsubtract(10, 4) # Returns 6\nmultiply(6, 7)  # Returns 42\ndivide(15, 3)   # Returns 5.0\ndivide(10, 0)   # Returns None\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "# Define the add function\ndef add(a, b):\n    pass  # Replace with your code\n\n\n# Define the subtract function\ndef subtract(a, b):\n    pass  # Replace with your code\n\n\n# Define the multiply function\ndef multiply(a, b):\n    pass  # Replace with your code\n\n\n# Define the divide function (return None if dividing by zero)\ndef divide(a, b):\n    pass  # Replace with your code\n\n\n# Test your functions\nprint(f\"5 + 3 = {add(5, 3)}\")\nprint(f\"10 - 4 = {subtract(10, 4)}\")\nprint(f\"6 * 7 = {multiply(6, 7)}\")\nprint(f\"15 / 3 = {divide(15, 3)}\")\nprint(f\"10 / 0 = {divide(10, 0)}\")\n",
+    "testCases": [
+        {
+            "description": "add function exists",
+            "assertion": "callable(add)"
+        },
+        {
+            "description": "add(5, 3) returns 8",
+            "assertion": "add(5, 3) == 8"
+        },
+        {
+            "description": "add(-1, 1) returns 0",
+            "assertion": "add(-1, 1) == 0"
+        },
+        {
+            "description": "subtract function exists",
+            "assertion": "callable(subtract)"
+        },
+        {
+            "description": "subtract(10, 4) returns 6",
+            "assertion": "subtract(10, 4) == 6"
+        },
+        {
+            "description": "multiply function exists",
+            "assertion": "callable(multiply)"
+        },
+        {
+            "description": "multiply(6, 7) returns 42",
+            "assertion": "multiply(6, 7) == 42"
+        },
+        {
+            "description": "divide function exists",
+            "assertion": "callable(divide)"
+        },
+        {
+            "description": "divide(15, 3) returns 5.0",
+            "assertion": "divide(15, 3) == 5.0"
+        },
+        {
+            "description": "divide(10, 0) returns None",
+            "assertion": "divide(10, 0) is None"
+        }
+    ],
+    "hints": [
+        "Use the return statement to send a value back from each function",
+        "For divide, check if b == 0 before dividing",
+        "Use if/else in divide to handle the zero case",
+        "Don't forget to remove the 'pass' statement when adding your code"
+    ]
+}

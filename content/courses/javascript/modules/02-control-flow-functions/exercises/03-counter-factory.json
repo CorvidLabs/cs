@@ -1,0 +1,48 @@
+{
+    "id": "03-counter-factory",
+    "title": "Counter Factory",
+    "description": "Create a counter factory function that demonstrates closures.\n\n## Requirements\n\n1. Create a function `createCounter` that takes an optional starting value (default: 0)\n2. Return an object with these methods:\n   - `increment()` - increases count by 1 and returns new value\n   - `decrement()` - decreases count by 1 and returns new value\n   - `getValue()` - returns current count without changing it\n   - `reset()` - resets count to the initial value and returns it\n\n3. The count should be private (not directly accessible)\n4. Each counter created should be independent\n\n## Expected Output\n\n```javascript\nconst counter1 = createCounter();\ncounter1.increment(); // 1\ncounter1.increment(); // 2\ncounter1.getValue();  // 2\n\nconst counter2 = createCounter(10);\ncounter2.increment(); // 11\ncounter2.decrement(); // 10\ncounter2.reset();     // 10\n\n// counter1 and counter2 are independent\ncounter1.getValue();  // still 2\n```",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "// Create a counter factory using closures\nfunction createCounter(startValue = 0) {\n    // Your code here\n    // Hint: Create a private variable to store the count\n    // Return an object with methods that access this variable\n    \n}\n\n// Test your counter\nconst counter1 = createCounter();\nconsole.log(counter1.increment());  // Should print: 1\nconsole.log(counter1.increment());  // Should print: 2\nconsole.log(counter1.getValue());   // Should print: 2\nconsole.log(counter1.decrement());  // Should print: 1\nconsole.log(counter1.reset());      // Should print: 0\n\n// Test with starting value\nconst counter2 = createCounter(100);\nconsole.log(counter2.increment());  // Should print: 101\nconsole.log(counter2.reset());      // Should print: 100\n\n// Verify independence\nconsole.log(counter1.getValue());   // Should still be: 0\n",
+    "testCases": [
+        {
+            "description": "increment() should increase count by 1",
+            "assertion": "createCounter().increment() === 1"
+        },
+        {
+            "description": "Multiple increments should accumulate",
+            "assertion": "(function() { const c = createCounter(); c.increment(); c.increment(); return c.getValue(); })() === 2"
+        },
+        {
+            "description": "decrement() should decrease count by 1",
+            "assertion": "(function() { const c = createCounter(5); return c.decrement(); })() === 4"
+        },
+        {
+            "description": "getValue() should return current count",
+            "assertion": "createCounter(10).getValue() === 10"
+        },
+        {
+            "description": "reset() should return to initial value",
+            "assertion": "(function() { const c = createCounter(5); c.increment(); c.increment(); return c.reset(); })() === 5"
+        },
+        {
+            "description": "Default starting value should be 0",
+            "assertion": "createCounter().getValue() === 0"
+        },
+        {
+            "description": "Counters should be independent",
+            "assertion": "(function() { const c1 = createCounter(); const c2 = createCounter(); c1.increment(); c1.increment(); c2.increment(); return c1.getValue() === 2 && c2.getValue() === 1; })()"
+        },
+        {
+            "description": "Count should not be directly accessible",
+            "assertion": "createCounter().count === undefined"
+        }
+    ],
+    "hints": [
+        "Store the count in a variable inside createCounter (closure)",
+        "The initial value needs to be saved separately for reset()",
+        "Return an object with methods that read/modify the count variable",
+        "Each call to createCounter() creates a new closure with its own count"
+    ]
+}

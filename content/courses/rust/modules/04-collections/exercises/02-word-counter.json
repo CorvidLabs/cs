@@ -1,0 +1,41 @@
+{
+    "id": "02-word-counter",
+    "title": "Word Counter",
+    "description": "Build a word frequency counter using HashMap.\n\n## Requirements\n\n1. Implement `count_words(text: &str) -> HashMap<String, usize>`\n   - Count occurrences of each word (case-insensitive)\n   - Words are separated by whitespace\n\n2. Implement `most_common(counts: &HashMap<String, usize>, n: usize) -> Vec<(String, usize)>`\n   - Return the n most common words with their counts\n   - Sort by count (descending), then alphabetically for ties",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "use std::collections::HashMap;\n\n// Count occurrences of each word (case-insensitive)\n// Words are split by whitespace\nfn count_words(text: &str) -> HashMap<String, usize> {\n    todo!()\n}\n\n// Return the n most common words with their counts\n// Sort by count descending, then alphabetically for ties\nfn most_common(counts: &HashMap<String, usize>, n: usize) -> Vec<(String, usize)> {\n    todo!()\n}\n\nfn main() {\n    let text = \"the quick brown fox jumps over the lazy dog the fox\";\n\n    let counts = count_words(text);\n    println!(\"Word counts: {:?}\", counts);\n\n    let top_3 = most_common(&counts, 3);\n    println!(\"Top 3 words:\");\n    for (word, count) in top_3 {\n        println!(\"  {}: {}\", word, count);\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "count_words counts correctly",
+            "assertion": "*count_words(\"hello world hello\").get(\"hello\").unwrap_or(&0) == 2"
+        },
+        {
+            "description": "count_words is case-insensitive",
+            "assertion": "*count_words(\"Hello HELLO hello\").get(\"hello\").unwrap_or(&0) == 3"
+        },
+        {
+            "description": "count_words handles empty string",
+            "assertion": "count_words(\"\").is_empty()"
+        },
+        {
+            "description": "most_common returns correct number",
+            "assertion": "most_common(&count_words(\"a b c a b a\"), 2).len() == 2"
+        },
+        {
+            "description": "most_common sorts by count descending",
+            "assertion": "{ let m = most_common(&count_words(\"a b a c a b\"), 2); m[0].0 == \"a\" && m[0].1 == 3 }"
+        },
+        {
+            "description": "most_common handles ties alphabetically",
+            "assertion": "{ let m = most_common(&count_words(\"b a b a\"), 2); m[0].0 == \"a\" || m[0].1 == m[1].1 }"
+        }
+    ],
+    "hints": [
+        "Use text.split_whitespace() to split on any whitespace",
+        "Use .to_lowercase() for case-insensitive counting",
+        "Use entry().or_insert(0) pattern for counting",
+        "For most_common, collect into a Vec, then sort with sort_by",
+        "sort_by(|a, b| b.1.cmp(&a.1).then(a.0.cmp(&b.0))) sorts by count desc, then name asc"
+    ]
+}

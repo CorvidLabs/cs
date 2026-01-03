@@ -1,0 +1,40 @@
+{
+    "id": "03-data-pipeline",
+    "title": "Data Pipeline",
+    "description": "Create a data processing pipeline using higher-order functions to analyze student records.\n\n## Requirements\n\n1. Create a `Student` struct with `name: String`, `grade: Int`, and `subjects: [String]`\n2. Create a function `passingStudents(_ students: [Student]) -> [String]` that returns names of students with grade >= 60\n3. Create a function `averageGrade(_ students: [Student]) -> Double` that returns the average grade\n4. Create a function `studentsBySubject(_ students: [Student]) -> [String: [String]]` that groups student names by subject\n5. Create a function `topStudents(_ students: [Student], count: Int) -> [Student]` that returns top students by grade\n\n## Example Usage\n\n```swift\nlet students = [\n    Student(name: \"Alice\", grade: 95, subjects: [\"Math\", \"Science\"]),\n    Student(name: \"Bob\", grade: 55, subjects: [\"Math\", \"Art\"]),\n    Student(name: \"Charlie\", grade: 80, subjects: [\"Science\", \"Art\"]),\n    Student(name: \"Diana\", grade: 72, subjects: [\"Math\", \"Science\", \"Art\"])\n]\n\nlet passing = passingStudents(students)\n// [\"Alice\", \"Charlie\", \"Diana\"]\n\nlet average = averageGrade(students)\n// 75.5\n\nlet bySubject = studentsBySubject(students)\n// [\"Math\": [\"Alice\", \"Bob\", \"Diana\"], \"Science\": [\"Alice\", \"Charlie\", \"Diana\"], \"Art\": [\"Bob\", \"Charlie\", \"Diana\"]]\n\nlet top = topStudents(students, count: 2)\n// [Student(Alice, 95), Student(Charlie, 80)]\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "public struct Student {\n    public let name: String\n    public let grade: Int\n    public let subjects: [String]\n\n    public init(name: String, grade: Int, subjects: [String]) {\n        self.name = name\n        self.grade = grade\n        self.subjects = subjects\n    }\n}\n\n// Return names of students with grade >= 60\npublic func passingStudents(_ students: [Student]) -> [String] {\n    // Use filter and map\n}\n\n// Return average grade of all students\npublic func averageGrade(_ students: [Student]) -> Double {\n    // Use map and reduce\n}\n\n// Group student names by subject\npublic func studentsBySubject(_ students: [Student]) -> [String: [String]] {\n    // Use reduce(into:)\n}\n\n// Return top students sorted by grade\npublic func topStudents(_ students: [Student], count: Int) -> [Student] {\n    // Use sorted and prefix\n}\n\n// Test your implementation\nlet students = [\n    Student(name: \"Alice\", grade: 95, subjects: [\"Math\", \"Science\"]),\n    Student(name: \"Bob\", grade: 55, subjects: [\"Math\", \"Art\"]),\n    Student(name: \"Charlie\", grade: 80, subjects: [\"Science\", \"Art\"]),\n    Student(name: \"Diana\", grade: 72, subjects: [\"Math\", \"Science\", \"Art\"])\n]\n\nprint(\"Passing: \\(passingStudents(students))\")\nprint(\"Average: \\(averageGrade(students))\")\nprint(\"By Subject: \\(studentsBySubject(students))\")\nprint(\"Top 2: \\(topStudents(students, count: 2).map { $0.name })\")\n",
+    "testCases": [
+        {
+            "description": "passingStudents returns only students with grade >= 60",
+            "assertion": "{ let s = [Student(name: \"A\", grade: 60, subjects: []), Student(name: \"B\", grade: 59, subjects: [])]; return passingStudents(s) == [\"A\"] }()"
+        },
+        {
+            "description": "averageGrade calculates correct average",
+            "assertion": "{ let s = [Student(name: \"A\", grade: 80, subjects: []), Student(name: \"B\", grade: 60, subjects: [])]; return averageGrade(s) == 70.0 }()"
+        },
+        {
+            "description": "averageGrade returns 0 for empty array",
+            "assertion": "averageGrade([]) == 0.0"
+        },
+        {
+            "description": "studentsBySubject groups correctly",
+            "assertion": "{ let s = [Student(name: \"A\", grade: 90, subjects: [\"Math\"]), Student(name: \"B\", grade: 80, subjects: [\"Math\"])]; return studentsBySubject(s)[\"Math\"]?.count == 2 }()"
+        },
+        {
+            "description": "topStudents returns correct number of students",
+            "assertion": "{ let s = [Student(name: \"A\", grade: 90, subjects: []), Student(name: \"B\", grade: 80, subjects: []), Student(name: \"C\", grade: 70, subjects: [])]; return topStudents(s, count: 2).count == 2 }()"
+        },
+        {
+            "description": "topStudents returns highest grades first",
+            "assertion": "{ let s = [Student(name: \"A\", grade: 70, subjects: []), Student(name: \"B\", grade: 90, subjects: [])]; return topStudents(s, count: 1)[0].name == \"B\" }()"
+        }
+    ],
+    "hints": [
+        "Use students.filter { $0.grade >= 60 }.map { $0.name } for passingStudents",
+        "Use students.map { $0.grade }.reduce(0, +) / count for averageGrade",
+        "Use reduce(into:) to build the dictionary for studentsBySubject",
+        "Use sorted(by: { $0.grade > $1.grade }).prefix(count) for topStudents"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "09-modern-patterns",
+    "title": "Modern JavaScript Patterns",
+    "description": "Master modern JavaScript patterns including ES modules, destructuring, spread operators, and functional programming with array methods like map, filter, and reduce.",
+    "order": 9,
+    "lessons": [
+        "01-es-modules",
+        "02-destructuring",
+        "03-spread-rest",
+        "04-array-methods"
+    ],
+    "exercises": [
+        "01-module-system",
+        "02-data-destructuring",
+        "03-functional-pipeline"
+    ]
+}

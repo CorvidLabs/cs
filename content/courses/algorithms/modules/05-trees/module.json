@@ -1,0 +1,17 @@
+{
+  "id": "05-trees",
+  "title": "Trees",
+  "description": "Explore tree data structures including binary trees and binary search trees. Master tree traversal algorithms (in-order, pre-order, post-order) and understand how trees enable efficient searching and hierarchical data organization.",
+  "order": 5,
+  "lessons": [
+    "01-binary-tree-basics",
+    "02-tree-traversals",
+    "03-binary-search-trees",
+    "04-bst-operations"
+  ],
+  "exercises": [
+    "01-inorder-traversal",
+    "02-validate-bst",
+    "03-lowest-common-ancestor"
+  ]
+}

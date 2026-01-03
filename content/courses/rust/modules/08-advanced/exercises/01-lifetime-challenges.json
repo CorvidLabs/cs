@@ -1,0 +1,41 @@
+{
+    "id": "01-lifetime-challenges",
+    "title": "Lifetime Challenges",
+    "description": "Practice working with complex lifetime scenarios.\n\n## Requirements\n\n1. Implement `longest_with_announcement<'a, T>(x: &'a str, y: &'a str, ann: T) -> &'a str`\n   - Returns the longer string\n   - Prints announcement (T: Display) before returning\n\n2. Implement a `StrSplit` struct that iterates over string splits:\n   - `StrSplit<'a>` holds a reference to the remaining string\n   - `fn new(haystack: &'a str, delimiter: char) -> Self`\n   - Implement `Iterator` returning `Option<&'a str>`\n\n## Examples\n\n- `longest_with_announcement(\"hi\", \"hello\", \"Comparing\")` returns \"hello\"\n- `StrSplit::new(\"a,b,c\", ',')` iterates: \"a\", \"b\", \"c\"",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "use std::fmt::Display;\n\n// Return the longer string, printing announcement first\nfn longest_with_announcement<'a, T: Display>(\n    x: &'a str,\n    y: &'a str,\n    ann: T,\n) -> &'a str {\n    todo!()\n}\n\n// Iterator that splits a string by a delimiter\nstruct StrSplit<'a> {\n    remainder: Option<&'a str>,\n    delimiter: char,\n}\n\nimpl<'a> StrSplit<'a> {\n    fn new(haystack: &'a str, delimiter: char) -> Self {\n        todo!()\n    }\n}\n\nimpl<'a> Iterator for StrSplit<'a> {\n    type Item = &'a str;\n\n    fn next(&mut self) -> Option<Self::Item> {\n        todo!()\n    }\n}\n\nfn main() {\n    // Test longest_with_announcement\n    let s1 = String::from(\"short\");\n    let s2 = String::from(\"much longer string\");\n    let result = longest_with_announcement(&s1, &s2, \"Announcement!\");\n    println!(\"Longest: {}\", result);\n\n    // Test StrSplit\n    let text = \"apple,banana,cherry,date\";\n    for part in StrSplit::new(text, ',') {\n        println!(\"Part: {}\", part);\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "longest_with_announcement returns longer string",
+            "assertion": "longest_with_announcement(\"hi\", \"hello\", \"test\") == \"hello\""
+        },
+        {
+            "description": "longest_with_announcement handles equal lengths",
+            "assertion": "longest_with_announcement(\"abc\", \"def\", \"test\").len() == 3"
+        },
+        {
+            "description": "StrSplit iterates correctly",
+            "assertion": "StrSplit::new(\"a,b,c\", ',').collect::<Vec<_>>() == vec![\"a\", \"b\", \"c\"]"
+        },
+        {
+            "description": "StrSplit handles no delimiter",
+            "assertion": "StrSplit::new(\"hello\", ',').collect::<Vec<_>>() == vec![\"hello\"]"
+        },
+        {
+            "description": "StrSplit handles empty parts",
+            "assertion": "StrSplit::new(\"a,,b\", ',').collect::<Vec<_>>() == vec![\"a\", \"\", \"b\"]"
+        },
+        {
+            "description": "StrSplit handles empty string",
+            "assertion": "StrSplit::new(\"\", ',').collect::<Vec<_>>() == vec![\"\"]"
+        }
+    ],
+    "hints": [
+        "For longest_with_announcement, use println! then compare lengths",
+        "StrSplit should use Option<&'a str> for remainder to track if exhausted",
+        "Use find(delimiter) to locate the next split point",
+        "split_at can divide string into before and after parts",
+        "Remember to skip the delimiter character when updating remainder"
+    ]
+}

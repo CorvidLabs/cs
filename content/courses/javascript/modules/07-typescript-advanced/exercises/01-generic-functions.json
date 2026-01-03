@@ -1,0 +1,52 @@
+{
+    "id": "01-generic-functions",
+    "title": "Generic Functions",
+    "description": "Practice creating and using generic functions.\n\n## Requirements\n\n1. Create a generic `first<T>` function:\n   - Takes an array of type `T[]`\n   - Returns the first element or `undefined`\n   - Return type: `T | undefined`\n\n2. Create a generic `last<T>` function:\n   - Takes an array of type `T[]`\n   - Returns the last element or `undefined`\n\n3. Create a generic `reverse<T>` function:\n   - Takes an array of type `T[]`\n   - Returns a new array with elements in reverse order\n   - Original array should not be modified\n\n4. Create a generic `unique<T>` function:\n   - Takes an array of type `T[]`\n   - Returns array with duplicates removed\n   - Use `Set` for implementation\n\n## Expected Output\n\n```typescript\nfirst([1, 2, 3]);     // 1\nlast([1, 2, 3]);      // 3\nreverse([1, 2, 3]);   // [3, 2, 1]\nunique([1, 1, 2, 3]); // [1, 2, 3]\n```",
+    "order": 1,
+    "language": "typescript",
+    "starterCode": "// Get the first element of an array\nfunction first<T>(arr: T[]): T | undefined {\n    // Return the first element, or undefined if empty\n    return undefined;\n}\n\n// Get the last element of an array\nfunction last<T>(arr: T[]): T | undefined {\n    // Return the last element, or undefined if empty\n    return undefined;\n}\n\n// Reverse an array (return new array, don't modify original)\nfunction reverse<T>(arr: T[]): T[] {\n    // Return a new array with elements reversed\n    return [];\n}\n\n// Remove duplicates from an array\nfunction unique<T>(arr: T[]): T[] {\n    // Return array with duplicates removed\n    // Hint: Use Set\n    return [];\n}\n\n// Test your implementations\nconsole.log('first tests:');\nconsole.log(first([1, 2, 3]));           // 1\nconsole.log(first(['a', 'b', 'c']));     // 'a'\nconsole.log(first([]));                   // undefined\n\nconsole.log('\\nlast tests:');\nconsole.log(last([1, 2, 3]));            // 3\nconsole.log(last(['x', 'y', 'z']));      // 'z'\nconsole.log(last([]));                    // undefined\n\nconsole.log('\\nreverse tests:');\nconst nums = [1, 2, 3];\nconsole.log(reverse(nums));               // [3, 2, 1]\nconsole.log(nums);                        // [1, 2, 3] (unchanged)\n\nconsole.log('\\nunique tests:');\nconsole.log(unique([1, 1, 2, 2, 3]));    // [1, 2, 3]\nconsole.log(unique(['a', 'b', 'a']));    // ['a', 'b']\n",
+    "testCases": [
+        {
+            "description": "first returns first element",
+            "assertion": "first([1, 2, 3]) === 1"
+        },
+        {
+            "description": "first returns undefined for empty array",
+            "assertion": "first([]) === undefined"
+        },
+        {
+            "description": "first works with strings",
+            "assertion": "first(['a', 'b']) === 'a'"
+        },
+        {
+            "description": "last returns last element",
+            "assertion": "last([1, 2, 3]) === 3"
+        },
+        {
+            "description": "last returns undefined for empty array",
+            "assertion": "last([]) === undefined"
+        },
+        {
+            "description": "reverse returns elements in reverse order",
+            "assertion": "JSON.stringify(reverse([1, 2, 3])) === '[3,2,1]'"
+        },
+        {
+            "description": "reverse does not modify original array",
+            "assertion": "(function() { const arr = [1, 2, 3]; reverse(arr); return JSON.stringify(arr) === '[1,2,3]'; })()"
+        },
+        {
+            "description": "unique removes duplicates",
+            "assertion": "JSON.stringify(unique([1, 1, 2, 2, 3])) === '[1,2,3]'"
+        },
+        {
+            "description": "unique preserves order of first occurrence",
+            "assertion": "JSON.stringify(unique([3, 1, 2, 1, 3])) === '[3,1,2]'"
+        }
+    ],
+    "hints": [
+        "first: return arr[0] or check arr.length first",
+        "last: return arr[arr.length - 1] or use arr.at(-1)",
+        "reverse: use [...arr].reverse() to avoid mutating",
+        "unique: return [...new Set(arr)] to remove duplicates"
+    ]
+}

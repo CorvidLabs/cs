@@ -1,0 +1,17 @@
+{
+    "id": "03-functions",
+    "title": "Functions and Closures",
+    "description": "Learn to write reusable code with Swift functions and closures. Master parameter labels, default values, variadic parameters, and understand closure capture semantics.",
+    "order": 3,
+    "lessons": [
+        "01-functions",
+        "02-closures",
+        "03-capture-lists",
+        "04-escaping-closures"
+    ],
+    "exercises": [
+        "01-calculator-functions",
+        "02-array-transformer",
+        "03-async-completion"
+    ]
+}

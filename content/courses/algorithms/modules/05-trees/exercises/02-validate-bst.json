@@ -1,0 +1,55 @@
+{
+  "id": "02-validate-bst",
+  "title": "Validate Binary Search Tree",
+  "description": "Determine if a binary tree is a valid binary search tree (BST).",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "class TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\n\n\ndef is_valid_bst(root: TreeNode) -> bool:\n    \"\"\"\n    Determine if a binary tree is a valid BST.\n    \n    A valid BST is defined as:\n    - The left subtree of a node contains only nodes with keys less than the node's key\n    - The right subtree of a node contains only nodes with keys greater than the node's key\n    - Both the left and right subtrees must also be binary search trees\n    \n    Args:\n        root: The root of the binary tree\n        \n    Returns:\n        True if the tree is a valid BST, False otherwise\n        \n    Example:\n        Input: root = [2, 1, 3]\n               2\n              / \\\n             1   3\n        Output: True\n        \n        Input: root = [5, 1, 4, null, null, 3, 6]\n               5\n              / \\\n             1   4\n                / \\\n               3   6\n        Output: False (4 is less than 5 but in right subtree,\n                       and 3 is less than 4's parent 5)\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "class TreeNode:\n    def __init__(self, val=0, left=None, right=None):\n        self.val = val\n        self.left = left\n        self.right = right\n\n\ndef is_valid_bst(root: TreeNode) -> bool:\n    def validate(node, min_val, max_val):\n        if node is None:\n            return True\n        \n        if node.val <= min_val or node.val >= max_val:\n            return False\n        \n        return (validate(node.left, min_val, node.val) and\n                validate(node.right, node.val, max_val))\n    \n    return validate(root, float('-inf'), float('inf'))",
+  "testCases": [
+    {
+      "input": {"tree": [2, 1, 3]},
+      "expected": true,
+      "description": "Simple valid BST"
+    },
+    {
+      "input": {"tree": [5, 1, 4, null, null, 3, 6]},
+      "expected": false,
+      "description": "Invalid BST - right child less than root"
+    },
+    {
+      "input": {"tree": [5, 4, 6, null, null, 3, 7]},
+      "expected": false,
+      "description": "Invalid BST - 3 is less than ancestor 5"
+    },
+    {
+      "input": {"tree": []},
+      "expected": true,
+      "description": "Empty tree is valid"
+    },
+    {
+      "input": {"tree": [1]},
+      "expected": true,
+      "description": "Single node is valid"
+    },
+    {
+      "input": {"tree": [2, 2, 2]},
+      "expected": false,
+      "description": "Duplicate values are not allowed"
+    },
+    {
+      "input": {"tree": [10, 5, 15, null, null, 6, 20]},
+      "expected": false,
+      "description": "6 is less than ancestor 10 but in right subtree"
+    }
+  ],
+  "hints": [
+    "A common mistake is only checking if left child < parent < right child. This is not sufficient!",
+    "Each node must be within a valid range based on all its ancestors",
+    "Pass down the valid range (min, max) as you recurse",
+    "Left children must be less than all ancestors on the path to them",
+    "Alternatively, use in-order traversal - a valid BST produces sorted output"
+  ],
+  "explanation": "The key insight is that each node must satisfy constraints from all its ancestors, not just its immediate parent. We solve this by passing a valid range (min_val, max_val) down through recursion. Initially, the root can be any value, so we use negative and positive infinity. For each left child, it must be less than its parent, so we update max_val. For each right child, it must be greater than its parent, so we update min_val. If any node falls outside its valid range, the tree is not a valid BST. Time complexity is O(n) and space complexity is O(h) for the recursion stack."
+}

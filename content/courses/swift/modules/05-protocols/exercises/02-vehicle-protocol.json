@@ -1,0 +1,40 @@
+{
+    "id": "02-vehicle-protocol",
+    "title": "Vehicle Protocol Hierarchy",
+    "description": "Create a protocol hierarchy for different types of vehicles demonstrating protocol inheritance and conformance.\n\n## Requirements\n\n1. Define a `Vehicle` protocol with:\n   - `speed: Double` property (read-only)\n   - `move()` method\n\n2. Define a `Fuel` protocol with:\n   - `fuelLevel: Double` property (read-write)\n   - `refuel(amount: Double)` method\n\n3. Create a `Car` struct that conforms to both protocols with:\n   - Properties: `make`, `model`, `speed`, `fuelLevel`\n   - `move()` prints \"Driving at [speed] mph\"\n   - `refuel(amount:)` adds to fuelLevel (max 100)\n\n4. Create a `Bicycle` struct that conforms only to `Vehicle` with:\n   - Properties: `brand`, `speed`\n   - `move()` prints \"Cycling at [speed] mph\"\n\n## Expected Output\n\n```\nDriving at 65.0 mph\nCycling at 15.0 mph\nFuel level: 75.0\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Define the Vehicle protocol\n\n\n// Define the Fuel protocol\n\n\n// Create the Car struct conforming to Vehicle and Fuel\n\n\n// Create the Bicycle struct conforming to Vehicle only\n\n\n// Test your implementation\nvar car = Car(make: \"Toyota\", model: \"Camry\", speed: 65.0, fuelLevel: 50.0)\nlet bicycle = Bicycle(brand: \"Trek\", speed: 15.0)\n\ncar.move()\nbicycle.move()\ncar.refuel(amount: 25.0)\nprint(\"Fuel level: \\(car.fuelLevel)\")\n",
+    "testCases": [
+        {
+            "description": "Vehicle protocol should have speed property and move method",
+            "assertion": "car.speed == 65.0"
+        },
+        {
+            "description": "Car should conform to Vehicle protocol",
+            "assertion": "car is Vehicle"
+        },
+        {
+            "description": "Car should conform to Fuel protocol",
+            "assertion": "car is Fuel"
+        },
+        {
+            "description": "Bicycle should conform to Vehicle protocol",
+            "assertion": "bicycle is Vehicle"
+        },
+        {
+            "description": "refuel should increase fuel level",
+            "assertion": "car.fuelLevel == 75.0"
+        },
+        {
+            "description": "move() should print appropriate message",
+            "assertion": "output.contains(\"Driving\") && output.contains(\"Cycling\")"
+        }
+    ],
+    "hints": [
+        "Define Vehicle with: protocol Vehicle { var speed: Double { get } func move() }",
+        "Define Fuel with: protocol Fuel { var fuelLevel: Double { get set } mutating func refuel(amount: Double) }",
+        "Car needs 'mutating' for refuel since fuelLevel changes",
+        "Use min(100, fuelLevel + amount) to cap fuel at 100"
+    ]
+}

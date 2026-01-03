@@ -1,0 +1,48 @@
+{
+    "id": "01-array-statistics",
+    "title": "Array Statistics",
+    "description": "Create functions to calculate statistics from an array of numbers.\n\n## Requirements\n\n1. Create a function `getStats(numbers)` that returns an object with:\n   - `min`: the smallest number\n   - `max`: the largest number\n   - `sum`: the sum of all numbers\n   - `average`: the average (mean) of all numbers\n   - `count`: the total count of numbers\n\n2. Handle edge cases:\n   - Return `null` for an empty array\n\n## Expected Output\n\n```javascript\ngetStats([1, 2, 3, 4, 5])\n// { min: 1, max: 5, sum: 15, average: 3, count: 5 }\n\ngetStats([10, 20, 30])\n// { min: 10, max: 30, sum: 60, average: 20, count: 3 }\n\ngetStats([])\n// null\n```",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "function getStats(numbers) {\n    // Handle empty array\n    \n    // Calculate statistics\n    // Hint: Use Math.min(), Math.max() with spread operator\n    // Hint: Use reduce() for sum\n    \n    return {\n        min: 0,     // Replace with actual calculation\n        max: 0,     // Replace with actual calculation\n        sum: 0,     // Replace with actual calculation\n        average: 0, // Replace with actual calculation\n        count: 0    // Replace with actual calculation\n    };\n}\n\n// Test your function\nconsole.log(getStats([1, 2, 3, 4, 5]));\n// Expected: { min: 1, max: 5, sum: 15, average: 3, count: 5 }\n\nconsole.log(getStats([10, 20, 30]));\n// Expected: { min: 10, max: 30, sum: 60, average: 20, count: 3 }\n\nconsole.log(getStats([-5, 0, 5, 10]));\n// Expected: { min: -5, max: 10, sum: 10, average: 2.5, count: 4 }\n\nconsole.log(getStats([]));\n// Expected: null\n",
+    "testCases": [
+        {
+            "description": "getStats([1,2,3,4,5]).min should be 1",
+            "assertion": "getStats([1,2,3,4,5]).min === 1"
+        },
+        {
+            "description": "getStats([1,2,3,4,5]).max should be 5",
+            "assertion": "getStats([1,2,3,4,5]).max === 5"
+        },
+        {
+            "description": "getStats([1,2,3,4,5]).sum should be 15",
+            "assertion": "getStats([1,2,3,4,5]).sum === 15"
+        },
+        {
+            "description": "getStats([1,2,3,4,5]).average should be 3",
+            "assertion": "getStats([1,2,3,4,5]).average === 3"
+        },
+        {
+            "description": "getStats([1,2,3,4,5]).count should be 5",
+            "assertion": "getStats([1,2,3,4,5]).count === 5"
+        },
+        {
+            "description": "getStats([10,20,30]).average should be 20",
+            "assertion": "getStats([10,20,30]).average === 20"
+        },
+        {
+            "description": "getStats([-5,0,5,10]).min should be -5",
+            "assertion": "getStats([-5,0,5,10]).min === -5"
+        },
+        {
+            "description": "getStats([]) should return null",
+            "assertion": "getStats([]) === null"
+        }
+    ],
+    "hints": [
+        "Use Math.min(...numbers) and Math.max(...numbers) for min/max",
+        "Use numbers.reduce((acc, n) => acc + n, 0) for sum",
+        "Average is sum / count (use numbers.length for count)",
+        "Check if array is empty with numbers.length === 0"
+    ]
+}

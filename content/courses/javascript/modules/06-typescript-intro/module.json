@@ -1,0 +1,17 @@
+{
+    "id": "06-typescript-intro",
+    "title": "TypeScript Introduction",
+    "description": "Get started with TypeScript, the typed superset of JavaScript. Learn basic types, interfaces, type inference, and union types to write safer, more maintainable code.",
+    "order": 6,
+    "lessons": [
+        "01-basic-types",
+        "02-interfaces",
+        "03-type-inference",
+        "04-union-types"
+    ],
+    "exercises": [
+        "01-type-annotations",
+        "02-interface-design",
+        "03-type-narrowing"
+    ]
+}

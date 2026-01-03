@@ -1,0 +1,44 @@
+{
+  "id": "01-network-delay-time",
+  "title": "Network Delay Time",
+  "description": "Calculate the minimum time for a signal to reach all nodes in a network using Dijkstra's algorithm.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def network_delay_time(times: list[list[int]], n: int, k: int) -> int:\n    \"\"\"\n    Calculate the time it takes for a signal to reach all nodes.\n    \n    Args:\n        times: List of [source, target, time] edges\n        n: Number of nodes (labeled 1 to n)\n        k: Starting node\n        \n    Returns:\n        Minimum time for signal to reach all nodes, or -1 if impossible\n        \n    Example:\n        Input: times = [[2,1,1],[2,3,1],[3,4,1]], n = 4, k = 2\n        Output: 2  # Signal reaches all nodes in 2 time units\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "import heapq\n\ndef network_delay_time(times: list[list[int]], n: int, k: int) -> int:\n    # Build adjacency list\n    graph = [[] for _ in range(n + 1)]\n    for u, v, w in times:\n        graph[u].append((v, w))\n    \n    # Dijkstra's algorithm\n    distances = [float('inf')] * (n + 1)\n    distances[k] = 0\n    pq = [(0, k)]  # (distance, node)\n    \n    while pq:\n        dist, node = heapq.heappop(pq)\n        \n        if dist > distances[node]:\n            continue\n        \n        for neighbor, weight in graph[node]:\n            new_dist = dist + weight\n            if new_dist < distances[neighbor]:\n                distances[neighbor] = new_dist\n                heapq.heappush(pq, (new_dist, neighbor))\n    \n    # Find maximum distance (excluding index 0)\n    max_dist = max(distances[1:])\n    \n    return max_dist if max_dist != float('inf') else -1",
+  "testCases": [
+    {
+      "input": {"times": [[2, 1, 1], [2, 3, 1], [3, 4, 1]], "n": 4, "k": 2},
+      "expected": 2,
+      "description": "Signal propagates through network"
+    },
+    {
+      "input": {"times": [[1, 2, 1]], "n": 2, "k": 1},
+      "expected": 1,
+      "description": "Simple two-node network"
+    },
+    {
+      "input": {"times": [[1, 2, 1]], "n": 2, "k": 2},
+      "expected": -1,
+      "description": "Cannot reach node 1 from node 2"
+    },
+    {
+      "input": {"times": [[1, 2, 1], [2, 3, 2], [1, 3, 4]], "n": 3, "k": 1},
+      "expected": 3,
+      "description": "Shortest path through intermediate node"
+    },
+    {
+      "input": {"times": [[1, 2, 1], [2, 1, 1]], "n": 2, "k": 1},
+      "expected": 1,
+      "description": "Bidirectional edges"
+    }
+  ],
+  "hints": [
+    "This is a classic Dijkstra's algorithm problem",
+    "Build an adjacency list from the times array",
+    "The answer is the maximum shortest distance to any node",
+    "Return -1 if any node has infinite distance (unreachable)"
+  ],
+  "explanation": "We use Dijkstra's algorithm to find the shortest path from node k to all other nodes. Build an adjacency list from the edge list. Run Dijkstra starting from k using a min-heap. The answer is the maximum distance among all nodes - this represents when the last node receives the signal. If any node is unreachable (infinite distance), return -1. Time: O(E log V), Space: O(V + E)."
+}

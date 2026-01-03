@@ -1,0 +1,17 @@
+{
+    "id": "05-traits",
+    "title": "Traits and Generics",
+    "description": "Learn Rust's approach to polymorphism through traits and generics. Define shared behavior, use trait bounds, and write flexible generic code.",
+    "order": 5,
+    "lessons": [
+        "01-defining-traits",
+        "02-generics",
+        "03-trait-bounds",
+        "04-impl-trait"
+    ],
+    "exercises": [
+        "01-implement-trait",
+        "02-generic-functions",
+        "03-trait-objects"
+    ]
+}

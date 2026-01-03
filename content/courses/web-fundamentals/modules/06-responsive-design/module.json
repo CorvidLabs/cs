@@ -1,0 +1,17 @@
+{
+    "id": "06-responsive-design",
+    "title": "Responsive Design",
+    "description": "Build websites that work beautifully on all screen sizes. Learn media queries, fluid layouts, mobile-first design, and responsive images.",
+    "order": 6,
+    "lessons": [
+        "01-media-queries",
+        "02-mobile-first",
+        "03-fluid-layouts",
+        "04-responsive-images"
+    ],
+    "exercises": [
+        "01-responsive-nav",
+        "02-responsive-grid",
+        "03-responsive-page"
+    ]
+}

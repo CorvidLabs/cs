@@ -1,0 +1,41 @@
+{
+    "id": "01-vector-operations",
+    "title": "Vector Operations",
+    "description": "Practice common vector operations.\n\n## Requirements\n\n1. Implement `sum_vec(numbers: &[i32]) -> i32` - sum all numbers\n2. Implement `find_max(numbers: &[i32]) -> Option<i32>` - find maximum value\n3. Implement `remove_duplicates(numbers: Vec<i32>) -> Vec<i32>` - remove duplicates preserving order\n4. Implement `rotate_left(numbers: &mut [i32], positions: usize)` - rotate array left",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "// Sum all numbers in the slice\nfn sum_vec(numbers: &[i32]) -> i32 {\n    todo!()\n}\n\n// Find the maximum value, return None if empty\nfn find_max(numbers: &[i32]) -> Option<i32> {\n    todo!()\n}\n\n// Remove duplicates while preserving order\n// First occurrence of each value is kept\nfn remove_duplicates(numbers: Vec<i32>) -> Vec<i32> {\n    todo!()\n}\n\n// Rotate the slice left by `positions` places\n// Example: [1,2,3,4,5] rotated left by 2 becomes [3,4,5,1,2]\nfn rotate_left(numbers: &mut [i32], positions: usize) {\n    todo!()\n}\n\nfn main() {\n    // Test sum_vec\n    let nums = vec![1, 2, 3, 4, 5];\n    println!(\"Sum: {}\", sum_vec(&nums));\n\n    // Test find_max\n    println!(\"Max: {:?}\", find_max(&nums));\n    println!(\"Max of empty: {:?}\", find_max(&[]));\n\n    // Test remove_duplicates\n    let with_dups = vec![1, 2, 2, 3, 1, 4, 3, 5];\n    println!(\"Without dups: {:?}\", remove_duplicates(with_dups));\n\n    // Test rotate_left\n    let mut arr = vec![1, 2, 3, 4, 5];\n    rotate_left(&mut arr, 2);\n    println!(\"Rotated: {:?}\", arr);\n}\n",
+    "testCases": [
+        {
+            "description": "sum_vec adds all elements",
+            "assertion": "sum_vec(&[1, 2, 3, 4, 5]) == 15"
+        },
+        {
+            "description": "sum_vec handles empty slice",
+            "assertion": "sum_vec(&[]) == 0"
+        },
+        {
+            "description": "find_max returns Some for non-empty",
+            "assertion": "find_max(&[3, 1, 4, 1, 5]) == Some(5)"
+        },
+        {
+            "description": "find_max returns None for empty",
+            "assertion": "find_max(&[]).is_none()"
+        },
+        {
+            "description": "remove_duplicates keeps first occurrence",
+            "assertion": "remove_duplicates(vec![1, 2, 2, 3, 1]) == vec![1, 2, 3]"
+        },
+        {
+            "description": "rotate_left works correctly",
+            "assertion": "{ let mut v = vec![1, 2, 3, 4, 5]; rotate_left(&mut v, 2); v == vec![3, 4, 5, 1, 2] }"
+        }
+    ],
+    "hints": [
+        "For sum_vec: use .iter().sum() or a fold",
+        "For find_max: use .iter().max().copied() to get Option<i32> instead of Option<&i32>",
+        "For remove_duplicates: use a HashSet to track seen values, or use Vec::contains",
+        "For rotate_left: use slice.rotate_left(n) - it's built in! Or implement manually with split_at",
+        "Remember to handle edge cases like empty slices"
+    ]
+}

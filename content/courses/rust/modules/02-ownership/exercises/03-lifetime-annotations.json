@@ -1,0 +1,38 @@
+{
+    "id": "03-lifetime-annotations",
+    "title": "Lifetime Annotations",
+    "description": "Practice adding lifetime annotations to functions and structs.\n\n## Requirements\n\n1. Add correct lifetime annotations to `longest_string`\n2. Add lifetime annotations to the `TextExcerpt` struct\n3. Implement the `new` and `summary` methods for TextExcerpt with correct lifetimes\n\n## Key Concepts\n\n- Lifetime annotations describe relationships, they don't change actual lifetimes\n- Use 'a as the lifetime parameter name (convention)\n- Structs holding references need lifetime parameters",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "// TODO: Add lifetime annotations to make this compile\n// The returned reference should be valid as long as both inputs are valid\nfn longest_string(a: &str, b: &str) -> &str {\n    if a.len() > b.len() {\n        a\n    } else {\n        b\n    }\n}\n\n// TODO: Add lifetime annotation to this struct\n// It holds a reference to a string slice\nstruct TextExcerpt {\n    text: &str,\n    author: &str,\n}\n\n// TODO: Implement these methods with correct lifetimes\nimpl TextExcerpt {\n    // Create a new TextExcerpt from text and author references\n    fn new(text: &str, author: &str) -> TextExcerpt {\n        todo!()\n    }\n\n    // Return a summary string (can be owned String, no lifetime needed for return)\n    fn summary(&self) -> String {\n        todo!()\n    }\n}\n\nfn main() {\n    // Test longest_string\n    let s1 = String::from(\"short\");\n    let s2 = String::from(\"much longer string\");\n    let longest = longest_string(&s1, &s2);\n    println!(\"Longest: {}\", longest);\n\n    // Test TextExcerpt\n    let quote = String::from(\"To be, or not to be\");\n    let author = String::from(\"Shakespeare\");\n\n    let excerpt = TextExcerpt::new(&quote, &author);\n    println!(\"Text: '{}' by {}\", excerpt.text, excerpt.author);\n    println!(\"Summary: {}\", excerpt.summary());\n}\n",
+    "testCases": [
+        {
+            "description": "longest_string returns the longer string",
+            "assertion": "longest_string(\"short\", \"much longer\") == \"much longer\""
+        },
+        {
+            "description": "longest_string works with equal lengths",
+            "assertion": "longest_string(\"abc\", \"xyz\").len() == 3"
+        },
+        {
+            "description": "TextExcerpt stores text correctly",
+            "assertion": "TextExcerpt::new(\"hello\", \"author\").text == \"hello\""
+        },
+        {
+            "description": "TextExcerpt stores author correctly",
+            "assertion": "TextExcerpt::new(\"hello\", \"Bob\").author == \"Bob\""
+        },
+        {
+            "description": "TextExcerpt summary includes both text and author",
+            "assertion": "{ let e = TextExcerpt::new(\"Quote\", \"Writer\"); let s = e.summary(); s.contains(\"Quote\") && s.contains(\"Writer\") }"
+        }
+    ],
+    "hints": [
+        "For longest_string: Add <'a> after the function name, then use 'a for all three references",
+        "For TextExcerpt: Add <'a> after the struct name, then annotate both fields with &'a str",
+        "For impl block: Use impl<'a> TextExcerpt<'a> { ... }",
+        "For new(): The return type needs the lifetime too: TextExcerpt<'a>",
+        "For summary(): Since it returns an owned String, no lifetime annotation needed on return type",
+        "Use format!() to create the summary string"
+    ]
+}

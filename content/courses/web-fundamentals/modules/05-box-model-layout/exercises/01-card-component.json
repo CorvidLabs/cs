@@ -1,0 +1,49 @@
+{
+    "id": "01-card-component",
+    "title": "Build a Card Component",
+    "description": "Create a styled card component using the CSS box model.\n\n## Requirements\n\n1. Style the `.card` container:\n   - Width of 320px\n   - White background\n   - 20px padding on all sides\n   - 1px solid #ddd border\n   - 8px border-radius\n   - Use border-box sizing\n\n2. Style the `.card-title` (h3):\n   - No top margin\n   - 12px bottom margin\n   - #333 text color\n\n3. Style the `.card-text` (p):\n   - No margins\n   - #666 text color\n   - 1.5 line height\n\n## Expected Result\n\nA clean card with proper internal spacing and consistent styling.",
+    "order": 1,
+    "language": "css",
+    "starterCode": "/* Card container */\n.card {\n    /* Add your styles here */\n}\n\n/* Card title */\n.card-title {\n    /* Add your styles here */\n}\n\n/* Card text */\n.card-text {\n    /* Add your styles here */\n}",
+    "testCases": [
+        {
+            "description": "Card should be 320px wide",
+            "assertion": "document.querySelector('.card').offsetWidth === 320"
+        },
+        {
+            "description": "Card should have white background",
+            "assertion": "getComputedStyle(document.querySelector('.card')).backgroundColor === 'rgb(255, 255, 255)'"
+        },
+        {
+            "description": "Card should have 20px padding",
+            "assertion": "getComputedStyle(document.querySelector('.card')).paddingTop === '20px'"
+        },
+        {
+            "description": "Card should have border-radius of 8px",
+            "assertion": "getComputedStyle(document.querySelector('.card')).borderRadius === '8px'"
+        },
+        {
+            "description": "Card should use border-box sizing",
+            "assertion": "getComputedStyle(document.querySelector('.card')).boxSizing === 'border-box'"
+        },
+        {
+            "description": "Card title should have no top margin",
+            "assertion": "getComputedStyle(document.querySelector('.card-title')).marginTop === '0px'"
+        },
+        {
+            "description": "Card title should have 12px bottom margin",
+            "assertion": "getComputedStyle(document.querySelector('.card-title')).marginBottom === '12px'"
+        },
+        {
+            "description": "Card text should have #666 color",
+            "assertion": "getComputedStyle(document.querySelector('.card-text')).color === 'rgb(102, 102, 102)'"
+        }
+    ],
+    "hints": [
+        "Use width: 320px and background-color: white",
+        "Use box-sizing: border-box so the total width stays 320px",
+        "Use padding: 20px and border-radius: 8px",
+        "Use margin-top: 0 and margin-bottom: 12px for the title",
+        "Use margin: 0 and color: #666 for the text"
+    ]
+}

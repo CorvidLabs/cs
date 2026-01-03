@@ -1,0 +1,44 @@
+{
+  "id": "02-cheapest-flights",
+  "title": "Cheapest Flights Within K Stops",
+  "description": "Find the cheapest flight route with at most k stops using a modified Bellman-Ford algorithm.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def find_cheapest_price(n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:\n    \"\"\"\n    Find the cheapest price from src to dst with at most k stops.\n    \n    Args:\n        n: Number of cities (0 to n-1)\n        flights: List of [from, to, price] flights\n        src: Starting city\n        dst: Destination city\n        k: Maximum number of stops allowed\n        \n    Returns:\n        Cheapest price, or -1 if no such route exists\n        \n    Example:\n        Input: n = 4, flights = [[0,1,100],[1,2,100],[2,0,100],[1,3,600],[2,3,200]]\n               src = 0, dst = 3, k = 1\n        Output: 700  # Route: 0 -> 1 -> 3\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def find_cheapest_price(n: int, flights: list[list[int]], src: int, dst: int, k: int) -> int:\n    # Modified Bellman-Ford with k+1 iterations\n    prices = [float('inf')] * n\n    prices[src] = 0\n    \n    # k stops means k+1 edges\n    for _ in range(k + 1):\n        # Copy to avoid using updated values in same iteration\n        temp = prices.copy()\n        \n        for u, v, price in flights:\n            if prices[u] != float('inf'):\n                temp[v] = min(temp[v], prices[u] + price)\n        \n        prices = temp\n    \n    return prices[dst] if prices[dst] != float('inf') else -1",
+  "testCases": [
+    {
+      "input": {"n": 4, "flights": [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]], "src": 0, "dst": 3, "k": 1},
+      "expected": 700,
+      "description": "One stop allowed - direct to 1, then to 3"
+    },
+    {
+      "input": {"n": 3, "flights": [[0, 1, 100], [1, 2, 100], [0, 2, 500]], "src": 0, "dst": 2, "k": 1},
+      "expected": 200,
+      "description": "Cheaper with one stop"
+    },
+    {
+      "input": {"n": 3, "flights": [[0, 1, 100], [1, 2, 100], [0, 2, 500]], "src": 0, "dst": 2, "k": 0},
+      "expected": 500,
+      "description": "No stops allowed - must take direct flight"
+    },
+    {
+      "input": {"n": 3, "flights": [[0, 1, 100], [1, 2, 100]], "src": 0, "dst": 2, "k": 0},
+      "expected": -1,
+      "description": "No direct flight and no stops allowed"
+    },
+    {
+      "input": {"n": 4, "flights": [[0, 1, 1], [0, 2, 5], [1, 2, 1], [2, 3, 1]], "src": 0, "dst": 3, "k": 1},
+      "expected": 6,
+      "description": "Two stops needed but only one allowed"
+    }
+  ],
+  "hints": [
+    "This is a shortest path problem with a constraint on the number of edges",
+    "Modified Bellman-Ford: run exactly k+1 iterations",
+    "Make a copy of distances each iteration to avoid using updates from the same round",
+    "k stops means k+1 edges in the path"
+  ],
+  "explanation": "We use a modified Bellman-Ford algorithm. Standard Bellman-Ford relaxes all edges V-1 times, but here we only need k+1 iterations (k stops = k+1 edges). The key insight is to copy the distances array each iteration - this ensures we don't use distances updated in the current iteration, which would allow paths with more edges than allowed. Time: O(k * E), Space: O(V)."
+}

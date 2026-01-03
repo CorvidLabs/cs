@@ -1,0 +1,17 @@
+{
+    "id": "02-html-content",
+    "title": "HTML Content",
+    "description": "Learn to structure web content with semantic HTML elements. Master text formatting, links, images, and accessibility attributes.",
+    "order": 2,
+    "lessons": [
+        "01-semantic-html",
+        "02-text-elements",
+        "03-links-navigation",
+        "04-images-media"
+    ],
+    "exercises": [
+        "01-semantic-article",
+        "02-navigation-menu",
+        "03-image-gallery"
+    ]
+}

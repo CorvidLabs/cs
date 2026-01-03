@@ -1,0 +1,41 @@
+{
+    "id": "02-word-frequency",
+    "title": "Word Frequency Counter",
+    "description": "Create a function that counts word frequency in a text using dictionaries.\n\n## Requirements\n\n1. Create a function `countWords(_ text: String) -> [String: Int]` that returns word frequencies\n2. Words should be case-insensitive (\"Hello\" and \"hello\" are the same)\n3. Remove punctuation from words\n4. Create a function `topWords(_ text: String, count: Int) -> [(String, Int)]` that returns the most frequent words\n5. The topWords result should be sorted by frequency (descending), then alphabetically for ties\n\n## Example Usage\n\n```swift\nlet text = \"Hello world! Hello Swift. Swift is great, and hello world.\"\n\nlet frequencies = countWords(text)\n// [\"hello\": 3, \"world\": 2, \"swift\": 2, \"is\": 1, \"great\": 1, \"and\": 1]\n\nlet top = topWords(text, count: 3)\n// [(\"hello\", 3), (\"swift\", 2), (\"world\", 2)]\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Count word frequencies in a text\npublic func countWords(_ text: String) -> [String: Int] {\n    // 1. Convert to lowercase\n    // 2. Split into words\n    // 3. Remove punctuation from each word\n    // 4. Count occurrences using a dictionary\n}\n\n// Return the most frequent words\npublic func topWords(_ text: String, count: Int) -> [(String, Int)] {\n    // 1. Get word frequencies\n    // 2. Sort by frequency (descending), then alphabetically\n    // 3. Return the top 'count' words\n}\n\n// Helper function to clean a word\nprivate func cleanWord(_ word: String) -> String {\n    word.filter { $0.isLetter }\n}\n\n// Test your implementation\nlet text = \"Hello world! Hello Swift. Swift is great, and hello world.\"\n\nlet frequencies = countWords(text)\nprint(\"Frequencies: \\(frequencies)\")\n\nlet top = topWords(text, count: 3)\nprint(\"Top 3: \\(top)\")\n",
+    "testCases": [
+        {
+            "description": "countWords should return correct frequencies",
+            "assertion": "countWords(\"hello hello world\")[\"hello\"] == 2"
+        },
+        {
+            "description": "countWords should be case-insensitive",
+            "assertion": "countWords(\"Hello HELLO hello\")[\"hello\"] == 3"
+        },
+        {
+            "description": "countWords should handle punctuation",
+            "assertion": "countWords(\"hello! hello? hello.\")[\"hello\"] == 3"
+        },
+        {
+            "description": "topWords should return correct number of results",
+            "assertion": "topWords(\"a b c d e\", count: 3).count == 3"
+        },
+        {
+            "description": "topWords should be sorted by frequency",
+            "assertion": "{ let t = topWords(\"a a a b b c\", count: 2); return t[0].0 == \"a\" && t[1].0 == \"b\" }()"
+        },
+        {
+            "description": "topWords with ties should sort alphabetically",
+            "assertion": "{ let t = topWords(\"c c b b a a\", count: 3); return t[0].0 == \"a\" && t[1].0 == \"b\" && t[2].0 == \"c\" }()"
+        }
+    ],
+    "hints": [
+        "Use text.lowercased() to convert to lowercase",
+        "Use text.split(separator: \" \") to split into words",
+        "Use word.filter { $0.isLetter } to remove punctuation",
+        "Use dictionary[key, default: 0] += 1 to count occurrences",
+        "Use sorted(by:) with a custom comparator for topWords"
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "id": "01-async-fetcher",
+    "title": "Async Data Fetcher",
+    "description": "Create an async function that simulates fetching data with proper error handling.\n\n## Requirements\n\n1. Define a `FetchError` enum with cases:\n   - `invalidID` - the ID is invalid (empty or negative)\n   - `notFound` - the resource wasn't found\n   - `networkError` - general network failure\n\n2. Create a `fetchUser(id: Int) async throws -> User` function that:\n   - Throws `invalidID` if id <= 0\n   - Simulates network delay with `try await Task.sleep(nanoseconds: 100_000_000)`\n   - Returns User(id: id, name: \"User_\\(id)\") for valid IDs\n   - Throws `notFound` if id > 1000\n\n3. Define a simple `User` struct with `id: Int` and `name: String`\n\n4. Create a main async function that fetches multiple users\n\n## Expected Output\n\n```\nFetched: User_1\nFetched: User_42\nError for -1: Invalid ID\nError for 9999: Not found\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "// Define FetchError enum\n\n\n// Define User struct\n\n\n// Implement async fetchUser function\n\n\n// Test function\nfunc testFetching() async {\n    let ids = [1, 42, -1, 9999]\n    \n    for id in ids {\n        do {\n            let user = try await fetchUser(id: id)\n            print(\"Fetched: \\(user.name)\")\n        } catch {\n            print(\"Error for \\(id): \\(error)\")\n        }\n    }\n}\n\n// Run the test\nTask {\n    await testFetching()\n}\n",
+    "testCases": [
+        {
+            "description": "fetchUser should return user for valid ID",
+            "assertion": "let user = try await fetchUser(id: 1); user.name == \"User_1\""
+        },
+        {
+            "description": "fetchUser should throw invalidID for id <= 0",
+            "assertion": "do { try await fetchUser(id: -1); false } catch FetchError.invalidID { true } catch { false }"
+        },
+        {
+            "description": "fetchUser should throw notFound for id > 1000",
+            "assertion": "do { try await fetchUser(id: 9999); false } catch FetchError.notFound { true } catch { false }"
+        },
+        {
+            "description": "User struct should have id and name properties",
+            "assertion": "let u = User(id: 1, name: \"Test\"); u.id == 1 && u.name == \"Test\""
+        }
+    ],
+    "hints": [
+        "Mark the function with: func fetchUser(id: Int) async throws -> User",
+        "Use guard statements to check for invalid conditions",
+        "Task.sleep throws on cancellation, so use try await",
+        "String interpolation: \"User_\\(id)\""
+    ]
+}

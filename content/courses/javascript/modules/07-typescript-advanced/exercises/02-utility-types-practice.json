@@ -1,0 +1,51 @@
+{
+    "id": "02-utility-types-practice",
+    "title": "Utility Types Practice",
+    "description": "Practice using TypeScript's built-in utility types.\n\n## Requirements\n\n1. Define a `User` interface with: `id` (number), `name` (string), `email` (string), `password` (string), `role` (string)\n\n2. Create type aliases using utility types:\n   - `PublicUser`: User without password (use `Omit`)\n   - `UserUpdate`: All User fields optional except id (use `Partial` and `Pick`)\n   - `UserCredentials`: Only email and password (use `Pick`)\n   - `ReadonlyUser`: All fields readonly (use `Readonly`)\n\n3. Implement functions:\n   - `toPublicUser(user: User): PublicUser`\n   - `updateUser(current: User, updates: UserUpdate): User`\n   - `validateCredentials(creds: UserCredentials): boolean`\n\n## Expected Behavior\n\nAll types should be correctly derived and functions should compile without errors.",
+    "order": 2,
+    "language": "typescript",
+    "starterCode": "// Define the User interface\ninterface User {\n    id: number;\n    name: string;\n    email: string;\n    password: string;\n    role: string;\n}\n\n// Create type aliases using utility types\n\n// PublicUser: User without password field\ntype PublicUser = unknown;  // Use Omit\n\n// UserUpdate: Partial User but id is required\ntype UserUpdate = unknown;  // Use Partial + Pick or Omit\n\n// UserCredentials: Only email and password\ntype UserCredentials = unknown;  // Use Pick\n\n// ReadonlyUser: All fields are readonly\ntype ReadonlyUser = unknown;  // Use Readonly\n\n// Implement the functions\n\n// Convert User to PublicUser (remove password)\nfunction toPublicUser(user: User): PublicUser {\n    // Return user without password\n    return {} as PublicUser;\n}\n\n// Update user with partial data\nfunction updateUser(current: User, updates: UserUpdate): User {\n    // Merge current with updates\n    return {} as User;\n}\n\n// Validate credentials (simple check: both non-empty)\nfunction validateCredentials(creds: UserCredentials): boolean {\n    // Return true if email and password are non-empty\n    return false;\n}\n\n// Test your implementation\nconst testUser: User = {\n    id: 1,\n    name: 'Alice',\n    email: 'alice@example.com',\n    password: 'secret123',\n    role: 'admin'\n};\n\nconsole.log('PublicUser:', toPublicUser(testUser));\n// Should not include password\n\nconst updated = updateUser(testUser, { id: 1, name: 'Alice Smith' });\nconsole.log('Updated:', updated);\n\nconsole.log('Valid creds:', validateCredentials({ email: 'a@b.com', password: 'pass' }));\nconsole.log('Invalid creds:', validateCredentials({ email: '', password: 'pass' }));\n",
+    "testCases": [
+        {
+            "description": "PublicUser does not have password property",
+            "assertion": "(function() { const pub: PublicUser = { id: 1, name: 'A', email: 'a@b.com', role: 'user' }; return !('password' in pub); })()"
+        },
+        {
+            "description": "UserCredentials has only email and password",
+            "assertion": "(function() { const creds: UserCredentials = { email: 'a@b.com', password: 'pass' }; return 'email' in creds && 'password' in creds; })()"
+        },
+        {
+            "description": "toPublicUser removes password from result",
+            "assertion": "(function() { const user: User = { id: 1, name: 'A', email: 'a@b.com', password: 'x', role: 'user' }; const pub = toPublicUser(user); return !('password' in pub); })()"
+        },
+        {
+            "description": "toPublicUser preserves other fields",
+            "assertion": "(function() { const user: User = { id: 1, name: 'Alice', email: 'a@b.com', password: 'x', role: 'admin' }; const pub = toPublicUser(user); return pub.name === 'Alice' && pub.role === 'admin'; })()"
+        },
+        {
+            "description": "updateUser merges updates correctly",
+            "assertion": "(function() { const user: User = { id: 1, name: 'A', email: 'a@b.com', password: 'x', role: 'user' }; const result = updateUser(user, { id: 1, name: 'B' }); return result.name === 'B' && result.email === 'a@b.com'; })()"
+        },
+        {
+            "description": "validateCredentials returns true for valid credentials",
+            "assertion": "validateCredentials({ email: 'a@b.com', password: 'secret' }) === true"
+        },
+        {
+            "description": "validateCredentials returns false for empty email",
+            "assertion": "validateCredentials({ email: '', password: 'secret' }) === false"
+        },
+        {
+            "description": "validateCredentials returns false for empty password",
+            "assertion": "validateCredentials({ email: 'a@b.com', password: '' }) === false"
+        }
+    ],
+    "hints": [
+        "PublicUser: Omit<User, 'password'>",
+        "UserUpdate: Partial<Omit<User, 'id'>> & Pick<User, 'id'>",
+        "UserCredentials: Pick<User, 'email' | 'password'>",
+        "ReadonlyUser: Readonly<User>",
+        "toPublicUser: destructure to separate password from rest",
+        "updateUser: return { ...current, ...updates }",
+        "validateCredentials: check email.length > 0 && password.length > 0"
+    ]
+}

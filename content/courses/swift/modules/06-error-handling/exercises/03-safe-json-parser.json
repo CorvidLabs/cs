@@ -1,0 +1,44 @@
+{
+    "id": "03-safe-json-parser",
+    "title": "Safe JSON Parser",
+    "description": "Create a safe JSON navigation system using optional chaining.\n\n## Requirements\n\n1. Create a `JSONValue` struct that wraps `Any?` and provides safe navigation\n\n2. Implement subscript access for both dictionary keys and array indices\n\n3. Add computed properties to extract typed values:\n   - `string: String?`\n   - `int: Int?`\n   - `double: Double?`\n   - `bool: Bool?`\n   - `array: [JSONValue]?`\n\n4. All access should be nil-safe using optional chaining\n\n## Example Usage\n\n```swift\nlet json = JSONValue([\n    \"user\": [\n        \"name\": \"Alice\",\n        \"age\": 30,\n        \"active\": true,\n        \"scores\": [95, 87, 92]\n    ]\n])\n\nlet name = json[\"user\"][\"name\"].string  // Optional(\"Alice\")\nlet age = json[\"user\"][\"age\"].int        // Optional(30)\nlet score = json[\"user\"][\"scores\"][0].int // Optional(95)\nlet missing = json[\"user\"][\"email\"].string // nil\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "public struct JSONValue {\n    private let value: Any?\n\n    public init(_ value: Any?) {\n        self.value = value\n    }\n\n    // Dictionary subscript\n    public subscript(key: String) -> JSONValue {\n        // Get value from dictionary, return new JSONValue\n    }\n\n    // Array subscript\n    public subscript(index: Int) -> JSONValue {\n        // Get value from array, return new JSONValue\n    }\n\n    // Type accessors\n    public var string: String? {\n        // Cast value to String\n    }\n\n    public var int: Int? {\n        // Cast value to Int\n    }\n\n    public var double: Double? {\n        // Cast value to Double\n    }\n\n    public var bool: Bool? {\n        // Cast value to Bool\n    }\n\n    public var array: [JSONValue]? {\n        // Cast value to [Any] and map to [JSONValue]\n    }\n}\n\n// Test your implementation\nlet json = JSONValue([\n    \"user\": [\n        \"name\": \"Alice\",\n        \"age\": 30,\n        \"active\": true,\n        \"scores\": [95, 87, 92]\n    ]\n])\n\nprint(\"Name: \\(json[\"user\"][\"name\"].string ?? \"unknown\")\")\nprint(\"Age: \\(json[\"user\"][\"age\"].int ?? 0)\")\nprint(\"Active: \\(json[\"user\"][\"active\"].bool ?? false)\")\nprint(\"First score: \\(json[\"user\"][\"scores\"][0].int ?? 0)\")\nprint(\"Missing: \\(json[\"missing\"][\"path\"].string ?? \"nil\")\")\n",
+    "testCases": [
+        {
+            "description": "Dictionary subscript returns nested value",
+            "assertion": "{ let j = JSONValue([\"a\": [\"b\": \"c\"]]); return j[\"a\"][\"b\"].string == \"c\" }()"
+        },
+        {
+            "description": "Array subscript returns element",
+            "assertion": "{ let j = JSONValue([\"arr\": [1, 2, 3]]); return j[\"arr\"][1].int == 2 }()"
+        },
+        {
+            "description": "string returns String value",
+            "assertion": "{ let j = JSONValue([\"name\": \"Test\"]); return j[\"name\"].string == \"Test\" }()"
+        },
+        {
+            "description": "int returns Int value",
+            "assertion": "{ let j = JSONValue([\"count\": 42]); return j[\"count\"].int == 42 }()"
+        },
+        {
+            "description": "Missing key returns nil",
+            "assertion": "{ let j = JSONValue([\"a\": 1]); return j[\"b\"].int == nil }()"
+        },
+        {
+            "description": "Deep missing path returns nil",
+            "assertion": "{ let j = JSONValue([\"a\": 1]); return j[\"x\"][\"y\"][\"z\"].string == nil }()"
+        },
+        {
+            "description": "array returns mapped JSONValues",
+            "assertion": "{ let j = JSONValue([\"items\": [1, 2, 3]]); return j[\"items\"].array?.count == 3 }()"
+        }
+    ],
+    "hints": [
+        "Dictionary subscript: (value as? [String: Any])?[key]",
+        "Array subscript: check bounds before accessing (value as? [Any])?[index]",
+        "For string property: return value as? String",
+        "For array: (value as? [Any])?.map { JSONValue($0) }"
+    ]
+}

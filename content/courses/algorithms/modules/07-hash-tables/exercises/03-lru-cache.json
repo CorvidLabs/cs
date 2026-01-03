@@ -1,0 +1,45 @@
+{
+  "id": "03-lru-cache",
+  "title": "LRU Cache",
+  "description": "Design and implement a Least Recently Used (LRU) cache.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "advanced",
+  "starterCode": "class LRUCache:\n    \"\"\"\n    Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.\n    \n    Implement the LRUCache class:\n    - LRUCache(capacity) Initialize the cache with positive size capacity.\n    - get(key) Return the value of the key if it exists, otherwise return -1.\n    - put(key, value) Update or insert the value. If capacity is exceeded,\n      evict the least recently used key.\n    \n    The functions get and put must each run in O(1) average time complexity.\n    \n    Example:\n        cache = LRUCache(2)  # capacity = 2\n        cache.put(1, 1)      # cache is {1=1}\n        cache.put(2, 2)      # cache is {1=1, 2=2}\n        cache.get(1)         # returns 1, cache is {2=2, 1=1}\n        cache.put(3, 3)      # evicts key 2, cache is {1=1, 3=3}\n        cache.get(2)         # returns -1 (not found)\n        cache.put(4, 4)      # evicts key 1, cache is {3=3, 4=4}\n        cache.get(1)         # returns -1 (not found)\n        cache.get(3)         # returns 3\n        cache.get(4)         # returns 4\n    \"\"\"\n    \n    def __init__(self, capacity: int):\n        # Your code here\n        pass\n    \n    def get(self, key: int) -> int:\n        # Your code here\n        pass\n    \n    def put(self, key: int, value: int) -> None:\n        # Your code here\n        pass",
+  "solutionCode": "from collections import OrderedDict\n\nclass LRUCache:\n    def __init__(self, capacity: int):\n        self.capacity = capacity\n        self.cache = OrderedDict()\n    \n    def get(self, key: int) -> int:\n        if key not in self.cache:\n            return -1\n        # Move to end (most recently used)\n        self.cache.move_to_end(key)\n        return self.cache[key]\n    \n    def put(self, key: int, value: int) -> None:\n        if key in self.cache:\n            # Update existing key and move to end\n            self.cache.move_to_end(key)\n        self.cache[key] = value\n        \n        if len(self.cache) > self.capacity:\n            # Remove oldest (first item)\n            self.cache.popitem(last=False)",
+  "testCases": [
+    {
+      "input": {"operations": ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"], "args": [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]},
+      "expected": [null, null, null, 1, null, -1, null, -1, 3, 4],
+      "description": "Standard LRU operations"
+    },
+    {
+      "input": {"operations": ["LRUCache", "put", "get"], "args": [[1], [1, 1], [1]]},
+      "expected": [null, null, 1],
+      "description": "Capacity 1"
+    },
+    {
+      "input": {"operations": ["LRUCache", "put", "put", "put", "get"], "args": [[2], [1, 1], [2, 2], [3, 3], [1]]},
+      "expected": [null, null, null, null, -1],
+      "description": "Eviction of LRU"
+    },
+    {
+      "input": {"operations": ["LRUCache", "put", "put", "get", "put", "get"], "args": [[2], [1, 1], [2, 2], [1], [3, 3], [2]]},
+      "expected": [null, null, null, 1, null, -1],
+      "description": "Access updates recency"
+    },
+    {
+      "input": {"operations": ["LRUCache", "put", "put", "put", "put", "get", "get"], "args": [[2], [2, 1], [2, 2], [2, 3], [2, 4], [2], [1]]},
+      "expected": [null, null, null, null, null, 4, -1],
+      "description": "Update same key multiple times"
+    }
+  ],
+  "hints": [
+    "You need O(1) lookup AND O(1) removal of the least recently used item",
+    "A hash map gives O(1) lookup, but how do you track access order?",
+    "A doubly linked list can track order with O(1) insertion/removal at both ends",
+    "Python's OrderedDict combines both features - it's a dict that remembers insertion order",
+    "move_to_end() moves a key to the end, popitem(last=False) removes from the front"
+  ],
+  "explanation": "An LRU cache needs two key operations in O(1): lookup by key and eviction of the least recently used item. We use an OrderedDict which maintains insertion order. On get(), we move the key to the end (most recent). On put(), if the key exists we move it to end and update; otherwise we insert at end. If capacity is exceeded, we remove from the front (oldest). This gives O(1) for both operations. An alternative implementation uses a hash map plus a doubly linked list."
+}

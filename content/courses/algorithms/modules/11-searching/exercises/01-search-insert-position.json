@@ -1,0 +1,44 @@
+{
+  "id": "01-search-insert-position",
+  "title": "Search Insert Position",
+  "description": "Find the index where a target should be inserted in a sorted array.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "beginner",
+  "starterCode": "def search_insert(nums: list[int], target: int) -> int:\n    \"\"\"\n    Find the index where target should be inserted in sorted array.\n    \n    If target exists, return its index.\n    If not, return the index where it would be inserted.\n    \n    Args:\n        nums: Sorted array of distinct integers\n        target: Value to find or insert position for\n        \n    Returns:\n        Index where target is or should be inserted\n        \n    Example:\n        Input: nums = [1,3,5,6], target = 5\n        Output: 2  # Found at index 2\n        \n        Input: nums = [1,3,5,6], target = 2\n        Output: 1  # Would insert at index 1\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def search_insert(nums: list[int], target: int) -> int:\n    left, right = 0, len(nums)\n    \n    while left < right:\n        mid = left + (right - left) // 2\n        \n        if nums[mid] < target:\n            left = mid + 1\n        else:\n            right = mid\n    \n    return left",
+  "testCases": [
+    {
+      "input": {"nums": [1, 3, 5, 6], "target": 5},
+      "expected": 2,
+      "description": "Target exists in array"
+    },
+    {
+      "input": {"nums": [1, 3, 5, 6], "target": 2},
+      "expected": 1,
+      "description": "Target between elements"
+    },
+    {
+      "input": {"nums": [1, 3, 5, 6], "target": 7},
+      "expected": 4,
+      "description": "Target larger than all elements"
+    },
+    {
+      "input": {"nums": [1, 3, 5, 6], "target": 0},
+      "expected": 0,
+      "description": "Target smaller than all elements"
+    },
+    {
+      "input": {"nums": [1], "target": 1},
+      "expected": 0,
+      "description": "Single element, target exists"
+    }
+  ],
+  "hints": [
+    "This is finding the lower bound - first index where nums[i] >= target",
+    "Use binary search with left < right condition",
+    "When nums[mid] < target, search right half",
+    "When nums[mid] >= target, search left half (including mid)"
+  ],
+  "explanation": "This is a lower bound problem - find the first position where the value >= target. Use binary search with left < right. If nums[mid] < target, the answer is in the right half (left = mid + 1). Otherwise, the answer is at mid or in the left half (right = mid). Return left as the insert position. Time: O(log n), Space: O(1)."
+}

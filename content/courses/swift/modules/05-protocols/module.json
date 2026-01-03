@@ -1,0 +1,17 @@
+{
+    "id": "05-protocols",
+    "title": "Protocols and Protocol-Oriented Programming",
+    "description": "Learn Swift's protocol-oriented programming paradigm. Understand how to define protocols, provide default implementations, and use protocol composition to build flexible, reusable code.",
+    "order": 5,
+    "lessons": [
+        "01-protocol-basics",
+        "02-protocol-conformance",
+        "03-protocol-extensions",
+        "04-protocol-composition"
+    ],
+    "exercises": [
+        "01-describable-protocol",
+        "02-vehicle-protocol",
+        "03-stackable-protocol"
+    ]
+}

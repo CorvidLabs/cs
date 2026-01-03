@@ -1,0 +1,29 @@
+{
+    "id": "03-focus-styles",
+    "title": "Create Accessible Focus Styles",
+    "description": "Design visible, attractive focus indicators for interactive elements.\n\n## Requirements\n\n1. Style all focusable elements with `:focus`:\n   - Add a visible outline (at least 2px)\n   - Use outline-offset for breathing room\n   - Choose a high-contrast color\n\n2. Style `.button:focus`:\n   - Use a box-shadow instead of outline for a nicer look\n   - Include a white inner shadow and colored outer shadow\n\n3. Style `.link:focus`:\n   - Remove default outline\n   - Add a colored bottom border\n   - Change background color slightly\n\n4. Create a `.skip-link` that:\n   - Is positioned off-screen by default\n   - Becomes visible when focused\n\n## Expected Result\n\nClear, attractive focus indicators that work on any background.",
+    "order": 3,
+    "language": "css",
+    "starterCode": "/* Global focus styles */\n:focus {\n    /* Add your focus styles */\n}\n\n/* Button focus */\n.button:focus {\n    outline: none;\n    /* Add box-shadow focus effect */\n}\n\n/* Link focus */\n.link:focus {\n    /* Add custom link focus */\n}\n\n/* Skip link - hidden by default, visible on focus */\n.skip-link {\n    position: absolute;\n    /* Position off-screen */\n}\n\n.skip-link:focus {\n    /* Bring into view */\n}",
+    "testCases": [
+        {
+            "description": "Focus should have visible outline or shadow",
+            "assertion": "getComputedStyle(document.querySelector(':focus') || document.body).outlineWidth !== '0px' || getComputedStyle(document.querySelector(':focus') || document.body).boxShadow !== 'none'"
+        },
+        {
+            "description": "Button focus should have box-shadow",
+            "assertion": "true"
+        },
+        {
+            "description": "Skip link should be positioned absolute",
+            "assertion": "getComputedStyle(document.querySelector('.skip-link')).position === 'absolute'"
+        }
+    ],
+    "hints": [
+        "Use outline: 2px solid #3498db for basic focus",
+        "Add outline-offset: 2px for spacing",
+        "For button: box-shadow: 0 0 0 2px white, 0 0 0 4px #3498db",
+        "Skip link hidden: top: -40px or transform: translateY(-100%)",
+        "Skip link visible on focus: top: 0 or transform: translateY(0)"
+    ]
+}

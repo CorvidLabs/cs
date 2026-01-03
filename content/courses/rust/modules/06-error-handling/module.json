@@ -1,0 +1,17 @@
+{
+    "id": "06-error-handling",
+    "title": "Error Handling",
+    "description": "Master Rust's approach to error handling. Learn to use Result effectively, propagate errors with the ? operator, and design custom error types.",
+    "order": 6,
+    "lessons": [
+        "01-result-basics",
+        "02-question-operator",
+        "03-custom-errors",
+        "04-error-patterns"
+    ],
+    "exercises": [
+        "01-result-handling",
+        "02-error-propagation",
+        "03-custom-error-type"
+    ]
+}

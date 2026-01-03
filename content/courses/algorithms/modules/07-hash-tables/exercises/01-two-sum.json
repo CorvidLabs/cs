@@ -1,0 +1,49 @@
+{
+  "id": "01-two-sum",
+  "title": "Two Sum",
+  "description": "Find two numbers in an array that add up to a target value using a hash map.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "beginner",
+  "starterCode": "def two_sum(nums: list[int], target: int) -> list[int]:\n    \"\"\"\n    Find indices of two numbers that add up to target.\n    \n    Given an array of integers nums and an integer target,\n    return indices of the two numbers such that they add up to target.\n    \n    You may assume that each input has exactly one solution,\n    and you may not use the same element twice.\n    \n    Args:\n        nums: List of integers\n        target: Target sum\n        \n    Returns:\n        List containing the two indices\n        \n    Example:\n        Input: nums = [2, 7, 11, 15], target = 9\n        Output: [0, 1]\n        Explanation: nums[0] + nums[1] = 2 + 7 = 9\n        \n        Input: nums = [3, 2, 4], target = 6\n        Output: [1, 2]\n        Explanation: nums[1] + nums[2] = 2 + 4 = 6\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def two_sum(nums: list[int], target: int) -> list[int]:\n    seen = {}  # value -> index\n    \n    for i, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    \n    return []",
+  "testCases": [
+    {
+      "input": {"nums": [2, 7, 11, 15], "target": 9},
+      "expected": [0, 1],
+      "description": "Standard case"
+    },
+    {
+      "input": {"nums": [3, 2, 4], "target": 6},
+      "expected": [1, 2],
+      "description": "Target in middle of array"
+    },
+    {
+      "input": {"nums": [3, 3], "target": 6},
+      "expected": [0, 1],
+      "description": "Duplicate values"
+    },
+    {
+      "input": {"nums": [1, 2, 3, 4, 5], "target": 9},
+      "expected": [3, 4],
+      "description": "Target at end"
+    },
+    {
+      "input": {"nums": [-1, -2, -3, -4, -5], "target": -8},
+      "expected": [2, 4],
+      "description": "Negative numbers"
+    },
+    {
+      "input": {"nums": [0, 4, 3, 0], "target": 0},
+      "expected": [0, 3],
+      "description": "Target is zero"
+    }
+  ],
+  "hints": [
+    "For each number, you need to find if (target - number) exists in the array",
+    "A brute force approach would check all pairs in O(n^2), but we can do better",
+    "Use a hash map to store numbers you've seen and their indices",
+    "As you iterate, check if the complement (target - current) is already in the map"
+  ],
+  "explanation": "We use a hash map to store each number and its index as we iterate. For each number, we check if its complement (target - num) exists in the map. If it does, we found our pair. If not, we add the current number to the map and continue. This gives us O(n) time complexity with a single pass through the array, compared to O(n^2) for the brute force approach."
+}

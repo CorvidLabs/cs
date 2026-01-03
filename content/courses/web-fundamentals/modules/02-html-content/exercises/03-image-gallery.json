@@ -1,0 +1,52 @@
+{
+    "id": "03-image-gallery",
+    "title": "Accessible Image Gallery",
+    "description": "Create an image gallery with proper accessibility attributes.\n\n## Requirements\n\n1. Use a `<section>` with class \"gallery\" and aria-labelledby=\"gallery-title\"\n2. Add an `<h2>` with id=\"gallery-title\" and text \"Photo Gallery\"\n3. Create a `<div>` with class \"gallery-grid\" containing 3 figures\n4. Each `<figure>` should have:\n   - An `<img>` with src, alt, width, and height attributes\n   - A `<figcaption>` describing the image\n\n## Image Details\n\n1. First image: src=\"mountain.jpg\", alt=\"Snow-capped mountain at sunset\", 400x300\n2. Second image: src=\"forest.jpg\", alt=\"Misty forest in autumn\", 400x300\n3. Third image: src=\"ocean.jpg\", alt=\"Waves crashing on rocky shore\", 400x300\n\n## Expected Structure\n\n```html\n<section class=\"gallery\" aria-labelledby=\"gallery-title\">\n    <h2 id=\"gallery-title\">Photo Gallery</h2>\n    <div class=\"gallery-grid\">\n        <figure>\n            <img src=\"...\" alt=\"...\" width=\"...\" height=\"...\">\n            <figcaption>...</figcaption>\n        </figure>\n        ...\n    </div>\n</section>\n```",
+    "order": 3,
+    "language": "html",
+    "starterCode": "<!-- Create an accessible image gallery -->\n<section>\n    <!-- Add gallery title -->\n    \n    <!-- Add gallery grid with 3 figures -->\n    <div class=\"gallery-grid\">\n        \n    </div>\n</section>",
+    "testCases": [
+        {
+            "description": "Section should have class \"gallery\"",
+            "assertion": "document.querySelector('section.gallery') !== null"
+        },
+        {
+            "description": "Section should have aria-labelledby attribute",
+            "assertion": "document.querySelector('section.gallery').getAttribute('aria-labelledby') === 'gallery-title'"
+        },
+        {
+            "description": "Section should have h2 with id \"gallery-title\"",
+            "assertion": "document.querySelector('section.gallery h2#gallery-title') !== null"
+        },
+        {
+            "description": "Gallery should have 3 figure elements",
+            "assertion": "document.querySelectorAll('section.gallery figure').length === 3"
+        },
+        {
+            "description": "Each figure should have an img element",
+            "assertion": "document.querySelectorAll('section.gallery figure img').length === 3"
+        },
+        {
+            "description": "All images should have alt attributes",
+            "assertion": "[...document.querySelectorAll('section.gallery figure img')].every(img => img.alt.length > 0)"
+        },
+        {
+            "description": "All images should have width and height attributes",
+            "assertion": "[...document.querySelectorAll('section.gallery figure img')].every(img => img.getAttribute('width') && img.getAttribute('height'))"
+        },
+        {
+            "description": "Each figure should have a figcaption",
+            "assertion": "document.querySelectorAll('section.gallery figure figcaption').length === 3"
+        },
+        {
+            "description": "First image should have correct src",
+            "assertion": "document.querySelector('section.gallery figure img').getAttribute('src') === 'mountain.jpg'"
+        }
+    ],
+    "hints": [
+        "Use aria-labelledby=\"gallery-title\" on the section",
+        "Use id=\"gallery-title\" on the h2",
+        "Image format: <img src=\"...\" alt=\"...\" width=\"400\" height=\"300\">",
+        "Figcaption provides visible caption, alt provides screen reader description"
+    ]
+}

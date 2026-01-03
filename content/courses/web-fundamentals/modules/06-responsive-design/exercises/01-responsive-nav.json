@@ -1,0 +1,37 @@
+{
+    "id": "01-responsive-nav",
+    "title": "Build a Responsive Navigation",
+    "description": "Create a navigation bar that adapts to different screen sizes using media queries.\n\n## Requirements\n\n1. Style the `.navbar`:\n   - Use flexbox layout\n   - Column direction on mobile (default)\n   - 16px padding\n   - #333 background color\n\n2. Style the `.nav-links` (ul):\n   - Flexbox with column direction on mobile\n   - 16px gap\n   - No list style, margin, or padding\n\n3. Add a media query at 768px:\n   - Change navbar to row direction with space-between\n   - Change nav-links to row direction\n\n## Expected Result\n\nVertical stacked navigation on mobile, horizontal on tablet and larger.",
+    "order": 1,
+    "language": "css",
+    "starterCode": "/* Mobile styles (default) */\n.navbar {\n    /* Add your styles here */\n}\n\n.nav-links {\n    /* Add your styles here */\n}\n\n.nav-link {\n    color: white;\n    text-decoration: none;\n}\n\n/* Tablet and larger - add your media query below */",
+    "testCases": [
+        {
+            "description": "Navbar should use flexbox",
+            "assertion": "getComputedStyle(document.querySelector('.navbar')).display === 'flex'"
+        },
+        {
+            "description": "Navbar should have #333 background",
+            "assertion": "getComputedStyle(document.querySelector('.navbar')).backgroundColor === 'rgb(51, 51, 51)'"
+        },
+        {
+            "description": "Nav links list should use flexbox",
+            "assertion": "getComputedStyle(document.querySelector('.nav-links')).display === 'flex'"
+        },
+        {
+            "description": "Nav links should have no list style",
+            "assertion": "getComputedStyle(document.querySelector('.nav-links')).listStyleType === 'none'"
+        },
+        {
+            "description": "Nav links should have 16px gap",
+            "assertion": "getComputedStyle(document.querySelector('.nav-links')).gap === '16px'"
+        }
+    ],
+    "hints": [
+        "Use display: flex on both .navbar and .nav-links",
+        "Use flex-direction: column for mobile styles",
+        "Use @media (min-width: 768px) for tablet styles",
+        "Inside the media query, change flex-direction to row",
+        "Use justify-content: space-between on navbar in the media query"
+    ]
+}

@@ -1,0 +1,36 @@
+{
+    "id": "01-describable-protocol",
+    "title": "Describable Protocol",
+    "description": "Create a protocol that provides a description capability and implement it for multiple types.\n\n## Requirements\n\n1. Define a `Describable` protocol with a `description` property (read-only String)\n2. Create a `Book` struct with `title` and `author` properties that conforms to `Describable`\n3. Create a `Movie` struct with `title` and `director` properties that conforms to `Describable`\n4. Add a protocol extension that provides a `printDescription()` method\n\n## Expected Output\n\nWhen you create instances and call `printDescription()`:\n\n```\n\"1984\" by George Orwell\n\"Inception\" directed by Christopher Nolan\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "// Define the Describable protocol\n// It should require a 'description' property of type String\n\n\n// Add a protocol extension with a printDescription() method\n// that prints the description\n\n\n// Create a Book struct with title and author\n// Make it conform to Describable\n\n\n// Create a Movie struct with title and director\n// Make it conform to Describable\n\n\n// Test your implementation\nlet book = Book(title: \"1984\", author: \"George Orwell\")\nlet movie = Movie(title: \"Inception\", director: \"Christopher Nolan\")\n\nbook.printDescription()\nmovie.printDescription()\n",
+    "testCases": [
+        {
+            "description": "Describable protocol should be defined with description property",
+            "assertion": "protocol Describable { var description: String { get } }"
+        },
+        {
+            "description": "Book struct should conform to Describable",
+            "assertion": "Book.self is Describable.Type || book is Describable"
+        },
+        {
+            "description": "Movie struct should conform to Describable",
+            "assertion": "Movie.self is Describable.Type || movie is Describable"
+        },
+        {
+            "description": "Book description should include title and author",
+            "assertion": "book.description.contains(\"1984\") && book.description.contains(\"George Orwell\")"
+        },
+        {
+            "description": "printDescription() should be available via protocol extension",
+            "assertion": "output.contains(\"1984\") && output.contains(\"Inception\")"
+        }
+    ],
+    "hints": [
+        "Define the protocol with: protocol Describable { var description: String { get } }",
+        "Use an extension to add the printDescription() method: extension Describable { func printDescription() { print(description) } }",
+        "For Book, the description could be: \"\\\"\\(title)\\\" by \\(author)\"",
+        "For Movie, the description could be: \"\\\"\\(title)\\\" directed by \\(director)\""
+    ]
+}

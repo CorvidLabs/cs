@@ -1,0 +1,17 @@
+{
+    "id": "03-collections-objects",
+    "title": "Collections & Objects",
+    "description": "Learn to work with JavaScript's core data structures. Master arrays for ordered collections, objects for key-value data, and modern features like destructuring and the spread operator.",
+    "order": 3,
+    "lessons": [
+        "01-arrays",
+        "02-objects",
+        "03-destructuring",
+        "04-spread-operator"
+    ],
+    "exercises": [
+        "01-array-statistics",
+        "02-user-profile",
+        "03-shopping-cart"
+    ]
+}

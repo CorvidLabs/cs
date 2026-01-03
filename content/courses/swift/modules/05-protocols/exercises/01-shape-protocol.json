@@ -1,0 +1,36 @@
+{
+    "id": "01-shape-protocol",
+    "title": "Shape Protocol",
+    "description": "Create a protocol-based shape system demonstrating protocol requirements and conformance.\n\n## Requirements\n\n1. Create a `Shape` protocol with:\n   - `area: Double` computed property\n   - `perimeter: Double` computed property\n   - `description: String` computed property\n\n2. Create a `Circle` struct conforming to `Shape`:\n   - Property: `radius: Double`\n   - Area = pi * radius * radius\n   - Perimeter = 2 * pi * radius\n\n3. Create a `Rectangle` struct conforming to `Shape`:\n   - Properties: `width: Double`, `height: Double`\n   - Area = width * height\n   - Perimeter = 2 * (width + height)\n\n4. Create a function `totalArea(_ shapes: [any Shape]) -> Double`\n\n## Example Usage\n\n```swift\nlet circle = Circle(radius: 5)\nprint(circle.area)       // ~78.54\nprint(circle.perimeter)  // ~31.42\n\nlet rect = Rectangle(width: 10, height: 5)\nprint(rect.area)       // 50.0\nprint(rect.perimeter)  // 30.0\n\nlet shapes: [any Shape] = [circle, rect]\nprint(totalArea(shapes))  // ~128.54\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "import Foundation\n\n// Define the Shape protocol\npublic protocol Shape {\n    var area: Double { get }\n    var perimeter: Double { get }\n    var description: String { get }\n}\n\n// Create Circle struct\npublic struct Circle: Shape {\n    public let radius: Double\n\n    public init(radius: Double) {\n        self.radius = radius\n    }\n\n    public var area: Double {\n        // Your code here\n    }\n\n    public var perimeter: Double {\n        // Your code here\n    }\n\n    public var description: String {\n        \"Circle with radius \\(radius)\"\n    }\n}\n\n// Create Rectangle struct\npublic struct Rectangle: Shape {\n    public let width: Double\n    public let height: Double\n\n    public init(width: Double, height: Double) {\n        self.width = width\n        self.height = height\n    }\n\n    public var area: Double {\n        // Your code here\n    }\n\n    public var perimeter: Double {\n        // Your code here\n    }\n\n    public var description: String {\n        \"Rectangle \\(width) x \\(height)\"\n    }\n}\n\n// Create a function to calculate total area\npublic func totalArea(_ shapes: [any Shape]) -> Double {\n    // Your code here\n}\n\n// Test your implementation\nlet circle = Circle(radius: 5)\nprint(\"Circle area: \\(circle.area)\")\nprint(\"Circle perimeter: \\(circle.perimeter)\")\n\nlet rect = Rectangle(width: 10, height: 5)\nprint(\"Rectangle area: \\(rect.area)\")\nprint(\"Rectangle perimeter: \\(rect.perimeter)\")\n\nlet shapes: [any Shape] = [circle, rect]\nprint(\"Total area: \\(totalArea(shapes))\")\n",
+    "testCases": [
+        {
+            "description": "Circle area should be pi * r^2",
+            "assertion": "abs(Circle(radius: 5).area - 78.539816) < 0.01"
+        },
+        {
+            "description": "Circle perimeter should be 2 * pi * r",
+            "assertion": "abs(Circle(radius: 5).perimeter - 31.415927) < 0.01"
+        },
+        {
+            "description": "Rectangle area should be width * height",
+            "assertion": "Rectangle(width: 10, height: 5).area == 50.0"
+        },
+        {
+            "description": "Rectangle perimeter should be 2 * (width + height)",
+            "assertion": "Rectangle(width: 10, height: 5).perimeter == 30.0"
+        },
+        {
+            "description": "totalArea should sum all shape areas",
+            "assertion": "{ let shapes: [any Shape] = [Rectangle(width: 10, height: 5), Rectangle(width: 2, height: 3)]; return totalArea(shapes) == 56.0 }()"
+        }
+    ],
+    "hints": [
+        "Use Double.pi for the pi constant",
+        "Circle area: Double.pi * radius * radius",
+        "Circle perimeter: 2 * Double.pi * radius",
+        "Use shapes.reduce(0) { $0 + $1.area } for totalArea"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "08-accessibility",
+    "title": "Accessibility",
+    "description": "Build inclusive websites that work for everyone. Learn WCAG guidelines, ARIA, keyboard navigation, screen readers, and color contrast requirements.",
+    "order": 8,
+    "lessons": [
+        "01-wcag-intro",
+        "02-aria-basics",
+        "03-keyboard-navigation",
+        "04-color-contrast"
+    ],
+    "exercises": [
+        "01-accessible-form",
+        "02-keyboard-menu",
+        "03-aria-dialog"
+    ]
+}

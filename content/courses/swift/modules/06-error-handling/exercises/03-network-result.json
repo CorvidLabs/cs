@@ -1,0 +1,36 @@
+{
+    "id": "03-network-result",
+    "title": "Network Result Handler",
+    "description": "Use the Result type to handle simulated network responses.\n\n## Requirements\n\n1. Define `NetworkError` enum with cases:\n   - `noConnection`\n   - `timeout`\n   - `serverError(statusCode: Int)`\n   - `decodingFailed`\n\n2. Define a `User` struct with `id: Int` and `name: String`\n\n3. Create a `fetchUser(id: Int) -> Result<User, NetworkError>` function:\n   - id 1: Return success with User(id: 1, name: \"Alice\")\n   - id 2: Return success with User(id: 2, name: \"Bob\")\n   - id 0: Return failure with `.noConnection`\n   - id -1: Return failure with `.timeout`\n   - id 404: Return failure with `.serverError(statusCode: 404)`\n   - Other: Return failure with `.serverError(statusCode: 500)`\n\n4. Create a `displayUser(result: Result<User, NetworkError>)` function that prints appropriate messages\n\n## Expected Output\n\n```\nUser: Alice (ID: 1)\nUser: Bob (ID: 2)\nError: No internet connection\nError: Request timed out\nError: Server error (404)\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "// Define NetworkError enum\n\n\n// Define User struct\n\n\n// Implement fetchUser function returning Result\n\n\n// Implement displayUser function\n\n\n// Test your implementation\nlet ids = [1, 2, 0, -1, 404]\n\nfor id in ids {\n    let result = fetchUser(id: id)\n    displayUser(result: result)\n}\n",
+    "testCases": [
+        {
+            "description": "fetchUser(id: 1) should return success",
+            "assertion": "if case .success(let user) = fetchUser(id: 1) { user.name == \"Alice\" } else { false }"
+        },
+        {
+            "description": "fetchUser(id: 0) should return noConnection error",
+            "assertion": "if case .failure(.noConnection) = fetchUser(id: 0) { true } else { false }"
+        },
+        {
+            "description": "fetchUser(id: -1) should return timeout error",
+            "assertion": "if case .failure(.timeout) = fetchUser(id: -1) { true } else { false }"
+        },
+        {
+            "description": "fetchUser(id: 404) should return serverError with 404",
+            "assertion": "if case .failure(.serverError(let code)) = fetchUser(id: 404) { code == 404 } else { false }"
+        },
+        {
+            "description": "Result.get() should work for success case",
+            "assertion": "(try? fetchUser(id: 1).get())?.name == \"Alice\""
+        }
+    ],
+    "hints": [
+        "Return .success(User(...)) for valid users",
+        "Return .failure(.noConnection) for id 0",
+        "Use switch in displayUser to handle .success and .failure cases",
+        "Pattern match the serverError case to extract statusCode"
+    ]
+}

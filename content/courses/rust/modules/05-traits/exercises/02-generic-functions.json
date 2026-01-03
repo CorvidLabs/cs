@@ -1,0 +1,44 @@
+{
+    "id": "02-generic-functions",
+    "title": "Generic Functions with Trait Bounds",
+    "description": "Write generic functions that work with multiple types using trait bounds.\n\n## Requirements\n\n1. Implement `find_largest<T: PartialOrd>(list: &[T]) -> Option<&T>`\n   - Return a reference to the largest element\n   - Return None if the list is empty\n\n2. Implement `print_all<T: Display>(items: &[T])`\n   - Print each item on its own line\n\n3. Implement `count_matches<T: PartialEq>(items: &[T], target: &T) -> usize`\n   - Count how many items equal the target\n\n## Examples\n\n- `find_largest(&[1, 5, 3])` returns `Some(&5)`\n- `print_all(&[\"a\", \"b\", \"c\"])` prints each on a line\n- `count_matches(&[1, 2, 1, 3, 1], &1)` returns `3`",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "use std::fmt::Display;\n\n// Find the largest element in a slice\n// Return None if empty\nfn find_largest<T: PartialOrd>(list: &[T]) -> Option<&T> {\n    todo!()\n}\n\n// Print each item on its own line\nfn print_all<T: Display>(items: &[T]) {\n    todo!()\n}\n\n// Count how many items equal the target\nfn count_matches<T: PartialEq>(items: &[T], target: &T) -> usize {\n    todo!()\n}\n\nfn main() {\n    // Test find_largest\n    let numbers = vec![34, 50, 25, 100, 65];\n    match find_largest(&numbers) {\n        Some(n) => println!(\"Largest: {}\", n),\n        None => println!(\"Empty list\"),\n    }\n\n    let chars = vec!['y', 'm', 'a', 'q'];\n    if let Some(c) = find_largest(&chars) {\n        println!(\"Largest char: {}\", c);\n    }\n\n    // Test print_all\n    println!(\"\\nPrinting items:\");\n    print_all(&[1, 2, 3]);\n\n    // Test count_matches\n    let data = vec![1, 2, 1, 3, 1, 4, 1];\n    println!(\"\\nCount of 1s: {}\", count_matches(&data, &1));\n}\n",
+    "testCases": [
+        {
+            "description": "find_largest finds largest number",
+            "assertion": "*find_largest(&[1, 5, 3, 2]).unwrap() == 5"
+        },
+        {
+            "description": "find_largest returns None for empty",
+            "assertion": "find_largest::<i32>(&[]).is_none()"
+        },
+        {
+            "description": "find_largest works with chars",
+            "assertion": "*find_largest(&['a', 'z', 'm']).unwrap() == 'z'"
+        },
+        {
+            "description": "find_largest handles single element",
+            "assertion": "*find_largest(&[42]).unwrap() == 42"
+        },
+        {
+            "description": "count_matches counts correctly",
+            "assertion": "count_matches(&[1, 2, 1, 3, 1], &1) == 3"
+        },
+        {
+            "description": "count_matches returns 0 when no matches",
+            "assertion": "count_matches(&[1, 2, 3], &4) == 0"
+        },
+        {
+            "description": "count_matches works with strings",
+            "assertion": "count_matches(&[\"a\", \"b\", \"a\"], &\"a\") == 2"
+        }
+    ],
+    "hints": [
+        "For find_largest, start with list.first()? then iterate comparing",
+        "Use PartialOrd's > operator to compare elements",
+        "For print_all, use a simple for loop with println!",
+        "For count_matches, use filter and count: items.iter().filter(|x| *x == target).count()"
+    ]
+}

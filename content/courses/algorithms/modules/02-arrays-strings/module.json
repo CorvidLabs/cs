@@ -1,0 +1,16 @@
+{
+  "id": "02-arrays-strings",
+  "title": "Arrays and Strings",
+  "description": "Master fundamental array and string manipulation techniques including the two-pointer technique, sliding window pattern, and common string operations. These techniques form the foundation for solving a wide variety of algorithmic problems efficiently.",
+  "order": 2,
+  "lessons": [
+    "01-two-pointer-technique",
+    "02-sliding-window",
+    "03-string-manipulation"
+  ],
+  "exercises": [
+    "01-pair-sum",
+    "02-max-subarray",
+    "03-palindrome-check"
+  ]
+}

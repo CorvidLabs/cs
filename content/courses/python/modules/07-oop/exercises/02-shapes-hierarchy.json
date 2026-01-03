@@ -1,0 +1,48 @@
+{
+    "id": "02-shapes-hierarchy",
+    "title": "Shapes Class Hierarchy",
+    "description": "Create a hierarchy of shape classes using inheritance.\n\n## Requirements\n\n1. Create a base `Shape` class with:\n   - `__init__(self, color)` - Store the color\n   - `area(self)` - Return 0 (to be overridden)\n   - `describe(self)` - Return \"A {color} shape\"\n\n2. Create a `Rectangle` class (inherits from Shape):\n   - `__init__(self, width, height, color)` - Initialize dimensions and color\n   - `area(self)` - Return width * height\n   - `describe(self)` - Return \"A {color} rectangle ({width}x{height})\"\n\n3. Create a `Circle` class (inherits from Shape):\n   - `__init__(self, radius, color)` - Initialize radius and color\n   - `area(self)` - Return 3.14159 * radius^2\n   - `describe(self)` - Return \"A {color} circle (radius={radius})\"\n\n## Example Usage\n\n```python\nrect = Rectangle(10, 5, \"blue\")\nprint(rect.describe())  # A blue rectangle (10x5)\nprint(rect.area())      # 50\n\ncircle = Circle(7, \"red\")\nprint(circle.describe())  # A red circle (radius=7)\nprint(circle.area())      # 153.93791\n```",
+    "order": 2,
+    "language": "python",
+    "starterCode": "class Shape:\n    def __init__(self, color):\n        pass\n\n    def area(self):\n        pass\n\n    def describe(self):\n        pass\n\n\nclass Rectangle(Shape):\n    def __init__(self, width, height, color):\n        # Call parent __init__ and store dimensions\n        pass\n\n    def area(self):\n        pass\n\n    def describe(self):\n        pass\n\n\nclass Circle(Shape):\n    def __init__(self, radius, color):\n        # Call parent __init__ and store radius\n        pass\n\n    def area(self):\n        pass\n\n    def describe(self):\n        pass\n\n\n# Test your classes\nshape = Shape(\"black\")\nprint(shape.describe())\n\nrect = Rectangle(10, 5, \"blue\")\nprint(rect.describe())\nprint(f\"Area: {rect.area()}\")\n\ncircle = Circle(7, \"red\")\nprint(circle.describe())\nprint(f\"Area: {circle.area():.2f}\")\n",
+    "testCases": [
+        {
+            "description": "Shape class exists",
+            "assertion": "'Shape' in dir()"
+        },
+        {
+            "description": "Rectangle inherits from Shape",
+            "assertion": "issubclass(Rectangle, Shape)"
+        },
+        {
+            "description": "Circle inherits from Shape",
+            "assertion": "issubclass(Circle, Shape)"
+        },
+        {
+            "description": "Shape.describe returns correct format",
+            "assertion": "Shape('blue').describe() == 'A blue shape'"
+        },
+        {
+            "description": "Rectangle.area calculates correctly",
+            "assertion": "Rectangle(10, 5, 'blue').area() == 50"
+        },
+        {
+            "description": "Rectangle.describe returns correct format",
+            "assertion": "Rectangle(10, 5, 'blue').describe() == 'A blue rectangle (10x5)'"
+        },
+        {
+            "description": "Circle.area calculates correctly",
+            "assertion": "abs(Circle(7, 'red').area() - 153.93791) < 0.01"
+        },
+        {
+            "description": "Circle.describe returns correct format",
+            "assertion": "Circle(7, 'red').describe() == 'A red circle (radius=7)'"
+        }
+    ],
+    "hints": [
+        "Use super().__init__(color) to call the parent's __init__",
+        "Store color as self.color in the Shape class",
+        "Use 3.14159 for pi in the Circle area calculation",
+        "Format strings with f-strings: f'A {self.color} rectangle ({self.width}x{self.height})'"
+    ]
+}

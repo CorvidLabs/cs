@@ -1,0 +1,57 @@
+{
+    "id": "02-fizz-buzz",
+    "title": "FizzBuzz",
+    "description": "Implement the classic FizzBuzz programming challenge.\n\n## Requirements\n\n1. Create a function called `fizzBuzz` that takes a number\n2. Return:\n   - \"FizzBuzz\" if the number is divisible by both 3 and 15\n   - \"Fizz\" if divisible by 3 only\n   - \"Buzz\" if divisible by 5 only\n   - The number itself (as a string) otherwise\n\n3. Create a function `fizzBuzzRange` that takes a number n and returns an array of FizzBuzz results from 1 to n\n\n## Expected Output\n\n- fizzBuzz(15) returns \"FizzBuzz\"\n- fizzBuzz(9) returns \"Fizz\"\n- fizzBuzz(10) returns \"Buzz\"\n- fizzBuzz(7) returns \"7\"\n- fizzBuzzRange(5) returns [\"1\", \"2\", \"Fizz\", \"4\", \"Buzz\"]",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "// FizzBuzz for a single number\nfunction fizzBuzz(n) {\n    // Your code here\n    \n}\n\n// FizzBuzz for a range from 1 to n\nfunction fizzBuzzRange(n) {\n    // Your code here\n    \n}\n\n// Test single numbers\nconsole.log(fizzBuzz(15));  // Should print: FizzBuzz\nconsole.log(fizzBuzz(9));   // Should print: Fizz\nconsole.log(fizzBuzz(10));  // Should print: Buzz\nconsole.log(fizzBuzz(7));   // Should print: 7\n\n// Test range\nconsole.log(fizzBuzzRange(15));\n// Should print: [\"1\", \"2\", \"Fizz\", \"4\", \"Buzz\", \"Fizz\", \"7\", \"8\", \"Fizz\", \"Buzz\", \"11\", \"Fizz\", \"13\", \"14\", \"FizzBuzz\"]\n",
+    "testCases": [
+        {
+            "description": "fizzBuzz(15) should return 'FizzBuzz'",
+            "assertion": "fizzBuzz(15) === 'FizzBuzz'"
+        },
+        {
+            "description": "fizzBuzz(30) should return 'FizzBuzz'",
+            "assertion": "fizzBuzz(30) === 'FizzBuzz'"
+        },
+        {
+            "description": "fizzBuzz(9) should return 'Fizz'",
+            "assertion": "fizzBuzz(9) === 'Fizz'"
+        },
+        {
+            "description": "fizzBuzz(3) should return 'Fizz'",
+            "assertion": "fizzBuzz(3) === 'Fizz'"
+        },
+        {
+            "description": "fizzBuzz(10) should return 'Buzz'",
+            "assertion": "fizzBuzz(10) === 'Buzz'"
+        },
+        {
+            "description": "fizzBuzz(5) should return 'Buzz'",
+            "assertion": "fizzBuzz(5) === 'Buzz'"
+        },
+        {
+            "description": "fizzBuzz(7) should return '7'",
+            "assertion": "fizzBuzz(7) === '7'"
+        },
+        {
+            "description": "fizzBuzz(1) should return '1'",
+            "assertion": "fizzBuzz(1) === '1'"
+        },
+        {
+            "description": "fizzBuzzRange(5) should return correct array",
+            "assertion": "JSON.stringify(fizzBuzzRange(5)) === JSON.stringify(['1', '2', 'Fizz', '4', 'Buzz'])"
+        },
+        {
+            "description": "fizzBuzzRange(15) ends with 'FizzBuzz'",
+            "assertion": "fizzBuzzRange(15)[14] === 'FizzBuzz'"
+        }
+    ],
+    "hints": [
+        "Check for divisibility by both 3 AND 5 first (use && operator)",
+        "Use the modulo operator (%) to check divisibility: n % 3 === 0",
+        "Order matters: check the most specific condition first",
+        "For fizzBuzzRange, use a loop and push results to an array",
+        "Remember to return the number as a string using String(n) or n.toString()"
+    ]
+}

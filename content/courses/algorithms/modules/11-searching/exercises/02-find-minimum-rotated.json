@@ -1,0 +1,44 @@
+{
+  "id": "02-find-minimum-rotated",
+  "title": "Find Minimum in Rotated Sorted Array",
+  "description": "Find the minimum element in a rotated sorted array using binary search.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def find_min(nums: list[int]) -> int:\n    \"\"\"\n    Find the minimum element in a rotated sorted array.\n    \n    A rotated array [0,1,2,4,5,6,7] might become [4,5,6,7,0,1,2].\n    Array has no duplicates.\n    \n    Args:\n        nums: Rotated sorted array with unique elements\n        \n    Returns:\n        The minimum element\n        \n    Example:\n        Input: nums = [3,4,5,1,2]\n        Output: 1\n        \n        Input: nums = [4,5,6,7,0,1,2]\n        Output: 0\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def find_min(nums: list[int]) -> int:\n    left, right = 0, len(nums) - 1\n    \n    while left < right:\n        mid = left + (right - left) // 2\n        \n        if nums[mid] > nums[right]:\n            # Minimum is in right half\n            left = mid + 1\n        else:\n            # Minimum is at mid or in left half\n            right = mid\n    \n    return nums[left]",
+  "testCases": [
+    {
+      "input": {"nums": [3, 4, 5, 1, 2]},
+      "expected": 1,
+      "description": "Rotated array"
+    },
+    {
+      "input": {"nums": [4, 5, 6, 7, 0, 1, 2]},
+      "expected": 0,
+      "description": "Larger rotation"
+    },
+    {
+      "input": {"nums": [11, 13, 15, 17]},
+      "expected": 11,
+      "description": "Not rotated (or full rotation)"
+    },
+    {
+      "input": {"nums": [2, 1]},
+      "expected": 1,
+      "description": "Two elements"
+    },
+    {
+      "input": {"nums": [1]},
+      "expected": 1,
+      "description": "Single element"
+    }
+  ],
+  "hints": [
+    "Compare the middle element with the rightmost element",
+    "If nums[mid] > nums[right], the minimum is in the right half",
+    "Otherwise, the minimum is at mid or in the left half",
+    "Use left < right to narrow down to one element"
+  ],
+  "explanation": "In a rotated sorted array, the minimum is at the rotation point. Compare nums[mid] with nums[right]: if nums[mid] > nums[right], the minimum must be in the right half (after mid). Otherwise, it's at mid or in the left half. Keep narrowing until left == right, which points to the minimum. Time: O(log n), Space: O(1)."
+}

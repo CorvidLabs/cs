@@ -1,0 +1,17 @@
+{
+    "id": "06-error-handling",
+    "title": "Error Handling",
+    "description": "Master Swift's error handling model. Learn to define custom errors, throw and catch errors, propagate errors through functions, and use Result types for flexible error management.",
+    "order": 6,
+    "lessons": [
+        "01-error-types",
+        "02-throwing-functions",
+        "03-handling-errors",
+        "04-result-type"
+    ],
+    "exercises": [
+        "01-validation-errors",
+        "02-file-processor",
+        "03-network-result"
+    ]
+}

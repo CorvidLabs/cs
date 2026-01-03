@@ -1,0 +1,49 @@
+{
+    "id": "02-error-propagation",
+    "title": "Error Propagation with ?",
+    "description": "Practice using the ? operator to propagate errors cleanly.\n\n## Requirements\n\n1. Implement `read_first_line(content: &str) -> Result<String, &'static str>`\n   - Return the first line of the content\n   - Return Err if content is empty\n\n2. Implement `parse_first_number(content: &str) -> Result<i32, String>`\n   - Get the first line, then parse it as a number\n   - Use ? to propagate errors\n\n3. Implement `sum_numbers(lines: &[&str]) -> Result<i32, String>`\n   - Parse each line as a number and sum them\n   - Return Err if any line fails to parse\n\n## Examples\n\n- `read_first_line(\"hello\\nworld\")` returns `Ok(\"hello\")`\n- `parse_first_number(\"42\\n100\")` returns `Ok(42)`\n- `sum_numbers(&[\"1\", \"2\", \"3\"])` returns `Ok(6)`",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "// Return the first line of content\n// Return Err if content is empty\nfn read_first_line(content: &str) -> Result<String, &'static str> {\n    todo!()\n}\n\n// Parse the first line as a number\n// Use ? to propagate errors\nfn parse_first_number(content: &str) -> Result<i32, String> {\n    todo!()\n}\n\n// Parse and sum all lines as numbers\n// Return Err if any line fails to parse\nfn sum_numbers(lines: &[&str]) -> Result<i32, String> {\n    todo!()\n}\n\nfn main() {\n    // Test read_first_line\n    let content = \"first\\nsecond\\nthird\";\n    println!(\"First line: {:?}\", read_first_line(content));\n    println!(\"First line of empty: {:?}\", read_first_line(\"\"));\n\n    // Test parse_first_number\n    println!(\"Parse '42\\n100': {:?}\", parse_first_number(\"42\\n100\"));\n    println!(\"Parse 'abc\\n100': {:?}\", parse_first_number(\"abc\\n100\"));\n\n    // Test sum_numbers\n    println!(\"Sum [1, 2, 3]: {:?}\", sum_numbers(&[\"1\", \"2\", \"3\"]));\n    println!(\"Sum [1, bad, 3]: {:?}\", sum_numbers(&[\"1\", \"bad\", \"3\"]));\n}\n",
+    "testCases": [
+        {
+            "description": "read_first_line returns first line",
+            "assertion": "read_first_line(\"hello\\nworld\").unwrap() == \"hello\""
+        },
+        {
+            "description": "read_first_line returns Err for empty",
+            "assertion": "read_first_line(\"\").is_err()"
+        },
+        {
+            "description": "read_first_line handles single line",
+            "assertion": "read_first_line(\"single\").unwrap() == \"single\""
+        },
+        {
+            "description": "parse_first_number parses valid number",
+            "assertion": "parse_first_number(\"42\\n100\").unwrap() == 42"
+        },
+        {
+            "description": "parse_first_number returns Err for invalid",
+            "assertion": "parse_first_number(\"abc\").is_err()"
+        },
+        {
+            "description": "parse_first_number returns Err for empty",
+            "assertion": "parse_first_number(\"\").is_err()"
+        },
+        {
+            "description": "sum_numbers sums valid numbers",
+            "assertion": "sum_numbers(&[\"1\", \"2\", \"3\"]).unwrap() == 6"
+        },
+        {
+            "description": "sum_numbers returns Err on invalid",
+            "assertion": "sum_numbers(&[\"1\", \"bad\", \"3\"]).is_err()"
+        }
+    ],
+    "hints": [
+        "Use lines().next() to get the first line as an Option",
+        "Convert Option to Result with ok_or() or ok_or_else()",
+        "For parse_first_number, call read_first_line then parse",
+        "Use map_err to convert error types when using ?",
+        "For sum_numbers, iterate and use ? in a loop, or use try_fold"
+    ]
+}

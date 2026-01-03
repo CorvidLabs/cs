@@ -1,0 +1,46 @@
+{
+    "id": "02-interface-design",
+    "title": "Interface Design",
+    "description": "Practice designing and using TypeScript interfaces.\n\n## Requirements\n\n1. Create an `Address` interface with street, city, state, and zipCode\n2. Create a `User` interface that extends a `Person` interface and adds email and address\n3. Create a `Company` interface with employees (array of Users)\n4. Implement functions that work with these interfaces\n\n## Interfaces to Create\n\n### Person\n- id: number\n- firstName: string\n- lastName: string\n- age: number\n\n### Address\n- street: string\n- city: string\n- state: string\n- zipCode: string\n\n### User (extends Person)\n- email: string\n- address: Address (optional)\n- roles: string[]\n\n### Company\n- name: string\n- employees: User[]\n- address: Address",
+    "order": 2,
+    "language": "typescript",
+    "starterCode": "// 1. Create the Address interface\n\n\n// 2. Create the Person interface\n\n\n// 3. Create the User interface (extends Person)\n\n\n// 4. Create the Company interface\n\n\n// 5. Implement this function\n// Returns the user's full name\nfunction getFullName(user: User): string {\n    // Your code here\n}\n\n// 6. Implement this function\n// Returns formatted address string: \"street, city, state zipCode\"\nfunction formatAddress(address: Address): string {\n    // Your code here\n}\n\n// 7. Implement this function\n// Returns array of users who have a specific role\nfunction getUsersByRole(users: User[], role: string): User[] {\n    // Your code here\n}\n\n// 8. Implement this function\n// Returns the average age of all employees in a company\nfunction getAverageEmployeeAge(company: Company): number {\n    // Your code here\n}\n\n// Test your implementation\nconst address: Address = {\n    street: \"123 Main St\",\n    city: \"Springfield\",\n    state: \"IL\",\n    zipCode: \"62701\"\n};\n\nconst users: User[] = [\n    { id: 1, firstName: \"Alice\", lastName: \"Smith\", age: 30, email: \"alice@example.com\", roles: [\"admin\", \"user\"] },\n    { id: 2, firstName: \"Bob\", lastName: \"Jones\", age: 25, email: \"bob@example.com\", roles: [\"user\"], address },\n    { id: 3, firstName: \"Carol\", lastName: \"White\", age: 35, email: \"carol@example.com\", roles: [\"admin\"] }\n];\n\nconst company: Company = {\n    name: \"TechCorp\",\n    employees: users,\n    address\n};\n\nconsole.log(\"Full name:\", getFullName(users[0]));\nconsole.log(\"Formatted address:\", formatAddress(address));\nconsole.log(\"Admins:\", getUsersByRole(users, \"admin\").map(u => u.firstName));\nconsole.log(\"Average age:\", getAverageEmployeeAge(company));\n",
+    "testCases": [
+        {
+            "description": "getFullName returns correct full name",
+            "assertion": "getFullName({id:1,firstName:'John',lastName:'Doe',age:30,email:'j@d.com',roles:[]}) === 'John Doe'"
+        },
+        {
+            "description": "formatAddress returns correctly formatted string",
+            "assertion": "formatAddress({street:'123 Main',city:'NYC',state:'NY',zipCode:'10001'}) === '123 Main, NYC, NY 10001'"
+        },
+        {
+            "description": "getUsersByRole returns users with matching role",
+            "assertion": "getUsersByRole([{id:1,firstName:'A',lastName:'B',age:25,email:'a@b.com',roles:['admin']},{id:2,firstName:'C',lastName:'D',age:30,email:'c@d.com',roles:['user']}], 'admin').length === 1"
+        },
+        {
+            "description": "getUsersByRole returns empty array when no matches",
+            "assertion": "getUsersByRole([{id:1,firstName:'A',lastName:'B',age:25,email:'a@b.com',roles:['user']}], 'admin').length === 0"
+        },
+        {
+            "description": "getAverageEmployeeAge calculates correct average",
+            "assertion": "getAverageEmployeeAge({name:'Co',address:{street:'',city:'',state:'',zipCode:''},employees:[{id:1,firstName:'A',lastName:'B',age:20,email:'',roles:[]},{id:2,firstName:'C',lastName:'D',age:40,email:'',roles:[]}]}) === 30"
+        },
+        {
+            "description": "User interface allows optional address",
+            "assertion": "(function() { const u: User = {id:1,firstName:'A',lastName:'B',age:25,email:'a@b.com',roles:[]}; return u.address === undefined; })()"
+        },
+        {
+            "description": "User has all Person properties",
+            "assertion": "(function() { const u: User = {id:1,firstName:'A',lastName:'B',age:25,email:'a@b.com',roles:[]}; return 'id' in u && 'firstName' in u && 'lastName' in u && 'age' in u; })()"
+        }
+    ],
+    "hints": [
+        "Interface syntax: interface Name { property: Type; }",
+        "Extension syntax: interface Child extends Parent { ... }",
+        "Optional property: address?: Address",
+        "getFullName: return `${user.firstName} ${user.lastName}`",
+        "getUsersByRole: use filter and includes",
+        "Average: sum of ages / number of employees"
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "id": "01-todo-list",
+    "title": "Todo List",
+    "description": "Build a simple todo list with add, complete, and delete functionality.\n\n## Requirements\n\n1. Create a function `createTodoApp(containerSelector)` that:\n   - Takes a CSS selector for the container element\n   - Sets up the todo list HTML structure\n   - Returns an object with methods to interact with the list\n\n2. The returned object should have:\n   - `addTodo(text)` - adds a new todo item\n   - `removeTodo(id)` - removes a todo by ID\n   - `toggleTodo(id)` - toggles completed state\n   - `getTodos()` - returns array of all todos\n\n3. Each todo should have:\n   - A unique ID\n   - Text content\n   - A checkbox to toggle completion\n   - A delete button\n   - Visual indication when completed (strikethrough)\n\n4. Use event delegation for the list interactions\n\n## HTML Structure\n\nThe container should contain:\n```html\n<form class=\"todo-form\">\n    <input type=\"text\" class=\"todo-input\" placeholder=\"Add a todo...\">\n    <button type=\"submit\">Add</button>\n</form>\n<ul class=\"todo-list\"></ul>\n```",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "function createTodoApp(containerSelector) {\n    const container = document.querySelector(containerSelector);\n    if (!container) throw new Error('Container not found');\n\n    // Track todos\n    let todos = [];\n    let nextId = 1;\n\n    // Create HTML structure\n    container.innerHTML = `\n        <form class=\"todo-form\">\n            <input type=\"text\" class=\"todo-input\" placeholder=\"Add a todo...\">\n            <button type=\"submit\">Add</button>\n        </form>\n        <ul class=\"todo-list\"></ul>\n    `;\n\n    const form = container.querySelector('.todo-form');\n    const input = container.querySelector('.todo-input');\n    const list = container.querySelector('.todo-list');\n\n    // Render a single todo item\n    function renderTodo(todo) {\n        // Create and return an <li> element for the todo\n        // Include: checkbox, text, delete button\n        // Use data-id attribute for the todo ID\n        \n    }\n\n    // Re-render the entire list\n    function renderList() {\n        list.innerHTML = '';\n        todos.forEach(todo => {\n            list.appendChild(renderTodo(todo));\n        });\n    }\n\n    // Add a new todo\n    function addTodo(text) {\n        // Create todo object with id, text, completed\n        // Add to todos array\n        // Re-render list\n        \n    }\n\n    // Remove a todo by ID\n    function removeTodo(id) {\n        // Filter out the todo with matching id\n        // Re-render list\n        \n    }\n\n    // Toggle todo completion\n    function toggleTodo(id) {\n        // Find todo and toggle its completed property\n        // Re-render list\n        \n    }\n\n    // Get all todos\n    function getTodos() {\n        return [...todos];\n    }\n\n    // Set up event listeners\n    // Form submit - add new todo\n    form.addEventListener('submit', (e) => {\n        e.preventDefault();\n        const text = input.value.trim();\n        if (text) {\n            addTodo(text);\n            input.value = '';\n        }\n    });\n\n    // Event delegation for list interactions\n    list.addEventListener('click', (e) => {\n        const item = e.target.closest('li');\n        if (!item) return;\n\n        const id = Number(item.dataset.id);\n\n        // Handle checkbox click\n        // Handle delete button click\n        \n    });\n\n    // Return public API\n    return {\n        addTodo,\n        removeTodo,\n        toggleTodo,\n        getTodos\n    };\n}\n\n// Test your implementation\nconst app = createTodoApp('#app');\napp.addTodo('Learn JavaScript');\napp.addTodo('Build a todo app');\napp.addTodo('Master the DOM');\nconsole.log('Todos:', app.getTodos());\n",
+    "testCases": [
+        {
+            "description": "createTodoApp returns an object with addTodo method",
+            "assertion": "typeof createTodoApp('#app').addTodo === 'function'"
+        },
+        {
+            "description": "createTodoApp returns an object with getTodos method",
+            "assertion": "typeof createTodoApp('#app').getTodos === 'function'"
+        },
+        {
+            "description": "addTodo adds a todo to the list",
+            "assertion": "(function() { const app = createTodoApp('#app'); app.addTodo('Test'); return app.getTodos().length === 1; })()"
+        },
+        {
+            "description": "getTodos returns array with correct text",
+            "assertion": "(function() { const app = createTodoApp('#app'); app.addTodo('Hello'); return app.getTodos()[0].text === 'Hello'; })()"
+        },
+        {
+            "description": "removeTodo removes the correct todo",
+            "assertion": "(function() { const app = createTodoApp('#app'); app.addTodo('A'); app.addTodo('B'); const id = app.getTodos()[0].id; app.removeTodo(id); return app.getTodos().length === 1 && app.getTodos()[0].text === 'B'; })()"
+        },
+        {
+            "description": "toggleTodo toggles completed state",
+            "assertion": "(function() { const app = createTodoApp('#app'); app.addTodo('Test'); const id = app.getTodos()[0].id; app.toggleTodo(id); return app.getTodos()[0].completed === true; })()"
+        },
+        {
+            "description": "New todos start as not completed",
+            "assertion": "(function() { const app = createTodoApp('#app'); app.addTodo('Test'); return app.getTodos()[0].completed === false; })()"
+        },
+        {
+            "description": "Each todo has a unique ID",
+            "assertion": "(function() { const app = createTodoApp('#app'); app.addTodo('A'); app.addTodo('B'); const todos = app.getTodos(); return todos[0].id !== todos[1].id; })()"
+        }
+    ],
+    "hints": [
+        "Use let nextId = 1 and increment it for each new todo",
+        "Todo object structure: { id, text, completed: false }",
+        "For renderTodo, create li with data-id attribute",
+        "Use checkbox input with checked attribute for completed state",
+        "In event delegation, check e.target.matches('[type=\"checkbox\"]') for toggles",
+        "Check e.target.matches('.delete') or similar for delete button"
+    ]
+}

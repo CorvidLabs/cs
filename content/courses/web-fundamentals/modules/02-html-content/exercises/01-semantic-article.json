@@ -1,0 +1,52 @@
+{
+    "id": "01-semantic-article",
+    "title": "Semantic Article Structure",
+    "description": "Create a blog article using semantic HTML elements.\n\n## Requirements\n\n1. Use an `<article>` element as the main container\n2. Include a `<header>` with:\n   - An `<h1>` with the title \"The Future of Web Development\"\n   - A `<time>` element with datetime=\"2024-01-15\" displaying \"January 15, 2024\"\n   - A `<span>` with class \"author\" containing \"By Jane Developer\"\n\n3. Include a `<section>` with class \"content\" containing:\n   - At least two `<p>` paragraphs with content\n   - An `<aside>` with a related tip or note\n\n4. Include a `<footer>` with:\n   - A `<p>` containing \"Tags:\"\n   - A `<ul>` with at least 3 `<li>` items for tags\n\n## Expected Structure\n\n```html\n<article>\n    <header>...</header>\n    <section class=\"content\">...</section>\n    <footer>...</footer>\n</article>\n```",
+    "order": 1,
+    "language": "html",
+    "starterCode": "<!-- Create a semantic article structure -->\n<article>\n    <!-- Add header with title, date, and author -->\n    <header>\n        \n    </header>\n\n    <!-- Add main content section with paragraphs and aside -->\n    <section class=\"content\">\n        \n    </section>\n\n    <!-- Add footer with tags -->\n    <footer>\n        \n    </footer>\n</article>",
+    "testCases": [
+        {
+            "description": "Page should have an article element",
+            "assertion": "document.querySelector('article') !== null"
+        },
+        {
+            "description": "Article should have a header element",
+            "assertion": "document.querySelector('article > header') !== null"
+        },
+        {
+            "description": "Header should have an h1 with the correct title",
+            "assertion": "document.querySelector('article > header > h1')?.textContent?.includes('Future of Web Development')"
+        },
+        {
+            "description": "Header should have a time element with datetime attribute",
+            "assertion": "document.querySelector('article > header time')?.getAttribute('datetime') === '2024-01-15'"
+        },
+        {
+            "description": "Header should have an author span",
+            "assertion": "document.querySelector('article > header .author') !== null"
+        },
+        {
+            "description": "Article should have a content section",
+            "assertion": "document.querySelector('article > section.content') !== null"
+        },
+        {
+            "description": "Content section should have at least 2 paragraphs",
+            "assertion": "document.querySelectorAll('article > section.content > p').length >= 2"
+        },
+        {
+            "description": "Content section should have an aside",
+            "assertion": "document.querySelector('article > section.content aside') !== null"
+        },
+        {
+            "description": "Article should have a footer with tags list",
+            "assertion": "document.querySelector('article > footer ul') !== null && document.querySelectorAll('article > footer ul li').length >= 3"
+        }
+    ],
+    "hints": [
+        "Use <time datetime=\"2024-01-15\">January 15, 2024</time>",
+        "Use <span class=\"author\">By Jane Developer</span>",
+        "The <aside> can contain a tip like \"Pro tip: ...\" or \"Note: ...\"",
+        "Tags could be technology terms like HTML, CSS, JavaScript"
+    ]
+}

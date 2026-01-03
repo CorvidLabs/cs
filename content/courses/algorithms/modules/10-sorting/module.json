@@ -1,0 +1,17 @@
+{
+  "id": "10-sorting",
+  "title": "Sorting Algorithms",
+  "description": "Study efficient sorting algorithms including merge sort, quick sort, and non-comparison sorts like counting sort and radix sort. Understand their time and space complexities, stability properties, and when to use each.",
+  "order": 10,
+  "lessons": [
+    "01-merge-sort",
+    "02-quick-sort",
+    "03-counting-sort",
+    "04-radix-sort"
+  ],
+  "exercises": [
+    "01-sort-colors",
+    "02-merge-intervals",
+    "03-largest-number"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "04-collections",
+    "title": "Collections",
+    "description": "Master Swift's collection types: Arrays for ordered data, Dictionaries for key-value pairs, Sets for unique values, and higher-order functions for powerful data transformations.",
+    "order": 4,
+    "lessons": [
+        "01-arrays",
+        "02-dictionaries",
+        "03-sets",
+        "04-higher-order-functions"
+    ],
+    "exercises": [
+        "01-shopping-list",
+        "02-word-frequency",
+        "03-data-pipeline"
+    ]
+}

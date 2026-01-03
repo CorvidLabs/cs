@@ -1,0 +1,36 @@
+{
+    "id": "02-file-processor",
+    "title": "File Processor with Error Handling",
+    "description": "Build a simulated file processor that demonstrates comprehensive error handling.\n\n## Requirements\n\n1. Define `FileError` enum with cases:\n   - `notFound(filename: String)`\n   - `permissionDenied(filename: String)`\n   - `corrupted(filename: String)`\n\n2. Create a `FileSystem` struct with:\n   - A static dictionary of \"files\": `[\"readme.txt\": \"Hello World\", \"secret.txt\": \"ACCESS_DENIED\", \"broken.txt\": \"CORRUPTED\"]`\n   - A static `readFile(_ filename: String) throws -> String` method\n\n3. Reading logic:\n   - If file doesn't exist in dictionary, throw `notFound`\n   - If content is \"ACCESS_DENIED\", throw `permissionDenied`\n   - If content is \"CORRUPTED\", throw `corrupted`\n   - Otherwise return the content\n\n4. Create a `processFiles(_ filenames: [String])` function that attempts to read each file and prints results\n\n## Expected Output\n\n```\nreadme.txt: Hello World\nsecret.txt: Permission denied\nbroken.txt: File corrupted\nmissing.txt: File not found\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Define FileError enum\n\n\n// Create FileSystem struct with static files and readFile method\n\n\n// Create processFiles function\n\n\n// Test your implementation\nprocessFiles([\"readme.txt\", \"secret.txt\", \"broken.txt\", \"missing.txt\"])\n",
+    "testCases": [
+        {
+            "description": "Reading existing file should return content",
+            "assertion": "(try? FileSystem.readFile(\"readme.txt\")) == \"Hello World\""
+        },
+        {
+            "description": "Reading non-existent file should throw notFound",
+            "assertion": "do { try FileSystem.readFile(\"missing.txt\"); false } catch FileError.notFound { true } catch { false }"
+        },
+        {
+            "description": "Reading secret file should throw permissionDenied",
+            "assertion": "do { try FileSystem.readFile(\"secret.txt\"); false } catch FileError.permissionDenied { true } catch { false }"
+        },
+        {
+            "description": "Reading corrupted file should throw corrupted",
+            "assertion": "do { try FileSystem.readFile(\"broken.txt\"); false } catch FileError.corrupted { true } catch { false }"
+        },
+        {
+            "description": "Output should show all error types",
+            "assertion": "output.contains(\"not found\") && output.contains(\"Permission\") && output.contains(\"corrupted\")"
+        }
+    ],
+    "hints": [
+        "Use a static let dictionary: static let files = [\"readme.txt\": \"Hello World\", ...]",
+        "Check if the filename exists in the dictionary first",
+        "Use a switch or if-else chain on the content value",
+        "In processFiles, use do-catch with specific error patterns"
+    ]
+}

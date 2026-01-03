@@ -1,0 +1,17 @@
+{
+    "id": "04-collections",
+    "title": "Collections",
+    "description": "Work with Rust's powerful collection types. Master vectors, hash maps, and the iterator system to process data efficiently and expressively.",
+    "order": 4,
+    "lessons": [
+        "01-vectors",
+        "02-hashmaps",
+        "03-iterators",
+        "04-iterator-adaptors"
+    ],
+    "exercises": [
+        "01-vector-operations",
+        "02-word-counter",
+        "03-iterator-chains"
+    ]
+}

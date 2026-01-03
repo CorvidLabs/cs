@@ -1,0 +1,17 @@
+{
+  "id": "06-heaps-priority-queues",
+  "title": "Heaps and Priority Queues",
+  "description": "Learn about heap data structures and priority queues. Understand heap properties, heapify operations, and how to efficiently find minimum or maximum elements. Apply these concepts to solve problems like finding top-k elements.",
+  "order": 6,
+  "lessons": [
+    "01-heap-fundamentals",
+    "02-heapify-operations",
+    "03-priority-queue-operations",
+    "04-heap-applications"
+  ],
+  "exercises": [
+    "01-kth-largest",
+    "02-merge-k-sorted-lists",
+    "03-top-k-frequent"
+  ]
+}

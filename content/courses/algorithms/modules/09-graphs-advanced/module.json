@@ -1,0 +1,17 @@
+{
+  "id": "09-graphs-advanced",
+  "title": "Graphs: Advanced Algorithms",
+  "description": "Explore advanced graph algorithms including shortest path algorithms (Dijkstra, Bellman-Ford), minimum spanning trees (Prim, Kruskal), and the Union-Find data structure for efficient connectivity queries.",
+  "order": 9,
+  "lessons": [
+    "01-dijkstra-algorithm",
+    "02-bellman-ford",
+    "03-minimum-spanning-trees",
+    "04-union-find"
+  ],
+  "exercises": [
+    "01-network-delay-time",
+    "02-cheapest-flights",
+    "03-connected-components"
+  ]
+}

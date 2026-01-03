@@ -1,0 +1,17 @@
+{
+    "id": "10-frameworks-intro",
+    "title": "Introduction to Frameworks",
+    "description": "Understand the concepts behind modern JavaScript frameworks. Learn component-based architecture, state management, reactivity patterns, and build a simple component system from scratch.",
+    "order": 10,
+    "lessons": [
+        "01-component-architecture",
+        "02-state-management",
+        "03-reactivity-patterns",
+        "04-building-components"
+    ],
+    "exercises": [
+        "01-component-class",
+        "02-reactive-state",
+        "03-todo-component"
+    ]
+}

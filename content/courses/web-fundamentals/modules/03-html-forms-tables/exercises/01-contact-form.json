@@ -1,0 +1,52 @@
+{
+    "id": "01-contact-form",
+    "title": "Contact Form",
+    "description": "Create an accessible contact form with proper labels and validation.\n\n## Requirements\n\n1. Create a `<form>` with id=\"contact-form\"\n2. Add three form groups, each with:\n   - A `<label>` with a `for` attribute\n   - An input/textarea with matching `id`\n\n3. Form fields:\n   - Name: `<input type=\"text\" id=\"name\" name=\"name\" required>`\n   - Email: `<input type=\"email\" id=\"email\" name=\"email\" required>`\n   - Message: `<textarea id=\"message\" name=\"message\" rows=\"5\" required></textarea>`\n\n4. Add a submit button with type=\"submit\" and text \"Send Message\"\n\n## Expected Structure\n\n```html\n<form id=\"contact-form\">\n    <div class=\"form-group\">\n        <label for=\"name\">Name</label>\n        <input type=\"text\" id=\"name\" name=\"name\" required>\n    </div>\n    ...\n    <button type=\"submit\">Send Message</button>\n</form>\n```",
+    "order": 1,
+    "language": "html",
+    "starterCode": "<!-- Create a contact form -->\n<form id=\"contact-form\">\n    <!-- Name field -->\n    <div class=\"form-group\">\n        \n    </div>\n\n    <!-- Email field -->\n    <div class=\"form-group\">\n        \n    </div>\n\n    <!-- Message field -->\n    <div class=\"form-group\">\n        \n    </div>\n\n    <!-- Submit button -->\n    \n</form>",
+    "testCases": [
+        {
+            "description": "Form should have id=\"contact-form\"",
+            "assertion": "document.querySelector('form#contact-form') !== null"
+        },
+        {
+            "description": "Form should have a name input with type=\"text\"",
+            "assertion": "document.querySelector('input#name[type=\"text\"]') !== null"
+        },
+        {
+            "description": "Name input should have name attribute",
+            "assertion": "document.querySelector('input#name').getAttribute('name') === 'name'"
+        },
+        {
+            "description": "Name input should be required",
+            "assertion": "document.querySelector('input#name').hasAttribute('required')"
+        },
+        {
+            "description": "Name label should have for=\"name\"",
+            "assertion": "document.querySelector('label[for=\"name\"]') !== null"
+        },
+        {
+            "description": "Form should have an email input with type=\"email\"",
+            "assertion": "document.querySelector('input#email[type=\"email\"]') !== null"
+        },
+        {
+            "description": "Form should have a textarea with id=\"message\"",
+            "assertion": "document.querySelector('textarea#message') !== null"
+        },
+        {
+            "description": "All inputs should have matching labels",
+            "assertion": "document.querySelector('label[for=\"name\"]') !== null && document.querySelector('label[for=\"email\"]') !== null && document.querySelector('label[for=\"message\"]') !== null"
+        },
+        {
+            "description": "Form should have a submit button",
+            "assertion": "document.querySelector('form button[type=\"submit\"]') !== null"
+        }
+    ],
+    "hints": [
+        "Use <label for=\"name\">Name</label> to associate label with input",
+        "Use <input type=\"text\" id=\"name\" name=\"name\" required>",
+        "Use type=\"email\" for email validation",
+        "The for attribute must match the input's id exactly"
+    ]
+}

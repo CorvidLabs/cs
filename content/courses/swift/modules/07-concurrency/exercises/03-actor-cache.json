@@ -1,0 +1,36 @@
+{
+    "id": "03-actor-cache",
+    "title": "Thread-Safe Actor Cache",
+    "description": "Build a thread-safe cache using an actor.\n\n## Requirements\n\n1. Create a `Cache` actor with:\n   - Private dictionary storage: `[String: String]`\n   - `set(key: String, value: String)` method\n   - `get(key: String) -> String?` method\n   - `remove(key: String)` method\n   - `clear()` method\n   - `count: Int` computed property\n   - `allKeys: [String]` computed property\n\n2. Create a `nonisolated` method `cacheInfo() -> String` that returns \"Cache v1.0\"\n\n3. Demonstrate thread-safe access from multiple tasks\n\n## Expected Output\n\n```\nCache Info: Cache v1.0\nStored 3 items\nValue for user1: Alice\nAfter removal: 2 items\nAll keys: [\"user2\", \"user3\"]\n```",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "// Define the Cache actor\n\n\n// Test the cache\nfunc testCache() async {\n    let cache = Cache()\n    \n    // nonisolated method - no await needed\n    print(\"Cache Info: \\(cache.cacheInfo())\")\n    \n    // Store some values\n    await cache.set(key: \"user1\", value: \"Alice\")\n    await cache.set(key: \"user2\", value: \"Bob\")\n    await cache.set(key: \"user3\", value: \"Charlie\")\n    \n    print(\"Stored \\(await cache.count) items\")\n    \n    // Retrieve a value\n    if let value = await cache.get(key: \"user1\") {\n        print(\"Value for user1: \\(value)\")\n    }\n    \n    // Remove and check count\n    await cache.remove(key: \"user1\")\n    print(\"After removal: \\(await cache.count) items\")\n    \n    // Get all keys\n    let keys = await cache.allKeys\n    print(\"All keys: \\(keys)\")\n}\n\nTask {\n    await testCache()\n}\n",
+    "testCases": [
+        {
+            "description": "Cache should store and retrieve values",
+            "assertion": "let c = Cache(); await c.set(key: \"k\", value: \"v\"); await c.get(key: \"k\") == \"v\""
+        },
+        {
+            "description": "Cache count should reflect stored items",
+            "assertion": "let c = Cache(); await c.set(key: \"a\", value: \"1\"); await c.set(key: \"b\", value: \"2\"); await c.count == 2"
+        },
+        {
+            "description": "Cache remove should delete the key",
+            "assertion": "let c = Cache(); await c.set(key: \"k\", value: \"v\"); await c.remove(key: \"k\"); await c.get(key: \"k\") == nil"
+        },
+        {
+            "description": "Cache clear should remove all items",
+            "assertion": "let c = Cache(); await c.set(key: \"k\", value: \"v\"); await c.clear(); await c.count == 0"
+        },
+        {
+            "description": "cacheInfo should be callable without await",
+            "assertion": "let c = Cache(); c.cacheInfo() == \"Cache v1.0\""
+        }
+    ],
+    "hints": [
+        "Define with: actor Cache { private var storage: [String: String] = [:] }",
+        "Methods inside the actor don't need await to access storage",
+        "Mark cacheInfo as nonisolated since it doesn't access mutable state",
+        "allKeys can return Array(storage.keys)"
+    ]
+}

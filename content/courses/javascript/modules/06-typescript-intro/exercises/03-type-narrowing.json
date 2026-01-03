@@ -1,0 +1,73 @@
+{
+    "id": "03-type-narrowing",
+    "title": "Type Narrowing",
+    "description": "Practice narrowing union types using type guards and control flow.\n\n## Requirements\n\n1. Use typeof, instanceof, and discriminated unions\n2. Create type guard functions\n3. Handle nullable types safely\n\n## Tasks\n\n1. Implement `processValue` that handles string | number | boolean\n2. Implement `getLength` that handles string | string[]\n3. Create a discriminated union for shapes and calculate area\n4. Handle nullable data safely\n5. Create a type guard function",
+    "order": 3,
+    "language": "typescript",
+    "starterCode": "// 1. Process different value types\n// - string: return uppercase version\n// - number: return doubled value\n// - boolean: return \"yes\" or \"no\"\nfunction processValue(value: string | number | boolean): string | number {\n    // Your code here - use typeof to narrow\n}\n\n// 2. Get length of string or array\n// - string: return character count\n// - string[]: return array length\nfunction getLength(input: string | string[]): number {\n    // Your code here\n}\n\n// 3. Create Shape types and area calculator\n// Define these types:\n// - Circle: { kind: \"circle\", radius: number }\n// - Rectangle: { kind: \"rectangle\", width: number, height: number }\n// - Triangle: { kind: \"triangle\", base: number, height: number }\n// - Shape = Circle | Rectangle | Triangle\n\n// Your type definitions here:\n\n\nfunction calculateArea(shape: Shape): number {\n    // Use discriminated union (switch on shape.kind)\n    // Circle: Math.PI * radius^2\n    // Rectangle: width * height\n    // Triangle: (base * height) / 2\n}\n\n// 4. Safely get user's city\n// User might be null, address might be undefined\ninterface User {\n    name: string;\n    address?: {\n        city: string;\n        country: string;\n    };\n}\n\nfunction getUserCity(user: User | null): string {\n    // Return city or \"Unknown\" if user is null or address is missing\n}\n\n// 5. Create a type guard for checking if something is a User\n// Type guard syntax: function isX(value: unknown): value is X\nfunction isUser(value: unknown): value is User {\n    // Check if value is an object with a name property (string)\n}\n\n// Test your implementations\nconsole.log(processValue(\"hello\"));  // \"HELLO\"\nconsole.log(processValue(21));       // 42\nconsole.log(processValue(true));     // \"yes\"\n\nconsole.log(getLength(\"hello\"));     // 5\nconsole.log(getLength([\"a\", \"b\"])); // 2\n\nconst circle: Circle = { kind: \"circle\", radius: 5 };\nconst rect: Rectangle = { kind: \"rectangle\", width: 4, height: 6 };\nconsole.log(calculateArea(circle));  // ~78.54\nconsole.log(calculateArea(rect));    // 24\n\nconst user1: User = { name: \"Alice\", address: { city: \"NYC\", country: \"USA\" } };\nconst user2: User = { name: \"Bob\" };\nconsole.log(getUserCity(user1));     // \"NYC\"\nconsole.log(getUserCity(user2));     // \"Unknown\"\nconsole.log(getUserCity(null));      // \"Unknown\"\n\nconst maybeUser: unknown = { name: \"Charlie\" };\nif (isUser(maybeUser)) {\n    console.log(maybeUser.name);  // TypeScript knows it's a User\n}\n",
+    "testCases": [
+        {
+            "description": "processValue handles string correctly",
+            "assertion": "processValue('hello') === 'HELLO'"
+        },
+        {
+            "description": "processValue handles number correctly",
+            "assertion": "processValue(21) === 42"
+        },
+        {
+            "description": "processValue handles boolean true",
+            "assertion": "processValue(true) === 'yes'"
+        },
+        {
+            "description": "processValue handles boolean false",
+            "assertion": "processValue(false) === 'no'"
+        },
+        {
+            "description": "getLength handles string",
+            "assertion": "getLength('hello') === 5"
+        },
+        {
+            "description": "getLength handles array",
+            "assertion": "getLength(['a', 'b', 'c']) === 3"
+        },
+        {
+            "description": "calculateArea handles circle",
+            "assertion": "Math.abs(calculateArea({ kind: 'circle', radius: 5 }) - Math.PI * 25) < 0.01"
+        },
+        {
+            "description": "calculateArea handles rectangle",
+            "assertion": "calculateArea({ kind: 'rectangle', width: 4, height: 6 }) === 24"
+        },
+        {
+            "description": "calculateArea handles triangle",
+            "assertion": "calculateArea({ kind: 'triangle', base: 10, height: 5 }) === 25"
+        },
+        {
+            "description": "getUserCity returns city when present",
+            "assertion": "getUserCity({ name: 'A', address: { city: 'NYC', country: 'USA' } }) === 'NYC'"
+        },
+        {
+            "description": "getUserCity returns Unknown for null user",
+            "assertion": "getUserCity(null) === 'Unknown'"
+        },
+        {
+            "description": "getUserCity returns Unknown when no address",
+            "assertion": "getUserCity({ name: 'A' }) === 'Unknown'"
+        },
+        {
+            "description": "isUser returns true for valid user",
+            "assertion": "isUser({ name: 'Test' }) === true"
+        },
+        {
+            "description": "isUser returns false for non-user",
+            "assertion": "isUser('not a user') === false && isUser(null) === false && isUser({}) === false"
+        }
+    ],
+    "hints": [
+        "Use typeof for primitives: if (typeof value === 'string')",
+        "Use Array.isArray() for arrays: if (Array.isArray(input))",
+        "Discriminated union: switch (shape.kind) { case 'circle': ... }",
+        "Nullish coalescing: user?.address?.city ?? 'Unknown'",
+        "Type guard: return typeof value === 'object' && value !== null && 'name' in value"
+    ]
+}

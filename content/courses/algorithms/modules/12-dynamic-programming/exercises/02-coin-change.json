@@ -1,0 +1,44 @@
+{
+  "id": "02-coin-change",
+  "title": "Coin Change",
+  "description": "Find the minimum number of coins needed to make a given amount.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def coin_change(coins: list[int], amount: int) -> int:\n    \"\"\"\n    Find minimum coins needed to make the amount.\n    \n    You have infinite supply of each coin denomination.\n    \n    Args:\n        coins: List of coin denominations\n        amount: Target amount\n        \n    Returns:\n        Minimum coins needed, or -1 if impossible\n        \n    Example:\n        Input: coins = [1, 2, 5], amount = 11\n        Output: 3  # 5 + 5 + 1 = 11\n        \n        Input: coins = [2], amount = 3\n        Output: -1  # Cannot make 3 with only 2s\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def coin_change(coins: list[int], amount: int) -> int:\n    # dp[i] = minimum coins to make amount i\n    dp = [float('inf')] * (amount + 1)\n    dp[0] = 0  # 0 coins for amount 0\n    \n    for i in range(1, amount + 1):\n        for coin in coins:\n            if coin <= i and dp[i - coin] != float('inf'):\n                dp[i] = min(dp[i], dp[i - coin] + 1)\n    \n    return dp[amount] if dp[amount] != float('inf') else -1",
+  "testCases": [
+    {
+      "input": {"coins": [1, 2, 5], "amount": 11},
+      "expected": 3,
+      "description": "Standard case: 5+5+1"
+    },
+    {
+      "input": {"coins": [2], "amount": 3},
+      "expected": -1,
+      "description": "Impossible to make amount"
+    },
+    {
+      "input": {"coins": [1], "amount": 0},
+      "expected": 0,
+      "description": "Zero amount needs zero coins"
+    },
+    {
+      "input": {"coins": [1, 2, 5], "amount": 5},
+      "expected": 1,
+      "description": "Exact coin match"
+    },
+    {
+      "input": {"coins": [2, 5, 10, 1], "amount": 27},
+      "expected": 4,
+      "description": "Multiple denominations: 10+10+5+2"
+    }
+  ],
+  "hints": [
+    "dp[i] represents the minimum coins needed to make amount i",
+    "For each amount, try using each coin and take the minimum",
+    "dp[i] = min(dp[i - coin] + 1) for all coins where coin <= i",
+    "Initialize dp with infinity except dp[0] = 0"
+  ],
+  "explanation": "Use DP where dp[i] = minimum coins for amount i. For each amount from 1 to target, try each coin: if we use this coin, we need 1 + dp[amount - coin] coins. Take the minimum over all valid coins. Base case: dp[0] = 0 (no coins for zero). If dp[amount] is still infinity, return -1. Time: O(amount × coins), Space: O(amount)."
+}

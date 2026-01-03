@@ -1,0 +1,49 @@
+{
+    "id": "03-accordion",
+    "title": "Accordion Component",
+    "description": "Build an accessible accordion component using event delegation.\n\n## Requirements\n\n1. Create a function `createAccordion(containerSelector, items)` where items is an array of `{ title, content }` objects\n\n2. Features:\n   - Click a header to expand/collapse its content\n   - Only one panel open at a time (optional: make this configurable)\n   - Smooth CSS transitions for open/close\n   - Proper ARIA attributes for accessibility\n\n3. Return an object with:\n   - `openPanel(index)` - opens panel at index\n   - `closePanel(index)` - closes panel at index\n   - `closeAll()` - closes all panels\n   - `getOpenPanels()` - returns array of open panel indices\n\n4. Use event delegation - single click listener on container\n\n## HTML Structure\n\n```html\n<div class=\"accordion-item\">\n    <button class=\"accordion-header\" aria-expanded=\"false\" aria-controls=\"panel-0\">\n        Panel Title\n    </button>\n    <div class=\"accordion-panel\" id=\"panel-0\" role=\"region\" hidden>\n        Panel content here\n    </div>\n</div>\n```\n\n## Accessibility Requirements\n\n- Headers should be buttons for keyboard access\n- Use aria-expanded on buttons\n- Use aria-controls to link button to panel\n- Use hidden attribute or aria-hidden on collapsed panels",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "function createAccordion(containerSelector, items, options = {}) {\n    const container = document.querySelector(containerSelector);\n    if (!container) throw new Error('Container not found');\n\n    const { allowMultiple = false } = options;\n\n    // Build accordion HTML\n    container.innerHTML = items.map((item, index) => `\n        <div class=\"accordion-item\" data-index=\"${index}\">\n            <button \n                class=\"accordion-header\" \n                aria-expanded=\"false\" \n                aria-controls=\"panel-${index}\"\n            >\n                ${item.title}\n            </button>\n            <div \n                class=\"accordion-panel\" \n                id=\"panel-${index}\" \n                role=\"region\"\n                hidden\n            >\n                ${item.content}\n            </div>\n        </div>\n    `).join('');\n\n    // Get all header buttons and panels\n    const headers = container.querySelectorAll('.accordion-header');\n    const panels = container.querySelectorAll('.accordion-panel');\n\n    // Open a panel by index\n    function openPanel(index) {\n        if (index < 0 || index >= items.length) return;\n\n        // If not allowing multiple, close others first\n        if (!allowMultiple) {\n            closeAll();\n        }\n\n        // Update aria-expanded and hidden attributes\n        // Hint: headers[index].setAttribute('aria-expanded', 'true')\n        // Hint: panels[index].hidden = false\n        \n    }\n\n    // Close a panel by index\n    function closePanel(index) {\n        if (index < 0 || index >= items.length) return;\n\n        // Update aria-expanded and hidden attributes\n        \n    }\n\n    // Close all panels\n    function closeAll() {\n        // Loop through all panels and close them\n        \n    }\n\n    // Toggle a panel\n    function togglePanel(index) {\n        const isOpen = headers[index].getAttribute('aria-expanded') === 'true';\n        if (isOpen) {\n            closePanel(index);\n        } else {\n            openPanel(index);\n        }\n    }\n\n    // Get indices of open panels\n    function getOpenPanels() {\n        const open = [];\n        headers.forEach((header, index) => {\n            if (header.getAttribute('aria-expanded') === 'true') {\n                open.push(index);\n            }\n        });\n        return open;\n    }\n\n    // Event delegation - single listener on container\n    container.addEventListener('click', (e) => {\n        const header = e.target.closest('.accordion-header');\n        if (!header) return;\n\n        const item = header.closest('.accordion-item');\n        const index = Number(item.dataset.index);\n\n        togglePanel(index);\n    });\n\n    return {\n        openPanel,\n        closePanel,\n        closeAll,\n        getOpenPanels\n    };\n}\n\n// Test your implementation\nconst accordion = createAccordion('#app', [\n    { title: 'Section 1', content: 'Content for section 1' },\n    { title: 'Section 2', content: 'Content for section 2' },\n    { title: 'Section 3', content: 'Content for section 3' }\n]);\n\naccordion.openPanel(0);\nconsole.log('Open panels:', accordion.getOpenPanels());\n",
+    "testCases": [
+        {
+            "description": "createAccordion returns object with openPanel method",
+            "assertion": "typeof createAccordion('#app', [{title: 'T', content: 'C'}]).openPanel === 'function'"
+        },
+        {
+            "description": "createAccordion returns object with getOpenPanels method",
+            "assertion": "typeof createAccordion('#app', [{title: 'T', content: 'C'}]).getOpenPanels === 'function'"
+        },
+        {
+            "description": "Initially no panels are open",
+            "assertion": "createAccordion('#app', [{title: 'T', content: 'C'}]).getOpenPanels().length === 0"
+        },
+        {
+            "description": "openPanel opens the specified panel",
+            "assertion": "(function() { const a = createAccordion('#app', [{title: 'T', content: 'C'}]); a.openPanel(0); return a.getOpenPanels().includes(0); })()"
+        },
+        {
+            "description": "closePanel closes the specified panel",
+            "assertion": "(function() { const a = createAccordion('#app', [{title: 'T', content: 'C'}]); a.openPanel(0); a.closePanel(0); return a.getOpenPanels().length === 0; })()"
+        },
+        {
+            "description": "closeAll closes all panels",
+            "assertion": "(function() { const a = createAccordion('#app', [{title: 'A', content: 'A'}, {title: 'B', content: 'B'}], {allowMultiple: true}); a.openPanel(0); a.openPanel(1); a.closeAll(); return a.getOpenPanels().length === 0; })()"
+        },
+        {
+            "description": "By default only one panel can be open",
+            "assertion": "(function() { const a = createAccordion('#app', [{title: 'A', content: 'A'}, {title: 'B', content: 'B'}]); a.openPanel(0); a.openPanel(1); return a.getOpenPanels().length === 1 && a.getOpenPanels()[0] === 1; })()"
+        },
+        {
+            "description": "allowMultiple option allows multiple open panels",
+            "assertion": "(function() { const a = createAccordion('#app', [{title: 'A', content: 'A'}, {title: 'B', content: 'B'}], {allowMultiple: true}); a.openPanel(0); a.openPanel(1); return a.getOpenPanels().length === 2; })()"
+        }
+    ],
+    "hints": [
+        "Use aria-expanded='true'/'false' to track open state",
+        "Use the hidden attribute to hide panels: panel.hidden = true/false",
+        "For event delegation, use e.target.closest('.accordion-header')",
+        "Get index from data attribute: Number(item.dataset.index)",
+        "To check if open: header.getAttribute('aria-expanded') === 'true'"
+    ]
+}

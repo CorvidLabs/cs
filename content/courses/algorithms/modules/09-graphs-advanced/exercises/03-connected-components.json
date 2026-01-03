@@ -1,0 +1,44 @@
+{
+  "id": "03-connected-components",
+  "title": "Number of Connected Components",
+  "description": "Count the number of connected components in an undirected graph using Union-Find.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def count_components(n: int, edges: list[list[int]]) -> int:\n    \"\"\"\n    Count the number of connected components in an undirected graph.\n    \n    Args:\n        n: Number of nodes (labeled 0 to n-1)\n        edges: List of [node1, node2] edges\n        \n    Returns:\n        Number of connected components\n        \n    Example:\n        Input: n = 5, edges = [[0,1],[1,2],[3,4]]\n        Output: 2  # Components: {0,1,2} and {3,4}\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def count_components(n: int, edges: list[list[int]]) -> int:\n    # Union-Find with path compression and union by rank\n    parent = list(range(n))\n    rank = [0] * n\n    \n    def find(x):\n        if parent[x] != x:\n            parent[x] = find(parent[x])  # Path compression\n        return parent[x]\n    \n    def union(x, y):\n        px, py = find(x), find(y)\n        if px == py:\n            return False  # Already connected\n        \n        # Union by rank\n        if rank[px] < rank[py]:\n            px, py = py, px\n        parent[py] = px\n        if rank[px] == rank[py]:\n            rank[px] += 1\n        return True\n    \n    # Start with n components\n    components = n\n    \n    # Each successful union reduces components by 1\n    for u, v in edges:\n        if union(u, v):\n            components -= 1\n    \n    return components",
+  "testCases": [
+    {
+      "input": {"n": 5, "edges": [[0, 1], [1, 2], [3, 4]]},
+      "expected": 2,
+      "description": "Two separate components"
+    },
+    {
+      "input": {"n": 5, "edges": [[0, 1], [1, 2], [2, 3], [3, 4]]},
+      "expected": 1,
+      "description": "All nodes connected in a chain"
+    },
+    {
+      "input": {"n": 4, "edges": []},
+      "expected": 4,
+      "description": "No edges - each node is its own component"
+    },
+    {
+      "input": {"n": 3, "edges": [[0, 1], [0, 2], [1, 2]]},
+      "expected": 1,
+      "description": "Triangle - all connected"
+    },
+    {
+      "input": {"n": 6, "edges": [[0, 1], [2, 3], [4, 5]]},
+      "expected": 3,
+      "description": "Three pairs"
+    }
+  ],
+  "hints": [
+    "Use Union-Find data structure for efficient connectivity",
+    "Start with n components (each node is its own component)",
+    "Each successful union operation reduces the component count by 1",
+    "Path compression and union by rank optimize performance"
+  ],
+  "explanation": "Union-Find is perfect for tracking connected components. Initialize each node as its own parent (n components). For each edge, union the two nodes. If they weren't already connected (different roots), decrement the component count. Path compression flattens the tree during find operations, and union by rank keeps trees balanced. Time: O(E * α(N)) ≈ O(E), Space: O(N)."
+}

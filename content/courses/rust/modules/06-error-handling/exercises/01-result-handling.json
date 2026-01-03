@@ -1,0 +1,45 @@
+{
+    "id": "01-result-handling",
+    "title": "Result Handling",
+    "description": "Practice basic Result handling patterns.\n\n## Requirements\n\n1. Implement `safe_sqrt(n: f64) -> Result<f64, String>`\n   - Return Err if n is negative\n   - Return Ok with square root otherwise\n\n2. Implement `parse_pair(s: &str) -> Result<(i32, i32), String>`\n   - Parse strings like \"10,20\" into tuples\n   - Return descriptive errors for invalid input\n\n3. Implement `combine_results<T, E>(results: Vec<Result<T, E>>) -> Result<Vec<T>, E>`\n   - Collect all Ok values or return first Err",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "// Return Err if n is negative, Ok with sqrt otherwise\nfn safe_sqrt(n: f64) -> Result<f64, String> {\n    todo!()\n}\n\n// Parse \"x,y\" format strings into (i32, i32)\n// Handle: missing comma, invalid numbers, wrong format\nfn parse_pair(s: &str) -> Result<(i32, i32), String> {\n    todo!()\n}\n\n// Collect all Ok values, or return first Err\nfn combine_results<T, E>(results: Vec<Result<T, E>>) -> Result<Vec<T>, E> {\n    todo!()\n}\n\nfn main() {\n    // Test safe_sqrt\n    println!(\"sqrt(4.0) = {:?}\", safe_sqrt(4.0));\n    println!(\"sqrt(-1.0) = {:?}\", safe_sqrt(-1.0));\n\n    // Test parse_pair\n    println!(\"parse '10,20' = {:?}\", parse_pair(\"10,20\"));\n    println!(\"parse 'abc,def' = {:?}\", parse_pair(\"abc,def\"));\n    println!(\"parse 'single' = {:?}\", parse_pair(\"single\"));\n\n    // Test combine_results\n    let good: Vec<Result<i32, &str>> = vec![Ok(1), Ok(2), Ok(3)];\n    println!(\"combine good = {:?}\", combine_results(good));\n\n    let bad: Vec<Result<i32, &str>> = vec![Ok(1), Err(\"oops\"), Ok(3)];\n    println!(\"combine bad = {:?}\", combine_results(bad));\n}\n",
+    "testCases": [
+        {
+            "description": "safe_sqrt returns Ok for positive",
+            "assertion": "safe_sqrt(4.0) == Ok(2.0)"
+        },
+        {
+            "description": "safe_sqrt returns Err for negative",
+            "assertion": "safe_sqrt(-1.0).is_err()"
+        },
+        {
+            "description": "parse_pair parses valid input",
+            "assertion": "parse_pair(\"10,20\") == Ok((10, 20))"
+        },
+        {
+            "description": "parse_pair handles negative numbers",
+            "assertion": "parse_pair(\"-5,10\") == Ok((-5, 10))"
+        },
+        {
+            "description": "parse_pair returns Err for invalid",
+            "assertion": "parse_pair(\"abc\").is_err()"
+        },
+        {
+            "description": "combine_results collects Ok values",
+            "assertion": "combine_results(vec![Ok(1), Ok(2), Ok(3)]) == Ok(vec![1, 2, 3])"
+        },
+        {
+            "description": "combine_results returns first Err",
+            "assertion": "combine_results::<i32, &str>(vec![Ok(1), Err(\"error\"), Ok(3)]) == Err(\"error\")"
+        }
+    ],
+    "hints": [
+        "safe_sqrt: if n < 0.0 { Err(...) } else { Ok(n.sqrt()) }",
+        "parse_pair: use split(','), then parse each part",
+        "parse_pair: collect into Vec, check length is 2",
+        "combine_results: use .into_iter().collect() - it implements FromIterator for Result",
+        "Remember to handle all error cases with descriptive messages"
+    ]
+}

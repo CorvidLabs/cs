@@ -1,0 +1,45 @@
+{
+    "id": "03-responsive-page",
+    "title": "Build a Responsive Page Layout",
+    "description": "Create a full page layout with header, main content with sidebar, and footer that adapts to screen size.\n\n## Requirements\n\n1. Style the `.page-container`:\n   - Maximum width of 1200px\n   - Centered with auto margins\n   - 16px horizontal padding\n\n2. Style the `.content-wrapper`:\n   - Column layout on mobile\n   - Row layout at 768px with sidebar on the right\n   - 24px gap\n\n3. Style the `.main-content`:\n   - Takes remaining space (flex: 1)\n\n4. Style the `.sidebar`:\n   - Full width on mobile\n   - Fixed 280px width at 768px\n   - #f5f5f5 background\n   - 16px padding\n\n## Expected Result\n\nSingle column on mobile, sidebar appears on right at 768px.",
+    "order": 3,
+    "language": "css",
+    "starterCode": "/* Page container */\n.page-container {\n    /* Add your styles here */\n}\n\n/* Content wrapper - holds main and sidebar */\n.content-wrapper {\n    display: flex;\n    /* Add mobile styles here */\n}\n\n/* Main content area */\n.main-content {\n    /* Add your styles here */\n}\n\n/* Sidebar */\n.sidebar {\n    /* Add your styles here */\n}\n\n/* Tablet and larger - add media query */",
+    "testCases": [
+        {
+            "description": "Page container should have max-width of 1200px",
+            "assertion": "getComputedStyle(document.querySelector('.page-container')).maxWidth === '1200px'"
+        },
+        {
+            "description": "Page container should be centered",
+            "assertion": "getComputedStyle(document.querySelector('.page-container')).marginLeft === 'auto' || getComputedStyle(document.querySelector('.page-container')).marginLeft === getComputedStyle(document.querySelector('.page-container')).marginRight"
+        },
+        {
+            "description": "Content wrapper should use flexbox",
+            "assertion": "getComputedStyle(document.querySelector('.content-wrapper')).display === 'flex'"
+        },
+        {
+            "description": "Content wrapper should have 24px gap",
+            "assertion": "getComputedStyle(document.querySelector('.content-wrapper')).gap === '24px'"
+        },
+        {
+            "description": "Main content should grow (flex: 1 or similar)",
+            "assertion": "getComputedStyle(document.querySelector('.main-content')).flexGrow === '1'"
+        },
+        {
+            "description": "Sidebar should have #f5f5f5 background",
+            "assertion": "getComputedStyle(document.querySelector('.sidebar')).backgroundColor === 'rgb(245, 245, 245)'"
+        },
+        {
+            "description": "Sidebar should have 16px padding",
+            "assertion": "getComputedStyle(document.querySelector('.sidebar')).paddingTop === '16px'"
+        }
+    ],
+    "hints": [
+        "Use max-width: 1200px and margin: 0 auto on the container",
+        "Use flex-direction: column on mobile for content-wrapper",
+        "At 768px, change to flex-direction: row",
+        "Use flex: 1 on main-content to fill remaining space",
+        "Use flex: 0 0 280px on sidebar at 768px to fix its width"
+    ]
+}

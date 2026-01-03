@@ -1,0 +1,41 @@
+{
+    "id": "02-channels",
+    "title": "Channel Communication",
+    "description": "Practice using channels for thread communication.\n\n## Requirements\n\n1. Implement `producer_consumer(items: Vec<i32>) -> Vec<i32>`\n   - Producer thread sends items through channel\n   - Consumer receives and doubles each value\n   - Return all doubled values\n\n2. Implement `fan_out_fan_in(input: Vec<i32>, num_workers: usize) -> i32`\n   - Distribute work to multiple worker threads\n   - Each worker squares its received values\n   - Collect and sum all results\n\n## Examples\n\n- `producer_consumer(vec![1,2,3])` returns `[2,4,6]`\n- `fan_out_fan_in(vec![1,2,3,4], 2)` returns `30` (1+4+9+16)",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "use std::sync::mpsc;\nuse std::thread;\n\n// Producer sends items, consumer doubles them\nfn producer_consumer(items: Vec<i32>) -> Vec<i32> {\n    todo!()\n}\n\n// Distribute work to workers, collect squared results\nfn fan_out_fan_in(input: Vec<i32>, num_workers: usize) -> i32 {\n    todo!()\n}\n\nfn main() {\n    // Test producer_consumer\n    let items = vec![1, 2, 3, 4, 5];\n    let doubled = producer_consumer(items);\n    println!(\"Producer-Consumer result: {:?}\", doubled);\n\n    // Test fan_out_fan_in\n    let input = vec![1, 2, 3, 4, 5, 6, 7, 8];\n    let sum_of_squares = fan_out_fan_in(input, 4);\n    println!(\"Fan-out-fan-in result: {}\", sum_of_squares);\n}\n",
+    "testCases": [
+        {
+            "description": "producer_consumer doubles all values",
+            "assertion": "producer_consumer(vec![1, 2, 3]) == vec![2, 4, 6]"
+        },
+        {
+            "description": "producer_consumer handles empty input",
+            "assertion": "producer_consumer(vec![]).is_empty()"
+        },
+        {
+            "description": "producer_consumer handles single item",
+            "assertion": "producer_consumer(vec![5]) == vec![10]"
+        },
+        {
+            "description": "fan_out_fan_in computes correct sum of squares",
+            "assertion": "fan_out_fan_in(vec![1, 2, 3, 4], 2) == 30"
+        },
+        {
+            "description": "fan_out_fan_in works with single worker",
+            "assertion": "fan_out_fan_in(vec![1, 2, 3], 1) == 14"
+        },
+        {
+            "description": "fan_out_fan_in handles empty input",
+            "assertion": "fan_out_fan_in(vec![], 4) == 0"
+        }
+    ],
+    "hints": [
+        "Create channel with mpsc::channel()",
+        "Move tx into producer thread, iterate rx in consumer",
+        "For fan_out: clone tx for each worker, drop original tx",
+        "Workers receive from shared rx (need Arc<Mutex<Receiver>>)",
+        "Alternative: use separate channels for input and output"
+    ]
+}

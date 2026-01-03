@@ -1,0 +1,41 @@
+{
+    "id": "01-thread-basics",
+    "title": "Thread Basics",
+    "description": "Practice spawning threads and collecting their results.\n\n## Requirements\n\n1. Implement `parallel_sum(numbers: Vec<i32>, num_threads: usize) -> i32`\n   - Split the numbers into chunks\n   - Sum each chunk in a separate thread\n   - Combine the partial sums\n\n2. Implement `parallel_map<F>(items: Vec<i32>, f: F) -> Vec<i32>`\n   - Apply function f to each item in a separate thread\n   - Return results in the same order\n   - F: Fn(i32) -> i32 + Send + Copy + 'static\n\n## Examples\n\n- `parallel_sum(vec![1,2,3,4,5,6], 2)` returns `21`\n- `parallel_map(vec![1,2,3], |x| x * 2)` returns `[2,4,6]`",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "use std::thread;\n\n// Sum numbers using multiple threads\n// Split into num_threads chunks, sum each in a thread\nfn parallel_sum(numbers: Vec<i32>, num_threads: usize) -> i32 {\n    todo!()\n}\n\n// Apply function to each item in parallel\n// Maintain original order in results\nfn parallel_map<F>(items: Vec<i32>, f: F) -> Vec<i32>\nwhere\n    F: Fn(i32) -> i32 + Send + Copy + 'static,\n{\n    todo!()\n}\n\nfn main() {\n    // Test parallel_sum\n    let numbers: Vec<i32> = (1..=100).collect();\n    let sum = parallel_sum(numbers, 4);\n    println!(\"Sum of 1-100: {}\", sum);\n\n    // Test parallel_map\n    let items = vec![1, 2, 3, 4, 5];\n    let doubled = parallel_map(items.clone(), |x| x * 2);\n    println!(\"Doubled: {:?}\", doubled);\n\n    let squared = parallel_map(items, |x| x * x);\n    println!(\"Squared: {:?}\", squared);\n}\n",
+    "testCases": [
+        {
+            "description": "parallel_sum correctly sums numbers",
+            "assertion": "parallel_sum(vec![1, 2, 3, 4, 5, 6], 2) == 21"
+        },
+        {
+            "description": "parallel_sum works with single thread",
+            "assertion": "parallel_sum(vec![1, 2, 3, 4], 1) == 10"
+        },
+        {
+            "description": "parallel_sum handles empty vector",
+            "assertion": "parallel_sum(vec![], 4) == 0"
+        },
+        {
+            "description": "parallel_map doubles correctly",
+            "assertion": "parallel_map(vec![1, 2, 3], |x| x * 2) == vec![2, 4, 6]"
+        },
+        {
+            "description": "parallel_map maintains order",
+            "assertion": "parallel_map(vec![3, 1, 2], |x| x * 10) == vec![30, 10, 20]"
+        },
+        {
+            "description": "parallel_map handles single element",
+            "assertion": "parallel_map(vec![5], |x| x + 1) == vec![6]"
+        }
+    ],
+    "hints": [
+        "Use chunks() to split the vector into parts",
+        "Move ownership of each chunk into its thread with move ||",
+        "Collect JoinHandles and call join() on each to get results",
+        "For parallel_map, enumerate to track indices for ordering",
+        "Consider using a Vec of (index, result) tuples then sorting"
+    ]
+}

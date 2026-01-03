@@ -1,0 +1,49 @@
+{
+    "id": "03-custom-error-types",
+    "title": "Custom Error Types",
+    "description": "Create and use custom error types for a validation system.\n\n## Requirements\n\n1. Create a `UserError` enum with variants:\n   - `EmptyName` - name cannot be empty\n   - `NameTooLong(usize)` - name exceeds max length (include the length)\n   - `InvalidAge(i32)` - age must be 0-150 (include the invalid age)\n   - `InvalidEmail` - email must contain @\n\n2. Implement `Display` for `UserError` with helpful messages\n\n3. Implement `validate_user(name: &str, age: i32, email: &str) -> Result<(), UserError>`\n   - Name: not empty, max 50 chars\n   - Age: 0 to 150 inclusive\n   - Email: must contain '@'\n\n## Examples\n\n- `validate_user(\"\", 25, \"a@b.com\")` returns `Err(UserError::EmptyName)`\n- `validate_user(\"Alice\", -5, \"a@b.com\")` returns `Err(UserError::InvalidAge(-5))`",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "use std::fmt;\n\n// Define the UserError enum\n#[derive(Debug, PartialEq)]\nenum UserError {\n    EmptyName,\n    NameTooLong(usize),\n    InvalidAge(i32),\n    InvalidEmail,\n}\n\n// Implement Display for UserError\nimpl fmt::Display for UserError {\n    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {\n        todo!()\n    }\n}\n\n// Validate user data\n// Name: not empty, max 50 chars\n// Age: 0 to 150 inclusive\n// Email: must contain '@'\nfn validate_user(name: &str, age: i32, email: &str) -> Result<(), UserError> {\n    todo!()\n}\n\nfn main() {\n    let test_cases = [\n        (\"\", 25, \"test@email.com\"),\n        (\"A very long name that exceeds the maximum allowed length for a username in this system\", 25, \"test@email.com\"),\n        (\"Alice\", -5, \"test@email.com\"),\n        (\"Bob\", 200, \"test@email.com\"),\n        (\"Charlie\", 30, \"invalid-email\"),\n        (\"Valid User\", 25, \"valid@email.com\"),\n    ];\n\n    for (name, age, email) in test_cases {\n        match validate_user(name, age, email) {\n            Ok(()) => println!(\"Valid: {} ({}, {})\", name, age, email),\n            Err(e) => println!(\"Invalid: {}\", e),\n        }\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "Empty name returns EmptyName error",
+            "assertion": "validate_user(\"\", 25, \"a@b.com\") == Err(UserError::EmptyName)"
+        },
+        {
+            "description": "Long name returns NameTooLong error",
+            "assertion": "{ let long_name = \"a\".repeat(60); validate_user(&long_name, 25, \"a@b.com\") == Err(UserError::NameTooLong(60)) }"
+        },
+        {
+            "description": "Negative age returns InvalidAge error",
+            "assertion": "validate_user(\"Alice\", -1, \"a@b.com\") == Err(UserError::InvalidAge(-1))"
+        },
+        {
+            "description": "Age over 150 returns InvalidAge error",
+            "assertion": "validate_user(\"Alice\", 151, \"a@b.com\") == Err(UserError::InvalidAge(151))"
+        },
+        {
+            "description": "Email without @ returns InvalidEmail error",
+            "assertion": "validate_user(\"Alice\", 25, \"invalid\") == Err(UserError::InvalidEmail)"
+        },
+        {
+            "description": "Valid user returns Ok",
+            "assertion": "validate_user(\"Alice\", 25, \"alice@example.com\").is_ok()"
+        },
+        {
+            "description": "Display formats EmptyName correctly",
+            "assertion": "format!(\"{}\", UserError::EmptyName).contains(\"empty\") || format!(\"{}\", UserError::EmptyName).contains(\"Empty\")"
+        },
+        {
+            "description": "Display formats InvalidAge with the value",
+            "assertion": "format!(\"{}\", UserError::InvalidAge(-5)).contains(\"-5\")"
+        }
+    ],
+    "hints": [
+        "Check validations in order: name empty, name length, age range, email format",
+        "Use match in Display to format each variant differently",
+        "For NameTooLong, pass name.len() when creating the error",
+        "Use email.contains('@') to check for @ symbol",
+        "Edge cases: age 0 and 150 are valid"
+    ]
+}

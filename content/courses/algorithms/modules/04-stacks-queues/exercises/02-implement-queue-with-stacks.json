@@ -1,0 +1,39 @@
+{
+  "id": "02-implement-queue-with-stacks",
+  "title": "Implement Queue using Stacks",
+  "description": "Implement a FIFO queue using only two stacks.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "class MyQueue:\n    \"\"\"\n    Implement a queue using two stacks.\n    \n    A queue is FIFO (First In, First Out).\n    A stack is LIFO (Last In, First Out).\n    \n    Use two stacks to simulate queue behavior:\n    - One stack for pushing (input)\n    - One stack for popping (output)\n    \n    Example:\n        queue = MyQueue()\n        queue.push(1)\n        queue.push(2)\n        queue.peek()   # returns 1\n        queue.pop()    # returns 1\n        queue.empty()  # returns False\n    \"\"\"\n    \n    def __init__(self):\n        # Your code here\n        pass\n    \n    def push(self, x: int) -> None:\n        \"\"\"Push element to the back of queue.\"\"\"\n        # Your code here\n        pass\n    \n    def pop(self) -> int:\n        \"\"\"Remove and return the front element.\"\"\"\n        # Your code here\n        pass\n    \n    def peek(self) -> int:\n        \"\"\"Return the front element without removing.\"\"\"\n        # Your code here\n        pass\n    \n    def empty(self) -> bool:\n        \"\"\"Return True if queue is empty.\"\"\"\n        # Your code here\n        pass",
+  "solutionCode": "class MyQueue:\n    def __init__(self):\n        self.input_stack = []\n        self.output_stack = []\n    \n    def push(self, x: int) -> None:\n        self.input_stack.append(x)\n    \n    def pop(self) -> int:\n        self._transfer()\n        return self.output_stack.pop()\n    \n    def peek(self) -> int:\n        self._transfer()\n        return self.output_stack[-1]\n    \n    def empty(self) -> bool:\n        return len(self.input_stack) == 0 and len(self.output_stack) == 0\n    \n    def _transfer(self):\n        \"\"\"Move elements from input to output stack if output is empty.\"\"\"\n        if not self.output_stack:\n            while self.input_stack:\n                self.output_stack.append(self.input_stack.pop())",
+  "testCases": [
+    {
+      "input": {"operations": ["push", "push", "peek", "pop", "empty"], "values": [1, 2, null, null, null]},
+      "expected": [null, null, 1, 1, false],
+      "description": "Basic queue operations"
+    },
+    {
+      "input": {"operations": ["push", "push", "push", "pop", "pop", "pop"], "values": [1, 2, 3, null, null, null]},
+      "expected": [null, null, null, 1, 2, 3],
+      "description": "FIFO order verification"
+    },
+    {
+      "input": {"operations": ["push", "pop", "push", "pop"], "values": [1, null, 2, null]},
+      "expected": [null, 1, null, 2],
+      "description": "Interleaved operations"
+    },
+    {
+      "input": {"operations": ["empty", "push", "empty"], "values": [null, 1, null]},
+      "expected": [true, null, false],
+      "description": "Empty check"
+    }
+  ],
+  "hints": [
+    "Use two stacks: one for input, one for output",
+    "Push always goes to the input stack",
+    "For pop/peek, if output stack is empty, transfer all from input to output",
+    "Transferring reverses the order, converting LIFO to FIFO"
+  ],
+  "explanation": "We use two stacks to achieve FIFO behavior. Elements are always pushed to the input stack. For pop/peek, we use the output stack. If the output stack is empty, we transfer all elements from input to output, which reverses their order. This reversal converts the LIFO order to FIFO. Amortized time is O(1) per operation because each element is moved at most twice."
+}

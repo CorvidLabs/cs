@@ -1,0 +1,37 @@
+{
+    "id": "03-custom-error-type",
+    "title": "Custom Error Type",
+    "description": "Create a custom error type for a configuration parser.\n\n## Requirements\n\n1. Define `ConfigError` enum with variants:\n   - `FileNotFound { path: String }`\n   - `ParseError { line: usize, message: String }`\n   - `MissingKey { key: String }`\n\n2. Implement `Display` and `Error` traits\n\n3. Implement `From<io::Error>` for ConfigError\n\n4. Create `parse_config(path: &str) -> Result<Config, ConfigError>`\n   - Parse key=value format\n   - Return appropriate errors",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "use std::collections::HashMap;\nuse std::error::Error;\nuse std::fmt;\nuse std::fs;\nuse std::io;\n\n// Define the ConfigError enum\n#[derive(Debug)]\nenum ConfigError {\n    // FileNotFound with path\n    // ParseError with line number and message\n    // MissingKey with key name\n    todo!()\n}\n\n// Implement Display for ConfigError\nimpl fmt::Display for ConfigError {\n    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {\n        todo!()\n    }\n}\n\n// Implement Error trait\nimpl Error for ConfigError {}\n\n// Implement From<io::Error>\nimpl From<io::Error> for ConfigError {\n    fn from(error: io::Error) -> Self {\n        todo!()\n    }\n}\n\n// Config struct\n#[derive(Debug)]\nstruct Config {\n    values: HashMap<String, String>,\n}\n\nimpl Config {\n    fn get(&self, key: &str) -> Result<&String, ConfigError> {\n        self.values.get(key).ok_or_else(|| ConfigError::MissingKey {\n            key: key.to_string(),\n        })\n    }\n}\n\n// Parse a config file with key=value pairs\n// Handle: file not found, invalid format, empty lines (skip them)\nfn parse_config(path: &str) -> Result<Config, ConfigError> {\n    todo!()\n}\n\nfn main() {\n    // Create a test config file\n    fs::write(\"test_config.txt\", \"name=Alice\\nage=30\\ncity=Boston\").unwrap();\n\n    match parse_config(\"test_config.txt\") {\n        Ok(config) => {\n            println!(\"Config loaded: {:?}\", config);\n            println!(\"Name: {:?}\", config.get(\"name\"));\n            println!(\"Missing: {:?}\", config.get(\"missing\"));\n        }\n        Err(e) => println!(\"Error: {}\", e),\n    }\n\n    // Test with nonexistent file\n    println!(\"\\nNonexistent file: {:?}\", parse_config(\"nonexistent.txt\"));\n\n    // Clean up\n    fs::remove_file(\"test_config.txt\").ok();\n}\n",
+    "testCases": [
+        {
+            "description": "ConfigError::FileNotFound displays correctly",
+            "assertion": "format!(\"{}\", ConfigError::FileNotFound { path: \"test.txt\".into() }).contains(\"test.txt\")"
+        },
+        {
+            "description": "ConfigError::ParseError displays line number",
+            "assertion": "format!(\"{}\", ConfigError::ParseError { line: 5, message: \"bad\".into() }).contains(\"5\")"
+        },
+        {
+            "description": "ConfigError::MissingKey displays key",
+            "assertion": "format!(\"{}\", ConfigError::MissingKey { key: \"name\".into() }).contains(\"name\")"
+        },
+        {
+            "description": "parse_config returns FileNotFound for missing file",
+            "assertion": "matches!(parse_config(\"nonexistent_config_12345.txt\"), Err(ConfigError::FileNotFound { .. }))"
+        },
+        {
+            "description": "parse_config parses valid config",
+            "assertion": "{ std::fs::write(\"_cfg.txt\", \"key=value\").unwrap(); let r = parse_config(\"_cfg.txt\").map(|c| c.get(\"key\").is_ok()); std::fs::remove_file(\"_cfg.txt\").ok(); r == Ok(true) }"
+        }
+    ],
+    "hints": [
+        "Enum variants: FileNotFound { path: String }, ParseError { line: usize, message: String }, MissingKey { key: String }",
+        "Display: use match to format each variant with a descriptive message",
+        "From<io::Error>: ConfigError::FileNotFound { path: error.to_string() } or similar",
+        "parse_config: use fs::read_to_string(path)? to leverage From trait",
+        "For each line, split on '=' and ensure there are exactly 2 parts"
+    ]
+}

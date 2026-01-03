@@ -1,0 +1,55 @@
+{
+  "id": "02-group-anagrams",
+  "title": "Group Anagrams",
+  "description": "Group strings that are anagrams of each other using hash maps.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def group_anagrams(strs: list[str]) -> list[list[str]]:\n    \"\"\"\n    Group anagrams together.\n    \n    An anagram is a word formed by rearranging the letters of another word,\n    using all the original letters exactly once.\n    \n    Args:\n        strs: List of strings\n        \n    Returns:\n        List of groups, where each group contains anagrams\n        \n    Example:\n        Input: strs = [\"eat\", \"tea\", \"tan\", \"ate\", \"nat\", \"bat\"]\n        Output: [[\"eat\", \"tea\", \"ate\"], [\"tan\", \"nat\"], [\"bat\"]]\n        \n        Input: strs = [\"\"]\n        Output: [[\"\"]]\n        \n        Input: strs = [\"a\"]\n        Output: [[\"a\"]]\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "from collections import defaultdict\n\ndef group_anagrams(strs: list[str]) -> list[list[str]]:\n    groups = defaultdict(list)\n    \n    for s in strs:\n        # Use sorted string as key - anagrams have same sorted form\n        key = tuple(sorted(s))\n        groups[key].append(s)\n    \n    return list(groups.values())",
+  "testCases": [
+    {
+      "input": {"strs": ["eat", "tea", "tan", "ate", "nat", "bat"]},
+      "expected": [["eat", "tea", "ate"], ["tan", "nat"], ["bat"]],
+      "description": "Multiple anagram groups",
+      "unordered": true,
+      "unorderedNested": true
+    },
+    {
+      "input": {"strs": [""]},
+      "expected": [[""]],
+      "description": "Empty string"
+    },
+    {
+      "input": {"strs": ["a"]},
+      "expected": [["a"]],
+      "description": "Single character"
+    },
+    {
+      "input": {"strs": ["abc", "bca", "cab", "xyz", "zyx"]},
+      "expected": [["abc", "bca", "cab"], ["xyz", "zyx"]],
+      "description": "Two groups",
+      "unordered": true,
+      "unorderedNested": true
+    },
+    {
+      "input": {"strs": ["a", "b", "c"]},
+      "expected": [["a"], ["b"], ["c"]],
+      "description": "No anagrams",
+      "unordered": true
+    },
+    {
+      "input": {"strs": ["listen", "silent", "enlist"]},
+      "expected": [["listen", "silent", "enlist"]],
+      "description": "All anagrams",
+      "unorderedNested": true
+    }
+  ],
+  "hints": [
+    "Two strings are anagrams if they have the same characters in different order",
+    "What if you sorted the characters of each string? Anagrams would have the same sorted form",
+    "Use the sorted string as a dictionary key to group anagrams",
+    "Alternative: use a character count tuple as the key for O(n*k) instead of O(n*k*log(k))"
+  ],
+  "explanation": "Anagrams have the same characters, just rearranged. If we sort the characters of each string, anagrams will produce the same sorted string. We use this sorted string (as a tuple for hashability) as a dictionary key. All strings that produce the same key are anagrams and get grouped together. Time complexity is O(n * k log k) where n is the number of strings and k is the maximum string length (due to sorting each string)."
+}

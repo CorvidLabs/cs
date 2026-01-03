@@ -1,0 +1,44 @@
+{
+    "id": "01-shopping-list",
+    "title": "Shopping List Manager",
+    "description": "Create a shopping list manager using arrays and array operations.\n\n## Requirements\n\n1. Create a struct `ShoppingList` with an `items` property of type `[String]`\n2. Add a method `addItem(_ item: String)` that adds an item if it doesn't already exist\n3. Add a method `removeItem(_ item: String) -> Bool` that removes an item and returns true if successful\n4. Add a method `hasItem(_ item: String) -> Bool` to check if an item exists\n5. Add a computed property `count` that returns the number of items\n6. Add a method `sortedItems() -> [String]` that returns items in alphabetical order\n\n## Example Usage\n\n```swift\nvar list = ShoppingList()\nlist.addItem(\"Milk\")\nlist.addItem(\"Bread\")\nlist.addItem(\"Eggs\")\nlist.addItem(\"Milk\")  // Already exists, not added\n\nprint(list.count)  // 3\nprint(list.hasItem(\"Milk\"))  // true\nprint(list.sortedItems())  // [\"Bread\", \"Eggs\", \"Milk\"]\n\nlist.removeItem(\"Bread\")  // Returns true\nprint(list.count)  // 2\n```",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "public struct ShoppingList {\n    public var items: [String] = []\n\n    public init() {}\n\n    // Add an item if it doesn't already exist\n    public mutating func addItem(_ item: String) {\n        // Your code here\n    }\n\n    // Remove an item, return true if successful\n    public mutating func removeItem(_ item: String) -> Bool {\n        // Your code here\n    }\n\n    // Check if an item exists\n    public func hasItem(_ item: String) -> Bool {\n        // Your code here\n    }\n\n    // Number of items\n    public var count: Int {\n        // Your code here\n    }\n\n    // Return items in alphabetical order\n    public func sortedItems() -> [String] {\n        // Your code here\n    }\n}\n\n// Test your implementation\nvar list = ShoppingList()\nlist.addItem(\"Milk\")\nlist.addItem(\"Bread\")\nlist.addItem(\"Eggs\")\nlist.addItem(\"Milk\")  // Duplicate\n\nprint(\"Count: \\(list.count)\")  // Should print: 3\nprint(\"Has Milk: \\(list.hasItem(\"Milk\"))\")  // Should print: true\nprint(\"Sorted: \\(list.sortedItems())\")  // Should print: [\"Bread\", \"Eggs\", \"Milk\"]\n\nlet removed = list.removeItem(\"Bread\")\nprint(\"Removed Bread: \\(removed)\")  // Should print: true\nprint(\"Count after removal: \\(list.count)\")  // Should print: 2\n",
+    "testCases": [
+        {
+            "description": "addItem should add new items",
+            "assertion": "{ var l = ShoppingList(); l.addItem(\"A\"); return l.count == 1 }()"
+        },
+        {
+            "description": "addItem should not add duplicates",
+            "assertion": "{ var l = ShoppingList(); l.addItem(\"A\"); l.addItem(\"A\"); return l.count == 1 }()"
+        },
+        {
+            "description": "removeItem should return true for existing item",
+            "assertion": "{ var l = ShoppingList(); l.addItem(\"A\"); return l.removeItem(\"A\") == true }()"
+        },
+        {
+            "description": "removeItem should return false for non-existing item",
+            "assertion": "{ var l = ShoppingList(); return l.removeItem(\"A\") == false }()"
+        },
+        {
+            "description": "hasItem should return true for existing item",
+            "assertion": "{ var l = ShoppingList(); l.addItem(\"A\"); return l.hasItem(\"A\") == true }()"
+        },
+        {
+            "description": "hasItem should return false for non-existing item",
+            "assertion": "{ var l = ShoppingList(); return l.hasItem(\"A\") == false }()"
+        },
+        {
+            "description": "sortedItems should return alphabetically sorted array",
+            "assertion": "{ var l = ShoppingList(); l.addItem(\"C\"); l.addItem(\"A\"); l.addItem(\"B\"); return l.sortedItems() == [\"A\", \"B\", \"C\"] }()"
+        }
+    ],
+    "hints": [
+        "Use items.contains() to check if an item already exists before adding",
+        "Use items.firstIndex(of:) to find an item's index for removal",
+        "Use items.remove(at:) to remove an item at a specific index",
+        "Use items.sorted() to return a sorted copy of the array"
+    ]
+}

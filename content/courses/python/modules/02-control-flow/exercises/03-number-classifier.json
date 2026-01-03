@@ -1,0 +1,52 @@
+{
+    "id": "03-number-classifier",
+    "title": "Number Classifier",
+    "description": "Create a program that classifies a number based on multiple properties.\n\n## Requirements\n\n1. Create a variable called `number` with any integer value\n2. Create the following classification variables:\n   - `sign`: \"positive\", \"negative\", or \"zero\"\n   - `parity`: \"even\" or \"odd\"\n   - `size`: \"small\" (abs value < 10), \"medium\" (10-99), or \"large\" (100+)\n\n## Example\n\nFor `number = 42`:\n- `sign` = \"positive\"\n- `parity` = \"even\"\n- `size` = \"medium\"",
+    "order": 3,
+    "language": "python",
+    "starterCode": "# Set the number to classify\nnumber = 42\n\n# Determine the sign: \"positive\", \"negative\", or \"zero\"\n\n\n# Determine parity: \"even\" or \"odd\"\n\n\n# Determine size based on absolute value:\n# \"small\" (< 10), \"medium\" (10-99), \"large\" (100+)\n\n\n# Print the classification\nprint(f\"Number: {number}\")\nprint(f\"Sign: {sign}\")\nprint(f\"Parity: {parity}\")\nprint(f\"Size: {size}\")\n",
+    "testCases": [
+        {
+            "description": "Variable 'number' should exist",
+            "assertion": "'number' in dir()"
+        },
+        {
+            "description": "Variable 'sign' should exist and be a string",
+            "assertion": "'sign' in dir() and isinstance(sign, str)"
+        },
+        {
+            "description": "Variable 'parity' should exist and be a string",
+            "assertion": "'parity' in dir() and isinstance(parity, str)"
+        },
+        {
+            "description": "Variable 'size' should exist and be a string",
+            "assertion": "'size' in dir() and isinstance(size, str)"
+        },
+        {
+            "description": "Sign should be 'positive', 'negative', or 'zero'",
+            "assertion": "sign in ['positive', 'negative', 'zero']"
+        },
+        {
+            "description": "Parity should be 'even' or 'odd'",
+            "assertion": "parity in ['even', 'odd']"
+        },
+        {
+            "description": "Size should be 'small', 'medium', or 'large'",
+            "assertion": "size in ['small', 'medium', 'large']"
+        },
+        {
+            "description": "Sign classification is correct",
+            "assertion": "(number > 0 and sign == 'positive') or (number < 0 and sign == 'negative') or (number == 0 and sign == 'zero')"
+        },
+        {
+            "description": "Parity classification is correct",
+            "assertion": "(number % 2 == 0 and parity == 'even') or (number % 2 != 0 and parity == 'odd')"
+        }
+    ],
+    "hints": [
+        "For sign: use if/elif/else comparing number to 0",
+        "For parity: use number % 2 to check if even (remainder is 0) or odd",
+        "For size: use abs(number) to get the absolute value, then compare ranges",
+        "Remember to use elif for mutually exclusive conditions"
+    ]
+}

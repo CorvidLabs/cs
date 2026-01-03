@@ -1,0 +1,56 @@
+{
+    "id": "03-typography-system",
+    "title": "Typography System",
+    "description": "Create a type scale and typography system.\n\n## Requirements\n\n1. Set up the body:\n   - Font family: system-ui, -apple-system, sans-serif\n   - Font size: 16px (base)\n   - Line height: 1.5\n   - Color: #333\n\n2. Style headings with a type scale:\n   - h1: 3rem, font-weight 700, line-height 1.2\n   - h2: 2.25rem, font-weight 600, line-height 1.25\n   - h3: 1.5rem, font-weight 600, line-height 1.3\n   - All headings: color #111, margin-bottom 0.5em\n\n3. Style `.text-small`:\n   - Font size: 0.875rem\n   - Color: #666\n\n4. Style `.text-large`:\n   - Font size: 1.25rem\n   - Line height: 1.6\n\n5. Style `blockquote`:\n   - Font size: 1.125rem\n   - Font style: italic\n   - Border left: 4px solid #ddd\n   - Padding left: 1rem\n   - Color: #555",
+    "order": 3,
+    "language": "css",
+    "starterCode": "/* Base typography */\nbody {\n    \n}\n\n/* Heading styles */\nh1, h2, h3 {\n    \n}\n\nh1 {\n    \n}\n\nh2 {\n    \n}\n\nh3 {\n    \n}\n\n/* Small text */\n.text-small {\n    \n}\n\n/* Large text */\n.text-large {\n    \n}\n\n/* Blockquote */\nblockquote {\n    \n}",
+    "testCases": [
+        {
+            "description": "body should use system font stack",
+            "assertion": "getComputedStyle(document.body).fontFamily.includes('system-ui') || getComputedStyle(document.body).fontFamily.includes('-apple-system')"
+        },
+        {
+            "description": "body font-size should be 16px",
+            "assertion": "getComputedStyle(document.body).fontSize === '16px'"
+        },
+        {
+            "description": "h1 font-size should be 3rem (48px)",
+            "assertion": "getComputedStyle(document.querySelector('h1')).fontSize === '48px'"
+        },
+        {
+            "description": "h1 font-weight should be 700",
+            "assertion": "getComputedStyle(document.querySelector('h1')).fontWeight === '700'"
+        },
+        {
+            "description": "h2 font-size should be 2.25rem (36px)",
+            "assertion": "getComputedStyle(document.querySelector('h2')).fontSize === '36px'"
+        },
+        {
+            "description": "h3 font-size should be 1.5rem (24px)",
+            "assertion": "getComputedStyle(document.querySelector('h3')).fontSize === '24px'"
+        },
+        {
+            "description": ".text-small should be 0.875rem (14px)",
+            "assertion": "getComputedStyle(document.querySelector('.text-small')).fontSize === '14px'"
+        },
+        {
+            "description": ".text-large should be 1.25rem (20px)",
+            "assertion": "getComputedStyle(document.querySelector('.text-large')).fontSize === '20px'"
+        },
+        {
+            "description": "blockquote should be italic",
+            "assertion": "getComputedStyle(document.querySelector('blockquote')).fontStyle === 'italic'"
+        },
+        {
+            "description": "blockquote should have left border",
+            "assertion": "getComputedStyle(document.querySelector('blockquote')).borderLeftWidth === '4px'"
+        }
+    ],
+    "hints": [
+        "Use font-family: system-ui, -apple-system, sans-serif;",
+        "Group shared heading styles with h1, h2, h3 selector",
+        "Use margin-bottom: 0.5em (em unit) for relative spacing",
+        "Use border-left: 4px solid #ddd for blockquote"
+    ]
+}

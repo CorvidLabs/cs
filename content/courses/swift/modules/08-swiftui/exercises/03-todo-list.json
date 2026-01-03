@@ -1,0 +1,37 @@
+{
+    "id": "03-todo-list",
+    "title": "Todo List App",
+    "description": "Build a functional todo list app combining lists, state, and navigation.\n\n## Requirements\n\n1. Create a `TodoItem` struct that is `Identifiable`:\n   - `id: UUID`\n   - `title: String`\n   - `isCompleted: Bool`\n\n2. Create a `TodoListView` with:\n   - `@State` array of TodoItems\n   - `@State` property for new item text\n   - A TextField to enter new todos\n   - A List displaying all todos\n   - Ability to toggle completion status\n   - Swipe to delete items\n\n3. Features:\n   - Tapping a row toggles its completed status\n   - Completed items show a checkmark\n   - Swiping left reveals a delete button\n   - Pressing return in TextField adds new item\n\n4. Wrap in NavigationStack with title \"My Tasks\"\n\n## Expected Behavior\n\n- User can add new todos\n- User can mark todos as complete/incomplete\n- User can delete todos by swiping\n- List updates immediately on changes",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "import SwiftUI\n\n// Define TodoItem struct\nstruct TodoItem: Identifiable {\n    // Add properties\n}\n\nstruct TodoListView: View {\n    // State for todos array\n    \n    // State for new item text\n    \n    var body: some View {\n        NavigationStack {\n            VStack {\n                // TextField for new items\n                \n                // List of todos\n            }\n            .navigationTitle(\"My Tasks\")\n        }\n    }\n    \n    // Function to add new item\n    private func addItem() {\n        // Implementation\n    }\n    \n    // Function to toggle completion\n    private func toggleItem(_ item: TodoItem) {\n        // Implementation\n    }\n    \n    // Function to delete items\n    private func deleteItems(at offsets: IndexSet) {\n        // Implementation\n    }\n}\n\n#Preview {\n    TodoListView()\n}\n",
+    "testCases": [
+        {
+            "description": "TodoItem should be Identifiable with id, title, isCompleted",
+            "assertion": "TodoItem(id: UUID(), title: \"Test\", isCompleted: false) compiles"
+        },
+        {
+            "description": "View should have @State todos array",
+            "assertion": "@State private var todos: [TodoItem] exists"
+        },
+        {
+            "description": "View should have TextField for new items",
+            "assertion": "TextField is present in the view"
+        },
+        {
+            "description": "View should have List with ForEach",
+            "assertion": "List with ForEach(todos) is present"
+        },
+        {
+            "description": "Items should be swipe-to-delete",
+            "assertion": ".onDelete or .swipeActions is used"
+        }
+    ],
+    "hints": [
+        "TodoItem: struct TodoItem: Identifiable { let id = UUID(); var title: String; var isCompleted: Bool }",
+        "State arrays: @State private var todos: [TodoItem] = []",
+        "TextField with onSubmit: TextField(\"New task\", text: $newItemText).onSubmit { addItem() }",
+        "Toggle in list: ForEach($todos) { $item in ... } to get bindings",
+        "Delete: ForEach(...).onDelete(perform: deleteItems)"
+    ]
+}

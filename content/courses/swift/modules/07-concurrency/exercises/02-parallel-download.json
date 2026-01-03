@@ -1,0 +1,32 @@
+{
+    "id": "02-parallel-download",
+    "title": "Parallel Downloads",
+    "description": "Use async let to download multiple resources in parallel.\n\n## Requirements\n\n1. Create a `Resource` struct with `name: String` and `size: Int`\n\n2. Create a `download(name: String) async -> Resource` function that:\n   - Simulates download time with `try? await Task.sleep(nanoseconds: 50_000_000)`\n   - Returns Resource(name: name, size: name.count * 100)\n\n3. Create a `downloadAllSequential(names: [String]) async -> [Resource]` function:\n   - Downloads each resource one at a time\n   - Returns array of resources\n\n4. Create a `downloadAllParallel(names: [String]) async -> [Resource]` function:\n   - Uses `async let` to download first 3 resources in parallel\n   - Returns array of resources\n\n5. Compare the approaches by downloading [\"Image\", \"Video\", \"Audio\"]\n\n## Expected Output\n\n```\nSequential downloads complete\nParallel downloads complete (faster!)\nDownloaded: Image (500 bytes), Video (500 bytes), Audio (500 bytes)\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Define Resource struct\n\n\n// Implement download function\n\n\n// Implement sequential download\n\n\n// Implement parallel download using async let\n\n\n// Test and compare\nfunc compareDownloads() async {\n    let names = [\"Image\", \"Video\", \"Audio\"]\n    \n    let start1 = Date()\n    let seq = await downloadAllSequential(names: names)\n    let seqTime = Date().timeIntervalSince(start1)\n    print(\"Sequential: \\(seqTime)s\")\n    \n    let start2 = Date()\n    let par = await downloadAllParallel(names: names)\n    let parTime = Date().timeIntervalSince(start2)\n    print(\"Parallel: \\(parTime)s\")\n    \n    print(\"Parallel is \\(seqTime / parTime)x faster\")\n}\n\nTask {\n    await compareDownloads()\n}\n",
+    "testCases": [
+        {
+            "description": "Resource struct should store name and size",
+            "assertion": "let r = Resource(name: \"Test\", size: 100); r.name == \"Test\" && r.size == 100"
+        },
+        {
+            "description": "download should return Resource with correct name",
+            "assertion": "let r = await download(name: \"File\"); r.name == \"File\""
+        },
+        {
+            "description": "downloadAllSequential should return all resources",
+            "assertion": "let results = await downloadAllSequential(names: [\"A\", \"B\"]); results.count == 2"
+        },
+        {
+            "description": "downloadAllParallel should return all resources",
+            "assertion": "let results = await downloadAllParallel(names: [\"A\", \"B\", \"C\"]); results.count == 3"
+        }
+    ],
+    "hints": [
+        "Sequential: use a for loop with await for each download",
+        "Parallel: use async let a = download(name: names[0]) for each",
+        "Collect parallel results: let results = await [a, b, c]",
+        "The size calculation is: name.count * 100"
+    ]
+}

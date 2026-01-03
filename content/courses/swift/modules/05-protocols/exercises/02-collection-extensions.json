@@ -1,0 +1,49 @@
+{
+    "id": "02-collection-extensions",
+    "title": "Collection Extensions",
+    "description": "Create useful extensions for Swift's collection types.\n\n## Requirements\n\n1. Extend `Array` with a `safeIndex(_ index: Int) -> Element?` method that returns nil for out-of-bounds access\n\n2. Extend `Array where Element: Numeric` with a `average() -> Double` method that returns the average of all elements\n\n3. Extend `String` with an `isValidEmail: Bool` computed property that checks for basic email format (contains @ and .)\n\n4. Extend `Int` with a `times(_ action: () -> Void)` method that executes the action that many times\n\n## Example Usage\n\n```swift\nlet numbers = [1, 2, 3, 4, 5]\nprint(numbers.safeIndex(2))   // Optional(3)\nprint(numbers.safeIndex(10))  // nil\nprint(numbers.average())      // 3.0\n\nlet email = \"test@example.com\"\nprint(email.isValidEmail)  // true\n\n3.times { print(\"Hello!\") }  // Prints Hello! three times\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Extend Array with safe index access\nextension Array {\n    public func safeIndex(_ index: Int) -> Element? {\n        // Return nil if index is out of bounds\n    }\n}\n\n// Extend Array where elements are Numeric\nextension Array where Element: Numeric {\n    public func average() -> Double {\n        // Return the average of all elements\n        // Handle empty array case\n    }\n}\n\n// Extend String with email validation\nextension String {\n    public var isValidEmail: Bool {\n        // Check for @ and . characters\n    }\n}\n\n// Extend Int with times method\nextension Int {\n    public func times(_ action: () -> Void) {\n        // Execute action 'self' times\n    }\n}\n\n// Test your extensions\nlet numbers = [1, 2, 3, 4, 5]\nprint(\"Safe index 2: \\(numbers.safeIndex(2) ?? -1)\")  // 3\nprint(\"Safe index 10: \\(numbers.safeIndex(10) ?? -1)\")  // -1\nprint(\"Average: \\(numbers.average())\")  // 3.0\n\nprint(\"Valid email: \\(\"test@example.com\".isValidEmail)\")  // true\nprint(\"Invalid email: \\(\"invalid-email\".isValidEmail)\")  // false\n\nvar count = 0\n3.times { count += 1 }\nprint(\"Count after 3.times: \\(count)\")  // 3\n",
+    "testCases": [
+        {
+            "description": "safeIndex returns element for valid index",
+            "assertion": "[1, 2, 3].safeIndex(1) == 2"
+        },
+        {
+            "description": "safeIndex returns nil for invalid index",
+            "assertion": "[1, 2, 3].safeIndex(10) == nil"
+        },
+        {
+            "description": "safeIndex returns nil for negative index",
+            "assertion": "[1, 2, 3].safeIndex(-1) == nil"
+        },
+        {
+            "description": "average returns correct value",
+            "assertion": "[1, 2, 3, 4, 5].average() == 3.0"
+        },
+        {
+            "description": "average returns 0 for empty array",
+            "assertion": "[Int]().average() == 0.0"
+        },
+        {
+            "description": "isValidEmail returns true for valid email",
+            "assertion": "\"user@domain.com\".isValidEmail == true"
+        },
+        {
+            "description": "isValidEmail returns false for missing @",
+            "assertion": "\"userdomain.com\".isValidEmail == false"
+        },
+        {
+            "description": "times executes action correct number of times",
+            "assertion": "{ var c = 0; 5.times { c += 1 }; return c == 5 }()"
+        }
+    ],
+    "hints": [
+        "For safeIndex, use indices.contains(index) to check bounds",
+        "For average, convert the sum to Double and divide by Double(count)",
+        "Handle empty array in average by returning 0.0",
+        "For isValidEmail, use contains(\"@\") && contains(\".\")",
+        "For times, use a for loop: for _ in 0..<self { action() }"
+    ]
+}

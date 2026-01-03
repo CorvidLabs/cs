@@ -1,0 +1,17 @@
+{
+    "id": "07-concurrency",
+    "title": "Swift Concurrency",
+    "description": "Master Swift's modern concurrency model with async/await. Learn to write asynchronous code, work with actors for safe mutable state, use task groups for parallel execution, and understand Sendable for data race safety.",
+    "order": 7,
+    "lessons": [
+        "01-async-await",
+        "02-tasks",
+        "03-actors",
+        "04-sendable"
+    ],
+    "exercises": [
+        "01-async-fetcher",
+        "02-parallel-download",
+        "03-actor-cache"
+    ]
+}

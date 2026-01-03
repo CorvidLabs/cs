@@ -1,0 +1,17 @@
+{
+  "id": "03-linked-lists",
+  "title": "Linked Lists",
+  "description": "Explore linked list data structures including singly and doubly linked lists. Learn essential operations like traversal, insertion, deletion, reversal, and cycle detection. Understand when to use linked lists versus arrays.",
+  "order": 3,
+  "lessons": [
+    "01-singly-linked-lists",
+    "02-doubly-linked-lists",
+    "03-cycle-detection",
+    "04-list-reversal"
+  ],
+  "exercises": [
+    "01-reverse-list",
+    "02-detect-cycle",
+    "03-merge-sorted-lists"
+  ]
+}

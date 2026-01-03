@@ -1,0 +1,17 @@
+{
+  "id": "07-hash-tables",
+  "title": "Hash Tables",
+  "description": "Master hash table data structures and their operations. Learn about hash functions, collision handling strategies (chaining and open addressing), and how hash tables provide O(1) average-case lookups.",
+  "order": 7,
+  "lessons": [
+    "01-hashing-fundamentals",
+    "02-collision-handling",
+    "03-hash-table-operations",
+    "04-hash-table-applications"
+  ],
+  "exercises": [
+    "01-two-sum",
+    "02-group-anagrams",
+    "03-lru-cache"
+  ]
+}

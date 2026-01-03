@@ -1,0 +1,37 @@
+{
+    "id": "02-reactive-state",
+    "title": "Reactive State Store",
+    "description": "Create a simple reactive state store with subscribe/notify pattern.\n\n## Requirements\n\nImplement a `Store` class with:\n\n1. `constructor(initialState)` - stores initial state and empty listeners array\n2. `getState()` - returns current state\n3. `setState(updates)` - merges updates with state and calls `notify()`\n4. `subscribe(listener)` - adds listener function to array, returns unsubscribe function\n5. `notify()` - calls all listeners with current state\n\n## Expected Usage\n\n```javascript\nconst store = new Store({ count: 0, name: 'App' });\n\nconst unsubscribe = store.subscribe(state => {\n    console.log('State changed:', state);\n});\n\nstore.setState({ count: 1 }); // Logs: State changed: { count: 1, name: 'App' }\nstore.setState({ count: 2 }); // Logs: State changed: { count: 2, name: 'App' }\n\nunsubscribe(); // Remove listener\nstore.setState({ count: 3 }); // No log - listener removed\n```",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "class Store {\n    constructor(initialState = {}) {\n        // TODO: Initialize state and listeners array\n        this.state = null;\n        this.listeners = null;\n    }\n\n    getState() {\n        // TODO: Return current state\n        return null;\n    }\n\n    setState(updates) {\n        // TODO: Merge updates with current state\n        // Then call notify()\n    }\n\n    subscribe(listener) {\n        // TODO: Add listener to array\n        // Return a function that removes this listener when called\n        return () => {};\n    }\n\n    notify() {\n        // TODO: Call each listener with current state\n    }\n}\n\n// Test the Store\nconst store = new Store({ count: 0, theme: 'light' });\n\nlet updateCount = 0;\nconst logUpdates = [];\n\nconst unsubscribe = store.subscribe(state => {\n    updateCount++;\n    logUpdates.push({ ...state });\n    console.log(`Update ${updateCount}:`, state);\n});\n\nconsole.log('Initial state:', store.getState());\n\nstore.setState({ count: 1 });\nstore.setState({ count: 2 });\nstore.setState({ theme: 'dark' });\n\nconsole.log('Updates received:', updateCount);\n\nunsubscribe();\nstore.setState({ count: 3 }); // Should not trigger listener\n\nconsole.log('Final update count:', updateCount);\nconsole.log('Final state:', store.getState());\n",
+    "testCases": [
+        {
+            "description": "Store initializes with given state",
+            "assertion": "new Store({ a: 1 }).getState().a === 1"
+        },
+        {
+            "description": "setState merges state",
+            "assertion": "(() => { const s = new Store({ a: 1 }); s.setState({ b: 2 }); return s.getState().a === 1 && s.getState().b === 2; })()"
+        },
+        {
+            "description": "subscribe adds listener that receives updates",
+            "assertion": "(() => { const s = new Store({ x: 0 }); let called = false; s.subscribe(() => { called = true; }); s.setState({ x: 1 }); return called; })()"
+        },
+        {
+            "description": "unsubscribe removes listener",
+            "assertion": "(() => { const s = new Store({ x: 0 }); let count = 0; const unsub = s.subscribe(() => { count++; }); s.setState({ x: 1 }); unsub(); s.setState({ x: 2 }); return count === 1; })()"
+        },
+        {
+            "description": "Multiple subscribers all receive updates",
+            "assertion": "(() => { const s = new Store({ x: 0 }); let c1 = 0, c2 = 0; s.subscribe(() => c1++); s.subscribe(() => c2++); s.setState({ x: 1 }); return c1 === 1 && c2 === 1; })()"
+        }
+    ],
+    "hints": [
+        "constructor: this.state = initialState; this.listeners = [];",
+        "getState: return this.state;",
+        "setState: this.state = { ...this.state, ...updates }; this.notify();",
+        "subscribe: this.listeners.push(listener); return () => { this.listeners = this.listeners.filter(l => l !== listener); };",
+        "notify: this.listeners.forEach(listener => listener(this.state));"
+    ]
+}

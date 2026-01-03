@@ -1,0 +1,44 @@
+{
+  "id": "02-merge-intervals",
+  "title": "Merge Intervals",
+  "description": "Merge all overlapping intervals using sorting.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    \"\"\"\n    Merge all overlapping intervals.\n    \n    Args:\n        intervals: List of [start, end] intervals\n        \n    Returns:\n        List of merged non-overlapping intervals\n        \n    Example:\n        Input: [[1,3],[2,6],[8,10],[15,18]]\n        Output: [[1,6],[8,10],[15,18]]\n        # [1,3] and [2,6] overlap, merge to [1,6]\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def merge_intervals(intervals: list[list[int]]) -> list[list[int]]:\n    if not intervals:\n        return []\n    \n    # Sort by start time\n    intervals.sort(key=lambda x: x[0])\n    \n    merged = [intervals[0]]\n    \n    for start, end in intervals[1:]:\n        # Check if current interval overlaps with last merged\n        if start <= merged[-1][1]:\n            # Merge: extend the end if needed\n            merged[-1][1] = max(merged[-1][1], end)\n        else:\n            # No overlap: add as new interval\n            merged.append([start, end])\n    \n    return merged",
+  "testCases": [
+    {
+      "input": {"intervals": [[1, 3], [2, 6], [8, 10], [15, 18]]},
+      "expected": [[1, 6], [8, 10], [15, 18]],
+      "description": "Some intervals overlap"
+    },
+    {
+      "input": {"intervals": [[1, 4], [4, 5]]},
+      "expected": [[1, 5]],
+      "description": "Adjacent intervals (touching edges)"
+    },
+    {
+      "input": {"intervals": [[1, 4], [0, 4]]},
+      "expected": [[0, 4]],
+      "description": "Unsorted input"
+    },
+    {
+      "input": {"intervals": [[1, 4], [2, 3]]},
+      "expected": [[1, 4]],
+      "description": "One interval contains another"
+    },
+    {
+      "input": {"intervals": [[1, 2], [3, 4], [5, 6]]},
+      "expected": [[1, 2], [3, 4], [5, 6]],
+      "description": "No overlaps"
+    }
+  ],
+  "hints": [
+    "First sort intervals by their start time",
+    "After sorting, overlapping intervals will be adjacent",
+    "Compare each interval with the last merged interval",
+    "Two intervals overlap if the current start <= previous end"
+  ],
+  "explanation": "First sort intervals by start time - this ensures overlapping intervals are adjacent. Then iterate through sorted intervals. For each interval, check if it overlaps with the last merged interval (current start <= last end). If they overlap, extend the last interval's end to cover both. If not, add the current interval as a new merged interval. Time: O(n log n) for sorting, Space: O(n) for output."
+}

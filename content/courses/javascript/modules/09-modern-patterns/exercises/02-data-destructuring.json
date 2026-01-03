@@ -1,0 +1,37 @@
+{
+    "id": "02-data-destructuring",
+    "title": "Data Destructuring",
+    "description": "Use destructuring to extract and transform data from complex objects.\n\n## Requirements\n\nGiven the `apiResponse` object, use destructuring to:\n\n1. Extract `userName` from `response.data.user.name`\n2. Extract `userEmail` from `response.data.user.email`\n3. Extract `posts` array from `response.data.posts` (default to empty array)\n4. Extract `statusCode` from `response.status`\n5. Create `postTitles` - an array of just the post titles using destructuring in a map\n\n## Input Data\n\n```javascript\nconst apiResponse = {\n    status: 200,\n    data: {\n        user: {\n            name: 'Alice',\n            email: 'alice@example.com',\n            role: 'admin'\n        },\n        posts: [\n            { id: 1, title: 'Hello World', likes: 10 },\n            { id: 2, title: 'JavaScript Tips', likes: 25 }\n        ]\n    }\n};\n```\n\n## Expected Results\n\n- `userName` = 'Alice'\n- `userEmail` = 'alice@example.com'\n- `posts` = array with 2 posts\n- `statusCode` = 200\n- `postTitles` = ['Hello World', 'JavaScript Tips']",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "const apiResponse = {\n    status: 200,\n    data: {\n        user: {\n            name: 'Alice',\n            email: 'alice@example.com',\n            role: 'admin'\n        },\n        posts: [\n            { id: 1, title: 'Hello World', likes: 10 },\n            { id: 2, title: 'JavaScript Tips', likes: 25 }\n        ]\n    }\n};\n\n// TODO: Use nested destructuring to extract these values\n// Hint: const { status: statusCode, data: { user: { name: userName, ... }, ... } } = apiResponse;\n\nlet userName = '';\nlet userEmail = '';\nlet posts = [];\nlet statusCode = 0;\n\n// Your destructuring code here:\n\n\n// TODO: Use destructuring in map to get post titles\n// Hint: posts.map(({ title }) => title)\nlet postTitles = [];\n\n// Your code here:\n\n\n// Test output\nconsole.log('User:', userName);\nconsole.log('Email:', userEmail);\nconsole.log('Status:', statusCode);\nconsole.log('Posts count:', posts.length);\nconsole.log('Post titles:', postTitles);\n",
+    "testCases": [
+        {
+            "description": "userName should be 'Alice'",
+            "assertion": "userName === 'Alice'"
+        },
+        {
+            "description": "userEmail should be 'alice@example.com'",
+            "assertion": "userEmail === 'alice@example.com'"
+        },
+        {
+            "description": "statusCode should be 200",
+            "assertion": "statusCode === 200"
+        },
+        {
+            "description": "posts should have 2 items",
+            "assertion": "Array.isArray(posts) && posts.length === 2"
+        },
+        {
+            "description": "postTitles should be ['Hello World', 'JavaScript Tips']",
+            "assertion": "Array.isArray(postTitles) && postTitles[0] === 'Hello World' && postTitles[1] === 'JavaScript Tips'"
+        }
+    ],
+    "hints": [
+        "Use nested destructuring: const { data: { user: { name: userName } } } = obj",
+        "Rename while destructuring with colon: { name: userName }",
+        "Set defaults with equals: { posts = [] }",
+        "In map, destructure the parameter: posts.map(({ title }) => title)",
+        "You can do it all in one destructuring statement or multiple"
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "id": "01-promise-chain",
+    "title": "Promise Chain",
+    "description": "Practice creating and chaining promises.\n\n## Requirements\n\n1. Create a function `delay(ms)` that returns a promise that resolves after `ms` milliseconds\n\n2. Create a function `fetchUser(id)` that:\n   - Returns a promise\n   - Resolves after 100ms with `{ id, name: 'User ' + id }` if id > 0\n   - Rejects with Error('Invalid ID') if id <= 0\n\n3. Create a function `fetchUserPosts(userId)` that:\n   - Returns a promise\n   - Resolves after 100ms with an array of 3 posts: `[{ id: 1, title: 'Post 1', userId }, ...]`\n\n4. Create a function `getUserWithPosts(userId)` that:\n   - Chains the promises to get user, then their posts\n   - Returns a promise that resolves with `{ user, posts }`\n\n## Expected Output\n\n```javascript\nawait delay(100); // Resolves after 100ms\n\nawait fetchUser(1); // { id: 1, name: 'User 1' }\nawait fetchUser(-1); // Rejects with Error('Invalid ID')\n\nawait fetchUserPosts(1); // [{ id: 1, title: 'Post 1', userId: 1 }, ...]\n\nawait getUserWithPosts(1);\n// { user: { id: 1, name: 'User 1' }, posts: [...] }\n```",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "// Delay for ms milliseconds\nfunction delay(ms) {\n    // Return a promise that resolves after ms milliseconds\n    // Hint: Use setTimeout inside the promise\n    \n}\n\n// Fetch a user by ID\nfunction fetchUser(id) {\n    // Return a promise\n    // After 100ms delay:\n    //   - If id > 0: resolve with { id, name: 'User ' + id }\n    //   - If id <= 0: reject with Error('Invalid ID')\n    \n}\n\n// Fetch posts for a user\nfunction fetchUserPosts(userId) {\n    // Return a promise that resolves after 100ms\n    // with array of 3 posts: [{ id: 1, title: 'Post 1', userId }, ...]\n    \n}\n\n// Get user with their posts\nfunction getUserWithPosts(userId) {\n    // Chain fetchUser and fetchUserPosts\n    // Return promise resolving to { user, posts }\n    // Use .then() chaining\n    \n}\n\n// Test your functions\nasync function test() {\n    console.log('Testing delay...');\n    await delay(100);\n    console.log('Delay complete!');\n\n    console.log('Testing fetchUser...');\n    const user = await fetchUser(1);\n    console.log('User:', user);\n\n    try {\n        await fetchUser(-1);\n    } catch (e) {\n        console.log('Expected error:', e.message);\n    }\n\n    console.log('Testing fetchUserPosts...');\n    const posts = await fetchUserPosts(1);\n    console.log('Posts:', posts);\n\n    console.log('Testing getUserWithPosts...');\n    const result = await getUserWithPosts(1);\n    console.log('Result:', result);\n}\n\ntest();\n",
+    "testCases": [
+        {
+            "description": "delay returns a Promise",
+            "assertion": "delay(10) instanceof Promise"
+        },
+        {
+            "description": "fetchUser returns a Promise",
+            "assertion": "fetchUser(1) instanceof Promise"
+        },
+        {
+            "description": "fetchUser(1) resolves to user object with correct id",
+            "assertion": "(async () => { const user = await fetchUser(1); return user.id === 1; })()"
+        },
+        {
+            "description": "fetchUser(1) resolves to user object with correct name",
+            "assertion": "(async () => { const user = await fetchUser(1); return user.name === 'User 1'; })()"
+        },
+        {
+            "description": "fetchUser(-1) rejects with Error",
+            "assertion": "(async () => { try { await fetchUser(-1); return false; } catch (e) { return e.message === 'Invalid ID'; } })()"
+        },
+        {
+            "description": "fetchUserPosts returns array of 3 posts",
+            "assertion": "(async () => { const posts = await fetchUserPosts(1); return Array.isArray(posts) && posts.length === 3; })()"
+        },
+        {
+            "description": "fetchUserPosts posts have correct userId",
+            "assertion": "(async () => { const posts = await fetchUserPosts(5); return posts.every(p => p.userId === 5); })()"
+        },
+        {
+            "description": "getUserWithPosts returns object with user and posts",
+            "assertion": "(async () => { const result = await getUserWithPosts(1); return 'user' in result && 'posts' in result; })()"
+        },
+        {
+            "description": "getUserWithPosts user matches userId",
+            "assertion": "(async () => { const result = await getUserWithPosts(2); return result.user.id === 2; })()"
+        }
+    ],
+    "hints": [
+        "delay: return new Promise(resolve => setTimeout(resolve, ms))",
+        "fetchUser: return new Promise((resolve, reject) => { setTimeout(() => { ... }, 100) })",
+        "For posts array: Array.from({ length: 3 }, (_, i) => ({ id: i+1, title: `Post ${i+1}`, userId }))",
+        "getUserWithPosts: return fetchUser(userId).then(user => fetchUserPosts(user.id).then(posts => ({ user, posts })))"
+    ]
+}

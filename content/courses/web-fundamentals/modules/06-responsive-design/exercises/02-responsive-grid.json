@@ -1,0 +1,37 @@
+{
+    "id": "02-responsive-grid",
+    "title": "Create a Responsive Card Grid",
+    "description": "Build a card grid that changes columns based on screen size.\n\n## Requirements\n\n1. Style the `.card-grid`:\n   - Use CSS Grid layout\n   - Single column on mobile (1fr)\n   - 20px gap between cards\n\n2. Style the `.card`:\n   - White background\n   - 16px padding\n   - 8px border-radius\n   - 1px solid #ddd border\n\n3. Add media queries:\n   - At 600px: 2 columns\n   - At 900px: 3 columns\n\n## Expected Result\n\n1 column on mobile, 2 on tablet, 3 on desktop.",
+    "order": 2,
+    "language": "css",
+    "starterCode": "/* Mobile styles (default) */\n.card-grid {\n    /* Add your styles here */\n}\n\n.card {\n    /* Add your styles here */\n}\n\n/* Tablet (600px) - add media query */\n\n/* Desktop (900px) - add media query */",
+    "testCases": [
+        {
+            "description": "Card grid should use CSS Grid",
+            "assertion": "getComputedStyle(document.querySelector('.card-grid')).display === 'grid'"
+        },
+        {
+            "description": "Card grid should have 20px gap",
+            "assertion": "getComputedStyle(document.querySelector('.card-grid')).gap === '20px'"
+        },
+        {
+            "description": "Card should have white background",
+            "assertion": "getComputedStyle(document.querySelector('.card')).backgroundColor === 'rgb(255, 255, 255)'"
+        },
+        {
+            "description": "Card should have 16px padding",
+            "assertion": "getComputedStyle(document.querySelector('.card')).paddingTop === '16px'"
+        },
+        {
+            "description": "Card should have 8px border-radius",
+            "assertion": "getComputedStyle(document.querySelector('.card')).borderRadius === '8px'"
+        }
+    ],
+    "hints": [
+        "Use display: grid on .card-grid",
+        "Use grid-template-columns: 1fr for single column",
+        "Use gap: 20px for spacing",
+        "At 600px, use grid-template-columns: repeat(2, 1fr)",
+        "At 900px, use grid-template-columns: repeat(3, 1fr)"
+    ]
+}

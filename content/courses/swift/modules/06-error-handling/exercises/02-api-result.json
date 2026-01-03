@@ -1,0 +1,39 @@
+{
+    "id": "02-api-result",
+    "title": "API Result Handler",
+    "description": "Create an API response handler using the Result type and error transformation.\n\n## Requirements\n\n1. Create an `APIError` enum with cases:\n   - `networkError(String)`\n   - `decodingError`\n   - `notFound`\n   - `unauthorized`\n\n2. Create a `User` struct with `id: Int` and `name: String`\n\n3. Create a function `parseAPIResponse(_ json: [String: Any]?) -> Result<User, APIError>`\n\n4. Create a function `fetchUser(id: Int, simulatedResponse: [String: Any]?) -> Result<User, APIError>`\n\n5. Add a method on Result to get a default value: `getOrDefault(_ defaultValue: User) -> User`\n\n## Example Usage\n\n```swift\nlet validJSON: [String: Any] = [\"id\": 1, \"name\": \"Alice\"]\nlet result = parseAPIResponse(validJSON)\n\nswitch result {\ncase .success(let user):\n    print(\"Got user: \\(user.name)\")\ncase .failure(let error):\n    print(\"Error: \\(error)\")\n}\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Define API error type\npublic enum APIError: Error {\n    case networkError(String)\n    case decodingError\n    case notFound\n    case unauthorized\n}\n\n// Define User struct\npublic struct User {\n    public let id: Int\n    public let name: String\n\n    public init(id: Int, name: String) {\n        self.id = id\n        self.name = name\n    }\n}\n\n// Parse JSON response into User\npublic func parseAPIResponse(_ json: [String: Any]?) -> Result<User, APIError> {\n    // Return .failure(.notFound) if json is nil\n    // Return .failure(.decodingError) if id or name is missing/wrong type\n    // Return .success(user) if valid\n}\n\n// Fetch user (simulated)\npublic func fetchUser(id: Int, simulatedResponse: [String: Any]?) -> Result<User, APIError> {\n    guard id > 0 else {\n        return .failure(.notFound)\n    }\n    return parseAPIResponse(simulatedResponse)\n}\n\n// Extend Result with getOrDefault\nextension Result where Success == User {\n    public func getOrDefault(_ defaultValue: User) -> User {\n        // Return success value or default\n    }\n}\n\n// Test your implementation\nlet validJSON: [String: Any] = [\"id\": 1, \"name\": \"Alice\"]\nlet invalidJSON: [String: Any] = [\"id\": \"not-a-number\", \"name\": \"Bob\"]\n\nprint(\"Valid response:\")\nswitch parseAPIResponse(validJSON) {\ncase .success(let user):\n    print(\"  User: \\(user.name)\")\ncase .failure(let error):\n    print(\"  Error: \\(error)\")\n}\n\nprint(\"Invalid response:\")\nswitch parseAPIResponse(invalidJSON) {\ncase .success(let user):\n    print(\"  User: \\(user.name)\")\ncase .failure(let error):\n    print(\"  Error: \\(error)\")\n}\n\nlet defaultUser = User(id: 0, name: \"Guest\")\nlet result = parseAPIResponse(nil)\nprint(\"With default: \\(result.getOrDefault(defaultUser).name)\")\n",
+    "testCases": [
+        {
+            "description": "parseAPIResponse returns success for valid JSON",
+            "assertion": "{ let json: [String: Any] = [\"id\": 1, \"name\": \"Test\"]; if case .success = parseAPIResponse(json) { return true }; return false }()"
+        },
+        {
+            "description": "parseAPIResponse returns notFound for nil JSON",
+            "assertion": "{ if case .failure(.notFound) = parseAPIResponse(nil) { return true }; return false }()"
+        },
+        {
+            "description": "parseAPIResponse returns decodingError for invalid JSON",
+            "assertion": "{ let json: [String: Any] = [\"wrong\": \"data\"]; if case .failure(.decodingError) = parseAPIResponse(json) { return true }; return false }()"
+        },
+        {
+            "description": "fetchUser returns notFound for invalid id",
+            "assertion": "{ if case .failure(.notFound) = fetchUser(id: -1, simulatedResponse: nil) { return true }; return false }()"
+        },
+        {
+            "description": "getOrDefault returns user on success",
+            "assertion": "{ let json: [String: Any] = [\"id\": 1, \"name\": \"Test\"]; let result = parseAPIResponse(json); return result.getOrDefault(User(id: 0, name: \"Default\")).name == \"Test\" }()"
+        },
+        {
+            "description": "getOrDefault returns default on failure",
+            "assertion": "{ let result = parseAPIResponse(nil); return result.getOrDefault(User(id: 0, name: \"Default\")).name == \"Default\" }()"
+        }
+    ],
+    "hints": [
+        "Use guard let json = json else { return .failure(.notFound) }",
+        "Use json[\"id\"] as? Int to safely cast values",
+        "For getOrDefault, use switch on self or if case .success(let value) = self"
+    ]
+}

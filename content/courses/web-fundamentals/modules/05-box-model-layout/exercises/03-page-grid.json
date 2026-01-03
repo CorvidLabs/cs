@@ -1,0 +1,49 @@
+{
+    "id": "03-page-grid",
+    "title": "Build a Page Grid Layout",
+    "description": "Create a page layout with header, sidebar, main content, and footer using CSS Grid.\n\n## Requirements\n\n1. Style the `.page-grid`:\n   - Use CSS Grid layout\n   - Define template areas for header, sidebar, main, footer\n   - Minimum height of 100vh\n   - Sidebar column should be 250px, main should take remaining space\n\n2. Assign grid areas:\n   - `.header` - grid-area: header\n   - `.sidebar` - grid-area: sidebar\n   - `.main` - grid-area: main\n   - `.footer` - grid-area: footer\n\n3. Style backgrounds:\n   - Header: #333 background, white text\n   - Sidebar: #f5f5f5 background\n   - Footer: #333 background, white text\n\n## Expected Result\n\nA classic page layout with fixed-width sidebar and fluid main content.",
+    "order": 3,
+    "language": "css",
+    "starterCode": "/* Page grid container */\n.page-grid {\n    /* Add your styles here */\n}\n\n/* Header */\n.header {\n    /* Add your styles here */\n}\n\n/* Sidebar */\n.sidebar {\n    /* Add your styles here */\n}\n\n/* Main content */\n.main {\n    /* Add your styles here */\n}\n\n/* Footer */\n.footer {\n    /* Add your styles here */\n}",
+    "testCases": [
+        {
+            "description": "Page grid should use CSS Grid",
+            "assertion": "getComputedStyle(document.querySelector('.page-grid')).display === 'grid'"
+        },
+        {
+            "description": "Page grid should have minimum height of 100vh",
+            "assertion": "getComputedStyle(document.querySelector('.page-grid')).minHeight === window.innerHeight + 'px'"
+        },
+        {
+            "description": "Header should have correct grid area",
+            "assertion": "getComputedStyle(document.querySelector('.header')).gridArea.includes('header')"
+        },
+        {
+            "description": "Sidebar should have correct grid area",
+            "assertion": "getComputedStyle(document.querySelector('.sidebar')).gridArea.includes('sidebar')"
+        },
+        {
+            "description": "Header should have #333 background",
+            "assertion": "getComputedStyle(document.querySelector('.header')).backgroundColor === 'rgb(51, 51, 51)'"
+        },
+        {
+            "description": "Header should have white text",
+            "assertion": "getComputedStyle(document.querySelector('.header')).color === 'rgb(255, 255, 255)'"
+        },
+        {
+            "description": "Sidebar should have #f5f5f5 background",
+            "assertion": "getComputedStyle(document.querySelector('.sidebar')).backgroundColor === 'rgb(245, 245, 245)'"
+        },
+        {
+            "description": "Footer should have #333 background",
+            "assertion": "getComputedStyle(document.querySelector('.footer')).backgroundColor === 'rgb(51, 51, 51)'"
+        }
+    ],
+    "hints": [
+        "Use display: grid on the container",
+        "Define grid-template-areas with 'header header' for the first row, 'sidebar main' for the middle, 'footer footer' for the last",
+        "Use grid-template-columns: 250px 1fr for sidebar and main widths",
+        "Assign each element its grid-area (e.g., grid-area: header)",
+        "Use min-height: 100vh on the container"
+    ]
+}

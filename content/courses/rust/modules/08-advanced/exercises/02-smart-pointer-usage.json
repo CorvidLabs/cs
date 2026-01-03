@@ -1,0 +1,41 @@
+{
+    "id": "02-smart-pointer-usage",
+    "title": "Smart Pointer Usage",
+    "description": "Practice using Box, Rc, and RefCell for various scenarios.\n\n## Requirements\n\n1. Implement a recursive `List` enum using Box:\n   - Variants: `Cons(i32, Box<List>)` and `Nil`\n   - `fn sum(&self) -> i32` - sum all values\n   - `fn len(&self) -> usize` - count elements\n\n2. Implement a shared mutable counter using Rc<RefCell<T>>:\n   - `SharedCounter::new() -> Self`\n   - `SharedCounter::clone(&self) -> Self`\n   - `fn increment(&self)` - add 1\n   - `fn get(&self) -> i32` - get current value\n\n## Examples\n\n- `Cons(1, Box::new(Cons(2, Box::new(Nil)))).sum()` returns `3`\n- Two clones of SharedCounter increment the same value",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "use std::cell::RefCell;\nuse std::rc::Rc;\n\n// Recursive list using Box\nenum List {\n    Cons(i32, Box<List>),\n    Nil,\n}\n\nuse List::{Cons, Nil};\n\nimpl List {\n    fn sum(&self) -> i32 {\n        todo!()\n    }\n\n    fn len(&self) -> usize {\n        todo!()\n    }\n}\n\n// Shared mutable counter\nstruct SharedCounter {\n    value: Rc<RefCell<i32>>,\n}\n\nimpl SharedCounter {\n    fn new() -> Self {\n        todo!()\n    }\n\n    fn make_clone(&self) -> Self {\n        todo!()\n    }\n\n    fn increment(&self) {\n        todo!()\n    }\n\n    fn get(&self) -> i32 {\n        todo!()\n    }\n}\n\nfn main() {\n    // Test List\n    let list = Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil))))));\n    println!(\"Sum: {}\", list.sum());\n    println!(\"Length: {}\", list.len());\n\n    // Test SharedCounter\n    let counter1 = SharedCounter::new();\n    let counter2 = counter1.make_clone();\n\n    counter1.increment();\n    counter1.increment();\n    counter2.increment();\n\n    println!(\"Counter1: {}\", counter1.get());\n    println!(\"Counter2: {}\", counter2.get());  // Same value!\n}\n",
+    "testCases": [
+        {
+            "description": "List sum works correctly",
+            "assertion": "Cons(1, Box::new(Cons(2, Box::new(Cons(3, Box::new(Nil)))))).sum() == 6"
+        },
+        {
+            "description": "List len works correctly",
+            "assertion": "Cons(1, Box::new(Cons(2, Box::new(Nil)))).len() == 2"
+        },
+        {
+            "description": "Nil sum is 0",
+            "assertion": "Nil.sum() == 0"
+        },
+        {
+            "description": "Nil len is 0",
+            "assertion": "Nil.len() == 0"
+        },
+        {
+            "description": "SharedCounter increments work",
+            "assertion": "{ let c = SharedCounter::new(); c.increment(); c.increment(); c.get() == 2 }"
+        },
+        {
+            "description": "SharedCounter clones share state",
+            "assertion": "{ let c1 = SharedCounter::new(); let c2 = c1.make_clone(); c1.increment(); c2.get() == 1 }"
+        }
+    ],
+    "hints": [
+        "For List::sum, match on self and recursively sum Cons values",
+        "For List::len, match and add 1 for each Cons node",
+        "SharedCounter uses Rc::new(RefCell::new(0)) for shared mutable i32",
+        "Use Rc::clone(&self.value) in make_clone",
+        "Use .borrow() for reading, .borrow_mut() for writing RefCell"
+    ]
+}

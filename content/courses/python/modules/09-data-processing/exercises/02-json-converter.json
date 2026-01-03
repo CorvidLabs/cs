@@ -1,0 +1,32 @@
+{
+    "id": "02-json-converter",
+    "title": "Product Catalog Transformer",
+    "description": "Parse JSON data and transform it into a different structure.\n\n## Requirements\n\n1. Parse the `json_data` string containing product information\n2. Transform the data into a lookup dictionary where:\n   - Keys are product IDs (as strings)\n   - Values are dictionaries with 'name' and 'price' (price should be a float)\n3. Store the result in a variable called `catalog`\n4. Also create a variable `total_value` with the sum of all prices\n\n## Input Data\n\n```json\n[\n    {\"id\": 101, \"name\": \"Widget\", \"price\": \"29.99\"},\n    {\"id\": 102, \"name\": \"Gadget\", \"price\": \"49.99\"},\n    {\"id\": 103, \"name\": \"Gizmo\", \"price\": \"19.99\"}\n]\n```\n\n## Expected Output\n\n`catalog` should be:\n```python\n{\n    '101': {'name': 'Widget', 'price': 29.99},\n    '102': {'name': 'Gadget', 'price': 49.99},\n    '103': {'name': 'Gizmo', 'price': 19.99}\n}\n```\n\n`total_value` should be `99.97`",
+    "order": 2,
+    "language": "python",
+    "starterCode": "import json\n\n# JSON data as a string (simulating an API response)\njson_data = '''[\n    {\"id\": 101, \"name\": \"Widget\", \"price\": \"29.99\"},\n    {\"id\": 102, \"name\": \"Gadget\", \"price\": \"49.99\"},\n    {\"id\": 103, \"name\": \"Gizmo\", \"price\": \"19.99\"}\n]'''\n\n# TODO: Parse the JSON data\nproducts = None  # Replace with json.loads(...)\n\n# TODO: Transform into catalog dictionary\ncatalog = {}  # Should be {'101': {'name': ..., 'price': ...}, ...}\n\n# TODO: Calculate total value of all products\ntotal_value = 0  # Should be sum of all prices\n\n# Your code here:\n\n\n# Print results to verify\nprint(f\"Catalog has {len(catalog)} products\")\nprint(f\"Total value: ${total_value}\")\n",
+    "testCases": [
+        {
+            "description": "catalog should have 3 products",
+            "assertion": "isinstance(catalog, dict) and len(catalog) == 3"
+        },
+        {
+            "description": "Product 101 should be Widget with price 29.99",
+            "assertion": "catalog.get('101', {}).get('name') == 'Widget' and catalog.get('101', {}).get('price') == 29.99"
+        },
+        {
+            "description": "Product 102 should be Gadget with price 49.99",
+            "assertion": "catalog.get('102', {}).get('name') == 'Gadget' and catalog.get('102', {}).get('price') == 49.99"
+        },
+        {
+            "description": "total_value should be 99.97",
+            "assertion": "abs(total_value - 99.97) < 0.01"
+        }
+    ],
+    "hints": [
+        "Use json.loads(json_data) to parse the JSON string",
+        "Convert id to string: str(product['id'])",
+        "Convert price string to float: float(product['price'])",
+        "Use sum() with a list comprehension to calculate total_value"
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "id": "01-ownership-transfer",
+    "title": "Ownership Transfer",
+    "description": "Practice understanding ownership by fixing code that has ownership errors.\n\n## Requirements\n\n1. Fix the `concatenate_strings` function so it returns a new combined String\n2. Fix the `use_after_move` function so both print statements work\n3. Fix the `ownership_in_loop` function so the loop completes correctly\n\n## Hints\n\n- Think about when to clone vs when to borrow\n- Consider whether functions need to take ownership or can borrow\n- Remember that String is moved, but &str is copied",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "// Fix this function: it should combine two strings into one\n// Currently it has an ownership problem\nfn concatenate_strings(a: String, b: String) -> String {\n    let result = a;\n    // Problem: how do we add b to result?\n    // Hint: String has a + operator, but think about ownership\n    todo!()\n}\n\n// Fix this function: both println! statements should work\nfn use_after_move() -> (String, String) {\n    let s1 = String::from(\"hello\");\n    let s2 = s1;  // s1 is moved here\n\n    // Problem: we want to print both s1 and s2\n    // Currently s1 is invalid after the move\n    // Return both strings\n    todo!()\n}\n\n// Fix this function: the loop should process the string 3 times\nfn ownership_in_loop() -> String {\n    let data = String::from(\"hello\");\n    let mut result = String::new();\n\n    for _ in 0..3 {\n        // Problem: data is moved on first iteration\n        result.push_str(&process(data));\n    }\n\n    result\n}\n\nfn process(s: String) -> String {\n    format!(\"[{}]\", s)\n}\n\nfn main() {\n    // Test concatenate_strings\n    let a = String::from(\"Hello, \");\n    let b = String::from(\"World!\");\n    let combined = concatenate_strings(a, b);\n    println!(\"Combined: {}\", combined);\n\n    // Test use_after_move\n    let (s1, s2) = use_after_move();\n    println!(\"s1: {}, s2: {}\", s1, s2);\n\n    // Test ownership_in_loop\n    let result = ownership_in_loop();\n    println!(\"Loop result: {}\", result);\n}\n",
+    "testCases": [
+        {
+            "description": "concatenate_strings combines two strings",
+            "assertion": "concatenate_strings(String::from(\"Hello, \"), String::from(\"World!\")) == \"Hello, World!\""
+        },
+        {
+            "description": "concatenate_strings works with empty strings",
+            "assertion": "concatenate_strings(String::from(\"\"), String::from(\"test\")) == \"test\""
+        },
+        {
+            "description": "use_after_move returns valid strings",
+            "assertion": "{ let (s1, s2) = use_after_move(); s1.len() > 0 && s2.len() > 0 }"
+        },
+        {
+            "description": "ownership_in_loop processes string 3 times",
+            "assertion": "ownership_in_loop().matches(\"hello\").count() == 3"
+        },
+        {
+            "description": "ownership_in_loop contains brackets from processing",
+            "assertion": "ownership_in_loop().contains('[') && ownership_in_loop().contains(']')"
+        }
+    ],
+    "hints": [
+        "For concatenate_strings: The + operator takes ownership of the left operand and a reference to the right",
+        "For use_after_move: Use .clone() to create a copy instead of moving",
+        "For ownership_in_loop: You can either clone data each iteration, or change process() to take a reference",
+        "Consider: does the function really need to own the String, or would a reference work?",
+        "Remember: String + &str works, but String + String doesn't (need &)"
+    ]
+}

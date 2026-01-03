@@ -1,0 +1,52 @@
+{
+    "id": "02-season-detector",
+    "title": "Season Detector",
+    "description": "Create a function that determines the season based on a month name using switch statements.\n\n## Requirements\n\n1. Create a function `getSeason` that takes a `String` month parameter\n2. Return the season as a `String`\n3. Use compound cases to group months:\n   - Spring: March, April, May\n   - Summer: June, July, August\n   - Autumn: September, October, November\n   - Winter: December, January, February\n4. Return \"Unknown\" for invalid month names\n5. The function should be case-insensitive\n\n## Example Usage\n\n```swift\nlet season1 = getSeason(month: \"July\")      // \"Summer\"\nlet season2 = getSeason(month: \"october\")   // \"Autumn\"\nlet season3 = getSeason(month: \"JANUARY\")   // \"Winter\"\nlet season4 = getSeason(month: \"Smarch\")    // \"Unknown\"\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Create a function that returns the season for a given month\n// Use compound switch cases and handle case-insensitivity\n\npublic func getSeason(month: String) -> String {\n    // Your code here\n}\n\n// Test your function\nprint(getSeason(month: \"March\"))     // Should print: Spring\nprint(getSeason(month: \"july\"))      // Should print: Summer\nprint(getSeason(month: \"OCTOBER\"))   // Should print: Autumn\nprint(getSeason(month: \"December\"))  // Should print: Winter\nprint(getSeason(month: \"Invalid\"))   // Should print: Unknown\n",
+    "testCases": [
+        {
+            "description": "'March' should return 'Spring'",
+            "assertion": "getSeason(month: \"March\") == \"Spring\""
+        },
+        {
+            "description": "'april' (lowercase) should return 'Spring'",
+            "assertion": "getSeason(month: \"april\") == \"Spring\""
+        },
+        {
+            "description": "'JUNE' (uppercase) should return 'Summer'",
+            "assertion": "getSeason(month: \"JUNE\") == \"Summer\""
+        },
+        {
+            "description": "'August' should return 'Summer'",
+            "assertion": "getSeason(month: \"August\") == \"Summer\""
+        },
+        {
+            "description": "'September' should return 'Autumn'",
+            "assertion": "getSeason(month: \"September\") == \"Autumn\""
+        },
+        {
+            "description": "'November' should return 'Autumn'",
+            "assertion": "getSeason(month: \"November\") == \"Autumn\""
+        },
+        {
+            "description": "'January' should return 'Winter'",
+            "assertion": "getSeason(month: \"January\") == \"Winter\""
+        },
+        {
+            "description": "'February' should return 'Winter'",
+            "assertion": "getSeason(month: \"February\") == \"Winter\""
+        },
+        {
+            "description": "Invalid month should return 'Unknown'",
+            "assertion": "getSeason(month: \"Foo\") == \"Unknown\""
+        }
+    ],
+    "hints": [
+        "Use .lowercased() to convert the input month to lowercase for comparison",
+        "Use compound cases: case \"march\", \"april\", \"may\":",
+        "Remember to include all 12 months across the four seasons",
+        "Use default: for unknown month names"
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "01-reverse-list",
+  "title": "Reverse Linked List",
+  "description": "Reverse a singly linked list in-place by changing the next pointers.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "beginner",
+  "starterCode": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\n\ndef reverse_list(head: ListNode) -> ListNode:\n    \"\"\"\n    Reverse a singly linked list.\n    \n    Change the next pointers to reverse the list in-place.\n    \n    Args:\n        head: The head of the linked list\n        \n    Returns:\n        The new head (previously the tail)\n        \n    Example:\n        Input: 1 -> 2 -> 3 -> 4 -> 5\n        Output: 5 -> 4 -> 3 -> 2 -> 1\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "class ListNode:\n    def __init__(self, val=0, next=None):\n        self.val = val\n        self.next = next\n\n\ndef reverse_list(head: ListNode) -> ListNode:\n    prev = None\n    current = head\n    \n    while current is not None:\n        # Save the next node\n        next_node = current.next\n        # Reverse the pointer\n        current.next = prev\n        # Move prev and current forward\n        prev = current\n        current = next_node\n    \n    return prev",
+  "testCases": [
+    {
+      "input": {"list": [1, 2, 3, 4, 5]},
+      "expected": [5, 4, 3, 2, 1],
+      "description": "Reverse 5-node list"
+    },
+    {
+      "input": {"list": [1, 2]},
+      "expected": [2, 1],
+      "description": "Reverse 2-node list"
+    },
+    {
+      "input": {"list": [1]},
+      "expected": [1],
+      "description": "Single node stays same"
+    },
+    {
+      "input": {"list": []},
+      "expected": [],
+      "description": "Empty list stays empty"
+    },
+    {
+      "input": {"list": [1, 2, 3]},
+      "expected": [3, 2, 1],
+      "description": "Reverse 3-node list"
+    }
+  ],
+  "hints": [
+    "Use three pointers: prev (starts null), current (starts at head), next (to save the next node)",
+    "For each node: save next, reverse the pointer, move prev and current forward",
+    "When current becomes null, prev points to the new head",
+    "This is an iterative O(n) time, O(1) space solution"
+  ],
+  "explanation": "We iterate through the list, reversing one pointer at a time. For each node, we: (1) save its next pointer, (2) point it to the previous node, (3) move prev to current, and (4) move current to the saved next. When current becomes null, prev is our new head. Time is O(n) and space is O(1). A recursive solution exists but uses O(n) stack space."
+}

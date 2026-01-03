@@ -6,7 +6,7 @@
     "color": "#f05138",
     "estimatedHours": 45,
     "modules": [
-        "01-fundamentals",
+        "01-swift-fundamentals",
         "02-control-flow",
         "03-functions",
         "04-collections",

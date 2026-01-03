@@ -1,0 +1,36 @@
+{
+    "id": "01-grade-calculator",
+    "title": "Grade Calculator",
+    "description": "Create a program that converts a numerical score to a letter grade.\n\n## Requirements\n\n1. Create a variable called `score` with a value between 0 and 100\n2. Create a variable called `grade` with the letter grade based on this scale:\n   - 90-100: \"A\"\n   - 80-89: \"B\"\n   - 70-79: \"C\"\n   - 60-69: \"D\"\n   - Below 60: \"F\"\n\n## Example\n\nIf `score` is 85, then `grade` should be \"B\".",
+    "order": 1,
+    "language": "python",
+    "starterCode": "# Set the score (0-100)\nscore = 85\n\n# Determine the letter grade based on the score\n# A: 90-100, B: 80-89, C: 70-79, D: 60-69, F: below 60\n\n\n# Print the result\nprint(f\"Score: {score}, Grade: {grade}\")\n",
+    "testCases": [
+        {
+            "description": "Variable 'score' should exist",
+            "assertion": "'score' in dir()"
+        },
+        {
+            "description": "Variable 'grade' should exist",
+            "assertion": "'grade' in dir()"
+        },
+        {
+            "description": "Grade should be a string",
+            "assertion": "isinstance(grade, str)"
+        },
+        {
+            "description": "Grade should be a single letter (A, B, C, D, or F)",
+            "assertion": "grade in ['A', 'B', 'C', 'D', 'F']"
+        },
+        {
+            "description": "Score 85 should give grade B",
+            "assertion": "(score != 85) or (grade == 'B')"
+        }
+    ],
+    "hints": [
+        "Use if-elif-else to check different score ranges",
+        "Check the highest scores first (90+), then work down",
+        "Remember: elif means 'else if'",
+        "The else clause handles scores below 60"
+    ]
+}

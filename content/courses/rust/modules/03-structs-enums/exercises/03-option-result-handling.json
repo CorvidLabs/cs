@@ -1,0 +1,49 @@
+{
+    "id": "03-option-result-handling",
+    "title": "Option and Result Handling",
+    "description": "Practice working with Option and Result types.\n\n## Requirements\n\n1. Implement `safe_divide(a, b) -> Option<f64>` - returns None if b is 0\n2. Implement `parse_and_double(s: &str) -> Result<i32, String>` - parses string to i32 and doubles it\n3. Implement `find_even(numbers: &[i32]) -> Option<i32>` - returns first even number\n4. Implement `all_positive(numbers: &[i32]) -> Result<Vec<i32>, String>` - returns Ok with same vec if all positive, Err otherwise",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "// Safe division that returns None if dividing by zero\nfn safe_divide(a: f64, b: f64) -> Option<f64> {\n    todo!()\n}\n\n// Parse a string to i32 and double it\n// Return Err with a descriptive message if parsing fails\nfn parse_and_double(s: &str) -> Result<i32, String> {\n    todo!()\n}\n\n// Find the first even number in the slice\nfn find_even(numbers: &[i32]) -> Option<i32> {\n    todo!()\n}\n\n// Check if all numbers are positive\n// Return Ok(numbers.to_vec()) if all positive\n// Return Err with message if any non-positive found\nfn all_positive(numbers: &[i32]) -> Result<Vec<i32>, String> {\n    todo!()\n}\n\nfn main() {\n    // Test safe_divide\n    println!(\"10 / 2 = {:?}\", safe_divide(10.0, 2.0));\n    println!(\"10 / 0 = {:?}\", safe_divide(10.0, 0.0));\n\n    // Test parse_and_double\n    println!(\"parse '21' = {:?}\", parse_and_double(\"21\"));\n    println!(\"parse 'abc' = {:?}\", parse_and_double(\"abc\"));\n\n    // Test find_even\n    println!(\"first even in [1,3,4,5] = {:?}\", find_even(&[1, 3, 4, 5]));\n    println!(\"first even in [1,3,5] = {:?}\", find_even(&[1, 3, 5]));\n\n    // Test all_positive\n    println!(\"all_positive [1,2,3] = {:?}\", all_positive(&[1, 2, 3]));\n    println!(\"all_positive [1,-2,3] = {:?}\", all_positive(&[1, -2, 3]));\n}\n",
+    "testCases": [
+        {
+            "description": "safe_divide returns Some for valid division",
+            "assertion": "safe_divide(10.0, 2.0) == Some(5.0)"
+        },
+        {
+            "description": "safe_divide returns None for division by zero",
+            "assertion": "safe_divide(10.0, 0.0).is_none()"
+        },
+        {
+            "description": "parse_and_double works for valid input",
+            "assertion": "parse_and_double(\"21\") == Ok(42)"
+        },
+        {
+            "description": "parse_and_double returns Err for invalid input",
+            "assertion": "parse_and_double(\"abc\").is_err()"
+        },
+        {
+            "description": "find_even returns Some for slice with even",
+            "assertion": "find_even(&[1, 3, 4, 5]) == Some(4)"
+        },
+        {
+            "description": "find_even returns None for all odd",
+            "assertion": "find_even(&[1, 3, 5, 7]).is_none()"
+        },
+        {
+            "description": "all_positive returns Ok for positive numbers",
+            "assertion": "all_positive(&[1, 2, 3]).is_ok()"
+        },
+        {
+            "description": "all_positive returns Err for non-positive numbers",
+            "assertion": "all_positive(&[1, -2, 3]).is_err()"
+        }
+    ],
+    "hints": [
+        "For safe_divide: if b == 0.0 { None } else { Some(a / b) }",
+        "For parse_and_double: use s.parse::<i32>() which returns Result, then map_err to convert the error",
+        "For find_even: use .iter().find(|&&x| x % 2 == 0).copied() or a for loop",
+        "For all_positive: check if any number <= 0, return Err if found, Ok(numbers.to_vec()) otherwise",
+        "You can use .map_err(|e| e.to_string()) to convert parse errors to String"
+    ]
+}

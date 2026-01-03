@@ -1,0 +1,17 @@
+{
+    "id": "05-box-model-layout",
+    "title": "Box Model and Layout",
+    "description": "Master the CSS box model and modern layout techniques. Learn margin, padding, Flexbox, CSS Grid, and positioning.",
+    "order": 5,
+    "lessons": [
+        "01-box-model",
+        "02-flexbox",
+        "03-css-grid",
+        "04-positioning"
+    ],
+    "exercises": [
+        "01-card-component",
+        "02-navigation-layout",
+        "03-page-grid"
+    ]
+}

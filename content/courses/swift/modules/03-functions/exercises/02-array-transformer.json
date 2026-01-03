@@ -1,0 +1,48 @@
+{
+    "id": "02-array-transformer",
+    "title": "Array Transformer",
+    "description": "Create functions that transform arrays using closures and higher-order functions.\n\n## Requirements\n\n1. Create a function `doubleAll` that takes an array of `Int` and returns an array with each element doubled\n2. Create a function `filterEvens` that takes an array of `Int` and returns only the even numbers\n3. Create a function `sumAll` that takes an array of `Int` and returns the sum of all elements\n4. Create a function `transformAndSum` that takes an array of `Int` and a transform closure, applies the transform to each element, then returns the sum\n\n## Example Usage\n\n```swift\nlet numbers = [1, 2, 3, 4, 5]\n\nlet doubled = doubleAll(numbers)           // [2, 4, 6, 8, 10]\nlet evens = filterEvens(numbers)           // [2, 4]\nlet sum = sumAll(numbers)                  // 15\n\nlet squaredSum = transformAndSum(numbers) { $0 * $0 }  // 55 (1+4+9+16+25)\n```",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Create array transformation functions using closures\n\npublic func doubleAll(_ numbers: [Int]) -> [Int] {\n    // Use map to double each element\n}\n\npublic func filterEvens(_ numbers: [Int]) -> [Int] {\n    // Use filter to keep only even numbers\n}\n\npublic func sumAll(_ numbers: [Int]) -> Int {\n    // Use reduce to sum all elements\n}\n\npublic func transformAndSum(\n    _ numbers: [Int],\n    transform: (Int) -> Int\n) -> Int {\n    // Apply transform to each element, then sum\n}\n\n// Test your functions\nlet numbers = [1, 2, 3, 4, 5]\n\nprint(doubleAll(numbers))           // Should print: [2, 4, 6, 8, 10]\nprint(filterEvens(numbers))         // Should print: [2, 4]\nprint(sumAll(numbers))              // Should print: 15\n\nprint(transformAndSum(numbers) { $0 * $0 })  // Should print: 55\nprint(transformAndSum(numbers) { $0 * 3 })   // Should print: 45\n",
+    "testCases": [
+        {
+            "description": "doubleAll([1, 2, 3]) should return [2, 4, 6]",
+            "assertion": "doubleAll([1, 2, 3]) == [2, 4, 6]"
+        },
+        {
+            "description": "doubleAll([]) should return []",
+            "assertion": "doubleAll([]) == []"
+        },
+        {
+            "description": "filterEvens([1, 2, 3, 4, 5]) should return [2, 4]",
+            "assertion": "filterEvens([1, 2, 3, 4, 5]) == [2, 4]"
+        },
+        {
+            "description": "filterEvens([1, 3, 5]) should return []",
+            "assertion": "filterEvens([1, 3, 5]) == []"
+        },
+        {
+            "description": "sumAll([1, 2, 3, 4, 5]) should return 15",
+            "assertion": "sumAll([1, 2, 3, 4, 5]) == 15"
+        },
+        {
+            "description": "sumAll([]) should return 0",
+            "assertion": "sumAll([]) == 0"
+        },
+        {
+            "description": "transformAndSum with squaring should return sum of squares",
+            "assertion": "transformAndSum([1, 2, 3]) { $0 * $0 } == 14"
+        },
+        {
+            "description": "transformAndSum with tripling should return triple sum",
+            "assertion": "transformAndSum([1, 2, 3, 4, 5]) { $0 * 3 } == 45"
+        }
+    ],
+    "hints": [
+        "Use numbers.map { $0 * 2 } to double each element",
+        "Use numbers.filter { $0 % 2 == 0 } to keep even numbers",
+        "Use numbers.reduce(0, +) or numbers.reduce(0) { $0 + $1 } to sum",
+        "For transformAndSum, first map with the transform, then reduce to sum"
+    ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "03-longest-common-subsequence",
+  "title": "Longest Common Subsequence",
+  "description": "Find the length of the longest subsequence common to two strings.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "starterCode": "def longest_common_subsequence(text1: str, text2: str) -> int:\n    \"\"\"\n    Find length of longest common subsequence.\n    \n    A subsequence is derived by deleting some/no characters\n    without changing the relative order.\n    \n    Args:\n        text1: First string\n        text2: Second string\n        \n    Returns:\n        Length of longest common subsequence\n        \n    Example:\n        Input: text1 = \"abcde\", text2 = \"ace\"\n        Output: 3  # \"ace\" is LCS\n        \n        Input: text1 = \"abc\", text2 = \"def\"\n        Output: 0  # No common subsequence\n    \"\"\"\n    # Your code here\n    pass",
+  "solutionCode": "def longest_common_subsequence(text1: str, text2: str) -> int:\n    m, n = len(text1), len(text2)\n    \n    # Space optimization: only need previous row\n    prev = [0] * (n + 1)\n    curr = [0] * (n + 1)\n    \n    for i in range(1, m + 1):\n        for j in range(1, n + 1):\n            if text1[i - 1] == text2[j - 1]:\n                curr[j] = prev[j - 1] + 1\n            else:\n                curr[j] = max(prev[j], curr[j - 1])\n        prev, curr = curr, prev\n    \n    return prev[n]",
+  "testCases": [
+    {
+      "input": {"text1": "abcde", "text2": "ace"},
+      "expected": 3,
+      "description": "LCS is 'ace'"
+    },
+    {
+      "input": {"text1": "abc", "text2": "abc"},
+      "expected": 3,
+      "description": "Identical strings"
+    },
+    {
+      "input": {"text1": "abc", "text2": "def"},
+      "expected": 0,
+      "description": "No common characters"
+    },
+    {
+      "input": {"text1": "bl", "text2": "yby"},
+      "expected": 1,
+      "description": "Single character match"
+    },
+    {
+      "input": {"text1": "hofubmnylkra", "text2": "pqhgxgdofcvmr"},
+      "expected": 5,
+      "description": "Longer strings"
+    }
+  ],
+  "hints": [
+    "dp[i][j] = LCS length of text1[0..i-1] and text2[0..j-1]",
+    "If characters match: dp[i][j] = dp[i-1][j-1] + 1",
+    "If no match: dp[i][j] = max(dp[i-1][j], dp[i][j-1])",
+    "Can optimize space to O(n) by using only two rows"
+  ],
+  "explanation": "Classic 2-sequence DP. dp[i][j] = LCS of first i chars of text1 and first j chars of text2. If text1[i-1] == text2[j-1], they match and extend the LCS by 1. Otherwise, take the max of excluding either character. Space optimization: we only need the previous row, so use two 1D arrays. Time: O(m × n), Space: O(n)."
+}

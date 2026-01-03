@@ -1,0 +1,49 @@
+{
+    "id": "01-result-basics",
+    "title": "Result Basics",
+    "description": "Practice working with the Result type for error handling.\n\n## Requirements\n\n1. Implement `safe_divide(a: i32, b: i32) -> Result<i32, String>`\n   - Return Ok with the quotient if b is not zero\n   - Return Err with a descriptive message if b is zero\n\n2. Implement `parse_pair(s: &str) -> Result<(i32, i32), String>`\n   - Parse a string like \"10,20\" into a tuple\n   - Return Err if format is wrong or parsing fails\n\n3. Implement `get_or_default(result: Result<i32, String>, default: i32) -> i32`\n   - Return the Ok value or the default if Err\n\n## Examples\n\n- `safe_divide(10, 2)` returns `Ok(5)`\n- `safe_divide(10, 0)` returns `Err(\"division by zero\")`\n- `parse_pair(\"3,4\")` returns `Ok((3, 4))`",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "// Safely divide two integers\n// Return Err if dividing by zero\nfn safe_divide(a: i32, b: i32) -> Result<i32, String> {\n    todo!()\n}\n\n// Parse a comma-separated pair of integers\n// Example: \"10,20\" -> Ok((10, 20))\nfn parse_pair(s: &str) -> Result<(i32, i32), String> {\n    todo!()\n}\n\n// Return the Ok value or a default\nfn get_or_default(result: Result<i32, String>, default: i32) -> i32 {\n    todo!()\n}\n\nfn main() {\n    // Test safe_divide\n    println!(\"10 / 2 = {:?}\", safe_divide(10, 2));\n    println!(\"10 / 0 = {:?}\", safe_divide(10, 0));\n\n    // Test parse_pair\n    println!(\"parse '3,4' = {:?}\", parse_pair(\"3,4\"));\n    println!(\"parse 'bad' = {:?}\", parse_pair(\"bad\"));\n    println!(\"parse '1,2,3' = {:?}\", parse_pair(\"1,2,3\"));\n\n    // Test get_or_default\n    println!(\"Ok(42) with default 0 = {}\", get_or_default(Ok(42), 0));\n    println!(\"Err with default 0 = {}\", get_or_default(Err(String::from(\"error\")), 0));\n}\n",
+    "testCases": [
+        {
+            "description": "safe_divide returns Ok for valid division",
+            "assertion": "safe_divide(10, 2) == Ok(5)"
+        },
+        {
+            "description": "safe_divide returns Err for division by zero",
+            "assertion": "safe_divide(10, 0).is_err()"
+        },
+        {
+            "description": "safe_divide handles negative numbers",
+            "assertion": "safe_divide(-10, 2) == Ok(-5)"
+        },
+        {
+            "description": "parse_pair parses valid input",
+            "assertion": "parse_pair(\"3,4\") == Ok((3, 4))"
+        },
+        {
+            "description": "parse_pair handles negative numbers",
+            "assertion": "parse_pair(\"-1,5\") == Ok((-1, 5))"
+        },
+        {
+            "description": "parse_pair returns Err for invalid format",
+            "assertion": "parse_pair(\"invalid\").is_err()"
+        },
+        {
+            "description": "get_or_default returns Ok value",
+            "assertion": "get_or_default(Ok(42), 0) == 42"
+        },
+        {
+            "description": "get_or_default returns default on Err",
+            "assertion": "get_or_default(Err(String::from(\"error\")), -1) == -1"
+        }
+    ],
+    "hints": [
+        "For safe_divide, check if b == 0 first",
+        "For parse_pair, use split(',') to separate parts",
+        "Use .parse::<i32>() to convert strings to integers",
+        "map_err can convert parse errors to your error type",
+        "For get_or_default, use unwrap_or() or match"
+    ]
+}

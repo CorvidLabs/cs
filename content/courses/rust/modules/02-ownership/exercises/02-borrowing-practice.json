@@ -1,0 +1,41 @@
+{
+    "id": "02-borrowing-practice",
+    "title": "Borrowing Practice",
+    "description": "Practice using references and borrowing correctly.\n\n## Requirements\n\n1. Implement `first_word` to return a slice of the first word (up to first space)\n2. Implement `count_occurrences` to count how many times a character appears\n3. Implement `push_greeting` to modify a string by appending a greeting\n\n## Rules\n\n- Use references appropriately (immutable when possible, mutable when needed)\n- Don't take ownership when borrowing would work\n- All functions should compile without moving their inputs",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "// Return a slice containing the first word (up to the first space)\n// If there's no space, return the entire string\n// Hint: Use &str as return type, not String\nfn first_word(s: &str) -> &str {\n    todo!()\n}\n\n// Count how many times the character appears in the string\n// This should borrow the string, not take ownership\nfn count_occurrences(s: &str, c: char) -> usize {\n    todo!()\n}\n\n// Append a greeting to the mutable string\n// This needs a mutable reference\nfn push_greeting(s: &mut String, name: &str) {\n    todo!()\n}\n\nfn main() {\n    // Test first_word\n    let sentence = String::from(\"Hello World\");\n    let first = first_word(&sentence);\n    println!(\"First word: '{}'\", first);\n    println!(\"Original still valid: '{}'\", sentence);\n\n    // Test count_occurrences\n    let text = \"abracadabra\";\n    let count = count_occurrences(text, 'a');\n    println!(\"'a' appears {} times in '{}'\", count, text);\n\n    // Test push_greeting\n    let mut greeting = String::from(\"Hello\");\n    push_greeting(&mut greeting, \"Alice\");\n    println!(\"Greeting: {}\", greeting);\n}\n",
+    "testCases": [
+        {
+            "description": "first_word returns first word before space",
+            "assertion": "first_word(\"Hello World\") == \"Hello\""
+        },
+        {
+            "description": "first_word returns entire string if no space",
+            "assertion": "first_word(\"Hello\") == \"Hello\""
+        },
+        {
+            "description": "first_word handles empty string",
+            "assertion": "first_word(\"\") == \"\""
+        },
+        {
+            "description": "count_occurrences counts correctly",
+            "assertion": "count_occurrences(\"abracadabra\", 'a') == 5"
+        },
+        {
+            "description": "count_occurrences returns 0 for missing char",
+            "assertion": "count_occurrences(\"hello\", 'z') == 0"
+        },
+        {
+            "description": "push_greeting modifies the string correctly",
+            "assertion": "{ let mut s = String::from(\"Hello\"); push_greeting(&mut s, \"Bob\"); s.contains(\"Bob\") }"
+        }
+    ],
+    "hints": [
+        "first_word: Use .find(' ') to locate the space, then slice with &s[..index]",
+        "first_word: .find() returns Option<usize> - use .unwrap_or(s.len()) for the no-space case",
+        "count_occurrences: Use .chars().filter(|&ch| ch == c).count()",
+        "push_greeting: Use .push_str() to append to a String",
+        "Remember: &str can be used with string literals AND String references"
+    ]
+}

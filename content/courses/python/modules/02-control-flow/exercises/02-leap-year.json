@@ -1,0 +1,36 @@
+{
+    "id": "02-leap-year",
+    "title": "Leap Year Checker",
+    "description": "Create a program that determines if a year is a leap year.\n\n## Rules for Leap Years\n\nA year is a leap year if:\n1. It is divisible by 4 AND\n2. If divisible by 100, it must also be divisible by 400\n\n## Examples\n\n- 2024 is a leap year (divisible by 4, not by 100)\n- 2000 is a leap year (divisible by 400)\n- 1900 is NOT a leap year (divisible by 100, but not 400)\n- 2023 is NOT a leap year (not divisible by 4)\n\n## Requirements\n\n1. Create a variable called `year` with a year value\n2. Create a variable called `is_leap_year` that is `True` if it's a leap year, `False` otherwise",
+    "order": 2,
+    "language": "python",
+    "starterCode": "# Set the year to check\nyear = 2024\n\n# Determine if it's a leap year\n# Rules:\n# - Divisible by 4 AND\n# - If divisible by 100, must also be divisible by 400\n\n\n# Print the result\nif is_leap_year:\n    print(f\"{year} is a leap year!\")\nelse:\n    print(f\"{year} is not a leap year.\")\n",
+    "testCases": [
+        {
+            "description": "Variable 'year' should exist",
+            "assertion": "'year' in dir()"
+        },
+        {
+            "description": "Variable 'is_leap_year' should exist",
+            "assertion": "'is_leap_year' in dir()"
+        },
+        {
+            "description": "is_leap_year should be a boolean",
+            "assertion": "isinstance(is_leap_year, bool)"
+        },
+        {
+            "description": "Year 2024 should be a leap year",
+            "assertion": "(year != 2024) or (is_leap_year == True)"
+        },
+        {
+            "description": "Leap year logic is correct",
+            "assertion": "is_leap_year == ((year % 4 == 0 and year % 100 != 0) or (year % 400 == 0))"
+        }
+    ],
+    "hints": [
+        "Use the modulo operator (%) to check divisibility: year % 4 == 0 means divisible by 4",
+        "Combine conditions with 'and' and 'or'",
+        "Think about it as: (divisible by 4 AND not by 100) OR (divisible by 400)",
+        "Parentheses help group conditions: (a and b) or c"
+    ]
+}

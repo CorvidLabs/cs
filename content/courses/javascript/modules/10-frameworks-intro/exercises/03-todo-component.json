@@ -1,0 +1,37 @@
+{
+    "id": "03-todo-component",
+    "title": "Todo List Component",
+    "description": "Build a functional Todo List component using the component patterns learned.\n\n## Requirements\n\nCreate a `TodoList` class that extends the base Component with:\n\n1. Initial state: `{ todos: [], inputValue: '' }`\n2. `addTodo()` method - adds new todo with id, text (from inputValue), completed: false\n3. `toggleTodo(id)` method - toggles completed status of todo with given id\n4. `deleteTodo(id)` method - removes todo with given id\n5. `render()` method - returns HTML with input, add button, and todo list\n\n## State Structure\n\n```javascript\n{\n    todos: [\n        { id: 1, text: 'Learn JS', completed: false },\n        { id: 2, text: 'Build app', completed: true }\n    ],\n    inputValue: ''\n}\n```\n\n## Expected Behavior\n\n```javascript\nconst todoList = new TodoList();\ntodoList.state.inputValue = 'Learn components';\ntodoList.addTodo();\n// todos now has one item\n\ntodoList.toggleTodo(todoList.state.todos[0].id);\n// First todo is now completed\n\ntodoList.deleteTodo(todoList.state.todos[0].id);\n// todos is now empty\n```",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "// Base Component class (already implemented)\nclass Component {\n    constructor(props = {}) {\n        this.props = props;\n        this.state = {};\n    }\n\n    setState(newState) {\n        this.state = { ...this.state, ...newState };\n        this.update();\n    }\n\n    update() {\n        console.log('Component updated');\n    }\n\n    render() {\n        return '<div></div>';\n    }\n}\n\n// TODO: Implement TodoList component\nclass TodoList extends Component {\n    constructor(props) {\n        super(props);\n        // TODO: Initialize state with todos array and inputValue\n        this.state = {\n            todos: [],\n            inputValue: ''\n        };\n    }\n\n    addTodo() {\n        // TODO: Add new todo if inputValue is not empty\n        // Todo should have: id (use Date.now()), text, completed: false\n        // Clear inputValue after adding\n    }\n\n    toggleTodo(id) {\n        // TODO: Toggle completed status of todo with given id\n        // Use map to create new array with updated todo\n    }\n\n    deleteTodo(id) {\n        // TODO: Remove todo with given id\n        // Use filter to create new array without the deleted todo\n    }\n\n    render() {\n        // TODO: Return HTML string with:\n        // - Input for new todo\n        // - Add button\n        // - List of todos with toggle and delete buttons\n        const { todos, inputValue } = this.state;\n\n        return `\n            <div class=\"todo-app\">\n                <h2>Todo List</h2>\n                <div class=\"todo-input\">\n                    <input type=\"text\" value=\"${inputValue}\" placeholder=\"Add todo...\" />\n                    <button class=\"add-btn\">Add</button>\n                </div>\n                <ul class=\"todo-list\">\n                    <!-- TODO: Render todos here -->\n                </ul>\n                <p>${todos.length} items</p>\n            </div>\n        `;\n    }\n}\n\n// Test the TodoList\nconst todoList = new TodoList();\n\nconsole.log('Initial state:', todoList.state);\n\n// Add some todos\ntodoList.state.inputValue = 'Learn JavaScript';\ntodoList.addTodo();\nconsole.log('After adding first todo:', todoList.state.todos);\n\ntodoList.state.inputValue = 'Build a project';\ntodoList.addTodo();\nconsole.log('After adding second todo:', todoList.state.todos);\n\n// Toggle first todo\nif (todoList.state.todos.length > 0) {\n    const firstId = todoList.state.todos[0].id;\n    todoList.toggleTodo(firstId);\n    console.log('After toggle:', todoList.state.todos[0]);\n}\n\n// Delete second todo\nif (todoList.state.todos.length > 1) {\n    const secondId = todoList.state.todos[1].id;\n    todoList.deleteTodo(secondId);\n    console.log('After delete:', todoList.state.todos);\n}\n\nconsole.log('Final render:', todoList.render());\n",
+    "testCases": [
+        {
+            "description": "TodoList initializes with empty todos array",
+            "assertion": "new TodoList().state.todos.length === 0"
+        },
+        {
+            "description": "addTodo adds a todo with correct structure",
+            "assertion": "(() => { const t = new TodoList(); t.state.inputValue = 'Test'; t.addTodo(); return t.state.todos[0].text === 'Test' && t.state.todos[0].completed === false && typeof t.state.todos[0].id === 'number'; })()"
+        },
+        {
+            "description": "addTodo clears inputValue after adding",
+            "assertion": "(() => { const t = new TodoList(); t.state.inputValue = 'Test'; t.addTodo(); return t.state.inputValue === ''; })()"
+        },
+        {
+            "description": "toggleTodo toggles completed status",
+            "assertion": "(() => { const t = new TodoList(); t.state.inputValue = 'Test'; t.addTodo(); const id = t.state.todos[0].id; t.toggleTodo(id); return t.state.todos[0].completed === true; })()"
+        },
+        {
+            "description": "deleteTodo removes the todo",
+            "assertion": "(() => { const t = new TodoList(); t.state.inputValue = 'Test'; t.addTodo(); const id = t.state.todos[0].id; t.deleteTodo(id); return t.state.todos.length === 0; })()"
+        }
+    ],
+    "hints": [
+        "addTodo: if (!this.state.inputValue.trim()) return; then create new todo and setState",
+        "New todo: { id: Date.now(), text: this.state.inputValue, completed: false }",
+        "toggleTodo: use map to create new array with toggled todo",
+        "toggleTodo: todo.id === id ? { ...todo, completed: !todo.completed } : todo",
+        "deleteTodo: this.setState({ todos: this.state.todos.filter(t => t.id !== id) });"
+    ]
+}

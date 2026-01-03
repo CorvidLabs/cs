@@ -1,0 +1,29 @@
+{
+    "id": "02-channel-communication",
+    "title": "Channel Communication",
+    "description": "Practice using channels for thread communication.\n\n## Requirements\n\n1. Implement a worker pool using channels:\n   - `create_worker_pool(num_workers: usize) -> (Sender<Job>, Receiver<i32>)`\n   - Workers receive Jobs and send back results\n   - Job is a boxed closure: `Box<dyn FnOnce() -> i32 + Send>`\n\n2. Implement `aggregate_results(rx: Receiver<i32>, count: usize) -> i32`\n   - Receive `count` results and sum them",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "use std::sync::mpsc::{self, Sender, Receiver};\nuse std::thread;\n\ntype Job = Box<dyn FnOnce() -> i32 + Send>;\n\n// Create a pool of workers that process Jobs and send results\nfn create_worker_pool(num_workers: usize) -> (Sender<Job>, Receiver<i32>) {\n    todo!()\n}\n\n// Receive count results and sum them\nfn aggregate_results(rx: Receiver<i32>, count: usize) -> i32 {\n    todo!()\n}\n\nfn main() {\n    let (job_tx, result_rx) = create_worker_pool(4);\n\n    // Send some jobs\n    for i in 0..10 {\n        let job: Job = Box::new(move || {\n            println!(\"Processing job {}\", i);\n            i * i\n        });\n        job_tx.send(job).unwrap();\n    }\n\n    // Need to drop sender so workers can terminate\n    drop(job_tx);\n\n    // Aggregate results\n    let total = aggregate_results(result_rx, 10);\n    println!(\"Total: {}\", total);\n}\n",
+    "testCases": [
+        {
+            "description": "Worker pool processes jobs",
+            "assertion": "{ let (tx, rx) = create_worker_pool(2); tx.send(Box::new(|| 42)).unwrap(); drop(tx); rx.recv().unwrap() == 42 }"
+        },
+        {
+            "description": "aggregate_results sums correctly",
+            "assertion": "{ let (tx, rx) = mpsc::channel(); tx.send(1).unwrap(); tx.send(2).unwrap(); tx.send(3).unwrap(); aggregate_results(rx, 3) == 6 }"
+        },
+        {
+            "description": "Multiple workers can process",
+            "assertion": "{ let (tx, rx) = create_worker_pool(4); for i in 0..4 { let job: Job = Box::new(move || i); tx.send(job).unwrap(); } drop(tx); aggregate_results(rx, 4) == 6 }"
+        }
+    ],
+    "hints": [
+        "Create two channels: one for jobs (mpsc), one for results (mpsc)",
+        "Workers need Arc<Mutex<Receiver<Job>>> to share the job receiver",
+        "Each worker loops: lock receiver, recv job, process, send result",
+        "Workers should break when recv returns Err (channel closed)",
+        "aggregate_results: use (0..count).map(|_| rx.recv().unwrap()).sum()"
+    ]
+}

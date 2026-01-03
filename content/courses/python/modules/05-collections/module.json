@@ -1,0 +1,17 @@
+{
+    "id": "05-collections",
+    "title": "Collections",
+    "description": "Master Python's built-in data structures. Learn to work with lists, tuples, dictionaries, and sets to organize and manipulate data efficiently.",
+    "order": 5,
+    "lessons": [
+        "01-lists",
+        "02-tuples",
+        "03-dictionaries",
+        "04-sets"
+    ],
+    "exercises": [
+        "01-list-operations",
+        "02-dictionary-phonebook",
+        "03-set-operations"
+    ]
+}
