@@ -1,0 +1,23 @@
+{
+    "id": "01-countdown",
+    "title": "Countdown Timer",
+    "description": "Create a countdown program using a while loop.\n\n## Requirements\n\n1. Start with a variable `count` set to 10\n2. Use a while loop to count down to 1\n3. Print each number\n4. After the loop, print \"Liftoff!\"\n\n## Expected Output\n\n```\n10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nLiftoff!\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "# Start with count = 10\ncount = 10\n\n# Use a while loop to count down\n\n\n# Print \"Liftoff!\" after the loop\n",
+    "testCases": [
+        {
+            "description": "Should print numbers from 10 to 1",
+            "assertion": "True"
+        },
+        {
+            "description": "Should end with 'Liftoff!'",
+            "assertion": "True"
+        }
+    ],
+    "hints": [
+        "while count > 0: will loop while count is positive",
+        "Don't forget to decrease count inside the loop",
+        "Use count -= 1 or count = count - 1"
+    ]
+}

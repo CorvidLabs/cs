@@ -1,0 +1,28 @@
+{
+    "id": "01-word-count",
+    "title": "Word Counter",
+    "description": "Create a function that counts words in a string.\n\n## Requirements\n\n1. Create a function `count_words(text)` that returns the number of words\n2. Words are separated by spaces\n3. Handle empty strings (should return 0)\n4. Test with the provided sample text\n\n## Expected Output\n\n```\n'Hello world' has 2 words\n'Python is awesome' has 3 words\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "def count_words(text):\n    \"\"\"Count the number of words in a string.\"\"\"\n    # Handle empty string\n    \n    # Split by spaces and count\n    pass\n\n# Test your function\nprint(f\"'Hello world' has {count_words('Hello world')} words\")\nprint(f\"'Python is awesome' has {count_words('Python is awesome')} words\")\n",
+    "testCases": [
+        {
+            "description": "count_words('Hello world') should return 2",
+            "assertion": "count_words('Hello world') == 2"
+        },
+        {
+            "description": "count_words('') should return 0",
+            "assertion": "count_words('') == 0"
+        },
+        {
+            "description": "count_words('Python is awesome') should return 3",
+            "assertion": "count_words('Python is awesome') == 3"
+        }
+    ],
+    "hints": [
+        "Use the split() method to break the string into words",
+        "split() with no arguments splits on whitespace",
+        "Use len() to count the resulting list",
+        "Check if the string is empty first"
+    ]
+}

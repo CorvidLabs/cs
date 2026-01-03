@@ -1,0 +1,32 @@
+{
+    "id": "03-recursive-factorial",
+    "title": "Recursive Factorial",
+    "description": "Implement factorial using recursion.\n\n## Requirements\n\n1. Create a function `factorial(n)` that:\n   - Takes a non-negative integer n\n   - Returns n! (n factorial)\n   - Uses recursion (function calls itself)\n2. Remember: n! = n * (n-1)!, and 0! = 1\n\n## Expected Output\n\n```\n5! = 120\n0! = 1\n10! = 3628800\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "def factorial(n):\n    \"\"\"Calculate factorial of n using recursion.\"\"\"\n    # Base case: 0! = 1\n    \n    # Recursive case: n! = n * (n-1)!\n    pass\n\n# Test your function\nprint(f\"5! = {factorial(5)}\")\nprint(f\"0! = {factorial(0)}\")\nprint(f\"10! = {factorial(10)}\")\n",
+    "testCases": [
+        {
+            "description": "factorial(5) should be 120",
+            "assertion": "factorial(5) == 120"
+        },
+        {
+            "description": "factorial(0) should be 1",
+            "assertion": "factorial(0) == 1"
+        },
+        {
+            "description": "factorial(1) should be 1",
+            "assertion": "factorial(1) == 1"
+        },
+        {
+            "description": "factorial(10) should be 3628800",
+            "assertion": "factorial(10) == 3628800"
+        }
+    ],
+    "hints": [
+        "Base case: if n == 0, return 1",
+        "Recursive case: return n * factorial(n - 1)",
+        "The recursion 'unwinds' back up: 5*4*3*2*1*1 = 120",
+        "Make sure to handle the base case first to avoid infinite recursion"
+    ]
+}

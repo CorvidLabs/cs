@@ -1,0 +1,23 @@
+{
+    "id": "02-date-formatter",
+    "title": "Date Formatting",
+    "description": "Practice using Python's datetime module.\n\n## Requirements\n\n1. Import the `datetime` module\n2. Create a date object for January 15, 2024\n3. Format the date as \"January 15, 2024\" using strftime()\n4. Store the formatted string in `formatted_date`\n\n## Expected Output\n\n```\nFormatted date: January 15, 2024\n```",
+    "order": 2,
+    "language": "python",
+    "starterCode": "# Import datetime\nfrom datetime import date\n\n# Create a date for January 15, 2024\nmy_date = None  # Use date(year, month, day)\n\n# Format the date as \"Month Day, Year\"\nformatted_date = None  # Use strftime()\n\nprint(f\"Formatted date: {formatted_date}\")\n",
+    "testCases": [
+        {
+            "description": "my_date should be January 15, 2024",
+            "assertion": "my_date == date(2024, 1, 15)"
+        },
+        {
+            "description": "formatted_date should be 'January 15, 2024'",
+            "assertion": "formatted_date == 'January 15, 2024'"
+        }
+    ],
+    "hints": [
+        "date(2024, 1, 15) creates January 15, 2024",
+        "strftime('%B %d, %Y') formats as 'Month Day, Year'",
+        "%B is full month name, %d is day, %Y is 4-digit year"
+    ]
+}

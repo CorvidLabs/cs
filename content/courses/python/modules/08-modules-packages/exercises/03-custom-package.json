@@ -1,0 +1,23 @@
+{
+    "id": "03-custom-package",
+    "title": "Random Number Generator",
+    "description": "Practice using Python's random module.\n\n## Requirements\n\n1. Import the `random` module\n2. Create a function `roll_dice()` that returns a random number 1-6\n3. Create a function `coin_flip()` that returns 'heads' or 'tails'\n4. Test both functions\n\n## Expected Output (varies)\n\n```\nDice roll: 4\nCoin flip: heads\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "# Import random module\nimport random\n\ndef roll_dice():\n    \"\"\"Return a random number from 1 to 6.\"\"\"\n    pass  # Use random.randint()\n\ndef coin_flip():\n    \"\"\"Return 'heads' or 'tails' randomly.\"\"\"\n    pass  # Use random.choice()\n\n# Test your functions\nprint(f\"Dice roll: {roll_dice()}\")\nprint(f\"Coin flip: {coin_flip()}\")\n",
+    "testCases": [
+        {
+            "description": "roll_dice() should return 1-6",
+            "assertion": "1 <= roll_dice() <= 6"
+        },
+        {
+            "description": "coin_flip() should return 'heads' or 'tails'",
+            "assertion": "coin_flip() in ['heads', 'tails']"
+        }
+    ],
+    "hints": [
+        "random.randint(1, 6) returns a random integer from 1 to 6",
+        "random.choice(['heads', 'tails']) picks randomly from the list",
+        "Run the functions multiple times to see different results"
+    ]
+}

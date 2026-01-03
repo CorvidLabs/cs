@@ -1,0 +1,23 @@
+{
+    "id": "02-sum-numbers",
+    "title": "Sum Calculator",
+    "description": "Calculate the sum of numbers from 1 to n using a for loop.\n\n## Requirements\n\n1. Create a variable `n` set to 10\n2. Create a variable `total` set to 0\n3. Use a for loop with range() to add each number from 1 to n\n4. Print the final total\n\n## Expected Output\n\n```\nThe sum of 1 to 10 is 55\n```",
+    "order": 2,
+    "language": "python",
+    "starterCode": "# Set n to 10\nn = 10\n\n# Initialize total to 0\ntotal = 0\n\n# Use a for loop to sum numbers from 1 to n\n\n\n# Print the result\n",
+    "testCases": [
+        {
+            "description": "Variable 'total' should exist",
+            "assertion": "'total' in dir()"
+        },
+        {
+            "description": "Sum of 1 to 10 should be 55",
+            "assertion": "n == 10 and total == 55"
+        }
+    ],
+    "hints": [
+        "range(1, n + 1) gives you numbers from 1 to n",
+        "Inside the loop, use total += i or total = total + i",
+        "The mathematical formula is n * (n + 1) / 2"
+    ]
+}

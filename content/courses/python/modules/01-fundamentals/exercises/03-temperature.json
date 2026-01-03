@@ -1,0 +1,27 @@
+{
+    "id": "03-temperature",
+    "title": "Temperature Converter",
+    "description": "Create a program that converts a temperature from Celsius to Fahrenheit.\n\n## Requirements\n\n1. Create a variable `celsius` with a temperature value (e.g., 25)\n2. Calculate the Fahrenheit equivalent using the formula: `F = C * 9/5 + 32`\n3. Store the result in a variable called `fahrenheit`\n4. Print the result\n\n## Expected Output\n\nFor 25 Celsius:\n\n```\n25 Celsius = 77.0 Fahrenheit\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "# Create a variable 'celsius' with a temperature value\ncelsius = 25\n\n# Calculate Fahrenheit using: F = C * 9/5 + 32\n\n\n# Print the result\n",
+    "testCases": [
+        {
+            "description": "Variable 'celsius' should exist",
+            "assertion": "'celsius' in dir()"
+        },
+        {
+            "description": "Variable 'fahrenheit' should exist",
+            "assertion": "'fahrenheit' in dir()"
+        },
+        {
+            "description": "Conversion formula should be correct (25C = 77F)",
+            "assertion": "celsius == 25 and fahrenheit == 77.0"
+        }
+    ],
+    "hints": [
+        "The formula is: fahrenheit = celsius * 9/5 + 32",
+        "Make sure to use the correct order of operations",
+        "9/5 equals 1.8"
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "id": "03-file-processor",
+    "title": "Line Statistics",
+    "description": "Create a function that analyzes text statistics.\n\n## Requirements\n\n1. Create a function `analyze_text(text)` that returns a dictionary with:\n   - `lines`: number of lines\n   - `words`: total word count\n   - `chars`: total character count\n2. Lines are separated by newline characters\n\n## Expected Output\n\n```python\n{'lines': 3, 'words': 6, 'chars': 28}\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "def analyze_text(text):\n    \"\"\"Analyze text and return statistics.\"\"\"\n    # Count lines, words, and characters\n    \n    return {\n        'lines': 0,  # Replace with actual count\n        'words': 0,  # Replace with actual count\n        'chars': 0   # Replace with actual count\n    }\n\n# Test your function\nsample = \"\"\"Hello world\nPython is fun\nLet's code\"\"\"\n\nstats = analyze_text(sample)\nprint(stats)\n",
+    "testCases": [
+        {
+            "description": "Should correctly count lines",
+            "assertion": "analyze_text('a\\nb\\nc')['lines'] == 3"
+        },
+        {
+            "description": "Should correctly count words",
+            "assertion": "analyze_text('hello world')['words'] == 2"
+        },
+        {
+            "description": "Should correctly count characters",
+            "assertion": "analyze_text('hello')['chars'] == 5"
+        }
+    ],
+    "hints": [
+        "Use splitlines() to split by newlines",
+        "Use split() on each line to count words",
+        "len(text) gives the character count",
+        "Handle empty text as a special case"
+    ]
+}

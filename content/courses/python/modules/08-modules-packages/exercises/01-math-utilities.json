@@ -1,0 +1,27 @@
+{
+    "id": "01-math-utilities",
+    "title": "Math Module Usage",
+    "description": "Practice using Python's built-in math module.\n\n## Requirements\n\n1. Import the `math` module\n2. Calculate the square root of 144 using `math.sqrt()`\n3. Calculate the ceiling of 4.3 using `math.ceil()`\n4. Calculate the floor of 4.7 using `math.floor()`\n5. Store results in variables `sqrt_result`, `ceil_result`, `floor_result`\n\n## Expected Output\n\n```\nSquare root of 144: 12.0\nCeiling of 4.3: 5\nFloor of 4.7: 4\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "# Import the math module\n\n\n# Calculate square root of 144\nsqrt_result = None  # Replace with math.sqrt()\n\n# Calculate ceiling of 4.3\nceil_result = None  # Replace with math.ceil()\n\n# Calculate floor of 4.7\nfloor_result = None  # Replace with math.floor()\n\n# Print results\nprint(f\"Square root of 144: {sqrt_result}\")\nprint(f\"Ceiling of 4.3: {ceil_result}\")\nprint(f\"Floor of 4.7: {floor_result}\")\n",
+    "testCases": [
+        {
+            "description": "sqrt_result should be 12.0",
+            "assertion": "sqrt_result == 12.0"
+        },
+        {
+            "description": "ceil_result should be 5",
+            "assertion": "ceil_result == 5"
+        },
+        {
+            "description": "floor_result should be 4",
+            "assertion": "floor_result == 4"
+        }
+    ],
+    "hints": [
+        "Use 'import math' at the top",
+        "Call functions as math.sqrt(), math.ceil(), etc.",
+        "sqrt() returns a float, ceil() and floor() return integers"
+    ]
+}

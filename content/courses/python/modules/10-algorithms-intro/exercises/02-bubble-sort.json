@@ -1,0 +1,32 @@
+{
+    "id": "02-bubble-sort",
+    "title": "Bubble Sort Implementation",
+    "description": "Implement the bubble sort algorithm.\n\n## Requirements\n\n1. Create a function `bubble_sort(arr)` that:\n   - Takes a list of numbers\n   - Sorts it in ascending order (in-place)\n   - Returns the sorted list\n2. Use the bubble sort approach (repeatedly swap adjacent elements)\n\n## Expected Output\n\n```\nOriginal: [64, 34, 25, 12, 22, 11, 90]\nSorted: [11, 12, 22, 25, 34, 64, 90]\n```",
+    "order": 2,
+    "language": "python",
+    "starterCode": "def bubble_sort(arr):\n    \"\"\"Sort array using bubble sort algorithm.\"\"\"\n    n = len(arr)\n    \n    # Outer loop for passes\n    for i in range(n):\n        # Inner loop for comparisons\n        for j in range(0, n - i - 1):\n            # Compare adjacent elements and swap if needed\n            pass\n    \n    return arr\n\n# Test your function\nnumbers = [64, 34, 25, 12, 22, 11, 90]\nprint(f\"Original: {numbers}\")\nprint(f\"Sorted: {bubble_sort(numbers.copy())}\")\n",
+    "testCases": [
+        {
+            "description": "Should sort list correctly",
+            "assertion": "bubble_sort([64, 34, 25, 12, 22, 11, 90]) == [11, 12, 22, 25, 34, 64, 90]"
+        },
+        {
+            "description": "Should handle already sorted list",
+            "assertion": "bubble_sort([1, 2, 3]) == [1, 2, 3]"
+        },
+        {
+            "description": "Should handle reverse sorted list",
+            "assertion": "bubble_sort([3, 2, 1]) == [1, 2, 3]"
+        },
+        {
+            "description": "Should handle single element",
+            "assertion": "bubble_sort([5]) == [5]"
+        }
+    ],
+    "hints": [
+        "Compare arr[j] with arr[j+1]",
+        "If arr[j] > arr[j+1], swap them",
+        "Swap using: arr[j], arr[j+1] = arr[j+1], arr[j]",
+        "After each pass, the largest unsorted element 'bubbles up'"
+    ]
+}

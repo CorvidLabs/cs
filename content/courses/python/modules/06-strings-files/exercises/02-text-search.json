@@ -1,0 +1,28 @@
+{
+    "id": "02-text-search",
+    "title": "Text Search",
+    "description": "Create a function that finds all occurrences of a substring.\n\n## Requirements\n\n1. Create a function `find_all(text, pattern)` that returns a list of indices\n2. Find every position where the pattern starts in the text\n3. Return an empty list if pattern not found\n\n## Expected Output\n\n```\n'ana' found at positions: [1, 3]\n```",
+    "order": 2,
+    "language": "python",
+    "starterCode": "def find_all(text, pattern):\n    \"\"\"Find all starting positions of pattern in text.\"\"\"\n    positions = []\n    # Use a loop to find all occurrences\n    \n    return positions\n\n# Test your function\ntext = \"banana\"\npattern = \"ana\"\nresult = find_all(text, pattern)\nprint(f\"'{pattern}' found at positions: {result}\")\n",
+    "testCases": [
+        {
+            "description": "find_all('banana', 'ana') should return [1, 3]",
+            "assertion": "find_all('banana', 'ana') == [1, 3]"
+        },
+        {
+            "description": "find_all('hello', 'x') should return []",
+            "assertion": "find_all('hello', 'x') == []"
+        },
+        {
+            "description": "find_all('aaa', 'a') should return [0, 1, 2]",
+            "assertion": "find_all('aaa', 'a') == [0, 1, 2]"
+        }
+    ],
+    "hints": [
+        "Use str.find(pattern, start) to find the next occurrence",
+        "find() returns -1 when not found",
+        "Update the start position after each find",
+        "Or use a simple loop checking each position"
+    ]
+}

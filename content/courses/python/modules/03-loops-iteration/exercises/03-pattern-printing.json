@@ -1,0 +1,23 @@
+{
+    "id": "03-pattern-printing",
+    "title": "Star Pattern",
+    "description": "Create a triangle pattern using nested loops.\n\n## Requirements\n\n1. Create a variable `rows` set to 5\n2. Use nested loops to print a right triangle of asterisks\n3. Each row should have one more asterisk than the previous row\n\n## Expected Output\n\n```\n*\n**\n***\n****\n*****\n```",
+    "order": 3,
+    "language": "python",
+    "starterCode": "# Set the number of rows\nrows = 5\n\n# Use nested loops to create the pattern\n# Outer loop controls the row number\n# Inner loop prints the asterisks\n\n",
+    "testCases": [
+        {
+            "description": "Should print 5 rows",
+            "assertion": "True"
+        },
+        {
+            "description": "Pattern should form a right triangle",
+            "assertion": "True"
+        }
+    ],
+    "hints": [
+        "The outer loop runs from 1 to rows + 1",
+        "You can use string multiplication: '*' * n prints n asterisks",
+        "Alternatively, use an inner loop to print individual asterisks"
+    ]
+}
