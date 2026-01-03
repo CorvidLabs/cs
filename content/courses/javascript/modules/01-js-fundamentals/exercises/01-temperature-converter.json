@@ -1,0 +1,32 @@
+{
+    "id": "01-temperature-converter",
+    "title": "Temperature Converter",
+    "description": "Create a program that converts temperatures between Celsius and Fahrenheit.\n\n## Requirements\n\n1. Create a variable `celsius` with the value `25`\n2. Calculate the Fahrenheit equivalent using the formula: `F = (C * 9/5) + 32`\n3. Store the result in a variable called `fahrenheit`\n4. Also create a variable `freezingPointC` with value `0` and convert it to `freezingPointF`\n\n## Expected Output\n\nWhen you log the values:\n- `fahrenheit` should be `77` (25 Celsius = 77 Fahrenheit)\n- `freezingPointF` should be `32` (0 Celsius = 32 Fahrenheit)",
+    "order": 1,
+    "language": "javascript",
+    "starterCode": "// Temperature in Celsius\nconst celsius = 25;\n\n// Convert to Fahrenheit: F = (C * 9/5) + 32\nconst fahrenheit = \n\n// Freezing point conversion\nconst freezingPointC = 0;\nconst freezingPointF = \n\n// Log the results\nconsole.log(`${celsius}°C = ${fahrenheit}°F`);\nconsole.log(`Freezing point: ${freezingPointC}°C = ${freezingPointF}°F`);\n",
+    "testCases": [
+        {
+            "description": "fahrenheit should equal 77",
+            "assertion": "fahrenheit === 77"
+        },
+        {
+            "description": "freezingPointF should equal 32",
+            "assertion": "freezingPointF === 32"
+        },
+        {
+            "description": "celsius should remain 25",
+            "assertion": "celsius === 25"
+        },
+        {
+            "description": "freezingPointC should remain 0",
+            "assertion": "freezingPointC === 0"
+        }
+    ],
+    "hints": [
+        "The formula is: Fahrenheit = (Celsius * 9/5) + 32",
+        "Use parentheses to ensure correct order of operations",
+        "25 * 9 / 5 = 45, then 45 + 32 = 77",
+        "Make sure you're using the right variable names as specified"
+    ]
+}

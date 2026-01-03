@@ -1,0 +1,18 @@
+{
+    "id": "01-rust-fundamentals",
+    "title": "Rust Fundamentals",
+    "description": "Begin your Rust journey with the essentials: writing your first program, understanding variables and mutability, exploring data types, defining functions, and mastering control flow. These foundational concepts prepare you for Rust's unique ownership system.",
+    "order": 1,
+    "lessons": [
+        "01-hello-rust",
+        "02-variables-mutability",
+        "03-data-types",
+        "04-functions",
+        "05-control-flow"
+    ],
+    "exercises": [
+        "01-temperature-converter",
+        "02-fizzbuzz",
+        "03-pattern-matching"
+    ]
+}

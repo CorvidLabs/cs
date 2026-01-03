@@ -1,0 +1,18 @@
+{
+    "id": "swift",
+    "title": "Swift Development",
+    "description": "Build iOS and macOS applications with Swift. Learn protocol-oriented programming, SwiftUI, and modern async/await concurrency patterns.",
+    "icon": "swift-logo.svg",
+    "color": "#f05138",
+    "estimatedHours": 45,
+    "modules": [
+        "01-fundamentals",
+        "02-control-flow",
+        "03-functions",
+        "04-collections",
+        "05-protocols",
+        "06-error-handling",
+        "07-concurrency",
+        "08-swiftui"
+    ]
+}

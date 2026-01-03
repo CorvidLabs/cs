@@ -1,0 +1,48 @@
+{
+    "id": "02-fizzbuzz",
+    "title": "FizzBuzz",
+    "description": "Implement the classic FizzBuzz programming challenge.\n\n## Requirements\n\nCreate a function `fizzbuzz(n: u32) -> String` that returns:\n- `\"FizzBuzz\"` if n is divisible by both 3 and 5\n- `\"Fizz\"` if n is divisible by 3 only\n- `\"Buzz\"` if n is divisible by 5 only\n- The number as a string otherwise\n\n## Examples\n\n- `fizzbuzz(1)` returns `\"1\"`\n- `fizzbuzz(3)` returns `\"Fizz\"`\n- `fizzbuzz(5)` returns `\"Buzz\"`\n- `fizzbuzz(15)` returns `\"FizzBuzz\"`\n- `fizzbuzz(7)` returns `\"7\"`",
+    "order": 2,
+    "language": "rust",
+    "starterCode": "fn fizzbuzz(n: u32) -> String {\n    // Hint: Check divisibility using the modulo operator (%)\n    // Hint: Use n % 3 == 0 to check if n is divisible by 3\n    // Hint: Check for FizzBuzz (divisible by both) first!\n    // Hint: Use n.to_string() to convert a number to a String\n\n    todo!()\n}\n\nfn main() {\n    // Print FizzBuzz for numbers 1 to 20\n    for i in 1..=20 {\n        println!(\"{}: {}\", i, fizzbuzz(i));\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "fizzbuzz(1) should return \"1\"",
+            "assertion": "fizzbuzz(1) == \"1\""
+        },
+        {
+            "description": "fizzbuzz(3) should return \"Fizz\"",
+            "assertion": "fizzbuzz(3) == \"Fizz\""
+        },
+        {
+            "description": "fizzbuzz(5) should return \"Buzz\"",
+            "assertion": "fizzbuzz(5) == \"Buzz\""
+        },
+        {
+            "description": "fizzbuzz(15) should return \"FizzBuzz\"",
+            "assertion": "fizzbuzz(15) == \"FizzBuzz\""
+        },
+        {
+            "description": "fizzbuzz(9) should return \"Fizz\" (9 = 3*3)",
+            "assertion": "fizzbuzz(9) == \"Fizz\""
+        },
+        {
+            "description": "fizzbuzz(10) should return \"Buzz\" (10 = 2*5)",
+            "assertion": "fizzbuzz(10) == \"Buzz\""
+        },
+        {
+            "description": "fizzbuzz(30) should return \"FizzBuzz\" (30 = 2*3*5)",
+            "assertion": "fizzbuzz(30) == \"FizzBuzz\""
+        },
+        {
+            "description": "fizzbuzz(7) should return \"7\" (prime number)",
+            "assertion": "fizzbuzz(7) == \"7\""
+        }
+    ],
+    "hints": [
+        "The order of your conditions matters - check for FizzBuzz (divisible by both 3 AND 5) before checking for Fizz or Buzz individually",
+        "Use the modulo operator: n % 3 == 0 checks if n is divisible by 3",
+        "You can create a String literal with String::from(\"text\") or \"text\".to_string()",
+        "Consider using if/else if/else or the match expression for cleaner code"
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "id": "08-modules-packages",
+    "title": "Modules and Packages",
+    "description": "Organize your Python code into reusable modules and packages. Learn to import standard library modules, install third-party packages, and create your own modules.",
+    "order": 8,
+    "lessons": [
+        "01-importing-modules",
+        "02-standard-library",
+        "03-creating-modules",
+        "04-packages-pip"
+    ],
+    "exercises": [
+        "01-math-utilities",
+        "02-date-formatter",
+        "03-custom-package"
+    ]
+}

@@ -1,0 +1,136 @@
+{
+  "id": "03-optimize-solution",
+  "title": "Optimize Brute Force Solutions",
+  "description": "Given inefficient brute-force solutions, analyze their complexity and write optimized versions with better time or space efficiency.",
+  "type": "coding",
+  "language": "python",
+  "difficulty": "intermediate",
+  "problems": [
+    {
+      "id": "p1",
+      "title": "Contains Duplicate",
+      "prompt": "The following brute-force solution checks if an array contains any duplicate values. Optimize it to achieve better time complexity.",
+      "brute_force": {
+        "code": "def contains_duplicate(nums):\n    for i in range(len(nums)):\n        for j in range(i + 1, len(nums)):\n            if nums[i] == nums[j]:\n                return True\n    return False",
+        "time_complexity": "O(n^2)",
+        "space_complexity": "O(1)"
+      },
+      "optimized_solution": {
+        "code": "def contains_duplicate(nums):\n    seen = set()\n    for num in nums:\n        if num in seen:\n            return True\n        seen.add(num)\n    return False",
+        "time_complexity": "O(n)",
+        "space_complexity": "O(n)"
+      },
+      "hints": [
+        "Think about what data structure allows O(1) lookup time",
+        "You can trade space for time by storing elements you've seen",
+        "A set provides constant-time membership testing"
+      ],
+      "explanation": "By using a set to track seen elements, we reduce the lookup time from O(n) to O(1), improving overall complexity from O(n^2) to O(n). The trade-off is O(n) additional space."
+    },
+    {
+      "id": "p2",
+      "title": "First Unique Character",
+      "prompt": "Find the index of the first character that appears exactly once in a string. Optimize the brute-force approach.",
+      "brute_force": {
+        "code": "def first_unique_char(s):\n    for i in range(len(s)):\n        is_unique = True\n        for j in range(len(s)):\n            if i != j and s[i] == s[j]:\n                is_unique = False\n                break\n        if is_unique:\n            return i\n    return -1",
+        "time_complexity": "O(n^2)",
+        "space_complexity": "O(1)"
+      },
+      "optimized_solution": {
+        "code": "def first_unique_char(s):\n    char_count = {}\n    \n    # First pass: count all characters\n    for char in s:\n        char_count[char] = char_count.get(char, 0) + 1\n    \n    # Second pass: find first with count 1\n    for i, char in enumerate(s):\n        if char_count[char] == 1:\n            return i\n    \n    return -1",
+        "time_complexity": "O(n)",
+        "space_complexity": "O(k)"
+      },
+      "hints": [
+        "What if you counted character frequencies first?",
+        "Two passes through the string is still O(n)",
+        "A dictionary can store character counts"
+      ],
+      "explanation": "Instead of checking every character against every other character, we first count frequencies in O(n) time, then scan again to find the first unique. Total time is O(n) + O(n) = O(n). Space is O(k) where k is the alphabet size (at most 26 for lowercase letters)."
+    },
+    {
+      "id": "p3",
+      "title": "Intersection of Two Arrays",
+      "prompt": "Find the intersection of two arrays (elements that appear in both). Optimize the brute-force nested loop approach.",
+      "brute_force": {
+        "code": "def intersection(nums1, nums2):\n    result = []\n    for num in nums1:\n        if num not in result:\n            for other in nums2:\n                if num == other:\n                    result.append(num)\n                    break\n    return result",
+        "time_complexity": "O(n * m)",
+        "space_complexity": "O(min(n, m))"
+      },
+      "optimized_solution": {
+        "code": "def intersection(nums1, nums2):\n    set1 = set(nums1)\n    set2 = set(nums2)\n    return list(set1 & set2)",
+        "time_complexity": "O(n + m)",
+        "space_complexity": "O(n + m)"
+      },
+      "hints": [
+        "Converting lists to sets gives O(1) lookup",
+        "Set intersection is a built-in operation",
+        "Building two sets is O(n + m)"
+      ],
+      "explanation": "Converting both arrays to sets takes O(n + m) time. Set intersection is O(min(n, m)). Total is O(n + m), much better than O(n * m). We trade space for time by storing both sets."
+    },
+    {
+      "id": "p4",
+      "title": "Find Missing Number",
+      "prompt": "Given an array containing n distinct numbers from 0 to n, find the one number that is missing. Optimize the search-based approach.",
+      "brute_force": {
+        "code": "def missing_number(nums):\n    n = len(nums)\n    for i in range(n + 1):\n        found = False\n        for num in nums:\n            if num == i:\n                found = True\n                break\n        if not found:\n            return i\n    return -1",
+        "time_complexity": "O(n^2)",
+        "space_complexity": "O(1)"
+      },
+      "optimized_solution": {
+        "code": "def missing_number(nums):\n    n = len(nums)\n    expected_sum = n * (n + 1) // 2\n    actual_sum = sum(nums)\n    return expected_sum - actual_sum",
+        "time_complexity": "O(n)",
+        "space_complexity": "O(1)"
+      },
+      "hints": [
+        "The sum of 0 to n has a mathematical formula",
+        "If you know the expected sum and actual sum, the difference is the missing number",
+        "No extra data structures needed for this optimization"
+      ],
+      "explanation": "Using the formula for sum of first n natural numbers (n*(n+1)/2), we can find the missing number by subtracting the actual sum from the expected sum. This achieves O(n) time with O(1) space - optimal in both dimensions."
+    },
+    {
+      "id": "p5",
+      "title": "Majority Element",
+      "prompt": "Find the element that appears more than n/2 times in an array. Assume such an element always exists. Optimize the counting approach.",
+      "brute_force": {
+        "code": "def majority_element(nums):\n    n = len(nums)\n    for num in nums:\n        count = 0\n        for other in nums:\n            if other == num:\n                count += 1\n        if count > n // 2:\n            return num\n    return -1",
+        "time_complexity": "O(n^2)",
+        "space_complexity": "O(1)"
+      },
+      "optimized_solution": {
+        "code": "def majority_element(nums):\n    # Boyer-Moore Voting Algorithm\n    candidate = None\n    count = 0\n    \n    for num in nums:\n        if count == 0:\n            candidate = num\n        count += 1 if num == candidate else -1\n    \n    return candidate",
+        "time_complexity": "O(n)",
+        "space_complexity": "O(1)"
+      },
+      "hints": [
+        "The majority element appears more than half the time",
+        "Consider the Boyer-Moore Voting Algorithm",
+        "If an element is truly majority, it cannot be 'voted out'"
+      ],
+      "explanation": "The Boyer-Moore Voting Algorithm finds the majority element in O(n) time with O(1) space. It works by maintaining a candidate and a count - the count increases when we see the candidate and decreases otherwise. The true majority element will always survive as the final candidate."
+    },
+    {
+      "id": "p6",
+      "title": "Maximum Subarray Sum",
+      "prompt": "Find the contiguous subarray with the largest sum. Optimize the O(n^3) brute-force approach.",
+      "brute_force": {
+        "code": "def max_subarray(nums):\n    max_sum = float('-inf')\n    n = len(nums)\n    \n    for i in range(n):\n        for j in range(i, n):\n            current_sum = 0\n            for k in range(i, j + 1):\n                current_sum += nums[k]\n            max_sum = max(max_sum, current_sum)\n    \n    return max_sum",
+        "time_complexity": "O(n^3)",
+        "space_complexity": "O(1)"
+      },
+      "optimized_solution": {
+        "code": "def max_subarray(nums):\n    # Kadane's Algorithm\n    max_sum = nums[0]\n    current_sum = nums[0]\n    \n    for i in range(1, len(nums)):\n        current_sum = max(nums[i], current_sum + nums[i])\n        max_sum = max(max_sum, current_sum)\n    \n    return max_sum",
+        "time_complexity": "O(n)",
+        "space_complexity": "O(1)"
+      },
+      "hints": [
+        "At each position, decide: start new subarray or extend current one?",
+        "Track both current subarray sum and overall maximum",
+        "Kadane's Algorithm solves this in linear time"
+      ],
+      "explanation": "Kadane's Algorithm achieves O(n) time by making a simple observation: at each position, the maximum subarray ending there is either the element alone or the element plus the maximum subarray ending at the previous position. This dynamic programming approach eliminates all nested loops."
+    }
+  ]
+}

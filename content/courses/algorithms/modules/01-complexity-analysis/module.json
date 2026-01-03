@@ -1,0 +1,17 @@
+{
+  "id": "01-complexity-analysis",
+  "title": "Complexity Analysis",
+  "description": "Learn to analyze algorithm efficiency using Big-O notation. Understand how to measure and compare the time and space requirements of different algorithms, enabling you to make informed decisions about which approach to use for a given problem.",
+  "order": 1,
+  "lessons": [
+    "01-why-algorithms-matter",
+    "02-big-o-notation",
+    "03-time-vs-space",
+    "04-analyzing-code"
+  ],
+  "exercises": [
+    "01-identify-complexity",
+    "02-compare-approaches",
+    "03-optimize-solution"
+  ]
+}

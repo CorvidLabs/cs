@@ -1,0 +1,20 @@
+{
+    "id": "python",
+    "title": "Python Programming",
+    "description": "Master data science, algorithms, and automation with Python. From variables to machine learning, build practical skills for real-world applications.",
+    "icon": "python-logo.svg",
+    "color": "#3776ab",
+    "estimatedHours": 50,
+    "modules": [
+        "01-fundamentals",
+        "02-control-flow",
+        "03-loops-iteration",
+        "04-functions",
+        "05-collections",
+        "06-strings-files",
+        "07-oop",
+        "08-modules-packages",
+        "09-data-processing",
+        "10-algorithms-intro"
+    ]
+}

@@ -1,0 +1,44 @@
+{
+    "id": "01-basic-page",
+    "title": "Create a Simple HTML Page",
+    "description": "Build a basic HTML page with a title and paragraph.\n\n## Requirements\n\n1. Create a valid HTML5 document structure\n2. Set the page title to \"My First Page\"\n3. Add an `<h1>` heading with the text \"Hello, World!\"\n4. Add a `<p>` paragraph with any introduction text\n\n## Expected Structure\n\nYour page should have:\n- A `<!DOCTYPE html>` declaration\n- An `<html>` element with `lang=\"en\"`\n- A `<head>` with charset, viewport, and title\n- A `<body>` with an h1 and a paragraph",
+    "order": 1,
+    "language": "html",
+    "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <!-- Add your title here -->\n</head>\n<body>\n    <!-- Add your heading and paragraph here -->\n</body>\n</html>",
+    "testCases": [
+        {
+            "description": "Document should have <!DOCTYPE html> declaration",
+            "assertion": "document.doctype !== null && document.doctype.name === 'html'"
+        },
+        {
+            "description": "HTML element should have lang=\"en\" attribute",
+            "assertion": "document.documentElement.lang === 'en'"
+        },
+        {
+            "description": "Page title should be 'My First Page'",
+            "assertion": "document.title === 'My First Page'"
+        },
+        {
+            "description": "Page should have an h1 element",
+            "assertion": "document.querySelector('h1') !== null"
+        },
+        {
+            "description": "h1 should contain 'Hello, World!'",
+            "assertion": "document.querySelector('h1').textContent.includes('Hello, World!')"
+        },
+        {
+            "description": "Page should have a paragraph element",
+            "assertion": "document.querySelector('p') !== null"
+        },
+        {
+            "description": "Paragraph should not be empty",
+            "assertion": "document.querySelector('p').textContent.trim().length > 0"
+        }
+    ],
+    "hints": [
+        "The <title> element goes inside the <head> section",
+        "Use <h1>Hello, World!</h1> for the heading",
+        "Use <p>Your text here</p> for the paragraph",
+        "Make sure your title text exactly matches 'My First Page'"
+    ]
+}

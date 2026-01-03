@@ -1,0 +1,136 @@
+{
+  "id": "02-compare-approaches",
+  "title": "Compare Algorithm Approaches",
+  "description": "Given two solutions to the same problem, analyze and compare their time and space complexity to determine which is more efficient.",
+  "type": "comparison",
+  "language": "python",
+  "difficulty": "intermediate",
+  "questions": [
+    {
+      "id": "q1",
+      "title": "Finding Duplicates",
+      "prompt": "Both functions find duplicate elements in a list. Which approach is more efficient and why?",
+      "approach_a": {
+        "name": "Nested Loop Approach",
+        "code": "def find_duplicates_nested(items):\n    duplicates = []\n    for i in range(len(items)):\n        for j in range(i + 1, len(items)):\n            if items[i] == items[j]:\n                if items[i] not in duplicates:\n                    duplicates.append(items[i])\n    return duplicates"
+      },
+      "approach_b": {
+        "name": "Set-Based Approach",
+        "code": "def find_duplicates_set(items):\n    seen = set()\n    duplicates = set()\n    for item in items:\n        if item in seen:\n            duplicates.add(item)\n        else:\n            seen.add(item)\n    return list(duplicates)"
+      },
+      "correct_answer": "B",
+      "analysis": {
+        "approach_a_time": "O(n^2)",
+        "approach_a_space": "O(n)",
+        "approach_b_time": "O(n)",
+        "approach_b_space": "O(n)",
+        "explanation": "Approach A uses nested loops, comparing every pair of elements, resulting in O(n^2) time. Approach B uses a set for O(1) lookup, achieving O(n) time with the same O(n) space. For large inputs, B is significantly faster."
+      }
+    },
+    {
+      "id": "q2",
+      "title": "Checking for Sorted Array",
+      "prompt": "Both functions check if an array is sorted in ascending order. Which approach is more efficient?",
+      "approach_a": {
+        "name": "Adjacent Comparison",
+        "code": "def is_sorted_adjacent(items):\n    for i in range(len(items) - 1):\n        if items[i] > items[i + 1]:\n            return False\n    return True"
+      },
+      "approach_b": {
+        "name": "Sort and Compare",
+        "code": "def is_sorted_compare(items):\n    return items == sorted(items)"
+      },
+      "correct_answer": "A",
+      "analysis": {
+        "approach_a_time": "O(n)",
+        "approach_a_space": "O(1)",
+        "approach_b_time": "O(n log n)",
+        "approach_b_space": "O(n)",
+        "explanation": "Approach A only needs one pass through the array with O(1) space. Approach B creates a sorted copy (O(n) space) and sorts it (O(n log n) time). A is better in both time and space complexity."
+      }
+    },
+    {
+      "id": "q3",
+      "title": "Finding Two Numbers That Sum to Target",
+      "prompt": "Both functions find two numbers that add up to a target value. Which is more efficient?",
+      "approach_a": {
+        "name": "Brute Force",
+        "code": "def two_sum_brute(numbers, target):\n    for i in range(len(numbers)):\n        for j in range(i + 1, len(numbers)):\n            if numbers[i] + numbers[j] == target:\n                return [i, j]\n    return []"
+      },
+      "approach_b": {
+        "name": "Hash Map Approach",
+        "code": "def two_sum_hash(numbers, target):\n    seen = {}\n    for i, num in enumerate(numbers):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], i]\n        seen[num] = i\n    return []"
+      },
+      "correct_answer": "B",
+      "analysis": {
+        "approach_a_time": "O(n^2)",
+        "approach_a_space": "O(1)",
+        "approach_b_time": "O(n)",
+        "approach_b_space": "O(n)",
+        "explanation": "Approach A checks all pairs with O(n^2) time but O(1) space. Approach B uses O(n) space to achieve O(n) time by storing seen numbers in a hash map. The time improvement from O(n^2) to O(n) is usually worth the O(n) space trade-off."
+      }
+    },
+    {
+      "id": "q4",
+      "title": "Finding Maximum Element",
+      "prompt": "Both functions find the maximum element in a list. Which approach is more efficient?",
+      "approach_a": {
+        "name": "Linear Scan",
+        "code": "def find_max_scan(items):\n    if not items:\n        return None\n    maximum = items[0]\n    for item in items:\n        if item > maximum:\n            maximum = item\n    return maximum"
+      },
+      "approach_b": {
+        "name": "Sort First",
+        "code": "def find_max_sort(items):\n    if not items:\n        return None\n    sorted_items = sorted(items)\n    return sorted_items[-1]"
+      },
+      "correct_answer": "A",
+      "analysis": {
+        "approach_a_time": "O(n)",
+        "approach_a_space": "O(1)",
+        "approach_b_time": "O(n log n)",
+        "approach_b_space": "O(n)",
+        "explanation": "Approach A scans once with O(n) time and O(1) space. Approach B sorts (O(n log n) time, O(n) space) just to find one value. A is strictly better - sorting is unnecessary for finding a single maximum."
+      }
+    },
+    {
+      "id": "q5",
+      "title": "Reversing a String",
+      "prompt": "Both functions reverse a string. Which approach is more efficient?",
+      "approach_a": {
+        "name": "Concatenation Loop",
+        "code": "def reverse_concat(s):\n    result = \"\"\n    for char in s:\n        result = char + result\n    return result"
+      },
+      "approach_b": {
+        "name": "List and Join",
+        "code": "def reverse_list(s):\n    chars = list(s)\n    left = 0\n    right = len(chars) - 1\n    while left < right:\n        chars[left], chars[right] = chars[right], chars[left]\n        left += 1\n        right -= 1\n    return ''.join(chars)"
+      },
+      "correct_answer": "B",
+      "analysis": {
+        "approach_a_time": "O(n^2)",
+        "approach_a_space": "O(n)",
+        "approach_b_time": "O(n)",
+        "approach_b_space": "O(n)",
+        "explanation": "Approach A creates a new string on each iteration. Since strings are immutable, each concatenation copies the entire string, leading to O(n^2) time. Approach B uses a list for O(1) swaps, achieving O(n) time overall."
+      }
+    },
+    {
+      "id": "q6",
+      "title": "Counting Character Frequencies",
+      "prompt": "Both functions count character frequencies in a string. Which approach is more efficient?",
+      "approach_a": {
+        "name": "Dictionary Approach",
+        "code": "def count_chars_dict(s):\n    counts = {}\n    for char in s:\n        if char in counts:\n            counts[char] += 1\n        else:\n            counts[char] = 1\n    return counts"
+      },
+      "approach_b": {
+        "name": "Nested Count Approach",
+        "code": "def count_chars_nested(s):\n    counts = {}\n    unique = set(s)\n    for char in unique:\n        count = 0\n        for c in s:\n            if c == char:\n                count += 1\n        counts[char] = count\n    return counts"
+      },
+      "correct_answer": "A",
+      "analysis": {
+        "approach_a_time": "O(n)",
+        "approach_a_space": "O(k)",
+        "approach_b_time": "O(n * k)",
+        "approach_b_space": "O(k)",
+        "explanation": "Approach A counts in a single pass with O(1) dictionary operations. Approach B scans the entire string once per unique character. With k unique characters, B is O(n * k) which can approach O(n^2) if many characters are unique. A is always O(n)."
+      }
+    }
+  ]
+}

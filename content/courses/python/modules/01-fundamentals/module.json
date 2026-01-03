@@ -1,0 +1,17 @@
+{
+    "id": "01-fundamentals",
+    "title": "Python Fundamentals",
+    "description": "Start your Python journey with variables, types, and basic I/O. Learn how to write your first programs and understand Python's clean, readable syntax.",
+    "order": 1,
+    "lessons": [
+        "01-hello-world",
+        "02-variables",
+        "03-data-types",
+        "04-input-output"
+    ],
+    "exercises": [
+        "01-greeting",
+        "02-calculator",
+        "03-temperature"
+    ]
+}

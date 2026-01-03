@@ -1,0 +1,32 @@
+{
+    "id": "02-calculator",
+    "title": "Simple Calculator",
+    "description": "Create a program that performs basic arithmetic operations.\n\n## Requirements\n\n1. Create variables `a` and `b` with values 10 and 3\n2. Calculate and store the sum in a variable called `sum_result`\n3. Calculate and store the difference in a variable called `difference`\n4. Calculate and store the product in a variable called `product`\n5. Calculate and store the quotient in a variable called `quotient`\n\n## Expected Values\n\n- sum_result = 13\n- difference = 7\n- product = 30\n- quotient = 3.333... (approximately)",
+    "order": 2,
+    "language": "python",
+    "starterCode": "# Create two number variables\na = 10\nb = 3\n\n# Calculate the sum (a + b)\nsum_result = \n\n# Calculate the difference (a - b)\ndifference = \n\n# Calculate the product (a * b)\nproduct = \n\n# Calculate the quotient (a / b)\nquotient = \n\n# Print all results\nprint(f\"Sum: {sum_result}\")\nprint(f\"Difference: {difference}\")\nprint(f\"Product: {product}\")\nprint(f\"Quotient: {quotient}\")\n",
+    "testCases": [
+        {
+            "description": "sum_result should equal 13",
+            "assertion": "sum_result == 13"
+        },
+        {
+            "description": "difference should equal 7",
+            "assertion": "difference == 7"
+        },
+        {
+            "description": "product should equal 30",
+            "assertion": "product == 30"
+        },
+        {
+            "description": "quotient should be approximately 3.33",
+            "assertion": "abs(quotient - 3.333333) < 0.01"
+        }
+    ],
+    "hints": [
+        "Addition uses the + operator",
+        "Subtraction uses the - operator",
+        "Multiplication uses the * operator",
+        "Division uses the / operator (always returns a float)"
+    ]
+}

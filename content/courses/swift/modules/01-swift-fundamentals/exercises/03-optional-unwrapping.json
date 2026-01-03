@@ -1,0 +1,37 @@
+{
+    "id": "03-optional-unwrapping",
+    "title": "Optional Unwrapping",
+    "description": "Practice safely unwrapping optionals using different Swift techniques.\n\n## Requirements\n\n1. Create an optional String `nickname` with value \"Swifty\"\n2. Create an optional Int `luckyNumber` that is nil\n3. Use `if let` to unwrap and print the nickname\n4. Use the nil-coalescing operator `??` to provide a default for luckyNumber\n5. Print the lucky number (or its default value of 7)\n\n## Expected Output\n\n```\nNickname: Swifty\nLucky number: 7\n```\n\n## Important\n\n- Do NOT use force unwrapping (`!`)\n- Use safe unwrapping techniques only",
+    "order": 3,
+    "language": "swift",
+    "starterCode": "// Create an optional String 'nickname' with value \"Swifty\"\n\n\n// Create an optional Int 'luckyNumber' that is nil\n\n\n// Use 'if let' to safely unwrap and print the nickname\n// Print format: \"Nickname: value\"\n\n\n// Use nil-coalescing (??) to get luckyNumber or default to 7\n// Store in a constant called 'number'\n\n\n// Print the lucky number\n// Print format: \"Lucky number: value\"\n",
+    "testCases": [
+        {
+            "description": "nickname should be an optional containing \"Swifty\"",
+            "assertion": "nickname == Optional(\"Swifty\")"
+        },
+        {
+            "description": "luckyNumber should be nil",
+            "assertion": "luckyNumber == nil"
+        },
+        {
+            "description": "Output should contain the nickname",
+            "assertion": "output.contains(\"Swifty\")"
+        },
+        {
+            "description": "Output should show the default lucky number 7",
+            "assertion": "output.contains(\"7\")"
+        },
+        {
+            "description": "Code should not contain force unwrap (!)",
+            "assertion": "!code.contains(\"!\")"
+        }
+    ],
+    "hints": [
+        "Declare an optional with: let nickname: String? = \"Swifty\"",
+        "Declare a nil optional with: let luckyNumber: Int? = nil",
+        "Use if let: if let unwrapped = nickname { print(\"Nickname: \\(unwrapped)\") }",
+        "Use nil-coalescing: let number = luckyNumber ?? 7",
+        "Never use ! to force unwrap - it can crash your program"
+    ]
+}

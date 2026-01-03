@@ -1,0 +1,17 @@
+{
+    "id": "06-strings-files",
+    "title": "Strings and Files",
+    "description": "Work with text data using Python's powerful string methods. Learn to read from and write to files, handle different encodings, and process text efficiently.",
+    "order": 6,
+    "lessons": [
+        "01-string-methods",
+        "02-string-formatting",
+        "03-reading-files",
+        "04-writing-files"
+    ],
+    "exercises": [
+        "01-word-count",
+        "02-text-search",
+        "03-file-processor"
+    ]
+}

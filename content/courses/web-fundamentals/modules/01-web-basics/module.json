@@ -1,0 +1,17 @@
+{
+    "id": "01-web-basics",
+    "title": "Web Basics",
+    "description": "Understand how the web works and learn HTML fundamentals. Explore browsers, servers, HTTP requests, and the structure of web pages.",
+    "order": 1,
+    "lessons": [
+        "01-how-web-works",
+        "02-html-structure",
+        "03-developer-tools",
+        "04-first-page"
+    ],
+    "exercises": [
+        "01-basic-page",
+        "02-validate-html",
+        "03-dev-tools-exploration"
+    ]
+}

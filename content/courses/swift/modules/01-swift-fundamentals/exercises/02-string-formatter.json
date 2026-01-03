@@ -1,0 +1,40 @@
+{
+    "id": "02-string-formatter",
+    "title": "String Formatter",
+    "description": "Create a program that formats a person's information using string interpolation.\n\n## Requirements\n\n1. Create a constant `firstName` with value \"Ada\"\n2. Create a constant `lastName` with value \"Lovelace\"\n3. Create a constant `birthYear` with value 1815 (as an Int)\n4. Create a constant `bio` that combines all information\n5. Print the bio\n\n## Expected Output\n\n```\nAda Lovelace was born in 1815.\n```\n\n## Tips\n\n- Use string interpolation with `\\(value)` to insert values into strings\n- The bio should be a single, complete sentence",
+    "order": 2,
+    "language": "swift",
+    "starterCode": "// Create constants for first name, last name, and birth year\n\n\n\n// Create a 'bio' constant using string interpolation\n// Format: \"FirstName LastName was born in Year.\"\n\n\n// Print the bio\n",
+    "testCases": [
+        {
+            "description": "Constant 'firstName' should be \"Ada\"",
+            "assertion": "firstName == \"Ada\""
+        },
+        {
+            "description": "Constant 'lastName' should be \"Lovelace\"",
+            "assertion": "lastName == \"Lovelace\""
+        },
+        {
+            "description": "Constant 'birthYear' should be 1815",
+            "assertion": "birthYear == 1815"
+        },
+        {
+            "description": "Bio should contain the full name",
+            "assertion": "bio.contains(\"Ada Lovelace\")"
+        },
+        {
+            "description": "Bio should contain the birth year",
+            "assertion": "bio.contains(\"1815\")"
+        },
+        {
+            "description": "Bio should be a complete sentence ending with a period",
+            "assertion": "bio.hasSuffix(\".\")"
+        }
+    ],
+    "hints": [
+        "Use 'let' for all constants since none of these values change",
+        "birthYear should be an Int, not a String: let birthYear = 1815",
+        "Use string interpolation: \"\\(firstName) \\(lastName) was born in \\(birthYear).\"",
+        "Don't forget the period at the end of the sentence"
+    ]
+}

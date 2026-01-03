@@ -1,0 +1,32 @@
+{
+    "id": "01-temperature-converter",
+    "title": "Temperature Converter",
+    "description": "Create a program that converts a temperature from Fahrenheit to Celsius.\n\n## Requirements\n\n1. Create a constant `fahrenheit` with a temperature value (use 98.6)\n2. Create a constant `celsius` that converts Fahrenheit to Celsius\n3. Print the result showing both temperatures\n\n## Formula\n\nCelsius = (Fahrenheit - 32) * 5 / 9\n\n## Expected Output\n\n```\n98.6°F is 37.0°C\n```\n\nNote: The Celsius value should be approximately 37.0 for 98.6°F (normal body temperature).",
+    "order": 1,
+    "language": "swift",
+    "starterCode": "// Create a constant 'fahrenheit' with value 98.6\n\n\n// Create a constant 'celsius' using the conversion formula\n// Formula: (fahrenheit - 32) * 5 / 9\n\n\n// Print the result: \"X°F is Y°C\"\n",
+    "testCases": [
+        {
+            "description": "Constant 'fahrenheit' should be 98.6",
+            "assertion": "fahrenheit == 98.6"
+        },
+        {
+            "description": "Constant 'celsius' should be approximately 37.0",
+            "assertion": "abs(celsius - 37.0) < 0.1"
+        },
+        {
+            "description": "Output should contain the Fahrenheit value",
+            "assertion": "output.contains(\"98.6\")"
+        },
+        {
+            "description": "Output should contain the degree symbol and F",
+            "assertion": "output.contains(\"°F\")"
+        }
+    ],
+    "hints": [
+        "Use 'let' to declare constants since these values won't change",
+        "Make sure to use Double values (98.6, not 98) for precise calculations",
+        "Use string interpolation: \"\\(fahrenheit)°F is \\(celsius)°C\"",
+        "The formula is: (fahrenheit - 32) * 5 / 9"
+    ]
+}

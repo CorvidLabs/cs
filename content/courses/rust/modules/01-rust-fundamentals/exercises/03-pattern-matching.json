@@ -1,0 +1,65 @@
+{
+    "id": "03-pattern-matching",
+    "title": "Pattern Matching",
+    "description": "Practice Rust's powerful `match` expression by implementing a grading system and day classifier.\n\n## Requirements\n\n### Part 1: Grade Calculator\nImplement `score_to_grade(score: u32) -> char` that returns:\n- `'A'` for scores 90-100\n- `'B'` for scores 80-89\n- `'C'` for scores 70-79\n- `'D'` for scores 60-69\n- `'F'` for scores 0-59\n\n### Part 2: Day Classifier\nImplement `day_type(day: &str) -> &str` that returns:\n- `\"Weekend\"` for \"Saturday\" or \"Sunday\"\n- `\"Weekday\"` for Monday through Friday\n- `\"Unknown\"` for any other input\n\n## Examples\n\n- `score_to_grade(95)` returns `'A'`\n- `score_to_grade(73)` returns `'C'`\n- `day_type(\"Saturday\")` returns `\"Weekend\"`\n- `day_type(\"Wednesday\")` returns `\"Weekday\"`",
+    "order": 3,
+    "language": "rust",
+    "starterCode": "fn score_to_grade(score: u32) -> char {\n    // Use a match expression with range patterns\n    // Example: 90..=100 matches values from 90 to 100 inclusive\n\n    match score {\n        // Add your patterns here\n        _ => todo!()\n    }\n}\n\nfn day_type(day: &str) -> &str {\n    // Use a match expression with string patterns\n    // Use | to match multiple patterns: \"a\" | \"b\" matches either\n\n    match day {\n        // Add your patterns here\n        _ => todo!()\n    }\n}\n\nfn main() {\n    // Test score_to_grade\n    let scores = [95, 87, 73, 65, 45];\n    for score in scores {\n        println!(\"Score {} = Grade {}\", score, score_to_grade(score));\n    }\n\n    println!();\n\n    // Test day_type\n    let days = [\"Monday\", \"Saturday\", \"Wednesday\", \"Sunday\", \"Holiday\"];\n    for day in days {\n        println!(\"{} is a {}\", day, day_type(day));\n    }\n}\n",
+    "testCases": [
+        {
+            "description": "score_to_grade(100) should return 'A'",
+            "assertion": "score_to_grade(100) == 'A'"
+        },
+        {
+            "description": "score_to_grade(90) should return 'A'",
+            "assertion": "score_to_grade(90) == 'A'"
+        },
+        {
+            "description": "score_to_grade(85) should return 'B'",
+            "assertion": "score_to_grade(85) == 'B'"
+        },
+        {
+            "description": "score_to_grade(70) should return 'C'",
+            "assertion": "score_to_grade(70) == 'C'"
+        },
+        {
+            "description": "score_to_grade(65) should return 'D'",
+            "assertion": "score_to_grade(65) == 'D'"
+        },
+        {
+            "description": "score_to_grade(59) should return 'F'",
+            "assertion": "score_to_grade(59) == 'F'"
+        },
+        {
+            "description": "score_to_grade(0) should return 'F'",
+            "assertion": "score_to_grade(0) == 'F'"
+        },
+        {
+            "description": "day_type(\"Saturday\") should return \"Weekend\"",
+            "assertion": "day_type(\"Saturday\") == \"Weekend\""
+        },
+        {
+            "description": "day_type(\"Sunday\") should return \"Weekend\"",
+            "assertion": "day_type(\"Sunday\") == \"Weekend\""
+        },
+        {
+            "description": "day_type(\"Monday\") should return \"Weekday\"",
+            "assertion": "day_type(\"Monday\") == \"Weekday\""
+        },
+        {
+            "description": "day_type(\"Friday\") should return \"Weekday\"",
+            "assertion": "day_type(\"Friday\") == \"Weekday\""
+        },
+        {
+            "description": "day_type(\"Holiday\") should return \"Unknown\"",
+            "assertion": "day_type(\"Holiday\") == \"Unknown\""
+        }
+    ],
+    "hints": [
+        "Use inclusive range patterns: 90..=100 matches 90, 91, ..., 100",
+        "The order of match arms matters - put more specific patterns before general ones",
+        "Use the | operator for alternatives: \"Saturday\" | \"Sunday\" matches either string",
+        "The _ pattern matches anything and is useful as a catch-all",
+        "For day_type, you can list all weekdays with |, or use _ for Unknown after matching weekend and specific weekdays"
+    ]
+}

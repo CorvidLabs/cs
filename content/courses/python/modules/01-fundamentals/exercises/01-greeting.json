@@ -1,0 +1,32 @@
+{
+    "id": "01-greeting",
+    "title": "Personal Greeting",
+    "description": "Create a program that stores your name in a variable and prints a personalized greeting.\n\n## Requirements\n\n1. Create a variable called `name` with your name\n2. Create a variable called `greeting` that combines \"Hello, \" with your name\n3. Print the greeting\n\n## Expected Output\n\nIf your name is \"Alice\", the output should be:\n\n```\nHello, Alice!\n```",
+    "order": 1,
+    "language": "python",
+    "starterCode": "# Create a variable called 'name' with your name\n\n\n# Create a variable called 'greeting' that says \"Hello, \" + name + \"!\"\n\n\n# Print the greeting\n",
+    "testCases": [
+        {
+            "description": "Variable 'name' should exist",
+            "assertion": "'name' in dir()"
+        },
+        {
+            "description": "Variable 'greeting' should exist",
+            "assertion": "'greeting' in dir()"
+        },
+        {
+            "description": "Greeting should start with 'Hello, '",
+            "assertion": "greeting.startswith('Hello, ')"
+        },
+        {
+            "description": "Greeting should end with '!'",
+            "assertion": "greeting.endswith('!')"
+        }
+    ],
+    "hints": [
+        "Use quotes around your name since it's a string",
+        "You can combine strings with the + operator",
+        "Don't forget the comma and space after 'Hello'",
+        "Example: greeting = \"Hello, \" + name + \"!\""
+    ]
+}

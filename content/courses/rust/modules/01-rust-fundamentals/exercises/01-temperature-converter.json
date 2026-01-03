@@ -1,0 +1,40 @@
+{
+    "id": "01-temperature-converter",
+    "title": "Temperature Converter",
+    "description": "Create functions to convert temperatures between Fahrenheit and Celsius scales.\n\n## Requirements\n\n1. Implement `fahrenheit_to_celsius(f: f64) -> f64`\n   - Formula: C = (F - 32) * 5/9\n\n2. Implement `celsius_to_fahrenheit(c: f64) -> f64`\n   - Formula: F = C * 9/5 + 32\n\n## Examples\n\n- `fahrenheit_to_celsius(32.0)` returns `0.0`\n- `fahrenheit_to_celsius(212.0)` returns `100.0`\n- `celsius_to_fahrenheit(0.0)` returns `32.0`\n- `celsius_to_fahrenheit(100.0)` returns `212.0`",
+    "order": 1,
+    "language": "rust",
+    "starterCode": "// Convert Fahrenheit to Celsius\n// Formula: C = (F - 32) * 5/9\nfn fahrenheit_to_celsius(f: f64) -> f64 {\n    // Your code here\n    todo!()\n}\n\n// Convert Celsius to Fahrenheit\n// Formula: F = C * 9/5 + 32\nfn celsius_to_fahrenheit(c: f64) -> f64 {\n    // Your code here\n    todo!()\n}\n\nfn main() {\n    let freezing_f = 32.0;\n    let boiling_f = 212.0;\n\n    println!(\"{}F = {}C\", freezing_f, fahrenheit_to_celsius(freezing_f));\n    println!(\"{}F = {}C\", boiling_f, fahrenheit_to_celsius(boiling_f));\n\n    let freezing_c = 0.0;\n    let boiling_c = 100.0;\n\n    println!(\"{}C = {}F\", freezing_c, celsius_to_fahrenheit(freezing_c));\n    println!(\"{}C = {}F\", boiling_c, celsius_to_fahrenheit(boiling_c));\n}\n",
+    "testCases": [
+        {
+            "description": "32F should convert to 0C (freezing point)",
+            "assertion": "(fahrenheit_to_celsius(32.0) - 0.0).abs() < 0.001"
+        },
+        {
+            "description": "212F should convert to 100C (boiling point)",
+            "assertion": "(fahrenheit_to_celsius(212.0) - 100.0).abs() < 0.001"
+        },
+        {
+            "description": "98.6F (body temperature) should convert to approximately 37C",
+            "assertion": "(fahrenheit_to_celsius(98.6) - 37.0).abs() < 0.1"
+        },
+        {
+            "description": "0C should convert to 32F (freezing point)",
+            "assertion": "(celsius_to_fahrenheit(0.0) - 32.0).abs() < 0.001"
+        },
+        {
+            "description": "100C should convert to 212F (boiling point)",
+            "assertion": "(celsius_to_fahrenheit(100.0) - 212.0).abs() < 0.001"
+        },
+        {
+            "description": "-40 should be the same in both scales",
+            "assertion": "(fahrenheit_to_celsius(-40.0) - (-40.0)).abs() < 0.001"
+        }
+    ],
+    "hints": [
+        "Use f64 literals with decimal points (e.g., 5.0 instead of 5) to ensure floating-point division",
+        "Remember that 5/9 in integer math equals 0, but 5.0/9.0 gives the correct decimal result",
+        "The todo!() macro is a placeholder - replace it with your implementation",
+        "Test your formulas: freezing water is 32F/0C, boiling water is 212F/100C"
+    ]
+}

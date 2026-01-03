@@ -1,0 +1,17 @@
+{
+    "id": "10-algorithms-intro",
+    "title": "Introduction to Algorithms",
+    "description": "Learn fundamental algorithm concepts including Big O notation, searching, and sorting. Develop problem-solving skills and understand algorithmic efficiency.",
+    "order": 10,
+    "lessons": [
+        "01-big-o-basics",
+        "02-searching-algorithms",
+        "03-sorting-algorithms",
+        "04-recursion-intro"
+    ],
+    "exercises": [
+        "01-binary-search",
+        "02-bubble-sort",
+        "03-recursive-factorial"
+    ]
+}

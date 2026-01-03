@@ -1,0 +1,18 @@
+{
+    "id": "web-fundamentals",
+    "title": "Web Development Fundamentals",
+    "description": "Master HTML and CSS from the ground up. Build accessible, responsive websites with semantic markup and modern styling techniques.",
+    "icon": "html-logo.svg",
+    "color": "#e34c26",
+    "estimatedHours": 30,
+    "modules": [
+        "01-web-basics",
+        "02-html-content",
+        "03-html-forms-tables",
+        "04-css-basics",
+        "05-box-model-layout",
+        "06-responsive-design",
+        "07-css-advanced",
+        "08-accessibility"
+    ]
+}

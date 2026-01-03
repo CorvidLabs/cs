@@ -1,0 +1,18 @@
+{
+    "id": "01-swift-fundamentals",
+    "title": "Swift Fundamentals",
+    "description": "Master the foundations of Swift programming: constants, variables, type inference, and optionals. Learn Swift's safety-first approach to handling values that might not exist.",
+    "order": 1,
+    "lessons": [
+        "01-hello-swift",
+        "02-constants-variables",
+        "03-type-inference",
+        "04-basic-types",
+        "05-optionals-intro"
+    ],
+    "exercises": [
+        "01-temperature-converter",
+        "02-string-formatter",
+        "03-optional-unwrapping"
+    ]
+}

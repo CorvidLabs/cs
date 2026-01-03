@@ -1,0 +1,17 @@
+{
+    "id": "03-loops-iteration",
+    "title": "Loops and Iteration",
+    "description": "Master Python's looping constructs including while loops, for loops, and iteration patterns. Learn to process sequences efficiently and control loop execution.",
+    "order": 3,
+    "lessons": [
+        "01-while-loops",
+        "02-for-loops",
+        "03-loop-control",
+        "04-nested-loops"
+    ],
+    "exercises": [
+        "01-countdown",
+        "02-sum-numbers",
+        "03-pattern-printing"
+    ]
+}

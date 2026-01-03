@@ -1,0 +1,20 @@
+{
+    "id": "javascript",
+    "title": "JavaScript & TypeScript",
+    "description": "Master JavaScript and TypeScript for modern web development. Learn core language fundamentals, async patterns, DOM manipulation, and type-safe programming with TypeScript.",
+    "icon": "javascript-logo.svg",
+    "color": "#f7df1e",
+    "estimatedHours": 60,
+    "modules": [
+        "01-js-fundamentals",
+        "02-control-flow-functions",
+        "03-collections-objects",
+        "04-dom-manipulation",
+        "05-async-javascript",
+        "06-typescript-intro",
+        "07-typescript-advanced",
+        "08-apis-and-data",
+        "09-modern-patterns",
+        "10-frameworks-intro"
+    ]
+}

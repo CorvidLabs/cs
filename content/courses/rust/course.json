@@ -1,0 +1,18 @@
+{
+    "id": "rust",
+    "title": "Rust Systems Programming",
+    "description": "Write safe, fast, and concurrent systems with Rust. Master ownership, traits, and zero-cost abstractions for high-performance applications.",
+    "icon": "rust-logo.svg",
+    "color": "#dea584",
+    "estimatedHours": 55,
+    "modules": [
+        "01-rust-fundamentals",
+        "02-ownership",
+        "03-structs-enums",
+        "04-collections",
+        "05-traits",
+        "06-error-handling",
+        "07-concurrency",
+        "08-advanced"
+    ]
+}

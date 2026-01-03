@@ -1,0 +1,22 @@
+{
+    "id": "algorithms",
+    "title": "Algorithms & Data Structures",
+    "description": "Master essential algorithms and data structures. Learn complexity analysis, common patterns, and problem-solving techniques in Python, TypeScript, Swift, and Rust.",
+    "icon": "algorithm-logo.svg",
+    "color": "#6366f1",
+    "estimatedHours": 50,
+    "modules": [
+        "01-complexity-analysis",
+        "02-arrays-strings",
+        "03-linked-lists",
+        "04-stacks-queues",
+        "05-trees",
+        "06-heaps-priority-queues",
+        "07-hash-tables",
+        "08-graphs-basics",
+        "09-graphs-advanced",
+        "10-sorting",
+        "11-searching",
+        "12-dynamic-programming"
+    ]
+}

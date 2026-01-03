@@ -1,0 +1,106 @@
+{
+  "id": "01-identify-complexity",
+  "title": "Identify Time Complexity",
+  "description": "Analyze code snippets and determine their time complexity using Big-O notation.",
+  "type": "multiple-choice",
+  "language": "python",
+  "difficulty": "beginner",
+  "questions": [
+    {
+      "id": "q1",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def find_first(items):\n    if len(items) == 0:\n        return None\n    return items[0]",
+      "options": [
+        { "value": "O(1)", "correct": true },
+        { "value": "O(n)", "correct": false },
+        { "value": "O(log n)", "correct": false },
+        { "value": "O(n^2)", "correct": false }
+      ],
+      "explanation": "Array access by index is a constant-time O(1) operation. The function performs the same number of operations regardless of the list size."
+    },
+    {
+      "id": "q2",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def sum_all(numbers):\n    total = 0\n    for num in numbers:\n        total += num\n    return total",
+      "options": [
+        { "value": "O(1)", "correct": false },
+        { "value": "O(n)", "correct": true },
+        { "value": "O(log n)", "correct": false },
+        { "value": "O(n^2)", "correct": false }
+      ],
+      "explanation": "The function iterates through each element once, performing O(1) work per element. With n elements, total time is O(n)."
+    },
+    {
+      "id": "q3",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def has_duplicates(items):\n    for i in range(len(items)):\n        for j in range(len(items)):\n            if i != j and items[i] == items[j]:\n                return True\n    return False",
+      "options": [
+        { "value": "O(n)", "correct": false },
+        { "value": "O(n log n)", "correct": false },
+        { "value": "O(n^2)", "correct": true },
+        { "value": "O(2^n)", "correct": false }
+      ],
+      "explanation": "There are two nested loops, each iterating n times. The inner operations are O(1), so total complexity is O(n) * O(n) = O(n^2)."
+    },
+    {
+      "id": "q4",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def binary_search(sorted_list, target):\n    left = 0\n    right = len(sorted_list) - 1\n    \n    while left <= right:\n        mid = (left + right) // 2\n        if sorted_list[mid] == target:\n            return mid\n        elif sorted_list[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    \n    return -1",
+      "options": [
+        { "value": "O(1)", "correct": false },
+        { "value": "O(n)", "correct": false },
+        { "value": "O(log n)", "correct": true },
+        { "value": "O(n log n)", "correct": false }
+      ],
+      "explanation": "Each iteration halves the search space. Starting with n elements, we need log2(n) halvings to reach 1 element. This is characteristic O(log n) behavior."
+    },
+    {
+      "id": "q5",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def print_pairs(items):\n    n = len(items)\n    for i in range(n):\n        for j in range(i + 1, n):\n            print(items[i], items[j])",
+      "options": [
+        { "value": "O(n)", "correct": false },
+        { "value": "O(n log n)", "correct": false },
+        { "value": "O(n^2)", "correct": true },
+        { "value": "O(n^3)", "correct": false }
+      ],
+      "explanation": "The inner loop runs (n-1) + (n-2) + ... + 1 = n(n-1)/2 times total, which simplifies to O(n^2). Even though it's triangular, it's still quadratic."
+    },
+    {
+      "id": "q6",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def mystery(n):\n    i = 1\n    while i < n:\n        print(i)\n        i *= 2",
+      "options": [
+        { "value": "O(1)", "correct": false },
+        { "value": "O(log n)", "correct": true },
+        { "value": "O(n)", "correct": false },
+        { "value": "O(n^2)", "correct": false }
+      ],
+      "explanation": "The variable i doubles each iteration: 1, 2, 4, 8, 16... It takes log2(n) doublings to reach n, so the complexity is O(log n)."
+    },
+    {
+      "id": "q7",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def process(items):\n    # Phase 1\n    for item in items:\n        print(item)\n    \n    # Phase 2\n    items.sort()\n    \n    # Phase 3\n    for item in items:\n        print(item)",
+      "options": [
+        { "value": "O(n)", "correct": false },
+        { "value": "O(n log n)", "correct": true },
+        { "value": "O(n^2)", "correct": false },
+        { "value": "O(n^2 log n)", "correct": false }
+      ],
+      "explanation": "Phase 1 is O(n), Phase 2 (sort) is O(n log n), Phase 3 is O(n). Adding them: O(n) + O(n log n) + O(n) = O(n log n) since that's the dominant term."
+    },
+    {
+      "id": "q8",
+      "prompt": "What is the time complexity of this function?",
+      "code": "def count_in_matrix(matrix, target):\n    count = 0\n    for row in matrix:\n        for element in row:\n            if element == target:\n                count += 1\n    return count",
+      "options": [
+        { "value": "O(n)", "correct": false },
+        { "value": "O(n^2)", "correct": true },
+        { "value": "O(n * m)", "correct": false },
+        { "value": "O(n + m)", "correct": false }
+      ],
+      "explanation": "For an n x n matrix, we visit every element once. With n rows and n columns, that's n * n = n^2 elements, giving O(n^2) complexity. Note: if the matrix is m x n (not square), it would be O(m * n)."
+    }
+  ]
+}

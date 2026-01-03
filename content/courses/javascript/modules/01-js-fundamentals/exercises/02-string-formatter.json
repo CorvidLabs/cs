@@ -1,0 +1,32 @@
+{
+    "id": "02-string-formatter",
+    "title": "String Formatter",
+    "description": "Practice working with strings and template literals by creating formatted output.\n\n## Requirements\n\n1. Create variables for a person's information:\n   - `firstName` = \"Ada\"\n   - `lastName` = \"Lovelace\"\n   - `birthYear` = 1815\n   - `profession` = \"mathematician\"\n\n2. Create a `fullName` variable that combines first and last name with a space\n\n3. Create an `introduction` variable using a template literal that produces:\n   \"Ada Lovelace was a mathematician born in 1815.\"\n\n4. Create an `initials` variable containing just the first letters: \"AL\"\n\n## Expected Output\n\n- fullName: \"Ada Lovelace\"\n- introduction: \"Ada Lovelace was a mathematician born in 1815.\"\n- initials: \"AL\"",
+    "order": 2,
+    "language": "javascript",
+    "starterCode": "// Person's information\nconst firstName = \"Ada\";\nconst lastName = \"Lovelace\";\nconst birthYear = 1815;\nconst profession = \"mathematician\";\n\n// Combine first and last name\nconst fullName = \n\n// Create introduction using template literal\nconst introduction = \n\n// Get initials (first letter of each name)\nconst initials = \n\n// Log the results\nconsole.log(\"Full name:\", fullName);\nconsole.log(\"Introduction:\", introduction);\nconsole.log(\"Initials:\", initials);\n",
+    "testCases": [
+        {
+            "description": "fullName should be 'Ada Lovelace'",
+            "assertion": "fullName === 'Ada Lovelace'"
+        },
+        {
+            "description": "introduction should be correct sentence",
+            "assertion": "introduction === 'Ada Lovelace was a mathematician born in 1815.'"
+        },
+        {
+            "description": "initials should be 'AL'",
+            "assertion": "initials === 'AL'"
+        },
+        {
+            "description": "Should use the firstName variable",
+            "assertion": "firstName === 'Ada'"
+        }
+    ],
+    "hints": [
+        "Use + to concatenate strings: firstName + \" \" + lastName",
+        "Or use template literals: `${firstName} ${lastName}`",
+        "For initials, access first character with [0]: firstName[0]",
+        "Template literal example: `${name} was born in ${year}.`"
+    ]
+}

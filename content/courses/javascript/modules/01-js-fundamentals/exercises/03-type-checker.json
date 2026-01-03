@@ -1,0 +1,40 @@
+{
+    "id": "03-type-checker",
+    "title": "Type Checker",
+    "description": "Practice using the typeof operator and understanding JavaScript's type system.\n\n## Requirements\n\n1. Create variables of different types:\n   - `myString` = \"Hello\"\n   - `myNumber` = 42\n   - `myBoolean` = true\n   - `myNull` = null\n   - `myUndefined` (declare but don't assign)\n\n2. Use typeof to store the type of each variable:\n   - `stringType` = the type of myString\n   - `numberType` = the type of myNumber\n   - `booleanType` = the type of myBoolean\n   - `nullType` = the type of myNull\n   - `undefinedType` = the type of myUndefined\n\n## Expected Types\n\n- stringType: \"string\"\n- numberType: \"number\"\n- booleanType: \"boolean\"\n- nullType: \"object\" (JavaScript quirk!)\n- undefinedType: \"undefined\"",
+    "order": 3,
+    "language": "javascript",
+    "starterCode": "// Create variables of different types\nconst myString = \"Hello\";\nconst myNumber = 42;\nconst myBoolean = true;\nconst myNull = null;\nlet myUndefined;\n\n// Use typeof to get the type of each variable\nconst stringType = \nconst numberType = \nconst booleanType = \nconst nullType = \nconst undefinedType = \n\n// Log the results\nconsole.log(\"myString is a:\", stringType);\nconsole.log(\"myNumber is a:\", numberType);\nconsole.log(\"myBoolean is a:\", booleanType);\nconsole.log(\"myNull is a:\", nullType, \"(JavaScript quirk!)\");\nconsole.log(\"myUndefined is:\", undefinedType);\n",
+    "testCases": [
+        {
+            "description": "stringType should be 'string'",
+            "assertion": "stringType === 'string'"
+        },
+        {
+            "description": "numberType should be 'number'",
+            "assertion": "numberType === 'number'"
+        },
+        {
+            "description": "booleanType should be 'boolean'",
+            "assertion": "booleanType === 'boolean'"
+        },
+        {
+            "description": "nullType should be 'object'",
+            "assertion": "nullType === 'object'"
+        },
+        {
+            "description": "undefinedType should be 'undefined'",
+            "assertion": "undefinedType === 'undefined'"
+        },
+        {
+            "description": "myUndefined should actually be undefined",
+            "assertion": "myUndefined === undefined"
+        }
+    ],
+    "hints": [
+        "Use the typeof operator: typeof variableName",
+        "typeof returns a string describing the type",
+        "Remember: typeof null returns 'object' (historical JavaScript bug)",
+        "A declared variable without assignment is undefined"
+    ]
+}

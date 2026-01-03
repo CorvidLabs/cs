@@ -1,0 +1,17 @@
+{
+    "id": "01-js-fundamentals",
+    "title": "JavaScript Fundamentals",
+    "description": "Begin your JavaScript journey with core language basics. Learn how to run JavaScript, work with variables, understand data types, and use operators to build expressions.",
+    "order": 1,
+    "lessons": [
+        "01-hello-javascript",
+        "02-variables",
+        "03-data-types",
+        "04-operators"
+    ],
+    "exercises": [
+        "01-temperature-converter",
+        "02-string-formatter",
+        "03-type-checker"
+    ]
+}

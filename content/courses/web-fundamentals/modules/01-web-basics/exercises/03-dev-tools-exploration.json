@@ -1,0 +1,37 @@
+{
+    "id": "03-dev-tools-exploration",
+    "title": "Developer Tools Exploration",
+    "description": "Use browser developer tools to find specific elements and add required attributes.\n\n## Requirements\n\n1. Add an `id` attribute to the main heading: `id=\"main-title\"`\n2. Add a `class` attribute to the navigation: `class=\"site-nav\"`\n3. Add an `id` attribute to the footer: `id=\"page-footer\"`\n4. Add a `data-section` attribute to the article: `data-section=\"about\"`\n\n## How to Practice\n\nIn a real workflow, you would:\n1. Open this page in a browser\n2. Right-click elements and select \"Inspect\"\n3. Identify which elements need attributes\n4. Edit the HTML to add the attributes\n\nFor this exercise, add the attributes directly to the code below.",
+    "order": 3,
+    "language": "html",
+    "starterCode": "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>DevTools Practice</title>\n</head>\n<body>\n    <header>\n        <h1>Welcome to My Site</h1>\n        <nav>\n            <ul>\n                <li><a href=\"#home\">Home</a></li>\n                <li><a href=\"#about\">About</a></li>\n                <li><a href=\"#contact\">Contact</a></li>\n            </ul>\n        </nav>\n    </header>\n\n    <main>\n        <article>\n            <h2>About This Page</h2>\n            <p>This is a practice page for learning developer tools.</p>\n        </article>\n    </main>\n\n    <footer>\n        <p>Copyright 2024</p>\n    </footer>\n</body>\n</html>",
+    "testCases": [
+        {
+            "description": "The h1 element should have id=\"main-title\"",
+            "assertion": "document.querySelector('h1#main-title') !== null"
+        },
+        {
+            "description": "The nav element should have class=\"site-nav\"",
+            "assertion": "document.querySelector('nav.site-nav') !== null"
+        },
+        {
+            "description": "The footer element should have id=\"page-footer\"",
+            "assertion": "document.querySelector('footer#page-footer') !== null"
+        },
+        {
+            "description": "The article element should have data-section=\"about\"",
+            "assertion": "document.querySelector('article[data-section=\"about\"]') !== null"
+        },
+        {
+            "description": "Page structure should remain intact (header, main, footer)",
+            "assertion": "document.querySelector('header') !== null && document.querySelector('main') !== null && document.querySelector('footer') !== null"
+        }
+    ],
+    "hints": [
+        "Add id=\"main-title\" inside the opening <h1> tag: <h1 id=\"main-title\">",
+        "Add class=\"site-nav\" inside the opening <nav> tag: <nav class=\"site-nav\">",
+        "Add id=\"page-footer\" inside the opening <footer> tag: <footer id=\"page-footer\">",
+        "Add data-section=\"about\" inside the opening <article> tag: <article data-section=\"about\">",
+        "Attributes go inside the opening tag, before the closing >"
+    ]
+}
