@@ -55,7 +55,7 @@ import { RouterLink } from '@angular/router';
     styles: `
         .footer {
             background-color: var(--color-bg-secondary);
-            border-top: 1px solid var(--color-border);
+            border-top: 4px solid var(--color-border);
             padding: var(--spacing-xl) var(--spacing-md);
             margin-top: auto;
 
@@ -71,19 +71,22 @@ import { RouterLink } from '@angular/router';
 
         .footer__brand {
             margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--color-border);
         }
 
         .footer__logo {
             display: block;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 0.875rem;
             color: var(--color-primary);
-            margin-bottom: var(--spacing-xs);
+            margin-bottom: var(--spacing-sm);
+            text-shadow: 2px 2px 0 var(--color-border);
         }
 
         .footer__tagline {
-            font-size: 0.875rem;
+            font-size: 0.5rem;
             color: var(--color-text-secondary);
+            line-height: 2;
         }
 
         .footer__nav {
@@ -94,10 +97,12 @@ import { RouterLink } from '@angular/router';
         }
 
         .footer__nav-title {
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 0.55rem;
             color: var(--color-text);
             margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--color-border);
+            padding-bottom: var(--spacing-xs);
         }
 
         .footer__nav-list {
@@ -111,24 +116,28 @@ import { RouterLink } from '@angular/router';
         }
 
         .footer__link {
-            font-size: 0.875rem;
+            font-size: 0.5rem;
             color: var(--color-text-secondary);
             text-decoration: none;
+            text-transform: uppercase;
+            transition: color 0.1s;
 
             &:hover {
                 color: var(--color-primary);
+                text-decoration: none;
             }
         }
 
         .footer__bottom {
             padding-top: var(--spacing-lg);
-            border-top: 1px solid var(--color-border);
+            border-top: 4px solid var(--color-border);
         }
 
         .footer__copyright {
-            font-size: 0.75rem;
+            font-size: 0.45rem;
             color: var(--color-text-tertiary);
             margin: 0;
+            text-transform: uppercase;
         }
     `,
 })

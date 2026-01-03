@@ -32,6 +32,9 @@ import { Breadcrumb } from '@core/models/course.model';
     styles: `
         .breadcrumb {
             margin-bottom: var(--spacing-md);
+            padding: var(--spacing-sm);
+            background-color: var(--color-bg-secondary);
+            border: 2px solid var(--color-border);
         }
 
         .breadcrumb__list {
@@ -52,23 +55,28 @@ import { Breadcrumb } from '@core/models/course.model';
 
         .breadcrumb__separator {
             color: var(--color-text-tertiary);
+            font-size: 0.45rem;
         }
 
         .breadcrumb__link {
             color: var(--color-text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
+            font-size: 0.45rem;
+            text-transform: uppercase;
+            padding: var(--spacing-xs);
+            transition: color 0.1s;
 
             &:hover {
                 color: var(--color-primary);
-                text-decoration: underline;
+                text-decoration: none;
             }
         }
 
         .breadcrumb__current {
             color: var(--color-text);
-            font-size: 0.875rem;
-            font-weight: 500;
+            font-size: 0.45rem;
+            text-transform: uppercase;
+            padding: var(--spacing-xs);
         }
     `,
 })

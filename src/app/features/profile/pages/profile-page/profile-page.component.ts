@@ -125,16 +125,21 @@ interface CourseProgressData {
 
         .profile-page__header {
             margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            background-color: var(--color-bg-secondary);
+            border: 4px solid var(--color-border);
         }
 
         .profile-page__title {
-            font-size: 2rem;
-            font-weight: 700;
+            font-size: 0.85rem;
             margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
         }
 
         .profile-page__subtitle {
             color: var(--color-text-secondary);
+            font-size: 0.55rem;
+            line-height: 2;
         }
 
         .profile-page__stats {
@@ -147,44 +152,67 @@ interface CourseProgressData {
         .profile-page__stat {
             padding: var(--spacing-lg);
             background-color: var(--color-bg-secondary);
-            border-radius: var(--radius-lg);
+            border: 4px solid var(--color-border);
             text-align: center;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
         }
 
         .profile-page__stat-value {
             display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--color-primary);
+            font-size: 1rem;
+            color: var(--color-success);
             margin-bottom: var(--spacing-xs);
         }
 
         .profile-page__stat-label {
-            font-size: 0.875rem;
+            font-size: 0.45rem;
             color: var(--color-text-secondary);
+            text-transform: uppercase;
         }
 
         .profile-page__section-title {
-            font-size: 1.25rem;
-            font-weight: 600;
+            font-size: 0.6rem;
             margin-bottom: var(--spacing-lg);
+            text-transform: uppercase;
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border);
         }
 
         .profile-page__empty {
             text-align: center;
             padding: var(--spacing-2xl);
             background-color: var(--color-bg-secondary);
-            border-radius: var(--radius-lg);
+            border: 4px solid var(--color-border);
 
             p {
                 color: var(--color-text-secondary);
+                font-size: 0.55rem;
                 margin-bottom: var(--spacing-md);
             }
         }
 
         .profile-page__start-link {
-            color: var(--color-primary);
-            font-weight: 500;
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background-color: var(--color-success);
+            border: 4px solid var(--color-border);
+            color: var(--color-bg);
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+            transition: transform 0.1s, box-shadow 0.1s;
+
+            &:hover {
+                transform: translate(-2px, -2px);
+                box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+                text-decoration: none;
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
+                box-shadow: none;
+            }
         }
 
         .profile-page__course-list {
@@ -195,9 +223,9 @@ interface CourseProgressData {
         .profile-page__course-card {
             padding: var(--spacing-lg);
             background-color: var(--color-bg-secondary);
-            border: 1px solid var(--color-border);
-            border-left: 4px solid var(--course-color);
-            border-radius: var(--radius-lg);
+            border: 4px solid var(--color-border);
+            border-left: 8px solid var(--course-color);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
         }
 
         .profile-page__course-header {
@@ -213,7 +241,7 @@ interface CourseProgressData {
             width: 48px;
             height: 48px;
             font-size: 1.5rem;
-            border-radius: var(--radius-md);
+            border: 4px solid var(--color-border);
             flex-shrink: 0;
         }
 
@@ -222,25 +250,39 @@ interface CourseProgressData {
         }
 
         .profile-page__course-title {
-            font-size: 1.125rem;
-            font-weight: 600;
+            font-size: 0.6rem;
             margin-bottom: var(--spacing-xs);
+            text-transform: uppercase;
         }
 
         .profile-page__course-meta {
-            font-size: 0.875rem;
+            font-size: 0.45rem;
             color: var(--color-text-secondary);
+            text-transform: uppercase;
         }
 
         .profile-page__course-link {
-            display: block;
+            display: inline-block;
             margin-top: var(--spacing-md);
-            color: var(--color-primary);
-            font-weight: 500;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background-color: var(--course-color);
+            color: var(--color-bg);
+            font-size: 0.5rem;
+            text-transform: uppercase;
             text-decoration: none;
+            border: 4px solid var(--color-border);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+            transition: transform 0.1s, box-shadow 0.1s;
 
             &:hover {
-                text-decoration: underline;
+                transform: translate(-1px, -1px);
+                box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.4);
+                text-decoration: none;
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
+                box-shadow: none;
             }
         }
     `,

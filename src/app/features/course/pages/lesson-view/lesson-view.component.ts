@@ -85,11 +85,28 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
         .lesson-view__error {
             text-align: center;
             padding: var(--spacing-xl);
+            background-color: var(--color-bg-secondary);
+            border: 4px solid var(--color-error);
+
+            p {
+                font-size: 0.55rem;
+                text-transform: uppercase;
+                margin-bottom: var(--spacing-md);
+            }
 
             a {
                 display: inline-block;
-                margin-top: var(--spacing-md);
+                padding: var(--spacing-sm) var(--spacing-md);
+                background-color: var(--color-bg-tertiary);
+                border: 4px solid var(--color-border);
                 color: var(--color-primary);
+                font-size: 0.5rem;
+                text-transform: uppercase;
+                text-decoration: none;
+
+                &:active {
+                    transform: translate(2px, 2px);
+                }
             }
         }
 
@@ -99,8 +116,9 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
 
         .lesson-view__header {
             margin-bottom: var(--spacing-xl);
-            padding-bottom: var(--spacing-lg);
-            border-bottom: 1px solid var(--color-border);
+            padding: var(--spacing-lg);
+            background-color: var(--color-bg-secondary);
+            border: 4px solid var(--color-border);
         }
 
         .lesson-view__meta {
@@ -110,27 +128,34 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
         }
 
         .lesson-view__time {
-            font-size: 0.875rem;
+            font-size: 0.45rem;
             color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: var(--color-bg-tertiary);
+            border: 2px solid var(--color-border);
         }
 
         .lesson-view__completed {
-            font-size: 0.875rem;
+            font-size: 0.45rem;
             color: var(--color-success);
-            font-weight: 500;
+            text-transform: uppercase;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: rgba(146, 204, 65, 0.1);
+            border: 2px solid var(--color-success);
         }
 
         .lesson-view__title {
-            font-size: 2rem;
-            font-weight: 700;
-            line-height: 1.2;
+            font-size: 0.7rem;
+            line-height: 1.6;
             margin: 0;
+            text-transform: uppercase;
         }
 
         .lesson-view__footer {
             margin-top: var(--spacing-2xl);
             padding-top: var(--spacing-lg);
-            border-top: 1px solid var(--color-border);
+            border-top: 4px solid var(--color-border);
         }
 
         .lesson-view__complete-btn {
@@ -138,15 +163,22 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
             width: 100%;
             padding: var(--spacing-md);
             background-color: var(--color-success);
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: var(--radius-md);
+            color: var(--color-bg);
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            border: 4px solid var(--color-border);
             margin-bottom: var(--spacing-lg);
-            transition: background-color 0.2s;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+            transition: transform 0.1s, box-shadow 0.1s;
 
             &:hover {
-                background-color: #1a7c36;
+                transform: translate(-2px, -2px);
+                box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
+                box-shadow: none;
             }
         }
 
@@ -158,10 +190,16 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
         .lesson-view__nav-link {
             color: var(--color-text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid transparent;
+            transition: border-color 0.1s;
 
             &:hover {
                 color: var(--color-primary);
+                border-color: var(--color-border);
+                text-decoration: none;
             }
         }
     `,

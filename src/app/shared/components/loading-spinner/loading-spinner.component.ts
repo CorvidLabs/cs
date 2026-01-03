@@ -28,23 +28,21 @@ import { Component, ChangeDetectionStrategy, input } from '@angular/core';
         }
 
         .loading-spinner__circle {
-            width: 40px;
-            height: 40px;
-            border: 3px solid var(--color-bg-tertiary);
-            border-top-color: var(--color-primary);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            width: 32px;
+            height: 32px;
+            border: 4px solid var(--color-bg-tertiary);
+            border-top-color: var(--color-success);
+            border-right-color: var(--color-success);
+            animation: spin 0.6s steps(8) infinite;
 
             .loading-spinner--small & {
-                width: 24px;
-                height: 24px;
-                border-width: 2px;
+                width: 20px;
+                height: 20px;
             }
 
             .loading-spinner--large & {
-                width: 56px;
-                height: 56px;
-                border-width: 4px;
+                width: 48px;
+                height: 48px;
             }
         }
 
@@ -56,7 +54,15 @@ import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 
         .loading-spinner__text {
             color: var(--color-text-secondary);
-            font-size: 0.875rem;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            animation: blink 1s steps(2) infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0.5;
+            }
         }
     `,
 })

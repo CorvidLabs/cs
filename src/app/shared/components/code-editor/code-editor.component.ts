@@ -66,14 +66,12 @@ import { ThemeService } from '@core/services/theme.service';
     `,
     styles: `
         .code-editor {
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
+            border: 4px solid var(--color-border);
             overflow: hidden;
             background-color: var(--color-bg-secondary);
 
             &--focused {
-                border-color: var(--color-primary);
-                box-shadow: 0 0 0 2px var(--color-primary-light);
+                border-color: var(--color-success);
             }
         }
 
@@ -83,27 +81,31 @@ import { ThemeService } from '@core/services/theme.service';
             align-items: center;
             padding: var(--spacing-xs) var(--spacing-md);
             background-color: var(--color-bg-tertiary);
-            border-bottom: 1px solid var(--color-border);
+            border-bottom: 4px solid var(--color-border);
         }
 
         .code-editor__language {
-            font-size: 0.75rem;
-            font-weight: 500;
+            font-size: 0.45rem;
             text-transform: uppercase;
             color: var(--color-text-secondary);
         }
 
         .code-editor__reset {
             padding: var(--spacing-xs) var(--spacing-sm);
-            font-size: 0.75rem;
+            font-size: 0.45rem;
+            text-transform: uppercase;
             color: var(--color-text-secondary);
-            background: none;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
+            background-color: var(--color-bg);
+            border: 2px solid var(--color-border);
             cursor: pointer;
 
             &:hover {
-                background-color: var(--color-bg);
+                background-color: var(--color-bg-tertiary);
+                color: var(--color-text);
+            }
+
+            &:active {
+                transform: translate(1px, 1px);
             }
         }
 
@@ -119,13 +121,13 @@ import { ThemeService } from '@core/services/theme.service';
             flex-direction: column;
             padding: var(--spacing-md) var(--spacing-sm);
             background-color: var(--color-bg-tertiary);
-            border-right: 1px solid var(--color-border);
+            border-right: 2px solid var(--color-border);
             user-select: none;
         }
 
         .code-editor__line-number {
             font-family: var(--font-mono);
-            font-size: 0.875rem;
+            font-size: 0.7rem;
             line-height: 1.6;
             color: var(--color-text-tertiary);
             text-align: right;
@@ -141,7 +143,7 @@ import { ThemeService } from '@core/services/theme.service';
         .code-editor__textarea,
         .code-editor__highlight {
             font-family: var(--font-mono);
-            font-size: 0.875rem;
+            font-size: 0.7rem;
             line-height: 1.6;
             padding: var(--spacing-md);
             white-space: pre;
@@ -156,7 +158,7 @@ import { ThemeService } from '@core/services/theme.service';
             height: 100%;
             color: transparent;
             background: transparent;
-            caret-color: var(--color-text);
+            caret-color: var(--color-success);
             border: none;
             resize: none;
             outline: none;

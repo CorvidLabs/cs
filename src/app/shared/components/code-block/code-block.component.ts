@@ -34,15 +34,15 @@ import { ThemeService } from '@core/services/theme.service';
         .code-block {
             position: relative;
             margin: var(--spacing-md) 0;
-            border-radius: var(--radius-md);
+            border: 4px solid var(--color-border);
             overflow: hidden;
         }
 
         .code-block__label {
             padding: var(--spacing-xs) var(--spacing-md);
             background-color: var(--color-bg-tertiary);
-            font-size: 0.75rem;
-            font-weight: 500;
+            border-bottom: 2px solid var(--color-border);
+            font-size: 0.45rem;
             text-transform: uppercase;
             color: var(--color-text-secondary);
         }
@@ -53,12 +53,11 @@ import { ThemeService } from '@core/services/theme.service';
             :host ::ng-deep pre {
                 margin: 0;
                 padding: var(--spacing-md);
-                border-radius: 0;
             }
 
             :host ::ng-deep code {
                 font-family: var(--font-mono);
-                font-size: 0.875rem;
+                font-size: 0.7rem;
                 line-height: 1.6;
             }
         }
@@ -69,15 +68,19 @@ import { ThemeService } from '@core/services/theme.service';
             right: var(--spacing-sm);
             padding: var(--spacing-xs) var(--spacing-sm);
             background-color: var(--color-bg);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            font-size: 0.75rem;
+            border: 2px solid var(--color-border);
+            font-size: 0.45rem;
+            text-transform: uppercase;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 0.2s;
+            transition: opacity 0.1s;
 
             &:hover {
-                background-color: var(--color-bg-secondary);
+                background-color: var(--color-bg-tertiary);
+            }
+
+            &:active {
+                transform: translate(1px, 1px);
             }
         }
 

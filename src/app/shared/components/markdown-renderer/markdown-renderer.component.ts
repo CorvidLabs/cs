@@ -27,6 +27,7 @@ import { ThemeService } from '@core/services/theme.service';
                 h6 {
                     margin-top: var(--spacing-xl);
                     margin-bottom: var(--spacing-md);
+                    text-transform: uppercase;
 
                     &:first-child {
                         margin-top: 0;
@@ -34,28 +35,31 @@ import { ThemeService } from '@core/services/theme.service';
                 }
 
                 h1 {
-                    font-size: 2rem;
-                    border-bottom: 1px solid var(--color-border);
+                    font-size: 0.75rem;
+                    border-bottom: 4px solid var(--color-border);
                     padding-bottom: var(--spacing-sm);
                 }
 
                 h2 {
-                    font-size: 1.5rem;
+                    font-size: 0.65rem;
                 }
 
                 h3 {
-                    font-size: 1.25rem;
+                    font-size: 0.6rem;
                 }
 
                 p {
                     margin-bottom: var(--spacing-md);
-                    line-height: 1.7;
+                    font-size: 0.55rem;
+                    line-height: 2;
                 }
 
                 ul,
                 ol {
                     margin-bottom: var(--spacing-md);
                     padding-left: var(--spacing-xl);
+                    font-size: 0.55rem;
+                    line-height: 2;
                 }
 
                 li {
@@ -66,8 +70,8 @@ import { ThemeService } from '@core/services/theme.service';
                     margin: var(--spacing-md) 0;
                     padding: var(--spacing-md);
                     background-color: var(--color-bg-secondary);
-                    border-left: 4px solid var(--color-primary);
-                    border-radius: var(--radius-sm);
+                    border: 4px solid var(--color-border);
+                    border-left: 8px solid var(--color-primary);
 
                     p:last-child {
                         margin-bottom: 0;
@@ -76,14 +80,14 @@ import { ThemeService } from '@core/services/theme.service';
 
                 pre {
                     margin: var(--spacing-md) 0;
-                    border-radius: var(--radius-md);
+                    border: 4px solid var(--color-border);
                     overflow-x: auto;
                 }
 
                 code:not(pre code) {
                     padding: 2px 6px;
-                    background-color: var(--color-bg-secondary);
-                    border-radius: var(--radius-sm);
+                    background-color: var(--color-bg-tertiary);
+                    border: 2px solid var(--color-border);
                     font-size: 0.9em;
                 }
 
@@ -91,18 +95,19 @@ import { ThemeService } from '@core/services/theme.service';
                     width: 100%;
                     margin: var(--spacing-md) 0;
                     border-collapse: collapse;
+                    font-size: 0.5rem;
                 }
 
                 th,
                 td {
                     padding: var(--spacing-sm) var(--spacing-md);
-                    border: 1px solid var(--color-border);
+                    border: 2px solid var(--color-border);
                     text-align: left;
                 }
 
                 th {
                     background-color: var(--color-bg-secondary);
-                    font-weight: 600;
+                    text-transform: uppercase;
                 }
 
                 tr:nth-child(even) {
@@ -112,13 +117,13 @@ import { ThemeService } from '@core/services/theme.service';
                 hr {
                     margin: var(--spacing-xl) 0;
                     border: none;
-                    border-top: 1px solid var(--color-border);
+                    border-top: 4px solid var(--color-border);
                 }
 
                 img {
                     max-width: 100%;
                     height: auto;
-                    border-radius: var(--radius-md);
+                    border: 4px solid var(--color-border);
                 }
 
                 a {
@@ -126,29 +131,30 @@ import { ThemeService } from '@core/services/theme.service';
                     text-decoration: none;
 
                     &:hover {
-                        text-decoration: underline;
+                        color: var(--color-success);
+                        text-decoration: none;
                     }
                 }
 
                 .callout {
                     margin: var(--spacing-md) 0;
                     padding: var(--spacing-md);
-                    border-radius: var(--radius-md);
-                    border-left: 4px solid;
+                    border: 4px solid var(--color-border);
+                    border-left-width: 8px;
 
                     &.callout--info {
-                        background-color: var(--color-primary-light);
-                        border-color: var(--color-primary);
+                        background-color: rgba(249, 233, 200, 0.1);
+                        border-left-color: var(--color-primary);
                     }
 
                     &.callout--warning {
-                        background-color: var(--color-warning-light);
-                        border-color: var(--color-warning);
+                        background-color: rgba(247, 213, 29, 0.1);
+                        border-left-color: var(--color-warning);
                     }
 
                     &.callout--tip {
-                        background-color: var(--color-success-light);
-                        border-color: var(--color-success);
+                        background-color: rgba(146, 204, 65, 0.1);
+                        border-left-color: var(--color-success);
                     }
                 }
             }

@@ -68,9 +68,10 @@ import { ThemeService } from '@core/services/theme.service';
             left: 0;
             right: 0;
             height: var(--header-height);
-            background-color: var(--color-bg);
-            border-bottom: 1px solid var(--color-border);
+            background-color: var(--color-bg-secondary);
+            border-bottom: 4px solid var(--color-border);
             z-index: 100;
+            box-shadow: 0 4px 0 var(--color-border);
         }
 
         .header__container {
@@ -97,14 +98,21 @@ import { ThemeService } from '@core/services/theme.service';
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            font-size: 1.25rem;
+            width: 44px;
+            height: 44px;
+            font-size: 1rem;
             color: var(--color-text);
-            border-radius: var(--radius-md);
+            background-color: var(--color-bg-tertiary);
+            border: 4px solid var(--color-border);
+            transition: filter 0.1s, transform 0.1s;
 
             &:hover {
-                background-color: var(--color-bg-secondary);
+                filter: brightness(1.2);
+                box-shadow: 0 0 0 2px var(--color-primary);
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
             }
 
             @media (min-width: 1024px) {
@@ -115,19 +123,24 @@ import { ThemeService } from '@core/services/theme.service';
         .header__logo {
             display: flex;
             align-items: baseline;
-            gap: var(--spacing-xs);
+            gap: var(--spacing-sm);
             text-decoration: none;
+
+            &:hover {
+                text-decoration: none;
+            }
         }
 
         .header__logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1rem;
             color: var(--color-primary);
+            text-shadow: 2px 2px 0 var(--color-border);
         }
 
         .header__logo-subtitle {
-            font-size: 0.875rem;
+            font-size: 0.5rem;
             color: var(--color-text-secondary);
+            text-transform: uppercase;
 
             @media (max-width: 480px) {
                 display: none;
@@ -139,21 +152,23 @@ import { ThemeService } from '@core/services/theme.service';
 
             @media (min-width: 768px) {
                 display: flex;
-                gap: var(--spacing-lg);
+                gap: var(--spacing-sm);
             }
         }
 
         .header__nav-link {
             color: var(--color-text-secondary);
-            font-weight: 500;
             text-decoration: none;
             padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--radius-md);
-            transition: color 0.2s, background-color 0.2s;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+            transition: color 0.1s, border-color 0.1s;
 
             &:hover {
                 color: var(--color-text);
-                background-color: var(--color-bg-secondary);
+                border-color: var(--color-primary);
+                text-decoration: none;
             }
         }
 
@@ -167,13 +182,20 @@ import { ThemeService } from '@core/services/theme.service';
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             font-size: 1.25rem;
-            border-radius: var(--radius-md);
+            background-color: var(--color-bg-tertiary);
+            border: 4px solid var(--color-border);
+            transition: filter 0.1s, transform 0.1s;
 
             &:hover {
-                background-color: var(--color-bg-secondary);
+                filter: brightness(1.2);
+                box-shadow: 0 0 0 2px var(--color-primary);
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
             }
         }
     `,

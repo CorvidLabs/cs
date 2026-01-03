@@ -56,31 +56,32 @@ import { DecimalPipe } from '@angular/common';
         .progress-indicator__label {
             display: flex;
             justify-content: space-between;
-            font-size: 0.875rem;
+            font-size: 0.5rem;
             color: var(--color-text-secondary);
+            text-transform: uppercase;
         }
 
         .progress-indicator__count {
-            font-weight: 500;
+            color: var(--color-text);
         }
 
         .progress-indicator__bar {
-            height: 8px;
+            height: 16px;
             background-color: var(--color-bg-tertiary);
-            border-radius: 4px;
+            border: 4px solid var(--color-border);
             overflow: hidden;
 
             .progress-indicator--compact & {
                 flex: 1;
-                height: 4px;
+                height: 8px;
+                border-width: 2px;
             }
         }
 
         .progress-indicator__fill {
             height: 100%;
             background-color: var(--color-primary);
-            border-radius: 4px;
-            transition: width 0.3s ease-out;
+            transition: width 0.2s steps(10);
 
             &--complete {
                 background-color: var(--color-success);
@@ -88,8 +89,7 @@ import { DecimalPipe } from '@angular/common';
         }
 
         .progress-indicator__percentage {
-            font-size: 0.875rem;
-            font-weight: 600;
+            font-size: 0.5rem;
             color: var(--color-text);
             text-align: right;
         }

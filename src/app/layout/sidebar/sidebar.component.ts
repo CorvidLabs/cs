@@ -71,9 +71,9 @@ import { Course } from '@core/models/course.model';
             display: flex;
             flex-direction: column;
             height: 100%;
-            padding: var(--spacing-lg);
+            padding: var(--spacing-md);
             background-color: var(--color-bg-secondary);
-            border-right: 1px solid var(--color-border);
+            border-right: 4px solid var(--color-border);
         }
 
         .sidebar__nav {
@@ -86,13 +86,13 @@ import { Course } from '@core/models/course.model';
         }
 
         .sidebar__section-title {
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.5rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             color: var(--color-text-tertiary);
             margin-bottom: var(--spacing-sm);
-            padding: 0 var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border);
         }
 
         .sidebar__list {
@@ -102,36 +102,38 @@ import { Course } from '@core/models/course.model';
         }
 
         .sidebar__item {
-            margin-bottom: 2px;
+            margin-bottom: 4px;
         }
 
         .sidebar__link {
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
-            padding: var(--spacing-sm) var(--spacing-md);
+            padding: var(--spacing-sm);
             color: var(--color-text-secondary);
             text-decoration: none;
-            border-radius: var(--radius-md);
-            transition: background-color 0.2s, color 0.2s;
+            border: 2px solid transparent;
+            transition: border-color 0.1s, color 0.1s, background-color 0.1s;
 
             &:hover {
                 background-color: var(--color-bg-tertiary);
                 color: var(--color-text);
+                border-color: var(--color-border);
+                text-decoration: none;
             }
 
             &--active {
-                background-color: var(--color-primary-light);
+                background-color: var(--color-bg);
                 color: var(--color-primary);
-                font-weight: 500;
+                border-color: var(--color-primary);
             }
         }
 
         .sidebar__icon {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            width: 12px;
+            height: 12px;
             flex-shrink: 0;
+            border: 2px solid var(--color-border);
 
             &--profile {
                 background-color: var(--color-text-tertiary);
@@ -139,30 +141,34 @@ import { Course } from '@core/models/course.model';
         }
 
         .sidebar__link-text {
-            font-size: 0.875rem;
+            font-size: 0.55rem;
+            text-transform: uppercase;
         }
 
         .sidebar__footer {
             padding-top: var(--spacing-md);
-            border-top: 1px solid var(--color-border);
+            margin-top: var(--spacing-md);
+            border-top: 4px solid var(--color-border);
         }
 
         .sidebar__progress {
             display: flex;
             flex-direction: column;
             gap: var(--spacing-xs);
+            padding: var(--spacing-sm);
+            background-color: var(--color-bg);
+            border: 2px solid var(--color-border);
         }
 
         .sidebar__progress-label {
-            font-size: 0.75rem;
+            font-size: 0.45rem;
             color: var(--color-text-tertiary);
             text-transform: uppercase;
         }
 
         .sidebar__progress-value {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--color-text);
+            font-size: 0.5rem;
+            color: var(--color-success);
         }
     `,
 })

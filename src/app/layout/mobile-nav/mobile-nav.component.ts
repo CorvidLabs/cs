@@ -100,7 +100,7 @@ import { Course } from '@core/models/course.model';
         .mobile-nav__backdrop {
             position: fixed;
             inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             z-index: 199;
 
             @media (min-width: 1024px) {
@@ -116,8 +116,9 @@ import { Course } from '@core/models/course.model';
             width: 280px;
             max-width: 85vw;
             background-color: var(--color-bg);
+            border-right: 4px solid var(--color-border);
             transform: translateX(-100%);
-            transition: transform 0.3s ease-out;
+            transition: transform 0.2s;
             z-index: 200;
             display: flex;
             flex-direction: column;
@@ -136,26 +137,32 @@ import { Course } from '@core/models/course.model';
             justify-content: space-between;
             align-items: center;
             padding: var(--spacing-md);
-            border-bottom: 1px solid var(--color-border);
+            border-bottom: 4px solid var(--color-border);
+            background-color: var(--color-bg-secondary);
         }
 
         .mobile-nav__title {
-            font-size: 1.125rem;
-            font-weight: 600;
+            font-size: 0.6rem;
+            text-transform: uppercase;
         }
 
         .mobile-nav__close {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            font-size: 1.25rem;
+            width: 32px;
+            height: 32px;
+            font-size: 0.6rem;
             color: var(--color-text);
-            border-radius: var(--radius-md);
+            background-color: var(--color-bg-tertiary);
+            border: 4px solid var(--color-border);
 
             &:hover {
-                background-color: var(--color-bg-secondary);
+                background-color: var(--color-bg);
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
             }
         }
 
@@ -170,13 +177,13 @@ import { Course } from '@core/models/course.model';
         }
 
         .mobile-nav__section-title {
-            font-size: 0.75rem;
-            font-weight: 600;
+            font-size: 0.45rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.1em;
             color: var(--color-text-tertiary);
             margin-bottom: var(--spacing-sm);
-            padding: 0 var(--spacing-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-bottom: 2px solid var(--color-border);
         }
 
         .mobile-nav__list {
@@ -189,28 +196,33 @@ import { Course } from '@core/models/course.model';
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
-            padding: var(--spacing-md);
-            color: var(--color-text);
+            padding: var(--spacing-sm);
+            color: var(--color-text-secondary);
             text-decoration: none;
-            border-radius: var(--radius-md);
-            font-size: 1rem;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            border: 2px solid transparent;
+            margin-bottom: 4px;
+            transition: border-color 0.1s, background-color 0.1s;
 
             &:hover {
-                background-color: var(--color-bg-secondary);
+                background-color: var(--color-bg-tertiary);
+                border-color: var(--color-border);
+                text-decoration: none;
             }
 
             &--active {
-                background-color: var(--color-primary-light);
+                background-color: var(--color-bg);
                 color: var(--color-primary);
-                font-weight: 500;
+                border-color: var(--color-primary);
             }
         }
 
         .mobile-nav__icon {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
+            width: 12px;
+            height: 12px;
             flex-shrink: 0;
+            border: 2px solid var(--color-border);
         }
     `,
 })

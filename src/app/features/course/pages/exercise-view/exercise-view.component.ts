@@ -152,11 +152,28 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
         .exercise-view__error {
             text-align: center;
             padding: var(--spacing-xl);
+            background-color: var(--color-bg-secondary);
+            border: 4px solid var(--color-error);
+
+            p {
+                font-size: 0.55rem;
+                text-transform: uppercase;
+                margin-bottom: var(--spacing-md);
+            }
 
             a {
                 display: inline-block;
-                margin-top: var(--spacing-md);
+                padding: var(--spacing-sm) var(--spacing-md);
+                background-color: var(--color-bg-tertiary);
+                border: 4px solid var(--color-border);
                 color: var(--color-primary);
+                font-size: 0.5rem;
+                text-transform: uppercase;
+                text-decoration: none;
+
+                &:active {
+                    transform: translate(2px, 2px);
+                }
             }
         }
 
@@ -169,41 +186,66 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
             }
         }
 
+        .exercise-view__instructions {
+            padding: var(--spacing-lg);
+            background-color: var(--color-bg-secondary);
+            border: 4px solid var(--color-border);
+        }
+
         .exercise-view__header {
             display: flex;
             align-items: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--color-border);
         }
 
         .exercise-view__title {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 0.65rem;
             margin: 0;
+            text-transform: uppercase;
         }
 
         .exercise-view__completed {
-            font-size: 0.875rem;
+            font-size: 0.45rem;
             color: var(--color-success);
-            font-weight: 500;
+            text-transform: uppercase;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background-color: rgba(146, 204, 65, 0.1);
+            border: 2px solid var(--color-success);
         }
 
         .exercise-view__hints {
             margin-top: var(--spacing-lg);
             padding: var(--spacing-md);
-            background-color: var(--color-bg-secondary);
-            border-radius: var(--radius-md);
+            background-color: var(--color-bg-tertiary);
+            border: 2px solid var(--color-border);
         }
 
         .exercise-view__hints-toggle {
-            color: var(--color-primary);
-            font-weight: 500;
+            color: var(--color-warning);
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 2px solid var(--color-warning);
+            background-color: transparent;
+
+            &:hover {
+                background-color: rgba(247, 213, 29, 0.1);
+            }
         }
 
         .exercise-view__hints-list {
             margin-top: var(--spacing-md);
             padding-left: var(--spacing-lg);
             color: var(--color-text-secondary);
+            font-size: 0.5rem;
+            line-height: 2;
+
+            li {
+                margin-bottom: var(--spacing-sm);
+            }
         }
 
         .exercise-view__workspace {
@@ -220,14 +262,22 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
         .exercise-view__run-btn {
             flex: 1;
             padding: var(--spacing-md);
-            background-color: var(--color-primary);
-            color: white;
-            font-weight: 600;
-            border-radius: var(--radius-md);
-            transition: background-color 0.2s;
+            background-color: var(--color-success);
+            color: var(--color-bg);
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            border: 4px solid var(--color-border);
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+            transition: transform 0.1s, box-shadow 0.1s;
 
             &:hover:not(:disabled) {
-                background-color: var(--color-primary-hover);
+                transform: translate(-2px, -2px);
+                box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.5);
+            }
+
+            &:active:not(:disabled) {
+                transform: translate(2px, 2px);
+                box-shadow: none;
             }
 
             &:disabled {
@@ -238,23 +288,23 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
 
         .exercise-view__results {
             padding: var(--spacing-md);
-            border-radius: var(--radius-md);
+            border: 4px solid var(--color-border);
 
             &--success {
-                background-color: var(--color-success-light);
-                border: 1px solid var(--color-success);
+                background-color: rgba(146, 204, 65, 0.1);
+                border-color: var(--color-success);
             }
 
             &--failure {
-                background-color: var(--color-error-light);
-                border: 1px solid var(--color-error);
+                background-color: rgba(231, 110, 85, 0.1);
+                border-color: var(--color-error);
             }
         }
 
         .exercise-view__results-title {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.55rem;
             margin-bottom: var(--spacing-sm);
+            text-transform: uppercase;
         }
 
         .exercise-view__results-list {
@@ -268,6 +318,7 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
             align-items: flex-start;
             gap: var(--spacing-sm);
             padding: var(--spacing-xs) 0;
+            font-size: 0.5rem;
 
             &--passed {
                 color: var(--color-success);
@@ -279,29 +330,39 @@ import { MarkdownRendererComponent } from '@shared/components/markdown-renderer/
         }
 
         .exercise-view__result-icon {
-            font-weight: 600;
+            font-size: 0.6rem;
         }
 
         .exercise-view__result-error {
             display: block;
             margin-top: var(--spacing-xs);
-            font-size: 0.75rem;
+            font-size: 0.45rem;
+            font-family: var(--font-mono);
             color: var(--color-error);
+            padding: var(--spacing-xs);
+            background-color: var(--color-bg-tertiary);
+            border: 2px solid var(--color-border);
         }
 
         .exercise-view__nav {
             margin-top: var(--spacing-xl);
             padding-top: var(--spacing-lg);
-            border-top: 1px solid var(--color-border);
+            border-top: 4px solid var(--color-border);
         }
 
         .exercise-view__nav-link {
             color: var(--color-text-secondary);
             text-decoration: none;
-            font-size: 0.875rem;
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid transparent;
+            transition: border-color 0.1s;
 
             &:hover {
                 color: var(--color-primary);
+                border-color: var(--color-border);
+                text-decoration: none;
             }
         }
     `,

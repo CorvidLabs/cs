@@ -43,47 +43,44 @@ import { RouterLink } from '@angular/router';
     `,
     styles: `
         .hero {
-            padding: var(--spacing-2xl) 0;
+            padding: var(--spacing-2xl) var(--spacing-md);
             text-align: center;
         }
 
         .hero__content {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: var(--spacing-xl);
+            background-color: var(--color-bg-secondary);
+            border: 4px solid var(--color-border);
+            box-shadow: var(--shadow-lg);
         }
 
         .hero__title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: var(--spacing-md);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: var(--spacing-lg);
+            text-transform: uppercase;
 
             @media (min-width: 768px) {
-                font-size: 3.5rem;
+                font-size: 1.25rem;
             }
         }
 
         .hero__title-highlight {
             display: block;
-            background: linear-gradient(
-                135deg,
-                var(--color-swift) 0%,
-                var(--color-python) 50%,
-                var(--color-rust) 100%
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--color-success);
+            margin-top: var(--spacing-sm);
         }
 
         .hero__description {
-            font-size: 1.125rem;
+            font-size: 0.65rem;
             color: var(--color-text-secondary);
-            line-height: 1.7;
+            line-height: 2;
             margin-bottom: var(--spacing-xl);
 
             @media (min-width: 768px) {
-                font-size: 1.25rem;
+                font-size: 0.7rem;
             }
         }
 
@@ -97,12 +94,12 @@ import { RouterLink } from '@angular/router';
 
         .hero__language {
             padding: var(--spacing-xs) var(--spacing-md);
-            background-color: var(--color-bg-secondary);
-            border: 2px solid var(--lang-color);
-            border-radius: var(--radius-xl);
-            font-size: 0.875rem;
-            font-weight: 500;
+            background-color: var(--color-bg);
+            border: 4px solid var(--lang-color);
+            font-size: 0.5rem;
             color: var(--color-text);
+            text-transform: uppercase;
+            box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
         }
 
         .hero__actions {
@@ -113,35 +110,34 @@ import { RouterLink } from '@angular/router';
         }
 
         .hero__btn {
-            padding: var(--spacing-md) var(--spacing-xl);
-            font-size: 1rem;
-            font-weight: 600;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            font-size: 0.6rem;
             text-decoration: none;
-            border-radius: var(--radius-lg);
-            transition: transform 0.2s, box-shadow 0.2s;
+            text-transform: uppercase;
+            border: 4px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            transition: filter 0.1s, transform 0.1s, box-shadow 0.1s;
 
             &:hover {
-                transform: translateY(-2px);
+                filter: brightness(1.1);
+                transform: translate(-2px, -2px);
+                box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.4);
+                text-decoration: none;
+            }
+
+            &:active {
+                transform: translate(2px, 2px);
+                box-shadow: none;
             }
 
             &--primary {
-                background-color: var(--color-primary);
-                color: white;
-                box-shadow: var(--shadow-md);
-
-                &:hover {
-                    box-shadow: var(--shadow-lg);
-                }
+                background-color: var(--color-success);
+                color: var(--color-bg);
             }
 
             &--secondary {
-                background-color: var(--color-bg-secondary);
+                background-color: var(--color-bg-tertiary);
                 color: var(--color-text);
-                border: 1px solid var(--color-border);
-
-                &:hover {
-                    background-color: var(--color-bg-tertiary);
-                }
             }
         }
     `,
