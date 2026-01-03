@@ -1,6 +1,6 @@
 # CS Courses
 
-A comprehensive Computer Science course platform built with Angular and Bun, teaching programming through four language tracks: **Python**, **Swift**, **JavaScript**, and **Rust**.
+A comprehensive Computer Science course platform built with Angular and Bun, featuring six learning tracks: **Python**, **JavaScript**, **Swift**, **Rust**, **Web Fundamentals**, and **Algorithms**.
 
 ## Features
 
@@ -70,9 +70,11 @@ cs/
 ├── content/           # Course content (Markdown + JSON)
 │   └── courses/
 │       ├── python/
-│       ├── swift/
 │       ├── javascript/
-│       └── rust/
+│       ├── swift/
+│       ├── rust/
+│       ├── web-fundamentals/
+│       └── algorithms/
 ├── server/            # Bun backend
 │   ├── index.ts
 │   ├── routes/
@@ -89,20 +91,15 @@ cs/
 
 ## Curriculum
 
-### Foundation (Modules 1-4) - Python
-Core concepts taught in Python for accessibility.
+### Language Tracks
+- **Python**: Fundamentals through data processing and algorithms
+- **JavaScript**: DOM manipulation, async patterns, TypeScript, modern frameworks
+- **Swift**: iOS/macOS development, SwiftUI, concurrency
+- **Rust**: Systems programming, ownership, memory safety
 
-### Core (Modules 5-8) - Track-Specific
-Same CS concepts, different language implementations.
-
-### Specialization (Modules 9-12) - Deep Domain
-- **Python**: Data science, ML, visualization
-- **Swift**: iOS/macOS, SwiftUI, concurrency
-- **JavaScript**: Web apps, DOM, APIs
-- **Rust**: Systems programming, memory safety
-
-### Integration (Modules 13-16) - Capstones
-Cross-language projects and final capstones.
+### Supplementary Tracks
+- **Web Fundamentals**: HTML, CSS, responsive design, accessibility
+- **Algorithms**: Data structures, sorting, searching, dynamic programming
 
 ## License
 
