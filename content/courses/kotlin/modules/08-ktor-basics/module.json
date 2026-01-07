@@ -1,0 +1,18 @@
+{
+    "id": "08-ktor-basics",
+    "title": "Ktor Basics",
+    "description": "Build web applications and APIs with Ktor, Kotlin's asynchronous web framework. Learn routing, handling requests, and building REST APIs.",
+    "order": 8,
+    "lessons": [
+        "01-intro-ktor",
+        "02-routing",
+        "03-request-response",
+        "04-serialization",
+        "05-building-api"
+    ],
+    "exercises": [
+        "01-hello-server",
+        "02-crud-api",
+        "03-middleware"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "id": "02-control-flow",
+    "title": "Control Flow",
+    "description": "Master Kotlin's control flow: if expressions, when expressions, and loops. Learn how Kotlin makes branching more powerful by treating conditions as expressions.",
+    "order": 2,
+    "lessons": [
+        "01-if-expressions",
+        "02-when-expressions",
+        "03-for-loops",
+        "04-while-loops",
+        "05-ranges-progressions"
+    ],
+    "exercises": [
+        "01-grade-calculator",
+        "02-fizzbuzz",
+        "03-number-patterns"
+    ]
+}

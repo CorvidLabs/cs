@@ -1,0 +1,18 @@
+{
+    "id": "06-error-handling",
+    "title": "Error Handling",
+    "description": "Learn Kotlin's approach to error handling with exceptions, the Result type, and sealed classes for representing success and failure states.",
+    "order": 6,
+    "lessons": [
+        "01-exceptions",
+        "02-try-catch",
+        "03-custom-exceptions",
+        "04-result-type",
+        "05-sealed-errors"
+    ],
+    "exercises": [
+        "01-input-validation",
+        "02-file-processing",
+        "03-api-response"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "id": "07-coroutines",
+    "title": "Coroutines",
+    "description": "Master Kotlin's powerful coroutines for asynchronous programming. Learn suspend functions, coroutine builders, structured concurrency, and flow.",
+    "order": 7,
+    "lessons": [
+        "01-intro-coroutines",
+        "02-suspend-functions",
+        "03-coroutine-builders",
+        "04-structured-concurrency",
+        "05-flow-basics"
+    ],
+    "exercises": [
+        "01-async-data-fetch",
+        "02-parallel-processing",
+        "03-reactive-stream"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "id": "kotlin",
+    "title": "Kotlin Development",
+    "description": "Build Android apps and backend services with Kotlin. Learn null safety, coroutines for async programming, and modern functional patterns on the JVM.",
+    "icon": "kotlin-logo.svg",
+    "color": "#7f52ff",
+    "estimatedHours": 45,
+    "modules": [
+        "01-kotlin-fundamentals",
+        "02-control-flow",
+        "03-functions",
+        "04-collections",
+        "05-interfaces",
+        "06-error-handling",
+        "07-coroutines",
+        "08-ktor-basics"
+    ]
+}

@@ -1,0 +1,18 @@
+{
+    "id": "03-functions",
+    "title": "Functions",
+    "description": "Master Kotlin functions: parameters, return types, default arguments, named arguments, and lambda expressions. Learn to write concise, expressive code.",
+    "order": 3,
+    "lessons": [
+        "01-basic-functions",
+        "02-parameters-returns",
+        "03-default-named-args",
+        "04-single-expression",
+        "05-lambdas"
+    ],
+    "exercises": [
+        "01-calculator-functions",
+        "02-string-utils",
+        "03-higher-order"
+    ]
+}
