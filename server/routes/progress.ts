@@ -1,4 +1,5 @@
 import { Database } from 'bun:sqlite';
+import type { UserProgress } from '../db/schema';
 
 type Headers = Record<string, string>;
 
@@ -61,17 +62,6 @@ function getUserProgress(
     });
 }
 
-interface ProgressRow {
-    id: string;
-    user_id: string;
-    course_id: string;
-    module_id: string | null;
-    lesson_id: string | null;
-    exercise_id: string | null;
-    completed: number;
-    completed_at: string;
-}
-
 function getCourseProgress(
     db: Database,
     userId: string,
@@ -83,7 +73,7 @@ function getCourseProgress(
         WHERE user_id = ? AND course_id = ? AND completed = 1
     `);
 
-    const progress = stmt.all(userId, courseId) as ProgressRow[];
+    const progress = stmt.all(userId, courseId) as UserProgress[];
 
     const completedLessons = progress
         .filter((p) => p.lesson_id)
