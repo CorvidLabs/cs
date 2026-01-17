@@ -5,7 +5,16 @@
     "order": 3,
     "language": "kotlin",
     "starterCode": "fun main() {\n    val height = 5\n\n    println(\"Triangle:\")\n    // Your code here\n\n    println(\"\\nInverted Triangle:\")\n    // Your code here\n\n    println(\"\\nNumber Pyramid:\")\n    // Your code here\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should print number pattern",
+            "expectedOutput": "1"
+        },
+        {
+            "description": "Should use loops correctly",
+            "expectedOutput": "*"
+        }
+    ],
     "hints": [
         "For a pyramid of height 5:",
         "For each row, you count up to the row number, then back down:"

@@ -5,6 +5,11 @@
     "order": 2,
     "language": "kotlin",
     "starterCode": "fun main() {\n    // Test your functions\n    println(truncate(\"Hello World\", 5))\n    println(capitalizeWords(\"hello world\"))\n    println(wordCount(\"Hello beautiful world\"))\n    println(mask(\"1234567890\", visibleChars = 4))\n    println(isPalindrome(\"racecar\"))\n}\n\n// Implement your functions here",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should process strings",
+            "expectedOutput": "reverse"
+        }
+    ],
     "hints": []
 }

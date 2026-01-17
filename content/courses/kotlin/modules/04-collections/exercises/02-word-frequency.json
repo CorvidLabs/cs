@@ -5,6 +5,11 @@
     "order": 2,
     "language": "kotlin",
     "starterCode": "fun main() {\n    val text = \"\"\"\n        Kotlin is a modern programming language.\n        Kotlin is concise and expressive.\n        Programming in Kotlin is fun!\n        Is Kotlin the best language? Kotlin might be!\n    \"\"\".trimIndent()\n\n    // 1. Split into words (lowercase, remove punctuation)\n    val words = // your code\n\n    // 2. Count frequency\n    val frequency = // your code\n\n    // 3. Most common word\n    val mostCommon = // your code\n\n    // 4. Words appearing once\n    val unique = // your code\n\n    // 5. Words sorted by frequency (descending)\n    val sorted = // your code\n\n    println(\"Word count: ${words.size}\")\n    println(\"Unique words: ${frequency.size}\")\n    println(\"Frequency: $frequency\")\n    println(\"Most common: $mostCommon\")\n    println(\"Appear once: $unique\")\n    println(\"By frequency: $sorted\")\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should count word frequency",
+            "expectedOutput": ":"
+        }
+    ],
     "hints": []
 }

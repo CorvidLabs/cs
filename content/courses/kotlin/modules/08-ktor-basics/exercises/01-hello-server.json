@@ -5,6 +5,11 @@
     "order": 1,
     "language": "kotlin",
     "starterCode": "import io.ktor.server.application.*\nimport io.ktor.server.engine.*\nimport io.ktor.server.netty.*\nimport io.ktor.server.response.*\nimport io.ktor.server.routing.*\n\nfun main() {\n    embeddedServer(Netty, port = 8080) {\n        // Your routing here\n    }.start(wait = true)\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should create hello endpoint",
+            "expectedOutput": "Hello"
+        }
+    ],
     "hints": []
 }

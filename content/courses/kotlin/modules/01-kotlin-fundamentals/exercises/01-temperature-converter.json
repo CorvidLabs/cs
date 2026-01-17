@@ -5,7 +5,12 @@
     "order": 1,
     "language": "kotlin",
     "starterCode": "fun main() {\n    // Create a val for the Celsius temperature\n\n    // Calculate Fahrenheit\n\n    // Print the result using string templates\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should output temperature conversion",
+            "expectedOutput": "25.0°C = 77.0°F"
+        }
+    ],
     "hints": [
         "Use `val` since the temperature won't change:"
     ]

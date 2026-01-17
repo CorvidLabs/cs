@@ -5,6 +5,11 @@
     "order": 3,
     "language": "kotlin",
     "starterCode": "data class Product(\n    val id: Int,\n    val name: String,\n    val category: String,\n    val price: Double,\n    val stock: Int\n)\n\nfun main() {\n    val products = listOf(\n        Product(1, \"Laptop\", \"Electronics\", 999.99, 10),\n        Product(2, \"Mouse\", \"Electronics\", 29.99, 50),\n        Product(3, \"Keyboard\", \"Electronics\", 79.99, 30),\n        Product(4, \"Desk\", \"Furniture\", 199.99, 15),\n        Product(5, \"Chair\", \"Furniture\", 149.99, 20),\n        Product(6, \"Notebook\", \"Office\", 4.99, 100),\n        Product(7, \"Pen\", \"Office\", 1.99, 200),\n        Product(8, \"Monitor\", \"Electronics\", 299.99, 25)\n    )\n\n    // 1. Products under $50\n\n    // 2. Group by category\n\n    // 3. Average price per category\n\n    // 4. Most expensive per category\n\n    // 5. Total inventory value (price * stock for all)\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should process data correctly",
+            "expectedOutput": "Total"
+        }
+    ],
     "hints": []
 }

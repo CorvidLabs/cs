@@ -450,11 +450,10 @@ export class ExerciseViewComponent {
         this.testResults.set([]);
 
         try {
-            const language = exercise.language === 'python' ? 'python' : 'javascript';
             const results = await this.codeExecutor.runTests(
                 this.currentCode(),
                 exercise.testCases,
-                language
+                exercise.language
             );
 
             this.testResults.set(results);

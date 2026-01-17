@@ -5,6 +5,11 @@
     "order": 3,
     "language": "kotlin",
     "starterCode": "// Define your interface and classes here\n\nfun main() {\n    val manager = PluginManager()\n\n    manager.register(LoggerPlugin())\n    manager.register(AnalyticsPlugin())\n    manager.register(CachePlugin())\n\n    println(\"=== Starting Application ===\")\n    manager.startAll()\n\n    println(\"\\n=== Application Running ===\")\n    manager.executeAll(\"User logged in\")\n\n    println(\"\\n=== Stopping Application ===\")\n    manager.stopAll()\n\n    println(\"\\n=== Plugin Status ===\")\n    manager.status()\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should implement plugin pattern",
+            "expectedOutput": "plugin"
+        }
+    ],
     "hints": []
 }

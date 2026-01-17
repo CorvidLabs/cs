@@ -5,6 +5,11 @@
     "order": 3,
     "language": "kotlin",
     "starterCode": "// Write your code here\nfun main() {\n    \n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should use middleware",
+            "expectedOutput": "middleware"
+        }
+    ],
     "hints": []
 }

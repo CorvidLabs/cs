@@ -40,8 +40,11 @@ export interface Exercise {
 
 export interface TestCase {
     description: string;
-    assertion: string;
+    assertion?: string;
     expectedOutput?: string;
+    // Input/expected format for function-based tests
+    input?: Record<string, unknown>;
+    expected?: unknown;
 }
 
 export interface Breadcrumb {

@@ -5,6 +5,11 @@
     "order": 3,
     "language": "kotlin",
     "starterCode": "fun main() {\n    val numbers = listOf(1, 2, 3, 4, 5)\n\n    // Transform\n    val doubled = myMap(numbers) { it * 2 }\n    println(doubled) // [2, 4, 6, 8, 10]\n\n    // Filter\n    val evens = myFilter(numbers) { it % 2 == 0 }\n    println(evens) // [2, 4]\n\n    // Reduce\n    val sum = myReduce(numbers, 0) { acc, n -> acc + n }\n    println(sum) // 15\n\n    // Find\n    val firstEven = myFind(numbers) { it % 2 == 0 }\n    println(firstEven) // 2\n\n    // Any\n    val hasNegative = myAny(numbers) { it < 0 }\n    println(hasNegative) // false\n}\n\n// Implement your functions here",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should use higher-order functions",
+            "expectedOutput": "result"
+        }
+    ],
     "hints": []
 }

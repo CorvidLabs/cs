@@ -5,6 +5,11 @@
     "order": 1,
     "language": "kotlin",
     "starterCode": "data class RegistrationForm(\n    val name: String,\n    val email: String,\n    val age: Int,\n    val password: String\n)\n\n// Define your validation result sealed class\n\nfun validateForm(form: RegistrationForm): ValidationResult {\n    // Your implementation\n}\n\nfun main() {\n    val validForm = RegistrationForm(\n        name = \"Alice\",\n        email = \"alice@example.com\",\n        age = 25,\n        password = \"SecurePass123!\"\n    )\n\n    val invalidForm = RegistrationForm(\n        name = \"\",\n        email = \"not-an-email\",\n        age = -5,\n        password = \"123\"\n    )\n\n    println(\"Valid form: ${validateForm(validForm)}\")\n    println(\"Invalid form: ${validateForm(invalidForm)}\")\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should validate input",
+            "expectedOutput": "valid"
+        }
+    ],
     "hints": []
 }

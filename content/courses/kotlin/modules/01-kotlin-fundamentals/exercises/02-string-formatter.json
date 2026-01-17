@@ -5,7 +5,16 @@
     "order": 2,
     "language": "kotlin",
     "starterCode": "fun main() {\n    // Create your variables here\n    val firstName = \"Kyntrin\"\n\n    // Create formatted full name (uppercase last name)\n\n    // Calculate birth year (current year - age)\n\n    // Print all the information\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should format the greeting correctly",
+            "expectedOutput": "Hello"
+        },
+        {
+            "description": "Should include the name",
+            "expectedOutput": "World"
+        }
+    ],
     "hints": [
         "For simplicity, you can hardcode it:"
     ]

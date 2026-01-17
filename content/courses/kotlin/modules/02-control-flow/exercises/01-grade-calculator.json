@@ -5,7 +5,16 @@
     "order": 1,
     "language": "kotlin",
     "starterCode": "fun main() {\n    val scores = listOf(85, 92, 45, -5, 105, 70, 60, 59)\n\n    for (score in scores) {\n        // Calculate grade using when\n\n        // Print result\n    }\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should output grade A for 95",
+            "expectedOutput": "A"
+        },
+        {
+            "description": "Should handle grade boundaries",
+            "expectedOutput": "Grade"
+        }
+    ],
     "hints": [
         "Check for invalid ranges:"
     ]

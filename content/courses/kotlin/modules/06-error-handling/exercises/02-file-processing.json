@@ -5,6 +5,11 @@
     "order": 2,
     "language": "kotlin",
     "starterCode": "data class User(val id: Int, val name: String, val email: String)\n\nval csvData = \"\"\"\n    1,Alice,alice@example.com\n    2,Bob,bob@example.com\n    invalid,Charlie,charlie@example.com\n    4,,missing-name@example.com\n    5,Eve,eve@example.com\n\"\"\".trimIndent()\n\nfun parseRow(row: String): Result<User> {\n    // Your implementation\n}\n\nfun parseAllUsers(csv: String): Pair<List<User>, List<String>> {\n    // Returns (successful users, error messages)\n}\n\nfun main() {\n    val (users, errors) = parseAllUsers(csvData)\n\n    println(\"Successfully parsed ${users.size} users:\")\n    users.forEach { println(\"  $it\") }\n\n    println(\"\\nErrors (${errors.size}):\")\n    errors.forEach { println(\"  $it\") }\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should handle file errors",
+            "expectedOutput": "error"
+        }
+    ],
     "hints": []
 }

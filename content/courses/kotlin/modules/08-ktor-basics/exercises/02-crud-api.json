@@ -5,6 +5,11 @@
     "order": 2,
     "language": "kotlin",
     "starterCode": "// Write your code here\nfun main() {\n    \n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should implement CRUD operations",
+            "expectedOutput": "GET"
+        }
+    ],
     "hints": []
 }

@@ -5,7 +5,16 @@
     "order": 3,
     "language": "kotlin",
     "starterCode": "fun main() {\n    // User 1: Minimal profile\n    val username1 = \"kyntrin\"\n    val email1: String? = null\n    val nickname1: String? = null\n    val bio1: String? = null\n\n    // User 2: Complete profile\n    val username2 = \"leif\"\n    val email2: String? = \"leif@example.com\"\n    val nickname2: String? = \"0xLeif\"\n    val bio2: String? = \"Swift developer building cool open source tools\"\n\n    // Print user 1 info using null safety operators\n\n    // Print user 2 info using null safety operators\n}",
-    "testCases": [],
+    "testCases": [
+        {
+            "description": "Should handle null values safely",
+            "expectedOutput": "null"
+        },
+        {
+            "description": "Should use Elvis operator",
+            "expectedOutput": "default"
+        }
+    ],
     "hints": [
         "Display name should be nickname if present, otherwise username:"
     ]
