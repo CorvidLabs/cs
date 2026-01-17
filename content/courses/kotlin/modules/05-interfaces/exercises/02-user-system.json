@@ -1,0 +1,10 @@
+{
+    "id": "02-user-system",
+    "title": "User System",
+    "description": "Build a user management system using data classes and interfaces.\n\n## Requirements\n\n1. Create a `User` data class with id, name, email\n2. Create different user types using inheritance\n3. Implement a `Permissioned` interface for role-based access\n4. Build a simple user repository",
+    "order": 2,
+    "language": "kotlin",
+    "starterCode": "// Define your classes here\n\nfun main() {\n    val repository = UserRepository()\n\n    val admin = Admin(1, \"Alice\", \"alice@example.com\")\n    val moderator = Moderator(2, \"Bob\", \"bob@example.com\", listOf(\"posts\", \"comments\"))\n    val guest = Guest(3, \"Charlie\", \"charlie@example.com\")\n\n    repository.add(admin)\n    repository.add(moderator)\n    repository.add(guest)\n\n    println(\"All users:\")\n    repository.findAll().forEach { println(\"  ${it.name} - ${it.role}\") }\n\n    println(\"\\nPermissions check:\")\n    println(\"  Alice can delete: ${admin.hasPermission(\"delete\")}\")\n    println(\"  Bob can moderate posts: ${moderator.hasPermission(\"posts\")}\")\n    println(\"  Charlie can delete: ${guest.hasPermission(\"delete\")}\")\n\n    println(\"\\nCopy with changes:\")\n    val updatedAdmin = admin.copy(email = \"alice.admin@example.com\")\n    println(\"  Updated: $updatedAdmin\")\n}",
+    "testCases": [],
+    "hints": []
+}

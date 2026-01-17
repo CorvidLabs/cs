@@ -1,0 +1,12 @@
+{
+    "id": "02-string-formatter",
+    "title": "String Formatter",
+    "description": "Build a program that formats and displays user information using string templates and operations.\n\n## Requirements\n\n1. Create variables for: first name, last name, age, and city\n2. Create a formatted full name (uppercase last name)\n3. Print a formatted introduction using string templates\n4. Calculate and print birth year (approximate)\n\n## Expected Output\n\n```\nName: Kyntrin LASTNAME\nAge: 25\nCity: Your City\nBirth Year: 2001\nIntroduction: Hello! I'm Kyntrin LASTNAME, 25 years old, from Your City.\n```",
+    "order": 2,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    // Create your variables here\n    val firstName = \"Kyntrin\"\n\n    // Create formatted full name (uppercase last name)\n\n    // Calculate birth year (current year - age)\n\n    // Print all the information\n}",
+    "testCases": [],
+    "hints": [
+        "For simplicity, you can hardcode it:"
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "id": "03-higher-order",
+    "title": "Higher-Order Functions",
+    "description": "Master lambdas and higher-order functions by implementing custom collection operations.\n\n## Requirements\n\nImplement these functions WITHOUT using built-in collection methods:\n\n1. `myMap` - Transform each element\n2. `myFilter` - Keep elements matching a condition\n3. `myReduce` - Combine elements into one value\n4. `myFind` - Find first matching element\n5. `myAny` - Check if any element matches",
+    "order": 3,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    val numbers = listOf(1, 2, 3, 4, 5)\n\n    // Transform\n    val doubled = myMap(numbers) { it * 2 }\n    println(doubled) // [2, 4, 6, 8, 10]\n\n    // Filter\n    val evens = myFilter(numbers) { it % 2 == 0 }\n    println(evens) // [2, 4]\n\n    // Reduce\n    val sum = myReduce(numbers, 0) { acc, n -> acc + n }\n    println(sum) // 15\n\n    // Find\n    val firstEven = myFind(numbers) { it % 2 == 0 }\n    println(firstEven) // 2\n\n    // Any\n    val hasNegative = myAny(numbers) { it < 0 }\n    println(hasNegative) // false\n}\n\n// Implement your functions here",
+    "testCases": [],
+    "hints": []
+}

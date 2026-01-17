@@ -1,0 +1,13 @@
+{
+    "id": "03-number-patterns",
+    "title": "Number Patterns",
+    "description": "Practice loops and control flow by printing various number patterns.\n\n## Part 1: Triangle\n\nPrint a right triangle:\n\n```\n*\n**\n***\n****\n*****\n```\n\n## Part 2: Inverted Triangle\n\n```\n*****\n****\n***\n**\n*\n```\n\n## Part 3: Number Pyramid\n\n```\n    1\n   121\n  12321\n 1234321\n123454321\n```",
+    "order": 3,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    val height = 5\n\n    println(\"Triangle:\")\n    // Your code here\n\n    println(\"\\nInverted Triangle:\")\n    // Your code here\n\n    println(\"\\nNumber Pyramid:\")\n    // Your code here\n}",
+    "testCases": [],
+    "hints": [
+        "For a pyramid of height 5:",
+        "For each row, you count up to the row number, then back down:"
+    ]
+}

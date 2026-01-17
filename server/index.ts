@@ -4,7 +4,7 @@ import { progressRoutes } from './routes/progress';
 import { executeRoutes } from './routes/execute';
 import { initializeDatabase } from './db/schema';
 
-const PORT = process.env.PORT ?? 3000;
+const PORT = process.env['PORT'] ?? 3000;
 
 const db = initializeDatabase();
 

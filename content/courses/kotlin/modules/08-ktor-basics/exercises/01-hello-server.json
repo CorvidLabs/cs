@@ -1,0 +1,10 @@
+{
+    "id": "01-hello-server",
+    "title": "Hello Server",
+    "description": "Create your first Ktor server with multiple routes.\n\n## Requirements\n\n1. Create a server on port 8080\n2. Add routes for: `/`, `/hello/{name}`, `/api/status`\n3. Return appropriate responses for each\n\n## Expected Behavior\n\n```\nGET /              → \"Welcome to Ktor!\"\nGET /hello/Alice   → \"Hello, Alice!\"\nGET /api/status    → {\"status\": \"ok\", \"version\": \"1.0\"}\n```",
+    "order": 1,
+    "language": "kotlin",
+    "starterCode": "import io.ktor.server.application.*\nimport io.ktor.server.engine.*\nimport io.ktor.server.netty.*\nimport io.ktor.server.response.*\nimport io.ktor.server.routing.*\n\nfun main() {\n    embeddedServer(Netty, port = 8080) {\n        // Your routing here\n    }.start(wait = true)\n}",
+    "testCases": [],
+    "hints": []
+}

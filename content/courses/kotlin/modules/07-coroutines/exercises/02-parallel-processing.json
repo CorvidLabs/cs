@@ -1,0 +1,10 @@
+{
+    "id": "02-parallel-processing",
+    "title": "Parallel Processing",
+    "description": "Process multiple items in parallel with proper error handling.\n\n## Requirements\n\n1. Process a list of items concurrently\n2. Limit concurrency (don't overload)\n3. Handle individual failures gracefully\n4. Collect all results (successes and failures)",
+    "order": 2,
+    "language": "kotlin",
+    "starterCode": "import kotlinx.coroutines.*\n\ndata class Item(val id: Int, val value: String)\nsealed class ProcessResult {\n    data class Success(val item: Item, val processed: String) : ProcessResult()\n    data class Failure(val item: Item, val error: String) : ProcessResult()\n}\n\n// Simulate processing - fails for even IDs\nsuspend fun processItem(item: Item): String {\n    delay(500)  // Simulate work\n    if (item.id % 2 == 0) {\n        throw RuntimeException(\"Failed to process item ${item.id}\")\n    }\n    return item.value.uppercase()\n}\n\nsuspend fun processAllItems(items: List<Item>): List<ProcessResult> {\n    // Your implementation\n}\n\nfun main() = runBlocking {\n    val items = (1..6).map { Item(it, \"item$it\") }\n\n    println(\"Processing ${items.size} items...\")\n    val results = processAllItems(items)\n\n    val successes = results.filterIsInstance<ProcessResult.Success>()\n    val failures = results.filterIsInstance<ProcessResult.Failure>()\n\n    println(\"\\nSuccesses (${successes.size}):\")\n    successes.forEach { println(\"  ${it.item.id}: ${it.processed}\") }\n\n    println(\"\\nFailures (${failures.size}):\")\n    failures.forEach { println(\"  ${it.item.id}: ${it.error}\") }\n}",
+    "testCases": [],
+    "hints": []
+}

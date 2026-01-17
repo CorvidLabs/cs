@@ -56,16 +56,24 @@ export async function contentRoutes(
 }
 
 async function getCourses(headers: Headers): Promise<Response> {
-    const courseDirs = ['python', 'web-fundamentals', 'javascript', 'swift', 'rust', 'algorithms'];
+    const coursesDir = './content/courses';
     const courses = [];
 
-    for (const courseId of courseDirs) {
-        const courseFile = Bun.file(`./content/courses/${courseId}/course.json`);
+    // Dynamically read all course directories
+    const entries = await Array.fromAsync(
+        new Bun.Glob('*/course.json').scan({ cwd: coursesDir })
+    );
+
+    for (const entry of entries) {
+        const courseFile = Bun.file(`${coursesDir}/${entry}`);
         if (await courseFile.exists()) {
             const course = await courseFile.json();
             courses.push(course);
         }
     }
+
+    // Sort by title for consistent ordering
+    courses.sort((a, b) => a.title.localeCompare(b.title));
 
     return new Response(JSON.stringify(courses), {
         headers: { ...headers, 'Content-Type': 'application/json' },

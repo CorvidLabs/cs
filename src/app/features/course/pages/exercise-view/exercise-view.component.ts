@@ -438,6 +438,7 @@ export class ExerciseViewComponent {
         if (lang === 'python') return 'python';
         if (lang === 'swift') return 'swift';
         if (lang === 'rust') return 'rust';
+        if (lang === 'kotlin') return 'kotlin';
         return 'javascript';
     }
 

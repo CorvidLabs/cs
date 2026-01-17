@@ -1,0 +1,10 @@
+{
+    "id": "02-string-utils",
+    "title": "String Utilities",
+    "description": "Create a collection of useful string utility functions.\n\n## Requirements\n\n1. Create functions for common string operations\n2. Use extension functions where appropriate\n3. Use default and named arguments\n4. Handle edge cases (empty strings, null)\n\n## Functions to Implement\n\n```kotlin\n// 1. Truncate string with ellipsis\ntruncate(\"Hello World\", maxLength = 5) // \"Hello...\"\n\n// 2. Capitalize each word\ncapitalizeWords(\"hello world\") // \"Hello World\"\n\n// 3. Count words\nwordCount(\"Hello beautiful world\") // 3\n\n// 4. Mask string (for passwords, credit cards)\nmask(\"1234567890\", visibleChars = 4) // \"******7890\"\n\n// 5. Is palindrome?\nisPalindrome(\"racecar\") // true\n```",
+    "order": 2,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    // Test your functions\n    println(truncate(\"Hello World\", 5))\n    println(capitalizeWords(\"hello world\"))\n    println(wordCount(\"Hello beautiful world\"))\n    println(mask(\"1234567890\", visibleChars = 4))\n    println(isPalindrome(\"racecar\"))\n}\n\n// Implement your functions here",
+    "testCases": [],
+    "hints": []
+}

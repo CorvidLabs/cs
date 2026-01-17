@@ -1,0 +1,10 @@
+{
+    "id": "02-crud-api",
+    "title": "CRUD API",
+    "description": "Build a complete CRUD API for managing tasks.\n\n## Requirements\n\n1. Create Task model with id, title, completed\n2. Implement all CRUD operations\n3. Store tasks in memory\n4. Return appropriate status codes\n\n## API Endpoints\n\n```\nGET    /tasks        - List all tasks\nPOST   /tasks        - Create task\nGET    /tasks/{id}   - Get task by ID\nPUT    /tasks/{id}   - Update task\nDELETE /tasks/{id}   - Delete task\n```",
+    "order": 2,
+    "language": "kotlin",
+    "starterCode": "// Write your code here\nfun main() {\n    \n}",
+    "testCases": [],
+    "hints": []
+}

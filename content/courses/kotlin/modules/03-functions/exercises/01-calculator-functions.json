@@ -1,0 +1,10 @@
+{
+    "id": "01-calculator-functions",
+    "title": "Calculator Functions",
+    "description": "Build a set of calculator functions using different Kotlin function features.\n\n## Requirements\n\n1. Create basic math functions (add, subtract, multiply, divide)\n2. Use single-expression syntax\n3. Handle division by zero\n4. Create a higher-order function that applies any operation",
+    "order": 1,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    // Test your functions here\n    println(add(5, 3))       // 8\n    println(subtract(10, 4)) // 6\n    println(multiply(3, 4))  // 12\n    println(divide(10, 2))   // 5.0\n    println(divide(10, 0))   // Handle this!\n\n    // Higher-order function\n    println(calculate(10, 5, ::add))       // 15\n    println(calculate(10, 5) { a, b -> a - b })  // 5\n}\n\n// Define your functions here",
+    "testCases": [],
+    "hints": []
+}

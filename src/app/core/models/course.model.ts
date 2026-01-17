@@ -25,7 +25,7 @@ export interface Lesson {
     content: string;
 }
 
-export type Language = 'python' | 'javascript' | 'typescript' | 'swift' | 'rust' | 'html' | 'css';
+export type Language = 'python' | 'javascript' | 'typescript' | 'swift' | 'rust' | 'kotlin' | 'html' | 'css';
 
 export interface Exercise {
     id: string;
