@@ -1,6 +1,6 @@
 import { Glob } from "bun";
 import { readFile } from "node:fs/promises";
-import { join, basename, dirname } from "node:path";
+import { join } from "node:path";
 
 export interface TestCase {
     description: string;
