@@ -1,6 +1,6 @@
 # CS Courses
 
-A comprehensive Computer Science course platform built with Angular and Bun, featuring six learning tracks: **Python**, **JavaScript**, **Swift**, **Rust**, **Web Fundamentals**, and **Algorithms**.
+A comprehensive Computer Science course platform built with Angular and Bun, featuring seven learning tracks: **Python**, **JavaScript**, **Swift**, **Kotlin**, **Rust**, **Web Fundamentals**, and **Algorithms**.
 
 ## Features
 
@@ -72,6 +72,7 @@ cs/
 │       ├── python/
 │       ├── javascript/
 │       ├── swift/
+│       ├── kotlin/
 │       ├── rust/
 │       ├── web-fundamentals/
 │       └── algorithms/
@@ -95,6 +96,7 @@ cs/
 - **Python**: Fundamentals through data processing and algorithms
 - **JavaScript**: DOM manipulation, async patterns, TypeScript, modern frameworks
 - **Swift**: iOS/macOS development, SwiftUI, concurrency
+- **Kotlin**: Android/JVM development, coroutines, Ktor backend
 - **Rust**: Systems programming, ownership, memory safety
 
 ### Supplementary Tracks
