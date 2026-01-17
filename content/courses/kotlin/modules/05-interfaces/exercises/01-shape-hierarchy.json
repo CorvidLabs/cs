@@ -1,0 +1,15 @@
+{
+    "id": "01-shape-hierarchy",
+    "title": "Shape Hierarchy",
+    "description": "Create a class hierarchy for geometric shapes.\n\n## Requirements\n\n1. Create an interface `Shape` with `area` and `perimeter` properties\n2. Implement `Circle`, `Rectangle`, and `Triangle`\n3. Add a `describe()` method with default implementation\n4. Create a function to find the largest shape",
+    "order": 1,
+    "language": "kotlin",
+    "starterCode": "import kotlin.math.sqrt\nimport kotlin.math.PI\n\n// Define your interface and classes here\n\nfun main() {\n    val shapes = listOf(\n        Circle(5.0),\n        Rectangle(4.0, 6.0),\n        Triangle(3.0, 4.0, 5.0)\n    )\n\n    for (shape in shapes) {\n        println(shape.describe())\n        println(\"  Area: ${shape.area}\")\n        println(\"  Perimeter: ${shape.perimeter}\")\n        println()\n    }\n\n    val largest = findLargest(shapes)\n    println(\"Largest: ${largest.describe()}\")\n}\n\nfun findLargest(shapes: List<Shape>): Shape {\n    // Your code here\n}",
+    "testCases": [
+        {
+            "description": "Should calculate area",
+            "expectedOutput": "area"
+        }
+    ],
+    "hints": []
+}

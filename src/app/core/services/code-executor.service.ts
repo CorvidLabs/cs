@@ -2,9 +2,21 @@ import { Injectable, signal } from '@angular/core';
 import { ExecutionState, ExecutionResult, TestResult } from '../models/progress.model';
 import { TestCase, Language } from '../models/course.model';
 
+const TEST_TIMEOUT_MS = 3000;  // 3 seconds max per test
+const MAX_TESTS = 20;  // Maximum tests to run
+
 interface PyodideInterface {
     runPython: (code: string) => unknown;
     runPythonAsync: (code: string) => Promise<unknown>;
+}
+
+function withTimeout<T>(promise: Promise<T>, ms: number, errorMsg: string): Promise<T> {
+    return Promise.race([
+        promise,
+        new Promise<T>((_, reject) =>
+            setTimeout(() => reject(new Error(errorMsg)), ms)
+        ),
+    ]);
 }
 
 interface ServerExecutionResponse {
@@ -175,6 +187,27 @@ _result
         }
     }
 
+    public async executeKotlin(
+        code: string,
+        blockId: string
+    ): Promise<ExecutionResult> {
+        this.updateState(blockId, { status: 'running', output: '', error: null });
+
+        try {
+            const result = await this.executeOnServer('kotlin', code);
+            this.updateState(blockId, {
+                status: result.success ? 'complete' : 'error',
+                output: result.output,
+                error: result.error ?? null,
+            });
+            return { success: result.success, output: result.output, error: result.error };
+        } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            this.updateState(blockId, { status: 'error', output: '', error: errorMessage });
+            return { success: false, output: '', error: errorMessage };
+        }
+    }
+
     public renderHtmlCss(html: string, css: string = ''): string {
         const fullHtml = css
             ? `<!DOCTYPE html><html><head><style>${css}</style></head><body>${html}</body></html>`
@@ -219,6 +252,8 @@ _result
                 return this.executeSwift(code, blockId);
             case 'rust':
                 return this.executeRust(code, blockId);
+            case 'kotlin':
+                return this.executeKotlin(code, blockId);
             case 'html':
             case 'css':
                 return this.executeHtml(code, blockId);
@@ -232,31 +267,75 @@ _result
         testCases: TestCase[],
         language: Language
     ): Promise<TestResult[]> {
-        if (language === 'swift' || language === 'rust' || language === 'typescript') {
-            const result = await this.executeOnServer(language, code, testCases);
-            return result.testResults ?? testCases.map(tc => ({
-                description: tc.description,
-                passed: false,
-                error: 'No test results returned',
-            }));
+        const testsToRun = testCases.slice(0, MAX_TESTS);
+
+        if (language === 'swift' || language === 'rust' || language === 'typescript' || language === 'kotlin') {
+            try {
+                const result = await withTimeout(
+                    this.executeOnServer(language, code, testsToRun),
+                    30000,
+                    'Server execution timed out'
+                );
+                return result.testResults ?? testsToRun.map(tc => ({
+                    description: tc.description,
+                    passed: false,
+                    error: 'No test results returned',
+                }));
+            } catch (error) {
+                return testsToRun.map(tc => ({
+                    description: tc.description,
+                    passed: false,
+                    error: error instanceof Error ? error.message : 'Server error',
+                }));
+            }
         }
 
         const results: TestResult[] = [];
 
-        for (const testCase of testCases) {
+        for (const testCase of testsToRun) {
             try {
                 let passed = false;
 
+                // Generate assertion from input/expected format if needed
+                let assertion = testCase.assertion;
+                if (!assertion && testCase.input !== undefined && testCase.expected !== undefined) {
+                    assertion = this.generateAssertion(code, testCase.input, testCase.expected, language);
+                }
+
                 if (language === 'javascript') {
-                    const fullCode = `${code}\n${testCase.assertion}`;
-                    const result = await this.runInSandbox(fullCode);
+                    if (!assertion) {
+                        results.push({ description: testCase.description, passed: false, error: 'No assertion defined' });
+                        continue;
+                    }
+                    const fullCode = `${code}\n${assertion}`;
+                    const result = await withTimeout(
+                        this.runInSandbox(fullCode),
+                        TEST_TIMEOUT_MS,
+                        'Test timed out (3s limit)'
+                    );
                     passed = result === 'true' || result === testCase.expectedOutput;
                 } else if (language === 'python') {
+                    if (!assertion) {
+                        results.push({ description: testCase.description, passed: false, error: 'No assertion defined' });
+                        continue;
+                    }
                     await this.ensurePyodideLoaded();
                     if (this.pyodide) {
-                        const fullCode = `${code}\n${testCase.assertion}`;
-                        const result = await this.pyodide.runPythonAsync(fullCode);
-                        passed = result === true || String(result) === testCase.expectedOutput;
+                        const wrappedCode = this.wrapPythonWithTimeout(code, assertion);
+                        try {
+                            const result = await this.pyodide.runPythonAsync(wrappedCode);
+                            passed = result === true || String(result) === testCase.expectedOutput;
+                        } catch (pyError) {
+                            const errorMsg = String(pyError);
+                            if (errorMsg.includes('ExecutionLimitExceeded')) {
+                                results.push({ description: testCase.description, passed: false, error: 'Code took too long (possible infinite loop)' });
+                                continue;
+                            }
+                            throw pyError;
+                        }
+                    } else {
+                        results.push({ description: testCase.description, passed: false, error: 'Pyodide not loaded' });
+                        continue;
                     }
                 } else if (language === 'html' || language === 'css') {
                     passed = testCase.expectedOutput
@@ -362,8 +441,77 @@ _result
         });
     }
 
+    private generateAssertion(
+        code: string,
+        input: Record<string, unknown>,
+        expected: unknown,
+        language: Language
+    ): string | undefined {
+        // Extract function name from code
+        let funcName: string | undefined;
+
+        if (language === 'python') {
+            const match = code.match(/^def\s+(\w+)\s*\(/m);
+            funcName = match?.[1];
+        } else if (language === 'javascript' || language === 'typescript') {
+            const match = code.match(/^(?:function\s+(\w+)|const\s+(\w+)\s*=|let\s+(\w+)\s*=)/m);
+            funcName = match?.[1] ?? match?.[2] ?? match?.[3];
+        }
+
+        if (!funcName) {
+            return undefined;
+        }
+
+        // Build argument list from input
+        const args = Object.values(input)
+            .map(v => JSON.stringify(v))
+            .join(', ');
+
+        // Build expected value
+        const expectedStr = JSON.stringify(expected);
+
+        // Generate assertion based on language
+        if (language === 'python') {
+            return `${funcName}(${args}) == ${expectedStr}`;
+        } else {
+            return `JSON.stringify(${funcName}(${args})) === '${expectedStr.replace(/'/g, "\\'")}'`;
+        }
+    }
+
+    private wrapPythonWithTimeout(code: string, assertion: string): string {
+        // Wrap Python code with an execution counter to prevent infinite loops
+        // Uses sys.settrace to count operations and raise after limit
+        const maxOps = 1000000; // 1 million operations max
+        return `
+import sys
+
+class ExecutionLimitExceeded(Exception):
+    pass
+
+_op_count = 0
+_max_ops = ${maxOps}
+
+def _trace_calls(frame, event, arg):
+    global _op_count
+    _op_count += 1
+    if _op_count > _max_ops:
+        raise ExecutionLimitExceeded("Execution limit exceeded")
+    return _trace_calls
+
+sys.settrace(_trace_calls)
+
+try:
+${code.split('\n').map(line => '    ' + line).join('\n')}
+    _result = ${assertion}
+finally:
+    sys.settrace(None)
+
+_result
+`;
+    }
+
     private async executeOnServer(
-        language: 'swift' | 'rust' | 'typescript',
+        language: 'swift' | 'rust' | 'typescript' | 'kotlin',
         code: string,
         testCases?: TestCase[]
     ): Promise<ServerExecutionResponse> {

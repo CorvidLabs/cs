@@ -1,0 +1,26 @@
+{
+    "id": "02-fizzbuzz",
+    "title": "FizzBuzz",
+    "description": "The classic programming challenge! Print numbers 1-100, but:\n- For multiples of 3, print \"Fizz\"\n- For multiples of 5, print \"Buzz\"\n- For multiples of both 3 and 5, print \"FizzBuzz\"\n\n## Requirements\n\n1. Iterate from 1 to 100\n2. Use `when` expression to determine output\n3. Check for FizzBuzz first (multiples of both)\n\n## Expected Output\n\n```\n1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n...\n```",
+    "order": 2,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    for (i in 1..100) {\n        // Determine what to print using when\n\n        // Print the result\n    }\n}",
+    "testCases": [
+        {
+            "description": "Should print Fizz for multiples of 3",
+            "expectedOutput": "Fizz"
+        },
+        {
+            "description": "Should print Buzz for multiples of 5",
+            "expectedOutput": "Buzz"
+        },
+        {
+            "description": "Should print FizzBuzz for multiples of 15",
+            "expectedOutput": "FizzBuzz"
+        }
+    ],
+    "hints": [
+        "Use `%` to check divisibility:",
+        "15 is the least common multiple of 3 and 5."
+    ]
+}

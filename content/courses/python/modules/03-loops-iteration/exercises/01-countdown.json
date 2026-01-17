@@ -1,22 +1,31 @@
 {
     "id": "01-countdown",
     "title": "Countdown Timer",
-    "description": "Create a countdown program using a while loop.\n\n## Requirements\n\n1. Start with a variable `count` set to 10\n2. Use a while loop to count down to 1\n3. Print each number\n4. After the loop, print \"Liftoff!\"\n\n## Expected Output\n\n```\n10\n9\n8\n7\n6\n5\n4\n3\n2\n1\nLiftoff!\n```",
+    "description": "Create a countdown function using a while loop.\n\n## Requirements\n\n1. Complete the `countdown` function that returns a list of countdown numbers\n2. Start from the given number and count down to 1\n3. End the list with \"Liftoff!\"\n\n## Expected Output\n\nFor `countdown(5)`:\n```\n[5, 4, 3, 2, 1, 'Liftoff!']\n```",
     "order": 1,
     "language": "python",
-    "starterCode": "# Start with count = 10\ncount = 10\n\n# Use a while loop to count down\n\n\n# Print \"Liftoff!\" after the loop\n",
+    "starterCode": "def countdown(start):\n    \"\"\"Return a list counting down from start to 1, ending with 'Liftoff!'\"\"\"\n    result = []\n    count = start\n    \n    # Use a while loop to count down\n    # Append each number to result\n    # After the loop, append \"Liftoff!\"\n    \n    return result\n\n# Test your function\nprint(countdown(10))\nprint(countdown(5))\n",
     "testCases": [
         {
-            "description": "Should print numbers from 10 to 1",
-            "assertion": "True"
+            "description": "countdown(5) should return list starting with 5",
+            "assertion": "countdown(5)[0] == 5"
         },
         {
-            "description": "Should end with 'Liftoff!'",
-            "assertion": "True"
+            "description": "countdown(5) should have 6 elements",
+            "assertion": "len(countdown(5)) == 6"
+        },
+        {
+            "description": "countdown(5) should end with 'Liftoff!'",
+            "assertion": "countdown(5)[-1] == 'Liftoff!'"
+        },
+        {
+            "description": "countdown(3) should return [3, 2, 1, 'Liftoff!']",
+            "assertion": "countdown(3) == [3, 2, 1, 'Liftoff!']"
         }
     ],
     "hints": [
         "while count > 0: will loop while count is positive",
+        "Use result.append(count) to add to the list",
         "Don't forget to decrease count inside the loop",
         "Use count -= 1 or count = count - 1"
     ]

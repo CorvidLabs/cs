@@ -1,0 +1,15 @@
+{
+    "id": "01-async-data-fetch",
+    "title": "Async Data Fetch",
+    "description": "Practice coroutines by fetching data asynchronously.\n\n## Requirements\n\n1. Simulate API calls with delays\n2. Fetch user data sequentially\n3. Then optimize with parallel fetching\n4. Compare execution times",
+    "order": 1,
+    "language": "kotlin",
+    "starterCode": "import kotlinx.coroutines.*\nimport kotlin.system.measureTimeMillis\n\ndata class User(val id: String, val name: String)\ndata class Posts(val userId: String, val count: Int)\ndata class Profile(val user: User, val posts: Posts)\n\n// Simulate API calls\nsuspend fun fetchUser(id: String): User {\n    delay(1000)  // 1 second\n    return User(id, \"User $id\")\n}\n\nsuspend fun fetchPosts(userId: String): Posts {\n    delay(1000)  // 1 second\n    return Posts(userId, 42)\n}\n\n// Implement these functions\nsuspend fun loadProfileSequential(userId: String): Profile {\n    // Your code here - fetch sequentially\n}\n\nsuspend fun loadProfileParallel(userId: String): Profile {\n    // Your code here - fetch in parallel\n}\n\nfun main() = runBlocking {\n    val sequentialTime = measureTimeMillis {\n        val profile = loadProfileSequential(\"123\")\n        println(\"Sequential: $profile\")\n    }\n    println(\"Sequential took: ${sequentialTime}ms\\n\")\n\n    val parallelTime = measureTimeMillis {\n        val profile = loadProfileParallel(\"123\")\n        println(\"Parallel: $profile\")\n    }\n    println(\"Parallel took: ${parallelTime}ms\")\n}",
+    "testCases": [
+        {
+            "description": "Should fetch data asynchronously",
+            "expectedOutput": "data"
+        }
+    ],
+    "hints": []
+}

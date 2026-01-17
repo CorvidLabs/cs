@@ -1,0 +1,19 @@
+{
+    "id": "01-list-operations",
+    "title": "List Operations",
+    "description": "Practice basic list operations and transformations.\n\n## Requirements\n\nGiven a list of integers, implement functions to:\n1. Find all even numbers\n2. Square all numbers\n3. Get the sum\n4. Find the maximum\n5. Get unique values sorted in descending order",
+    "order": 1,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    val numbers = listOf(3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5)\n\n    // 1. Find all even numbers\n    val evens = // your code\n\n    // 2. Square all numbers\n    val squares = // your code\n\n    // 3. Get the sum\n    val sum = // your code\n\n    // 4. Find the maximum\n    val max = // your code\n\n    // 5. Unique values sorted descending\n    val uniqueDesc = // your code\n\n    println(\"Evens: $evens\")         // [4, 2, 6]\n    println(\"Squares: $squares\")     // [9, 1, 16, 1, 25, 81, 4, 36, 25, 9, 25]\n    println(\"Sum: $sum\")             // 44\n    println(\"Max: $max\")             // 9\n    println(\"Unique desc: $uniqueDesc\") // [9, 6, 5, 4, 3, 2, 1]\n}",
+    "testCases": [
+        {
+            "description": "Should perform list operations",
+            "expectedOutput": "["
+        },
+        {
+            "description": "Should filter elements",
+            "expectedOutput": "]"
+        }
+    ],
+    "hints": []
+}

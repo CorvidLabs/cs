@@ -1,0 +1,21 @@
+{
+    "id": "01-grade-calculator",
+    "title": "Grade Calculator",
+    "description": "Build a program that converts numerical scores to letter grades using `when` expressions.\n\n## Requirements\n\n1. Accept a numerical score (0-100)\n2. Convert to letter grade using this scale:\n   - 90-100: A\n   - 80-89: B\n   - 70-79: C\n   - 60-69: D\n   - Below 60: F\n3. Handle invalid scores (negative or over 100)\n4. Print both the score and grade\n\n## Expected Output\n\n```\nScore: 85 -> Grade: B\nScore: 92 -> Grade: A\nScore: 45 -> Grade: F\nScore: -5 -> Grade: Invalid\nScore: 105 -> Grade: Invalid\n```",
+    "order": 1,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    val scores = listOf(85, 92, 45, -5, 105, 70, 60, 59)\n\n    for (score in scores) {\n        // Calculate grade using when\n\n        // Print result\n    }\n}",
+    "testCases": [
+        {
+            "description": "Should output grade A for 95",
+            "expectedOutput": "A"
+        },
+        {
+            "description": "Should handle grade boundaries",
+            "expectedOutput": "Grade"
+        }
+    ],
+    "hints": [
+        "Check for invalid ranges:"
+    ]
+}

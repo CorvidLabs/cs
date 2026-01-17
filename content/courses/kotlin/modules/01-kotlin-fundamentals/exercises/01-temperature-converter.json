@@ -1,0 +1,17 @@
+{
+    "id": "01-temperature-converter",
+    "title": "Temperature Converter",
+    "description": "Build a program that converts temperatures between Celsius and Fahrenheit.\n\n## Requirements\n\n1. Create a variable to hold a temperature in Celsius\n2. Convert it to Fahrenheit using the formula: `F = C * 9/5 + 32`\n3. Print both temperatures with labels\n4. Use string templates for the output\n\n## Formula Reference\n\n- Celsius to Fahrenheit: `F = C * 9/5 + 32`\n- Fahrenheit to Celsius: `C = (F - 32) * 5/9`\n\n## Expected Output\n\n```\n25.0°C = 77.0°F\n```",
+    "order": 1,
+    "language": "kotlin",
+    "starterCode": "fun main() {\n    // Create a val for the Celsius temperature\n\n    // Calculate Fahrenheit\n\n    // Print the result using string templates\n}",
+    "testCases": [
+        {
+            "description": "Should output temperature conversion",
+            "expectedOutput": "25.0°C = 77.0°F"
+        }
+    ],
+    "hints": [
+        "Use `val` since the temperature won't change:"
+    ]
+}

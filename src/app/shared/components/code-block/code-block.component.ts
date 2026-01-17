@@ -2,6 +2,7 @@ import {
     Component,
     ChangeDetectionStrategy,
     input,
+    signal,
     computed,
     inject,
 } from '@angular/core';
@@ -99,7 +100,7 @@ export class CodeBlockComponent {
     public readonly showLanguageLabel = input(true);
     public readonly showCopyButton = input(true);
 
-    public readonly copied = input(false);
+    public readonly copied = signal(false);
 
     public readonly highlightedCode = computed<SafeHtml>(() => {
         const html = this.highlighter.highlight(
@@ -113,6 +114,8 @@ export class CodeBlockComponent {
     public async copyToClipboard(): Promise<void> {
         try {
             await navigator.clipboard.writeText(this.code());
+            this.copied.set(true);
+            setTimeout(() => this.copied.set(false), 2000);
         } catch {
             console.error('Failed to copy to clipboard');
         }

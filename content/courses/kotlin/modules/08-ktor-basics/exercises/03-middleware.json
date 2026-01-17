@@ -1,0 +1,15 @@
+{
+    "id": "03-middleware",
+    "title": "Middleware & Plugins",
+    "description": "Add logging, authentication, and error handling to your API.\n\n## Requirements\n\n1. Log all requests with method, path, and response time\n2. Add basic API key authentication\n3. Handle errors gracefully with JSON responses\n4. Add CORS support",
+    "order": 3,
+    "language": "kotlin",
+    "starterCode": "// Write your code here\nfun main() {\n    \n}",
+    "testCases": [
+        {
+            "description": "Should use middleware",
+            "expectedOutput": "middleware"
+        }
+    ],
+    "hints": []
+}

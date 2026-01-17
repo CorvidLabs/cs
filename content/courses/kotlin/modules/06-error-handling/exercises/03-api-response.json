@@ -1,0 +1,15 @@
+{
+    "id": "03-api-response",
+    "title": "API Response Handling",
+    "description": "Model and handle API responses using sealed classes.\n\n## Requirements\n\n1. Create a sealed class hierarchy for API responses\n2. Handle success, various error types, and loading state\n3. Implement a mock API client\n4. Display appropriate UI messages",
+    "order": 3,
+    "language": "kotlin",
+    "starterCode": "// Define your sealed class hierarchy for API responses\n\ndata class User(val id: Int, val name: String)\n\nclass MockApiClient {\n    fun fetchUser(id: Int): ApiResponse<User> {\n        // Simulate different responses based on ID\n    }\n}\n\nfun displayResult(response: ApiResponse<User>) {\n    // Handle all response types\n}\n\nfun main() {\n    val client = MockApiClient()\n\n    println(\"Fetching user 1:\")\n    displayResult(client.fetchUser(1))\n\n    println(\"\\nFetching user 404:\")\n    displayResult(client.fetchUser(404))\n\n    println(\"\\nFetching user 500:\")\n    displayResult(client.fetchUser(500))\n\n    println(\"\\nFetching user 401:\")\n    displayResult(client.fetchUser(401))\n}",
+    "testCases": [
+        {
+            "description": "Should handle API responses",
+            "expectedOutput": "Success"
+        }
+    ],
+    "hints": []
+}

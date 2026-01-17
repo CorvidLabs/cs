@@ -25,7 +25,7 @@ export interface Lesson {
     content: string;
 }
 
-export type Language = 'python' | 'javascript' | 'typescript' | 'swift' | 'rust' | 'html' | 'css';
+export type Language = 'python' | 'javascript' | 'typescript' | 'swift' | 'rust' | 'kotlin' | 'html' | 'css';
 
 export interface Exercise {
     id: string;
@@ -40,8 +40,11 @@ export interface Exercise {
 
 export interface TestCase {
     description: string;
-    assertion: string;
+    assertion?: string;
     expectedOutput?: string;
+    // Input/expected format for function-based tests
+    input?: Record<string, unknown>;
+    expected?: unknown;
 }
 
 export interface Breadcrumb {

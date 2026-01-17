@@ -55,17 +55,43 @@ export async function contentRoutes(
     });
 }
 
-async function getCourses(headers: Headers): Promise<Response> {
-    const courseDirs = ['python', 'web-fundamentals', 'javascript', 'swift', 'rust', 'algorithms'];
-    const courses = [];
+interface Course {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    color: string;
+    estimatedHours: number;
+    modules: string[];
+}
 
-    for (const courseId of courseDirs) {
-        const courseFile = Bun.file(`./content/courses/${courseId}/course.json`);
-        if (await courseFile.exists()) {
-            const course = await courseFile.json();
-            courses.push(course);
+async function getCourses(headers: Headers): Promise<Response> {
+    const coursesDir = './content/courses';
+    const courses: Course[] = [];
+
+    // Dynamically read all course directories
+    const entries = await Array.fromAsync(
+        new Bun.Glob('*/course.json').scan({ cwd: coursesDir })
+    );
+
+    for (const entry of entries) {
+        const courseFile = Bun.file(`${coursesDir}/${entry}`);
+        try {
+            const course = await courseFile.json() as Course;
+            // Validate required fields
+            if (course.id && course.title) {
+                courses.push(course);
+            } else {
+                console.warn(`Skipping malformed course: ${entry} (missing id or title)`);
+            }
+        } catch (err) {
+            console.error(`Failed to parse course: ${entry}`, err);
+            // Continue to next course instead of failing entirely
         }
     }
+
+    // Sort by title for consistent ordering
+    courses.sort((a, b) => a.title.localeCompare(b.title));
 
     return new Response(JSON.stringify(courses), {
         headers: { ...headers, 'Content-Type': 'application/json' },

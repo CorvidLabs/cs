@@ -6,7 +6,7 @@ import { join } from 'node:path';
 type Headers = Record<string, string>;
 
 interface ExecuteRequest {
-    language: 'swift' | 'rust' | 'typescript';
+    language: 'swift' | 'rust' | 'typescript' | 'kotlin';
     code: string;
     testCases?: TestCase[];
 }
@@ -31,8 +31,10 @@ interface ExecuteResponse {
     testResults?: TestResult[];
 }
 
-const TIMEOUT_MS = 10000;
+const TIMEOUT_MS = 5000;  // 5 seconds max for code execution
+const TEST_TIMEOUT_MS = 3000;  // 3 seconds max per test
 const MAX_OUTPUT_LENGTH = 50000;
+const MAX_TESTS = 20;  // Maximum number of tests to run
 
 export async function executeRoutes(
     req: Request,
@@ -69,7 +71,7 @@ async function handleExecute(
         return jsonResponse({ error: 'Missing language or code', success: false, output: '' }, 400, headers);
     }
 
-    if (!['swift', 'rust', 'typescript'].includes(language)) {
+    if (!['swift', 'rust', 'typescript', 'kotlin'].includes(language)) {
         return jsonResponse({ error: 'Unsupported language for server execution', success: false, output: '' }, 400, headers);
     }
 
@@ -83,7 +85,7 @@ async function handleExecute(
 }
 
 async function executeCode(
-    language: 'swift' | 'rust' | 'typescript',
+    language: 'swift' | 'rust' | 'typescript' | 'kotlin',
     code: string,
     testCases?: TestCase[]
 ): Promise<ExecuteResponse> {
@@ -94,6 +96,8 @@ async function executeCode(
             return executeRust(code, testCases);
         case 'typescript':
             return executeTypeScript(code, testCases);
+        case 'kotlin':
+            return executeKotlin(code, testCases);
         default:
             return { output: '', success: false, error: 'Unsupported language' };
     }
@@ -202,6 +206,122 @@ async function executeTypeScript(code: string, testCases?: TestCase[]): Promise<
 
         const output = truncate(result.stdout.toString() + result.stderr.toString());
         const success = result.exitCode === 0;
+
+        let testResults: TestResult[] | undefined;
+        if (testCases && success) {
+            // Run assertion-based tests
+            testResults = await runTypeScriptTests(tempDir, code, testCases);
+        }
+
+        return {
+            output,
+            success,
+            error: success ? undefined : 'Runtime error',
+            testResults,
+        };
+    } finally {
+        await rm(tempDir, { recursive: true, force: true });
+    }
+}
+
+async function runTypeScriptTests(
+    tempDir: string,
+    code: string,
+    testCases: TestCase[]
+): Promise<TestResult[]> {
+    const results: TestResult[] = [];
+    const testsToRun = testCases.slice(0, MAX_TESTS);
+
+    for (const test of testsToRun) {
+        // Handle assertion-based tests
+        if (test.assertion) {
+            const testCode = `${code}\nconsole.log(${test.assertion})`;
+            const testFile = join(tempDir, 'test.ts');
+
+            try {
+                await writeFile(testFile, testCode, 'utf-8');
+
+                const result = await Promise.race([
+                    $`bun ${testFile}`.quiet().nothrow(),
+                    timeout(TEST_TIMEOUT_MS),
+                ]);
+
+                if (result === 'timeout') {
+                    results.push({
+                        description: test.description,
+                        passed: false,
+                        error: 'Test timed out (3s limit)',
+                    });
+                    continue;
+                }
+
+                const output = result.stdout.toString().trim();
+                const passed = output === 'true';
+                console.log('[Execute] TS assertion test:', test.description, '- output:', output, '- passed:', passed);
+
+                results.push({
+                    description: test.description,
+                    passed,
+                    output: passed ? undefined : output,
+                });
+            } catch (error) {
+                results.push({
+                    description: test.description,
+                    passed: false,
+                    error: error instanceof Error ? error.message : 'Unknown error',
+                });
+            }
+        } else if (test.expectedOutput !== undefined) {
+            results.push({
+                description: test.description,
+                passed: false,
+                error: 'expectedOutput tests not supported for TypeScript yet',
+            });
+        } else {
+            results.push({
+                description: test.description,
+                passed: false,
+                error: 'No assertion or expectedOutput defined',
+            });
+        }
+    }
+
+    return results;
+}
+
+async function executeKotlin(code: string, testCases?: TestCase[]): Promise<ExecuteResponse> {
+    const tempDir = await mkdtemp(join(tmpdir(), 'kotlin-'));
+    const sourceFile = join(tempDir, 'Main.kt');
+    const jarFile = join(tempDir, 'main.jar');
+
+    try {
+        await writeFile(sourceFile, code, 'utf-8');
+
+        const compileResult = await Promise.race([
+            $`kotlinc ${sourceFile} -include-runtime -d ${jarFile}`.quiet().nothrow(),
+            timeout(TIMEOUT_MS * 3),
+        ]);
+
+        if (compileResult === 'timeout') {
+            return { output: '', success: false, error: 'Compilation timed out' };
+        }
+
+        if (compileResult.exitCode !== 0) {
+            const output = truncate(compileResult.stderr.toString());
+            return { output, success: false, error: 'Compilation error' };
+        }
+
+        const runResult = await Promise.race([
+            $`java -jar ${jarFile}`.quiet().nothrow(),
+            timeout(TIMEOUT_MS),
+        ]);
+
+        if (runResult === 'timeout') {
+            return { output: '', success: false, error: 'Execution timed out' };
+        }
+
+        const output = truncate(runResult.stdout.toString() + runResult.stderr.toString());
+        const success = runResult.exitCode === 0;
 
         let testResults: TestResult[] | undefined;
         if (testCases && success) {

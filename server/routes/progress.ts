@@ -1,4 +1,5 @@
 import { Database } from 'bun:sqlite';
+import type { UserProgress } from '../db/schema';
 
 type Headers = Record<string, string>;
 
@@ -72,15 +73,15 @@ function getCourseProgress(
         WHERE user_id = ? AND course_id = ? AND completed = 1
     `);
 
-    const progress = stmt.all(userId, courseId);
+    const progress = stmt.all(userId, courseId) as UserProgress[];
 
     const completedLessons = progress
-        .filter((p: Record<string, unknown>) => p.lesson_id)
-        .map((p: Record<string, unknown>) => p.lesson_id);
+        .filter((p) => p.lesson_id)
+        .map((p) => p.lesson_id);
 
     const completedExercises = progress
-        .filter((p: Record<string, unknown>) => p.exercise_id)
-        .map((p: Record<string, unknown>) => p.exercise_id);
+        .filter((p) => p.exercise_id)
+        .map((p) => p.exercise_id);
 
     return new Response(
         JSON.stringify({

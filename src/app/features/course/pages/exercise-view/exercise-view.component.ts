@@ -438,6 +438,7 @@ export class ExerciseViewComponent {
         if (lang === 'python') return 'python';
         if (lang === 'swift') return 'swift';
         if (lang === 'rust') return 'rust';
+        if (lang === 'kotlin') return 'kotlin';
         return 'javascript';
     }
 
@@ -449,11 +450,10 @@ export class ExerciseViewComponent {
         this.testResults.set([]);
 
         try {
-            const language = exercise.language === 'python' ? 'python' : 'javascript';
             const results = await this.codeExecutor.runTests(
                 this.currentCode(),
                 exercise.testCases,
-                language
+                exercise.language
             );
 
             this.testResults.set(results);

@@ -1,0 +1,15 @@
+{
+    "id": "03-reactive-stream",
+    "title": "Reactive Stream",
+    "description": "Build a reactive data pipeline using Kotlin Flow.\n\n## Requirements\n\n1. Create a flow that emits sensor readings\n2. Apply transformations (filter, map, sample)\n3. Handle errors gracefully\n4. Collect and display results",
+    "order": 3,
+    "language": "kotlin",
+    "starterCode": "import kotlinx.coroutines.*\nimport kotlinx.coroutines.flow.*\nimport kotlin.random.Random\n\ndata class SensorReading(val value: Double, val timestamp: Long)\n\n// Create a flow of sensor readings\nfun sensorReadings(): Flow<SensorReading> = flow {\n    // Emit readings every 100ms for 2 seconds\n}\n\n// Process readings pipeline\nfun processSensorData(readings: Flow<SensorReading>): Flow<String> {\n    // 1. Filter out invalid readings (< 0 or > 100)\n    // 2. Map to formatted string\n    // 3. Take only significant changes (> 5 difference from last)\n}\n\nfun main() = runBlocking {\n    println(\"Starting sensor monitoring...\")\n\n    processSensorData(sensorReadings())\n        .collect { reading ->\n            println(reading)\n        }\n\n    println(\"Monitoring complete\")\n}",
+    "testCases": [
+        {
+            "description": "Should handle reactive streams",
+            "expectedOutput": "flow"
+        }
+    ],
+    "hints": []
+}
