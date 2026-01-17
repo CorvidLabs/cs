@@ -1,0 +1,18 @@
+{
+    "id": "04-collections",
+    "title": "Collections",
+    "description": "Work with Kotlin's powerful collection types: List, Set, and Map. Learn the difference between mutable and immutable collections, and master functional operations.",
+    "order": 4,
+    "lessons": [
+        "01-lists",
+        "02-sets-maps",
+        "03-mutable-immutable",
+        "04-transformations",
+        "05-filtering-grouping"
+    ],
+    "exercises": [
+        "01-list-operations",
+        "02-word-frequency",
+        "03-data-processing"
+    ]
+}

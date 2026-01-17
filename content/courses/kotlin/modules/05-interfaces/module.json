@@ -1,0 +1,18 @@
+{
+    "id": "05-interfaces",
+    "title": "Interfaces and Classes",
+    "description": "Learn object-oriented programming in Kotlin: classes, interfaces, inheritance, and data classes. Understand how Kotlin improves on traditional OOP patterns.",
+    "order": 5,
+    "lessons": [
+        "01-classes-basics",
+        "02-properties",
+        "03-interfaces",
+        "04-inheritance",
+        "05-data-classes"
+    ],
+    "exercises": [
+        "01-shape-hierarchy",
+        "02-user-system",
+        "03-plugin-architecture"
+    ]
+}

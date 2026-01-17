@@ -1,0 +1,18 @@
+{
+    "id": "01-kotlin-fundamentals",
+    "title": "Kotlin Fundamentals",
+    "description": "Master the foundations of Kotlin programming: val vs var, type inference, and null safety. Learn Kotlin's approach to eliminating null pointer exceptions.",
+    "order": 1,
+    "lessons": [
+        "01-hello-kotlin",
+        "02-val-var",
+        "03-type-inference",
+        "04-basic-types",
+        "05-null-safety"
+    ],
+    "exercises": [
+        "01-temperature-converter",
+        "02-string-formatter",
+        "03-null-handling"
+    ]
+}
