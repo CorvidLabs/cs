@@ -77,14 +77,12 @@ async function getCourses(headers: Headers): Promise<Response> {
     for (const entry of entries) {
         const courseFile = Bun.file(`${coursesDir}/${entry}`);
         try {
-            if (await courseFile.exists()) {
-                const course = await courseFile.json() as Course;
-                // Validate required fields
-                if (course.id && course.title) {
-                    courses.push(course);
-                } else {
-                    console.warn(`Skipping malformed course: ${entry} (missing id or title)`);
-                }
+            const course = await courseFile.json() as Course;
+            // Validate required fields
+            if (course.id && course.title) {
+                courses.push(course);
+            } else {
+                console.warn(`Skipping malformed course: ${entry} (missing id or title)`);
             }
         } catch (err) {
             console.error(`Failed to parse course: ${entry}`, err);
@@ -92,8 +90,8 @@ async function getCourses(headers: Headers): Promise<Response> {
         }
     }
 
-    // Sort by title for consistent ordering (with fallback for missing titles)
-    courses.sort((a, b) => (a.title ?? '').localeCompare(b.title ?? ''));
+    // Sort by title for consistent ordering
+    courses.sort((a, b) => a.title.localeCompare(b.title));
 
     return new Response(JSON.stringify(courses), {
         headers: { ...headers, 'Content-Type': 'application/json' },
