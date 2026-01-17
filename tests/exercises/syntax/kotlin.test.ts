@@ -56,18 +56,18 @@ describe("Kotlin Syntax Validation", () => {
             const outputDir = join(tempDir, `${safeId}_out`);
 
             try {
-                await writeFile(tempFile, exercise.starterCode);
+                const code = exercise.starterCode ?? "";
+                await writeFile(tempFile, code);
                 await mkdir(outputDir, { recursive: true });
 
                 const result = await $`kotlinc -Werror -d ${outputDir} ${tempFile}`
                     .quiet()
-                    .nothrow()
-                    .timeout(60_000);
+                    .nothrow();
 
                 if (result.exitCode !== 0) {
                     const stderr = result.stderr.toString().trim();
                     const errorLines = stderr.split("\n");
-                    const syntaxError = errorLines.find((line) =>
+                    const syntaxError = errorLines.find((line: string) =>
                         line.includes("error:")
                     );
                     errors.push(
@@ -76,9 +76,7 @@ describe("Kotlin Syntax Validation", () => {
                 }
             } catch (error) {
                 const errorMessage = error instanceof Error ? error.message : String(error);
-                if (!errorMessage.includes("timed out")) {
-                    errors.push(`${exercise.id} (${exercise.courseName}): ${errorMessage}`);
-                }
+                errors.push(`${exercise.id} (${exercise.courseName}): ${errorMessage}`);
             } finally {
                 try {
                     await unlink(tempFile);
@@ -109,8 +107,9 @@ describe("Kotlin Syntax Validation", () => {
         const oldSyntax: string[] = [];
 
         for (const exercise of exercises) {
+            const code = exercise.starterCode ?? "";
             for (const { pattern, description } of oldPatterns) {
-                if (pattern.test(exercise.starterCode)) {
+                if (pattern.test(code)) {
                     oldSyntax.push(`${exercise.id}: ${description}`);
                 }
             }

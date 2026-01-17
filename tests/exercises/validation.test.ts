@@ -91,8 +91,7 @@ describe("Exercise JSON Validation", () => {
 
     test("standard exercises should have starterCode and testCases", () => {
         const standardExercises = exercises.filter((e) => {
-            const raw = e as Record<string, unknown>;
-            return !raw.type && !raw.questions && !raw.problems;
+            return !e.type && !e.questions && !e.problems;
         });
 
         const invalid: string[] = [];
@@ -114,16 +113,13 @@ describe("Exercise JSON Validation", () => {
     });
 
     test("coding exercises should have starterCode or problems", () => {
-        const codingExercises = exercises.filter(
-            (e) => (e as Record<string, unknown>).type === "coding"
-        );
+        const codingExercises = exercises.filter((e) => e.type === "coding");
 
         const invalid: string[] = [];
 
         for (const exercise of codingExercises) {
-            const raw = exercise as Record<string, unknown>;
-            const hasStarterCode = raw.starterCode && typeof raw.starterCode === "string";
-            const hasProblems = Array.isArray(raw.problems) && raw.problems.length > 0;
+            const hasStarterCode = exercise.starterCode && typeof exercise.starterCode === "string";
+            const hasProblems = Array.isArray(exercise.problems) && exercise.problems.length > 0;
 
             if (!hasStarterCode && !hasProblems) {
                 invalid.push(`${exercise.id}: missing both starterCode and problems`);
@@ -138,14 +134,12 @@ describe("Exercise JSON Validation", () => {
     });
 
     test("comparison exercises should have questions", () => {
-        const comparisonExercises = exercises.filter(
-            (e) => (e as Record<string, unknown>).type === "comparison"
-        );
+        const comparisonExercises = exercises.filter((e) => e.type === "comparison");
 
         const invalid: string[] = [];
 
         for (const exercise of comparisonExercises) {
-            const questions = (exercise as Record<string, unknown>).questions as unknown[];
+            const questions = exercise.questions;
             if (!questions || !Array.isArray(questions) || questions.length === 0) {
                 invalid.push(`${exercise.id}: missing questions`);
             }
@@ -160,14 +154,14 @@ describe("Exercise JSON Validation", () => {
 
     test("quiz/multiple-choice exercises should have questions", () => {
         const quizExercises = exercises.filter((e) => {
-            const type = (e as Record<string, unknown>).type;
+            const type = e.type;
             return type === "quiz" || type === "multiple-choice";
         });
 
         const invalid: string[] = [];
 
         for (const exercise of quizExercises) {
-            const questions = (exercise as Record<string, unknown>).questions as unknown[];
+            const questions = exercise.questions;
             if (!questions || !Array.isArray(questions) || questions.length === 0) {
                 invalid.push(`${exercise.id}: missing questions`);
             }
@@ -206,7 +200,7 @@ describe("Exercise JSON Validation", () => {
         const typeCount = new Map<string, number>();
 
         for (const exercise of exercises) {
-            const type = (exercise as Record<string, unknown>).type as string || "standard";
+            const type = (exercise.type as string) || "standard";
             typeCount.set(type, (typeCount.get(type) || 0) + 1);
         }
 

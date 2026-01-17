@@ -55,7 +55,8 @@ describe("Rust Syntax Validation", () => {
             const outputFile = join(tempDir, `${exercise.id.replace(/[^a-zA-Z0-9]/g, "_")}`);
 
             try {
-                await writeFile(tempFile, exercise.starterCode);
+                const code = exercise.starterCode ?? "";
+                await writeFile(tempFile, code);
 
                 const result = await $`rustc --emit=metadata -o ${outputFile} ${tempFile}`.quiet().nothrow();
 
@@ -63,7 +64,7 @@ describe("Rust Syntax Validation", () => {
                     const stderr = result.stderr.toString().trim();
                     const errorLines = stderr.split("\n");
                     const syntaxError = errorLines.find(
-                        (line) => line.includes("error") && !line.includes("aborting")
+                        (line: string) => line.includes("error") && !line.includes("aborting")
                     );
                     errors.push(
                         `${exercise.id} (${exercise.courseName}): ${syntaxError || errorLines[0]}`
@@ -91,7 +92,7 @@ describe("Rust Syntax Validation", () => {
         }
 
         expect(errors).toEqual([]);
-    });
+    }, 60_000);
 
     test("starter code should use modern Rust patterns", () => {
         const oldPatterns = [
@@ -101,8 +102,9 @@ describe("Rust Syntax Validation", () => {
         const oldSyntax: string[] = [];
 
         for (const exercise of exercises) {
+            const code = exercise.starterCode ?? "";
             for (const { pattern, description } of oldPatterns) {
-                if (pattern.test(exercise.starterCode)) {
+                if (pattern.test(code)) {
                     oldSyntax.push(`${exercise.id}: ${description}`);
                 }
             }

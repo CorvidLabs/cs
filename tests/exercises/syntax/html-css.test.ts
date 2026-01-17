@@ -24,8 +24,9 @@ describe("HTML/CSS Validation", () => {
                 try {
                     const window = new Window();
                     const document = window.document;
+                    const code = exercise.starterCode ?? "";
 
-                    document.write(exercise.starterCode);
+                    document.write(code);
 
                     if (document.documentElement === null) {
                         errors.push(
@@ -51,9 +52,10 @@ describe("HTML/CSS Validation", () => {
             for (const exercise of htmlExercises) {
                 const window = new Window();
                 const document = window.document;
-                document.write(exercise.starterCode);
+                const code = exercise.starterCode ?? "";
+                document.write(code);
 
-                const hasDoctype = exercise.starterCode.toLowerCase().includes("<!doctype html>");
+                const hasDoctype = code.toLowerCase().includes("<!doctype html>");
                 const hasHtml = document.querySelector("html") !== null;
                 const hasHead = document.querySelector("head") !== null;
                 const hasBody = document.querySelector("body") !== null;
@@ -97,7 +99,8 @@ describe("HTML/CSS Validation", () => {
             for (const exercise of htmlExercises) {
                 const window = new Window();
                 const document = window.document;
-                document.write(exercise.starterCode);
+                const code = exercise.starterCode ?? "";
+                document.write(code);
 
                 for (const element of deprecatedElements) {
                     if (document.querySelector(element) !== null) {
@@ -124,7 +127,7 @@ describe("HTML/CSS Validation", () => {
             const unbalanced: string[] = [];
 
             for (const exercise of cssExercises) {
-                const code = exercise.starterCode;
+                const code = exercise.starterCode ?? "";
                 const openBraces = (code.match(/{/g) || []).length;
                 const closeBraces = (code.match(/}/g) || []).length;
 
@@ -151,8 +154,9 @@ describe("HTML/CSS Validation", () => {
             const deprecated: string[] = [];
 
             for (const exercise of cssExercises) {
+                const code = exercise.starterCode ?? "";
                 for (const pattern of deprecatedProperties) {
-                    if (pattern.test(exercise.starterCode)) {
+                    if (pattern.test(code)) {
                         deprecated.push(`${exercise.id}: uses ${pattern.source.replace("\\s*:", "")}`);
                     }
                 }
@@ -173,13 +177,14 @@ describe("HTML/CSS Validation", () => {
             for (const exercise of htmlExercises) {
                 const window = new Window();
                 const document = window.document;
-                document.write(exercise.starterCode);
+                const code = exercise.starterCode ?? "";
+                document.write(code);
 
                 const styleElements = document.querySelectorAll("style");
                 for (const style of styleElements) {
-                    const css = style.textContent || "";
-                    const openBraces = (css.match(/{/g) || []).length;
-                    const closeBraces = (css.match(/}/g) || []).length;
+                    const cssContent = style.textContent || "";
+                    const openBraces = (cssContent.match(/{/g) || []).length;
+                    const closeBraces = (cssContent.match(/}/g) || []).length;
 
                     if (openBraces !== closeBraces) {
                         cssErrors.push(

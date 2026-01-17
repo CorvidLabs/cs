@@ -8,7 +8,7 @@ export interface TestCase {
     expectedOutput?: string;
 }
 
-export type ExerciseType = "code" | "comparison" | "quiz";
+export type ExerciseType = "code" | "comparison" | "quiz" | "coding" | "multiple-choice";
 
 export interface Exercise {
     id: string;
@@ -21,9 +21,11 @@ export interface Exercise {
     testCases?: TestCase[];
     hints?: string[];
     questions?: unknown[];
+    problems?: unknown[];
     filePath?: string;
     courseName?: string;
     moduleName?: string;
+    [key: string]: unknown;
 }
 
 export type Language =

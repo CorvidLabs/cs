@@ -62,7 +62,8 @@ describe("Swift Syntax Validation", () => {
             const tempFile = join(tempDir, `${exercise.id}.swift`);
 
             try {
-                await writeFile(tempFile, exercise.starterCode);
+                const code = exercise.starterCode ?? "";
+                await writeFile(tempFile, code);
 
                 const result = await $`swiftc -parse ${tempFile}`.quiet().nothrow();
 
@@ -98,8 +99,9 @@ describe("Swift Syntax Validation", () => {
         const deprecated: string[] = [];
 
         for (const exercise of exercises) {
+            const code = exercise.starterCode ?? "";
             for (const { pattern, description } of deprecatedPatterns) {
-                if (pattern.test(exercise.starterCode)) {
+                if (pattern.test(code)) {
                     deprecated.push(`${exercise.id}: ${description}`);
                 }
             }
