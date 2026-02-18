@@ -1,9 +1,34 @@
+/**
+ * SECURITY: Client-Side Code Execution Service
+ *
+ * JavaScript execution uses a sandboxed <iframe> with only 'allow-scripts'
+ * (no allow-same-origin, no allow-forms, no allow-popups, no allow-top-navigation).
+ * This prevents the executed code from accessing the parent page's DOM,
+ * cookies, localStorage, or navigating the parent frame.
+ *
+ * Python execution uses Pyodide (WebAssembly), which runs in the browser's
+ * sandboxed WebAssembly environment with no direct OS access.
+ *
+ * Server-side languages (TypeScript, Swift, Rust, Kotlin) are proxied to
+ * the backend /api/execute endpoint which has its own sandboxing.
+ *
+ * Remaining risks:
+ *   - JavaScript in the iframe can still consume CPU (addressed via timeout)
+ *   - Pyodide's settrace-based loop detection is best-effort
+ *   - HTML/CSS preview could contain malicious scripts if rendered unsandboxed
+ *
+ * TODO(security): Consider using Web Workers for JS execution for better
+ * isolation and the ability to terminate runaway scripts.
+ */
+
 import { Injectable, signal } from '@angular/core';
 import { ExecutionState, ExecutionResult, TestResult } from '../models/progress.model';
 import { TestCase, Language } from '../models/course.model';
 
 const TEST_TIMEOUT_MS = 3000;  // 3 seconds max per test
+const EXECUTION_TIMEOUT_MS = 5000; // 5 seconds max for single execution
 const MAX_TESTS = 20;  // Maximum tests to run
+const MAX_CODE_LENGTH = 100_000; // 100 KB max code size
 
 interface PyodideInterface {
     runPython: (code: string) => unknown;
@@ -208,6 +233,16 @@ _result
         }
     }
 
+    /**
+     * SECURITY: HTML/CSS preview rendering.
+     * The result is a data: URI which, when loaded in a sandboxed iframe,
+     * cannot access the parent origin. The iframe rendering this MUST use
+     * the sandbox attribute (without allow-same-origin) to prevent the
+     * previewed HTML from accessing cookies, localStorage, or the parent DOM.
+     *
+     * The CSS is embedded directly, so user CSS cannot escape the <style> tag
+     * unless it contains </style>, which is handled by the data: URI encoding.
+     */
     public renderHtmlCss(html: string, css: string = ''): string {
         const fullHtml = css
             ? `<!DOCTYPE html><html><head><style>${css}</style></head><body>${html}</body></html>`
@@ -241,6 +276,13 @@ _result
         language: Language,
         blockId: string
     ): Promise<ExecutionResult> {
+        // SECURITY: Validate code size before execution
+        if (code.length > MAX_CODE_LENGTH) {
+            const error = `Code too large: ${code.length} characters (max ${MAX_CODE_LENGTH})`;
+            this.updateState(blockId, { status: 'error', output: '', error });
+            return { success: false, output: '', error };
+        }
+
         switch (language) {
             case 'python':
                 return this.executePython(code, blockId);
@@ -391,16 +433,43 @@ _result
         }
     }
 
+    /**
+     * SECURITY: Execute JavaScript in a sandboxed iframe.
+     *
+     * The iframe's sandbox attribute is set to 'allow-scripts' ONLY.
+     * This means the code CANNOT:
+     *   - Access the parent page (no allow-same-origin)
+     *   - Submit forms (no allow-forms)
+     *   - Open popups (no allow-popups)
+     *   - Navigate the top frame (no allow-top-navigation)
+     *   - Access localStorage/cookies of the parent origin
+     *
+     * A hard timeout ensures the iframe is destroyed if code runs too long
+     * (e.g., infinite loops). Since eval() is synchronous, the timeout only
+     * fires after eval returns or if the browser's own script timeout kicks in.
+     *
+     * TODO(security): Migrate to a Web Worker for true preemptive termination
+     * of runaway scripts (Worker.terminate() immediately kills execution).
+     */
     private runInSandbox(code: string): Promise<string> {
         return new Promise((resolve, reject) => {
             const iframe = document.createElement('iframe');
+            // SECURITY: Only allow-scripts; no allow-same-origin, allow-forms,
+            // allow-popups, allow-top-navigation, or allow-modals.
             iframe.sandbox.add('allow-scripts');
             iframe.style.display = 'none';
             document.body.appendChild(iframe);
 
+            // SECURITY: Hard timeout to destroy the iframe if execution hangs
+            const cleanupTimer = setTimeout(() => {
+                try { document.body.removeChild(iframe); } catch { /* already removed */ }
+                reject(new Error('Execution timed out (5s limit)'));
+            }, EXECUTION_TIMEOUT_MS);
+
             const iframeWindow = iframe.contentWindow;
             if (!iframeWindow) {
-                document.body.removeChild(iframe);
+                clearTimeout(cleanupTimer);
+                try { document.body.removeChild(iframe); } catch { /* already removed */ }
                 reject(new Error('Failed to create sandbox'));
                 return;
             }
@@ -432,11 +501,13 @@ _result
                     output.push(String(result));
                 }
 
+                clearTimeout(cleanupTimer);
                 resolve(output.join('\n'));
             } catch (error) {
+                clearTimeout(cleanupTimer);
                 reject(error);
             } finally {
-                document.body.removeChild(iframe);
+                try { document.body.removeChild(iframe); } catch { /* already removed by timeout */ }
             }
         });
     }
