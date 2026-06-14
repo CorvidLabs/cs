@@ -3,15 +3,40 @@ name: CI
 on:
   push:
     branches: [main]
+    paths:
+      - "src/**"
+      - "server/**"
+      - "content/**"
+      - "tests/**"
+      - "package.json"
+      - "bun.lock"
+      - "tsconfig*.json"
+      - "angular.json"
+      - ".github/workflows/ci.yml"
   pull_request:
     branches: [main]
+    paths:
+      - "src/**"
+      - "server/**"
+      - "content/**"
+      - "tests/**"
+      - "package.json"
+      - "bun.lock"
+      - "tsconfig*.json"
+      - "angular.json"
+      - ".github/workflows/ci.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   validate:
     name: Validate Exercises
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -30,8 +55,9 @@ jobs:
   python:
     name: Python Syntax
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -52,8 +78,9 @@ jobs:
   rust:
     name: Rust Syntax
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -72,8 +99,9 @@ jobs:
   swift:
     name: Swift Syntax
     runs-on: macos-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -94,7 +122,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -125,8 +153,9 @@ jobs:
   web:
     name: HTML/CSS Validation
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -142,8 +171,9 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -168,6 +198,7 @@ jobs:
     name: All Tests Pass
     needs: [validate, python, rust, swift, kotlin, web, build]
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: All tests passed
         run: echo "All CI checks passed successfully!"
