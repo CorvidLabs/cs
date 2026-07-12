@@ -1,0 +1,9 @@
+# fledge.toml — project task definitions
+[tasks]
+typecheck = "bun x tsc --noEmit -p tsconfig.json"
+test = "bun test"
+build = "bun run build:prod"
+
+[lanes.verify]
+description = "Type-check, test, and build the CS learning application"
+steps = ["typecheck", "test", "build"]
