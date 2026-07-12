@@ -22,9 +22,7 @@
   "no_spec_change": true,
   "no_spec_change_rationale": "This migration adds governance configuration and CI orchestration without changing application behavior; future meaningful application changes must add or update canonical specifications.",
   "acceptance_criteria": [
-    "SpecSync advisory coverage passes; all four agent integrations are installed; Trust doctor passes; TypeScript checking",
-    "38 exercise validation tests",
-    "and the production Angular build pass; existing multi-language CI remains green."
+    "SpecSync advisory coverage passes; all four agent integrations are installed; Trust doctor passes; TypeScript checking, 38 exercise validation tests, and the production Angular build pass; existing multi-language CI remains green."
   ],
   "selected_artifacts": [
     "context",
