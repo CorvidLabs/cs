@@ -5,4 +5,4 @@ artifact: research
 
 # Research
 
-The native suite currently passes 38 deterministic exercise-validation tests, TypeScript checking, and a production Angular build. Specialized language jobs require distinct hosted toolchains and must remain independent. Prettier reports broad pre-existing formatting drift and is not an existing blocking check, so this migration does not introduce an unrelated repository-wide rewrite.
+The native suite currently passes its exercise-validation matrix, TypeScript checking, and a production Angular build. Specialized language jobs require distinct hosted toolchains and remain independent. Kotlin compilation needs the existing CI pin and extended test timeout, which the unified lane reproduces. Prettier reports broad pre-existing formatting drift and is not an existing blocking check, so this migration does not introduce an unrelated repository-wide rewrite.

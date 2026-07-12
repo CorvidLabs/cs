@@ -1,9 +1,15 @@
 # fledge.toml — project task definitions
 [tasks]
 typecheck = "bun x tsc --noEmit -p tsconfig.json"
-test = "bun test"
+validation = "bun test tests/exercises/validation.test.ts"
+javascript = "bun test tests/exercises/syntax/javascript.test.ts"
+python = "bun test tests/exercises/syntax/python.test.ts"
+rust = "bun test tests/exercises/syntax/rust.test.ts"
+swift = "bun test tests/exercises/syntax/swift.test.ts"
+kotlin = "bun test tests/exercises/syntax/kotlin.test.ts --timeout 300000"
+web = "bun test tests/exercises/syntax/html-css.test.ts"
 build = "bun run build:prod"
 
 [lanes.verify]
-description = "Type-check, test, and build the CS learning application"
-steps = ["typecheck", "test", "build"]
+description = "Run the existing language validation matrix, type-check, and build the CS learning application"
+steps = ["validation", "javascript", "python", "rust", "swift", "kotlin", "web", "typecheck", "build"]
