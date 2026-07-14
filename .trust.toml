@@ -1,0 +1,22 @@
+schema_version = 1
+profile = "standard"
+
+[lifecycle]
+command = ["fledge", "lanes", "run", "verify"]
+
+[contract]
+enabled = true
+require_coverage = 0
+skip_reason = "This governance-only adoption has no canonical application spec or prior coverage threshold; future meaningful application and course changes require an explicit governed change and accurate canonical specs"
+
+[risk]
+threshold = "block"
+
+[provenance]
+mode = "soft"
+policy = ".attest.json"
+skip_reason = ""
+
+[atlas]
+enabled = false
+skip_reason = "Trust-managed Atlas publication is disabled during the initial rollout"

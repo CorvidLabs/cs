@@ -1,0 +1,56 @@
+name: trust
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  trust:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Setup Kotlin
+        run: |
+          curl -L https://github.com/JetBrains/kotlin/releases/download/v2.0.0/kotlin-compiler-2.0.0.zip -o kotlin.zip
+          unzip kotlin.zip
+          echo "$PWD/kotlinc/bin" >> "$GITHUB_PATH"
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: CorvidLabs Trust gate
+        id: trust
+        uses: CorvidLabs/trust@9d32b5786d2e9e4d39fc581c0091c721ee3d4226 # v1.0.0
+      - name: Record SpecSync verification evidence
+        if: success()
+        shell: bash
+        run: |
+          change_id="CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-cs"
+          state="$(python3 -c 'import json; print(json.load(open(".specsync/changes/CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-cs/state.json"))["state"])')"
+          if [[ "$state" == "implementing" || "$state" == "verifying" ]]; then
+            specsync change verify "$change_id"
+            specsync change accept "$change_id" \
+              --actor user:0xLeif \
+              --note "Accepted after exact-head hosted Trust verification and preserved specialized checks"
+          fi
+      - name: Upload SpecSync lifecycle evidence
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: specsync-verification-${{ github.run_id }}
+          path: .specsync/changes/CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-cs/
+          if-no-files-found: error
+          retention-days: 7
