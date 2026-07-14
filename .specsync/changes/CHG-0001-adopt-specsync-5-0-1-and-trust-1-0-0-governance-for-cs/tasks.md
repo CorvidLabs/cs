@@ -12,6 +12,7 @@ artifact: tasks
 - [x] Make every Linux-required compiler and runtime a blocking preflight.
 - [x] Configure the Trust lane without falsely claiming the independently hosted macOS Swift check.
 - [x] Configure atomic hosted verification and authorized closing evidence after successful Trust verification.
+- [x] Check out the immutable pull-request head so verification evidence remains in branch history.
 - [x] Add Trust, Augur, Attest, and immutable workflow configuration.
 - [x] Prepare complete lifecycle artifacts for supported definition, verification, and closing commands.
 
