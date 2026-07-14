@@ -11,7 +11,7 @@ artifact: tasks
 - [x] Add deterministic no-spec adoption and agent-integration governance validation.
 - [x] Make every Linux-required compiler and runtime a blocking preflight.
 - [x] Configure the Trust lane without falsely claiming the independently hosted macOS Swift check.
-- [x] Configure supported hosted lifecycle evidence after successful Trust verification.
+- [x] Configure atomic hosted verification and authorized closing evidence after successful Trust verification.
 - [x] Add Trust, Augur, Attest, and immutable workflow configuration.
 - [x] Prepare complete lifecycle artifacts for supported definition, verification, and closing commands.
 

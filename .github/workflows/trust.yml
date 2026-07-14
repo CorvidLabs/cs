@@ -41,6 +41,9 @@ jobs:
           state="$(python3 -c 'import json; print(json.load(open(".specsync/changes/CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-cs/state.json"))["state"])')"
           if [[ "$state" == "implementing" || "$state" == "verifying" ]]; then
             specsync change verify "$change_id"
+            specsync change accept "$change_id" \
+              --actor user:0xLeif \
+              --note "Accepted after exact-head hosted Trust verification and preserved specialized checks"
           fi
       - name: Upload SpecSync lifecycle evidence
         if: success()

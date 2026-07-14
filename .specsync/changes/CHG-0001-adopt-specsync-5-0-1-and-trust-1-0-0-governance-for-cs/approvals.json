@@ -20,6 +20,13 @@
       "timestamp": 1784035890,
       "digest": "0d197967cb5e5390699bb4ca742ed3328082afe207cc3f1b27f41906ded34f69",
       "note": "Re-approved exact immutable hosted evidence configuration"
+    },
+    {
+      "gate": "definition",
+      "actor": "user:0xLeif",
+      "timestamp": 1784036512,
+      "digest": "8b5a7bbfd59444a8ccfc245ff7e4e0c21b96d24d64cdb553064fffa924a87bfb",
+      "note": "Re-approved atomic hosted verification and closing evidence after successful Trust"
     }
   ],
   "reopenings": []
