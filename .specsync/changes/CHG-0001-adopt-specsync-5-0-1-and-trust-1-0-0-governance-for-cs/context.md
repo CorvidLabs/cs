@@ -5,4 +5,4 @@ artifact: context
 
 # Context
 
-CS is an Angular and Bun learning application with a Bun server and multi-language exercise corpus. Existing CI validates JavaScript, Python, Rust, Swift, Kotlin, HTML/CSS, TypeScript, and the production build. The repository has no prior SpecSync coverage threshold or canonical requirement companions, so initial adoption is advisory while the SDD lifecycle becomes mandatory for future meaningful changes.
+CS is an Angular and Bun learning application with a Bun server and a large multi-language course and exercise corpus. Existing CI validates JavaScript, Python, Rust, Swift, Kotlin, HTML/CSS, TypeScript, and the production build. The repository has no prior SpecSync threshold or canonical requirement companion, so this governance-only adoption uses an explicit no-spec-change rationale while making the SDD lifecycle mandatory for later application, server, course, and exercise changes.

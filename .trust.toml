@@ -7,7 +7,7 @@ command = ["fledge", "lanes", "run", "verify"]
 [contract]
 enabled = true
 require_coverage = 0
-skip_reason = "Existing application behavior has no prior committed SpecSync coverage threshold; adoption begins in advisory mode"
+skip_reason = "This governance-only adoption has no canonical application spec or prior coverage threshold; future meaningful application and course changes require an explicit governed change and accurate canonical specs"
 
 [risk]
 threshold = "block"

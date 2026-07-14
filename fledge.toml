@@ -9,7 +9,9 @@ swift = "bun test tests/exercises/syntax/swift.test.ts --timeout 300000"
 kotlin = "bun test tests/exercises/syntax/kotlin.test.ts --timeout 300000"
 web = "bun test tests/exercises/syntax/html-css.test.ts"
 build = "bun run build:prod"
+governance = "bun test tests/governance/trust-rollout.test.ts"
+toolchains = "command -v bun && command -v python3 && command -v rustc && command -v java && command -v kotlinc"
 
 [lanes.verify]
-description = "Run the existing language validation matrix, type-check, and build the CS learning application"
-steps = ["validation", "javascript", "python", "rust", "swift", "kotlin", "web", "typecheck", "build"]
+description = "Validate governance, Linux language checks, TypeScript, and the production application build"
+steps = ["governance", "toolchains", "validation", "javascript", "python", "rust", "kotlin", "web", "typecheck", "build"]

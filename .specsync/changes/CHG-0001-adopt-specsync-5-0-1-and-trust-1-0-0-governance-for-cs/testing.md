@@ -5,4 +5,6 @@ artifact: testing
 
 # Testing
 
-Run `specsync check --strict --force` at the committed advisory threshold, `specsync agents status`, `fledge trust doctor`, and `fledge lanes run verify`. The native lane must reproduce the JavaScript, Python, Rust, Swift, Kotlin, HTML/CSS, and content validation commands, then pass TypeScript checking and the production Angular build. Hosted CI must retain its independently named language jobs.
+Run `specsync check --strict --force` at the committed advisory threshold, `specsync agents status`, `fledge trust doctor`, and `fledge lanes run verify`. The Trust lane first validates the exact SDD/no-spec adoption boundary and all four agents, requires Bun, Python, Rust, Java, and Kotlin, then reproduces content validation, JavaScript, Python, Rust, Kotlin, and HTML/CSS checks, TypeScript checking, and the production Angular build. It must not edit application source or course content.
+
+Lifecycle approvals and verification use supported SpecSync commands only. After the Trust lane passes, the hosted workflow records native verification evidence and uploads the complete change workspace for review and closing approval. Hosted acceptance requires the exact-head Trust job plus the existing independently named validation, Python, Rust, macOS Swift, Kotlin, HTML/CSS, build, aggregate, and CodeQL jobs on their normal runners.

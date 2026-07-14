@@ -1,3 +1,26 @@
 {
-  "approvals": []
+  "approvals": [
+    {
+      "gate": "definition",
+      "actor": "user:0xLeif",
+      "timestamp": 1784035752,
+      "digest": "ad48f206adc278713319c28a4a93cfc0f72cd4705e802dec9f1c68a7037acb31",
+      "note": "Approved repository-specific no-spec adoption boundary, exact affected-file coverage, preserved specialized jobs, and migration-only governance validation"
+    },
+    {
+      "gate": "definition",
+      "actor": "user:0xLeif",
+      "timestamp": 1784035874,
+      "digest": "0d197967cb5e5390699bb4ca742ed3328082afe207cc3f1b27f41906ded34f69",
+      "note": "Re-approved current migration definition including truthful hosted lifecycle evidence and independent macOS Swift enforcement"
+    },
+    {
+      "gate": "definition",
+      "actor": "user:0xLeif",
+      "timestamp": 1784035890,
+      "digest": "0d197967cb5e5390699bb4ca742ed3328082afe207cc3f1b27f41906ded34f69",
+      "note": "Re-approved exact immutable hosted evidence configuration"
+    }
+  ],
+  "reopenings": []
 }

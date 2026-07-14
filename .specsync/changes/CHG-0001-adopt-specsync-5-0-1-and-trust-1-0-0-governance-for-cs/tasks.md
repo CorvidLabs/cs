@@ -7,8 +7,12 @@ artifact: tasks
 
 - [x] Adopt the SpecSync 5.0.1 lifecycle with an explicit no-spec-change rationale.
 - [x] Install all four agent integrations.
-- [x] Add the native Fledge verification lane.
+- [x] Replace generic SDD paths with exact repository surfaces and exact changed-file coverage.
+- [x] Add deterministic no-spec adoption and agent-integration governance validation.
+- [x] Make every Linux-required compiler and runtime a blocking preflight.
+- [x] Configure the Trust lane without falsely claiming the independently hosted macOS Swift check.
+- [x] Configure supported hosted lifecycle evidence after successful Trust verification.
 - [x] Add Trust, Augur, Attest, and immutable workflow configuration.
-- [x] Pass type checking, 38 tests, and the production build locally.
-- [ ] Obtain definition and closing approvals from an authorized reviewer.
-- [ ] Confirm the existing multi-language hosted matrix remains green.
+- [x] Prepare complete lifecycle artifacts for supported definition, verification, and closing commands.
+
+Closing approval and hosted CI success are intentionally not claimed as preparation tasks.

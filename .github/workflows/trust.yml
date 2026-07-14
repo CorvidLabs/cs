@@ -33,3 +33,20 @@ jobs:
       - name: CorvidLabs Trust gate
         id: trust
         uses: CorvidLabs/trust@9d32b5786d2e9e4d39fc581c0091c721ee3d4226 # v1.0.0
+      - name: Record SpecSync verification evidence
+        if: success()
+        shell: bash
+        run: |
+          change_id="CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-cs"
+          state="$(python3 -c 'import json; print(json.load(open(".specsync/changes/CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-cs/state.json"))["state"])')"
+          if [[ "$state" == "implementing" || "$state" == "verifying" ]]; then
+            specsync change verify "$change_id"
+          fi
+      - name: Upload SpecSync lifecycle evidence
+        if: success()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: specsync-verification-${{ github.run_id }}
+          path: .specsync/changes/CHG-0001-adopt-specsync-5-0-1-and-trust-1-0-0-governance-for-cs/
+          if-no-files-found: error
+          retention-days: 7

@@ -5,4 +5,6 @@ artifact: research
 
 # Research
 
-The native suite currently passes its exercise-validation matrix, TypeScript checking, and a production Angular build. Specialized language jobs require distinct hosted toolchains and remain independent. Kotlin compilation needs the existing CI pin and extended test timeout, which the unified lane reproduces. Prettier reports broad pre-existing formatting drift and is not an existing blocking check, so this migration does not introduce an unrelated repository-wide rewrite.
+The native surface comprises application and server TypeScript, course and exercise content, exercise validators, language and web syntax suites, TypeScript checking, and a production Angular build. Specialized hosted jobs retain their runner-specific toolchains. Kotlin uses the existing compiler pin and extended timeout. The Swift suite explicitly skips syntax compilation off macOS, so the preserved macOS job—not the Linux Trust lane—remains its authoritative gate.
+
+The original generated SDD policy named nonexistent Cargo, Go, Python packaging, SwiftPM, package-manager, action, and site paths. The repository-specific policy now lists only real product, content, test, documentation, build, workflow, governance, and agent surfaces. Pre-existing formatting drift remains outside this migration.
