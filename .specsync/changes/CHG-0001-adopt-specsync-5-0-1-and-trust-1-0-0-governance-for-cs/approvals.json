@@ -34,6 +34,13 @@
       "timestamp": 1784037046,
       "digest": "937d2e61e6657b494e4928919a4cadb6f6e81b82ee4a6845f97a0117793712a6",
       "note": "Re-approved immutable PR-head checkout for branch-ancestry-safe hosted lifecycle evidence"
+    },
+    {
+      "gate": "acceptance",
+      "actor": "user:0xLeif",
+      "timestamp": 1784037367,
+      "digest": "8ed20d7dee5abbc03c8b4c71cd36bd21beafe1a89c84d13b65815e67f970d4a0",
+      "note": "Accepted after exact-head hosted Trust verification and preserved specialized checks"
     }
   ],
   "reopenings": []
